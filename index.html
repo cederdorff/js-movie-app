@@ -7,11 +7,31 @@
     <meta name="description" content="Project Template" />
     <link rel="stylesheet" href="app.css" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
-    <title>Project Template</title>
+    <title>Movie App</title>
   </head>
 
   <body>
-    <h1>Project Template</h1>
+    <header>
+      <h1>Movie App</h1>
+    </header>
+    <main>
+      <section id="movie-list">
+        <!-- Movie items will be displayed here -->
+      </section>
+    </main>
+    <footer>
+      <p>© RACE - Rasmus Cederdorff</p>
+    </footer>
+
+    <!-- Movie Detail Modal -->
+    <dialog id="movie-dialog">
+      <form method="dialog">
+        <button id="close-dialog" aria-label="Close">✕</button>
+        <div id="dialog-content">
+          <!-- Movie details will be injected here -->
+        </div>
+      </form>
+    </dialog>
 
     <script src="app.js"></script>
   </body>

@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "title": "Barbie",
+    "year": 2023,
+    "genre": ["Adventure", "Comedy", "Fantasy"],
+    "director": "Greta Gerwig",
+    "rating": 7.0,
+    "image": "https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg",
+    "actors": ["Margot Robbie", "Ryan Gosling", "America Ferrera"],
+    "description": "Barbie and Ken embark on a journey of self-discovery after leaving the utopian Barbie Land for the real world."
+  },
+  {
+    "id": 2,
+    "title": "The Matrix",
+    "year": 1999,
+    "genre": ["Action", "Sci-Fi"],
+    "director": "Lana Wachowski, Lilly Wachowski",
+    "rating": 8.7,
+    "image": "https://m.media-amazon.com/images/I/51EG732BV3L._AC_.jpg",
+    "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+    "description": "A computer hacker learns about the true nature of his reality and his role in the war against its controllers."
+  },
+  {
+    "id": 3,
+    "title": "The Dark Knight",
+    "year": 2008,
+    "genre": ["Action", "Crime", "Drama"],
+    "director": "Christopher Nolan",
+    "rating": 9.0,
+    "image": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
+    "actors": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
+    "description": "Batman faces the Joker, a criminal mastermind who plunges Gotham City into chaos."
+  },
+  {
+    "id": 4,
+    "title": "Dune",
+    "year": 2021,
+    "genre": ["Adventure", "Drama", "Sci-Fi"],
+    "director": "Denis Villeneuve",
+    "rating": 8.0,
+    "image": "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg",
+    "actors": ["Timothée Chalamet", "Rebecca Ferguson", "Oscar Isaac"],
+    "description": "Paul Atreides leads nomadic tribes in a battle to control the desert planet Arrakis and its valuable spice."
+  },
+  {
+    "id": 5,
+    "title": "The Godfather",
+    "year": 1972,
+    "genre": ["Crime", "Drama"],
+    "director": "Francis Ford Coppola",
+    "rating": 9.2,
+    "image": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "actors": ["Marlon Brando", "Al Pacino", "James Caan"],
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son."
+  },
+  {
+    "id": 6,
+    "title": "Fight Club",
+    "year": 1999,
+    "genre": ["Drama"],
+    "director": "David Fincher",
+    "rating": 8.8,
+    "image": "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
+    "actors": ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"],
+    "description": "An insomniac office worker and a soap maker form an underground fight club that evolves into something much more."
+  },
+  {
+    "id": 7,
+    "title": "Oppenheimer",
+    "year": 2023,
+    "genre": ["Biography", "Drama", "History"],
+    "director": "Christopher Nolan",
+    "rating": 8.4,
+    "image": "https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_.jpg",
+    "actors": ["Cillian Murphy", "Emily Blunt", "Matt Damon"],
+    "description": "The story of J. Robert Oppenheimer and his role in the development of the atomic bomb."
+  },
+  {
+    "id": 8,
+    "title": "The Lord of the Rings: The Return of the King",
+    "year": 2003,
+    "genre": ["Action", "Adventure", "Drama"],
+    "director": "Peter Jackson",
+    "rating": 8.9,
+    "image": "https://m.media-amazon.com/images/I/51Qvs9i5a%2BL._AC_.jpg",
+    "actors": ["Elijah Wood", "Viggo Mortensen", "Ian McKellen"],
+    "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+  },
+  {
+    "id": 9,
+    "title": "Everything Everywhere All at Once",
+    "year": 2022,
+    "genre": ["Action", "Adventure", "Comedy"],
+    "director": "Daniel Kwan, Daniel Scheinert",
+    "rating": 7.8,
+    "image": "https://m.media-amazon.com/images/M/MV5BOWNmMzAzZmQtNDQ1NC00Nzk5LTkyMmUtNGI2N2NkOWM4MzEyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "actors": ["Michelle Yeoh", "Stephanie Hsu", "Ke Huy Quan"],
+    "description": "A Chinese-American woman is swept up in an insane adventure, where she alone can save the world by exploring other universes."
+  },
+  {
+    "id": 10,
+    "title": "Forrest Gump",
+    "year": 1994,
+    "genre": ["Drama", "Romance"],
+    "director": "Robert Zemeckis",
+    "rating": 8.8,
+    "image": "https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg",
+    "actors": ["Tom Hanks", "Robin Wright", "Gary Sinise"],
+    "description": "The presidencies of Kennedy and Johnson, the Vietnam War, and more through the eyes of an Alabama man with a low IQ."
+  },
+  {
+    "id": 11,
+    "title": "Spider-Man: No Way Home",
+    "year": 2021,
+    "genre": ["Action", "Adventure", "Fantasy"],
+    "director": "Jon Watts",
+    "rating": 8.2,
+    "image": "https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg",
+    "actors": ["Tom Holland", "Zendaya", "Benedict Cumberbatch"],
+    "description": "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help, leading to dangerous multiverse consequences."
+  },
+  {
+    "id": 12,
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "genre": ["Crime", "Drama"],
+    "director": "Quentin Tarantino",
+    "rating": 8.9,
+    "image": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "actors": ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
+    "description": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+  },
+  {
+    "id": 13,
+    "title": "Goodfellas",
+    "year": 1990,
+    "genre": ["Biography", "Crime", "Drama"],
+    "director": "Martin Scorsese",
+    "rating": 8.7,
+    "image": "https://upload.wikimedia.org/wikipedia/en/7/7b/Goodfellas.jpg",
+    "actors": ["Robert De Niro", "Ray Liotta", "Joe Pesci"],
+    "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners."
+  },
+  {
+    "id": 14,
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "genre": ["Drama"],
+    "director": "Frank Darabont",
+    "rating": 9.3,
+    "image": "https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg",
+    "actors": ["Tim Robbins", "Morgan Freeman", "William Sadler"],
+    "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
+  },
+  {
+    "id": 15,
+    "title": "Inception",
+    "year": 2010,
+    "genre": ["Action", "Adventure", "Sci-Fi"],
+    "director": "Christopher Nolan",
+    "rating": 8.8,
+    "image": "https://m.media-amazon.com/images/M/MV5BMjExMjkwNTQ0Nl5BMl5BanBnXkFtZTcwNTY0OTk1Mw@@._V1_.jpg",
+    "actors": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
+    "description": "A thief who enters the dreams of others to steal secrets is given the inverse task of planting an idea into the mind of a CEO."
+  }
+]
