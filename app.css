@@ -47,6 +47,61 @@ body {
 }
 
 /* =====================
+   LAYOUT (main container)
+   ===================== */
+main {
+  max-width: min(1400px, 95vw);
+  margin: 0 auto;
+  padding: clamp(5rem, 10vw, 8rem) 1rem 2rem;
+}
+
+/* =====================
+   FILTERBAR (SØG/SORT/FILTER)
+   ===================== */
+.filterbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#search-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+#search-input,
+#genre-select,
+#sort-select {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+#search-input:focus,
+#genre-select:focus,
+#sort-select:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
+}
+
+#search-input::placeholder {
+  color: var(--text-light);
+  opacity: 1;
+}
+
+#genre-select,
+#sort-select {
+  min-width: 160px;
+  cursor: pointer;
+}
+
+/* =====================
    HEADER & FOOTER
    ===================== */
 header {
@@ -78,23 +133,31 @@ footer {
   margin-top: 4rem;
 }
 
-/* =====================
-   LAYOUT
-   ===================== */
-main {
-  max-width: min(1400px, 95vw);
-  margin: 0 auto;
-  padding: clamp(5rem, 10vw, 8rem) 1rem 2rem;
-}
+/* (main er allerede defineret ovenfor - dublet fjernet) */
 
 /* =====================
    MOVIE GRID & CARDS
    ===================== */
 #movie-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding: 2rem 0;
+}
+@media (min-width: 600px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 1400px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .movie-card {
@@ -341,36 +404,34 @@ dialog#movie-dialog::backdrop {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
   .movie-card {
     max-width: 350px;
     margin: 0 auto;
   }
-
   header h1 {
     font-size: 1.75rem;
   }
 }
 
-/* Focus styles */
+/* Focus styles for keyboard navigation */
 .movie-card:focus-visible,
 #close-dialog:focus-visible {
   outline: 3px solid var(--secondary);
   outline-offset: 2px;
 }
 
-/* Dark mode adjustments */
+/* =====================
+   DARK MODE ADJUSTMENTS
+   ===================== */
 @media (prefers-color-scheme: dark) {
   .movie-year {
     background: var(--primary);
     color: var(--secondary);
   }
-
   #dialog-content .movie-year {
     background: var(--primary);
     color: var(--secondary);
   }
-
   #close-dialog {
     background: rgba(23, 23, 23, 0.9);
   }
