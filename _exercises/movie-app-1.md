@@ -131,10 +131,10 @@ Nu tilføjer vi flere typer data. Tilføj disse linjer under din første variabe
 ```javascript
 // Different data types (following your project structure)
 const movieYear = 1999; // Number (tal) - no quotes needed
-const isGoodMovie = true; // Boolean (true/false)
+const movieGenre = "Action"; // Another string
 
 console.log("Year:", movieYear);
-console.log("Is good movie?", isGoodMovie);
+console.log("Genre:", movieGenre);
 ```
 
 **💡 Forklaring:**
@@ -247,7 +247,7 @@ Lad os tilføje flere variabler i én besked:
 
 ```javascript
 // Multiple variables in same template literal
-const complexMessage = `Movie: ${movieTitle}, Year: ${movieYear}, Rating: ${userRating}, Good? ${isGoodMovie}`;
+const complexMessage = `Movie: ${movieTitle}, Year: ${movieYear}, Rating: ${userRating}, Genre: ${movieGenre}`;
 console.log("Complete info:", complexMessage);
 ```
 
@@ -271,7 +271,7 @@ const multiLineMessage = `🎬 MOVIE INFO:
 Title: ${movieTitle}
 Year: ${movieYear}
 Rating: ${userRating}/10
-Recommended: ${isGoodMovie}`;
+Genre: ${movieGenre}`;
 console.log(multiLineMessage);
 ```
 
@@ -286,109 +286,29 @@ console.log(multiLineMessage);
 
 Se den pænt formaterede besked i konsollen!
 
-#### Step 5a: Introduktion til betingelser
+#### Step 5a: Kombiner forskellige data
 
-Først - lad os forstå hvad en betingelse er:
+Nu kombinerer vi alle variablerne i en smart tekststreng:
 
 ```javascript
-// Undersøg hvad der sker når vi sammenligner
-console.log("erGod er:", erGod);
-console.log("erGod er true:", erGod === true);
-console.log("brugerRating er:", brugerRating);
-console.log("brugerRating er høj (>=4.5):", brugerRating >= 4.5);
+// Brug alle vores variabler sammen
+const kompletBeskrivelse = `Film: ${filmTitel} (${filmÅr}) - Rating: ${brugerRating}/10`;
+console.log(kompletBeskrivelse);
 ```
 
 #### ✅ Test det!
 
-Refresh og se hvad der sker - sammenligning giver altid `true` eller `false`!
+Se den komplette filmbesked!
 
-**💡 Forklaring:**
 
-- `===` sammenligner to værdier (er de ens?)
-- `>=` betyder "større end eller lig med"
-- Alle sammenligninger giver enten `true` eller `false`
-
-#### Step 5b: Den magiske `?` operator
-
-Nu lærer vi at vælge mellem to tekster baseret på en betingelse:
-
-```javascript
-// ? betyder "vælg mellem to muligheder"
-const resultat = erGod ? "fantastisk" : "kedelig";
-console.log("Filmen er:", resultat);
-```
-
-#### ✅ Test det!
-
-Se hvad der sker når `erGod` er `true`!
-
-**💡 Forklaring:**
-
-- `erGod ?` betyder "er erGod sand?"
-- `"fantastisk"` er det første valg (når true)
-- `"kedelig"` er det andet valg (når false)
-- Tænk på det som: "Spørgsmål ? Svar1 : Svar2"
-
-#### Step 5c: Eksperimentér med true/false
-
-Lad os prøve begge muligheder:
-
-```javascript
-// Test med true
-const testTrue = true ? "JA!" : "NEJ!";
-console.log("true giver:", testTrue);
-
-// Test med false
-const testFalse = false ? "JA!" : "NEJ!";
-console.log("false giver:", testFalse);
-```
-
-#### ✅ Test og forstå!
-
-Se hvordan `?` operatoren altid vælger første eller anden mulighed!
-
-#### Step 5d: Brug det i template literals
-
-Nu kombinerer vi det med vores smarte tekstsammensætning:
-
-```javascript
-// Direkte i template literal
-const anmeldelse = `${filmTitel} er ${erGod ? "fantastisk" : "kedelig"}!`;
-console.log("Anmeldelse:", anmeldelse);
-```
-
-#### ✅ Test det!
-
-Se den komplette anmeldelse!
-
-#### Step 5e: Avanceret - sammenligning med tal
-
-Nu prøver vi med tal-sammenligning:
-
-```javascript
-// Sammenlign rating med tal
-const ratingBesked = `Rating ${brugerRating} er ${brugerRating >= 4.5 ? "høj" : "lav"}`;
-console.log(ratingBesked);
-
-// Prøv flere sammenligninger
-const alderBesked = `Film fra ${filmÅr} er ${filmÅr >= 2000 ? "ny" : "gammel"}`;
-console.log(alderBesked);
-```
-
-**💡 Forklaring:**
-
-- `brugerRating >= 4.5` spørger: "Er rating 4.5 eller højere?"
-- `filmÅr >= 2000` spørger: "Er året 2000 eller senere?"
-- Svarene bruges til at vælge den rigtige tekst
-
-#### ✅ Final test og eksperimenter!
+#### ✅ Final test!
 
 1. Gem din `app.js` fil (Ctrl+S)
 2. Refresh din browser og tjek konsollen
-3. **Prøv dette:** Ændr `erGod` til `false` og se forskellen!
-4. **Prøv dette:** Ændr `brugerRating` til `3.0` og se hvad der sker!
-5. **Prøv dette:** Ændr `filmÅr` til `1995` og se resultatet!
-6. **Eksperimentér:** Prøv at ændre `brugerRating` til 3.0 og se forskellen!
+3. **Prøv dette:** Ændr `filmTitel` til en anden film og se forskellen!
+4. **Prøv dette:** Ændr `brugerRating` til `9.5` og se resultatet!
+5. **Prøv dette:** Ændr `filmÅr` til `2024` og se output!
+6. **Eksperimentér:** Prøv forskellige værdier og se hvordan template literals virker!
 
 **🎯 Læringsmål:** Du kan nu oprette variabler og forstår forskellen på string, number og boolean.
 
@@ -447,15 +367,15 @@ const movieTitles = ["The Matrix", "Inception"];
 // Only numbers
 const movieYears = [1999, 2010, 2014];
 
-// Only booleans
-const erGode = [true, true, false];
+// Movie ratings (numbers)
+const movieRatings = [8.7, 8.8, 8.6];
 
 // Blandet indhold (fungerer også!)
-const blandedListe = ["The Matrix", 1999, true];
+const blandedListe = ["The Matrix", 1999, 8.7];
 
 console.log("Film navne:", filmNavne);
 console.log("Film år:", filmÅr);
-console.log("Er gode:", erGode);
+console.log("Film ratings:", movieRatings);
 console.log("Blandet:", blandedListe);
 ```
 
