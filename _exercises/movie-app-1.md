@@ -389,9 +389,9 @@ Nu lærer vi at hente specifikke film fra listen:
 
 ```javascript
 // Hent enkelt film (VIGTIGT: arrays starter fra 0!)
-console.log("Første film (index 0):", filmListe[0]);
-console.log("Anden film (index 1):", filmListe[1]);
-console.log("Tredje film (index 2):", filmListe[2]);
+console.log("Første film (index 0):", movieTitles[0]);
+console.log("Anden film (index 1):", movieTitles[1]);
+console.log("Tredje film (index 2):", movieTitles[2]);
 ```
 
 #### ✅ Test det!
