@@ -286,7 +286,6 @@ console.log(multiLineMessage);
 
 Se den pænt formaterede besked i konsollen!
 
-
 #### ✅ Final test!
 
 1. Gem din `app.js` fil (Ctrl+S)
@@ -497,7 +496,7 @@ Men hvad hvis vi vil gemme mere information om hver film?
 
 ```javascript
 // This becomes messy quickly... 😰
-const movieTitles = ["The Matrix", "Inception"];
+const movieTitles = ["The Matrix", "Inception", "Interstellar"];
 const movieYears = [1999, 2010];
 const movieRatings = [8.7, 8.8];
 const movieGenres = [
@@ -655,9 +654,11 @@ Se den flotte formaterede movie info!
 
 **💡 Forklaring:**
 
-- `.join(", ")` laver array til tekst med komma
-- `.join(" og ")` laver tekst med "og" mellem navne
-- `${udvidetFilm.set ? "Ja" : "Nej"}` er en smart if/else i template literal!
+- `${realMovie.title}` henter title fra objektet
+- `${realMovie.genre[0]}` henter første genre fra array
+- `${realMovie.actors[0]}` henter første skuespiller fra array
+- Template literals kombinerer tekst og objektdata perfekt!
+- Dette ligner hvordan rigtige movie apps viser information!
 
 #### ✅ Endelig test af alt!
 
