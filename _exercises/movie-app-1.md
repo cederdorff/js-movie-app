@@ -286,20 +286,6 @@ console.log(multiLineMessage);
 
 Se den pænt formaterede besked i konsollen!
 
-#### Step 5a: Kombiner forskellige data
-
-Nu kombinerer vi alle variablerne i en smart tekststreng:
-
-```javascript
-// Brug alle vores variabler sammen
-const kompletBeskrivelse = `Film: ${filmTitel} (${filmÅr}) - Rating: ${brugerRating}/10`;
-console.log(kompletBeskrivelse);
-```
-
-#### ✅ Test det!
-
-Se den komplette filmbesked!
-
 
 #### ✅ Final test!
 
