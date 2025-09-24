@@ -347,7 +347,7 @@ Arrays kan indeholde mange forskellige ting:
 
 ```javascript
 // Only strings (text)
-const movieTitles = ["The Matrix", "Inception"];
+const movieTitles = ["The Matrix", "Inception", "Interstellar"];
 
 // Only numbers
 const movieYears = [1999, 2010, 2014];
@@ -517,7 +517,7 @@ const movieGenres = [
 Her kommer løsningen - **objekter** (præcis som i din movies.json fil):
 
 ```javascript
-// An object collects ALL data about one movie! 🎉 (like in your movies.json)
+// An object collects ALL data about one movie! 🎉 
 const movie = {
   title: "The Matrix",
   year: 1999,
