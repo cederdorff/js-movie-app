@@ -371,12 +371,12 @@ const movieYears = [1999, 2010, 2014];
 const movieRatings = [8.7, 8.8, 8.6];
 
 // Blandet indhold (fungerer også!)
-const blandedListe = ["The Matrix", 1999, 8.7];
+const randomArray = ["The Matrix", 1999, 8.7];
 
-console.log("Film navne:", filmNavne);
-console.log("Film år:", filmÅr);
+console.log("Film navne:", movieTitles);
+console.log("Film år:", movieYears);
 console.log("Film ratings:", movieRatings);
-console.log("Blandet:", blandedListe);
+console.log("Blandet:", randomArray);
 ```
 
 #### ✅ Test og se forskellen!
