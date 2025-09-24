@@ -402,15 +402,15 @@ Se hvordan vi får fat i hver enkelt film!
 
 - Arrays starter fra **0** (ikke 1!)
 - Første element er `[0]`, anden er `[1]`, osv.
-- `filmListe[0]` = "The Matrix"
-- `filmListe[1]` = "Inception"
+- `movieTitles[0]` = "The Matrix"
+- `movieTitles[1]` = "Inception"
 
 #### Step 5: Hvor mange elementer har vi?
 
 ```javascript
 // Find længden af listen
-console.log("Antal film i listen:", filmListe.length);
-console.log("Sidste film (smart måde):", filmListe[filmListe.length - 1]);
+console.log("Antal film i listen:", movieTitles.length);
+console.log("Sidste film (smart måde):", movieTitles[movieTitles.length - 1]);
 ```
 
 #### ✅ Test det!
@@ -426,13 +426,13 @@ Se hvor mange film vi har!
 
 ```javascript
 // Tilføj film til slutningen
-filmListe.push("The Dark Knight");
-console.log("Efter tilføjelse:", filmListe);
-console.log("Nu har vi", filmListe.length, "film!");
+movieTitles.push("The Dark Knight");
+console.log("Efter tilføjelse:", movieTitles);
+console.log("Nu har vi", movieTitles.length, "film!");
 
 // Tilføj flere på én gang
-filmListe.push("Pulp Fiction", "Goodfellas");
-console.log("Efter flere tilføjelser:", filmListe);
+movieTitles.push("Pulp Fiction", "Goodfellas");
+console.log("Efter flere tilføjelser:", movieTitles);
 ```
 
 #### ✅ Test det!
@@ -451,14 +451,14 @@ Nogle gange vil vi fjerne film fra listen:
 
 ```javascript
 // Fjern den sidste film
-const fjernetFilm = filmListe.pop();
-console.log("Fjernet film:", fjernetFilm);
-console.log("Listen nu:", filmListe);
+const fjernetFilm = movieTitles.pop();
+console.log("Fjernet film:", movieTitles);
+console.log("Listen nu:", movieTitles);
 
 // Fjern den første film
-const førsteFjernet = filmListe.shift();
+const førsteFjernet = movieTitles.shift();
 console.log("Første fjernet:", førsteFjernet);
-console.log("Listen nu:", filmListe);
+console.log("Listen nu:", movieTitles);
 ```
 
 #### ✅ Test det!
@@ -475,7 +475,7 @@ Se hvordan film forsvinder fra listen!
 
 Gem din `app.js` fil og refresh browseren. I konsollen skulle du se:
 
-1. Den originale filmliste
+1. Den originale filmliste (movieTitles)
 2. Film der bliver tilføjet
 3. Enkelt film hentet fra listen
 4. Antal film i listen
