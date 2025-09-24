@@ -290,9 +290,9 @@ Se den pænt formaterede besked i konsollen!
 
 1. Gem din `app.js` fil (Ctrl+S)
 2. Refresh din browser og tjek konsollen
-3. **Prøv dette:** Ændr `filmTitel` til en anden film og se forskellen!
-4. **Prøv dette:** Ændr `brugerRating` til `9.5` og se resultatet!
-5. **Prøv dette:** Ændr `filmÅr` til `2024` og se output!
+3. **Prøv dette:** Ændr `movieTitle` til en anden film og se forskellen!
+4. **Prøv dette:** Ændr `userRating` til `9.5` og se resultatet!
+5. **Prøv dette:** Ændr `movieYear` til `2024` og se output!
 6. **Eksperimentér:** Prøv forskellige værdier og se hvordan template literals virker!
 
 **🎯 Læringsmål:** Du kan nu oprette variabler og forstår forskellen på string, number og boolean.
@@ -358,10 +358,10 @@ const movieRatings = [8.7, 8.8, 8.6];
 // Blandet indhold (fungerer også!)
 const randomArray = ["The Matrix", 1999, 8.7];
 
-console.log("Film navne:", movieTitles);
-console.log("Film år:", movieYears);
-console.log("Film ratings:", movieRatings);
-console.log("Blandet:", randomArray);
+console.log("Movie titles:", movieTitles);
+console.log("Movie years:", movieYears);
+console.log("Movie ratings:", movieRatings);
+console.log("Mixed array:", randomArray);
 ```
 
 #### ✅ Test og se forskellen!
@@ -436,14 +436,14 @@ Nogle gange vil vi fjerne film fra listen:
 
 ```javascript
 // Fjern den sidste film
-const fjernetFilm = movieTitles.pop();
-console.log("Fjernet film:", movieTitles);
-console.log("Listen nu:", movieTitles);
+const removedMovie = movieTitles.pop();
+console.log("Removed movie:", removedMovie);
+console.log("List now:", movieTitles);
 
 // Fjern den første film
-const førsteFjernet = movieTitles.shift();
-console.log("Første fjernet:", førsteFjernet);
-console.log("Listen nu:", movieTitles);
+const firstRemoved = movieTitles.shift();
+console.log("First removed:", firstRemoved);
+console.log("List now:", movieTitles);
 ```
 
 #### ✅ Test det!
@@ -517,7 +517,7 @@ const movieGenres = [
 Her kommer løsningen - **objekter** (præcis som i din movies.json fil):
 
 ```javascript
-// An object collects ALL data about one movie! 🎉 
+// An object collects ALL data about one movie! 🎉
 const movie = {
   title: "The Matrix",
   year: 1999,
@@ -753,7 +753,7 @@ Nu lærer vi at hente data fra denne struktur:
 ```javascript
 // Hent den første film (index 0)
 const firstMovie = allMovies[0];
-console.log("Første film objekt:", førsteFilm);
+console.log("Første film objekt:", firstMovie);
 console.log("First movie title:", firstMovie.title);
 
 // Eller gør det direkte i ét trin
