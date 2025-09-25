@@ -686,7 +686,7 @@ Du kan nu:
 
 ### Opgave 1.4: Arrays af objekter (som i dit movie app)
 
-**Formål:** Lær at kombinere arrays og objekter - præcis som i din allMovies array i dit projekt!
+**Formål:** Lær at kombinere arrays og objekter - præcis som i din `allMovies` array i dit projekt!
 
 #### Step 1: Problemet - en enkelt film er ikke nok!
 
@@ -711,7 +711,7 @@ Men hvad hvis vi vil have en hel movie collection? Som i dit rigtige projekt?
 
 #### Step 2: Arrays af objekter - den perfekte løsning!
 
-Her kombinerer vi det bedste fra begge verdener (præcis som allMovies i dit projekt):
+Her kombinerer vi det bedste fra begge verdener (præcis som `allMovies` i dit projekt):
 
 ```javascript
 // Array of movie objects - exactly like allMovies in your project! 🎉
