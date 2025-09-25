@@ -686,7 +686,7 @@ Du kan nu:
 
 ### Opgave 1.4: Arrays af objekter (som i dit movie app)
 
-**Formål:** Lær at kombinere arrays og objekter - præcis som i din allMovies array i dit projekt!
+**Formål:** Lær at kombinere arrays og objekter - præcis som i din `allMovies` array i dit projekt!
 
 #### Step 1: Problemet - en enkelt film er ikke nok!
 
@@ -711,7 +711,7 @@ Men hvad hvis vi vil have en hel movie collection? Som i dit rigtige projekt?
 
 #### Step 2: Arrays af objekter - den perfekte løsning!
 
-Her kombinerer vi det bedste fra begge verdener (præcis som allMovies i dit projekt):
+Her kombinerer vi det bedste fra begge verdener (præcis som `allMovies` i dit projekt):
 
 ```javascript
 // Array of movie objects - exactly like allMovies in your project! 🎉
@@ -1268,10 +1268,10 @@ Nu lærer vi at forbinde JavaScript med HTML:
 // ========== DOM MANIPULATION ==========
 
 // Find HTML elements by their id (like your project)
-const testSection = document.querySelector("#test-section");
+const headerElement = document.querySelector("header h1");
 const movieListContainer = document.querySelector("#movie-list");
 
-console.log("Found test section:", testSection);
+console.log("Found header:", headerElement);
 console.log("Found movie list container:", movieListContainer);
 ```
 
@@ -1293,7 +1293,7 @@ Nu skal vi lære at ændre på hjemmesiden med JavaScript!
 
 ```javascript
 // Prøv denne simple ændring først
-testSection.innerHTML = "Ny tekst fra JavaScript!";
+headerElement.innerHTML = "Ny titel fra JavaScript!";
 ```
 
 #### ✅ Test det!
@@ -1304,7 +1304,7 @@ Refresh siden - ser du den nye tekst?
 
 ```javascript
 // Vi kan også indsætte HTML-tags
-testSection.innerHTML = "<p>🎉 JavaScript har overtaget kontrollen!</p>";
+headerElement.innerHTML = "<span>🎉</span> JavaScript Movie App";
 ```
 
 #### ✅ Test det!
@@ -1315,7 +1315,7 @@ Se forskellen - nu har teksten HTML formatering!
 
 ```javascript
 // Ændr begge elementer
-testSection.innerHTML = "<p>🎉 JavaScript har overtaget kontrollen!</p>";
+headerElement.innerHTML = "<span>🎉</span> JavaScript Movie App";
 movieListContainer.innerHTML = "<p>📽️ Her vil filminfo komme...</p>";
 ```
 
