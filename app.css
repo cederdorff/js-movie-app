@@ -138,27 +138,7 @@ footer {
 /* =====================
    MOVIE GRID & CARDS
    ===================== */
-#movie-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  padding: 2rem 0;
-}
-@media (min-width: 600px) {
-  #movie-list {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (min-width: 992px) {
-  #movie-list {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media (min-width: 1400px) {
-  #movie-list {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
+/* TODO !!! */
 
 .movie-card {
   background: var(--bg-card);
