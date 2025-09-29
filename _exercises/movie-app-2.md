@@ -1,4 +1,4 @@
-# Movie App - Session 2: Projekt Forståelse og CSS Grid
+# Movie App - Session 2: Fra Template til Dynamisk Data
 
 ## Opgaver til anden undervisningsgang
 
