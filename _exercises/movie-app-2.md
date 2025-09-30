@@ -62,16 +62,15 @@ git clone https://github.com/dit-brugernavn/movie-app-dit-navn.git
 1. Højreklik på `index.html` i VS Code
 2. Vælg "Open with Live Server" (installer Live Server extension hvis nødvendigt)
 3. Dit projekt skulle åbne i browseren
-4. Du skulle se en flot Movie App med flere film cards!
+4. Du skulle se en Movie App med flere film "cards"!
 
 **0e. Forstå template strukturen**
 
 Dit nye projekt indeholder allerede:
 
-- **Komplet HTML struktur** med movie cards
-- **Professionel CSS styling** med dark mode
-- **Basis JavaScript setup**
-- **Movie data** i JSON format
+- **Komplet HTML struktur** med movie cards - men der skal laves et grid!
+- **Professionel CSS styling**
+- **Basis JavaScript setup** - klar til DOM-manipulation
 - **Responsive design** klar til forbedring
 
 #### ✅ Bekræft setup!
@@ -163,6 +162,7 @@ Prøv at ændre disse CSS værdier midlertidigt for at se hvad der sker:
 ```
 
 Refresh siden - kan du se de røde rammer?
+Du må gerne gå tilbage til det oprindelige, når du har testet.
 
 **2b. Forstå nuværende layout**
 
