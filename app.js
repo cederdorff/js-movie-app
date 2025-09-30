@@ -14,7 +14,7 @@ function initApp() {
 
 // #2: Fetch movies from JSON and display them
 async function getMovies() {
-  const response = await fetch("./data/movies.json");
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
   allMovies = await response.json();
   populateGenreDropdown();
   filterSortDisplayMovies();
