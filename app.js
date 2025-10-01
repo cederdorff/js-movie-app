@@ -68,14 +68,19 @@ function showMovieDialog(movie) {
 function populateGenreDropdown() {
   const genreSelect = document.querySelector("#genre-select");
   const genres = new Set();
-  allMovies.forEach(movie => movie.genre.forEach(g => genres.add(g)));
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
   // Fjern gamle options undtagen 'Alle genrer'
   genreSelect.innerHTML = '<option value="all">Alle genrer</option>';
-  Array.from(genres)
-    .sort()
-    .forEach(genre => {
-      genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
-    });
+  const sortedGenres = Array.from(genres).sort();
+  for (const genre of sortedGenres) {
+    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
+  }
 }
 
 // #7: Samlet filter, søg og sort funktion
