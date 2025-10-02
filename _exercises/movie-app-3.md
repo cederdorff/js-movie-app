@@ -624,7 +624,7 @@ function displayMovie(movie) {
 **9b. Opret `showMovieDetails` funktion**
 
 ```javascript
-// #6: Vis movie detaljer (midlertidig løsning med alert)
+// #7: Vis movie detaljer (midlertidig løsning med alert)
 function showMovieDetails(movie) {
   console.log("📊 Viser detaljer for:", movie.title);
 
