@@ -23,8 +23,10 @@
           <!-- Genre options will be populated from JS -->
         </select>
         <select id="sort-select">
+          <option value="none">Ingen sortering</option>
           <option value="title">Sortér: Titel (A-Å)</option>
-          <option value="year">Sortér: År (nyeste)</option>
+          <option value="year">Sortér: År (nyeste først)</option>
+          <option value="rating">Sortér: Rating (højeste først)</option>
         </select>
       </section>
       <!-- Movie List -->
@@ -36,16 +38,6 @@
     <footer>
       <p>© RACE - Rasmus Cederdorff</p>
     </footer>
-
-    <!-- Movie Detail Modal -->
-    <dialog id="movie-dialog">
-      <form method="dialog">
-        <button id="close-dialog" aria-label="Close">✕</button>
-        <div id="dialog-content">
-          <!-- Movie details will be injected here -->
-        </div>
-      </form>
-    </dialog>
 
     <script src="app.js"></script>
   </body>
