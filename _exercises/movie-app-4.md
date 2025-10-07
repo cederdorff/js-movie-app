@@ -44,877 +44,828 @@ function showMovieDetails(movie) {
 
 ---
 
-## Del 1: Forståelse af Filtrering og Sortering 🔍
+## Del 1: Udvidelse af Filtrering 🔍
 
-**Formål:** Forstå hvordan filtrering og sortering virker step-by-step før vi bygger modal.
+**Mål:** Udvid din eksisterende filtrering med **år-range** og **rating-range** filtre for at give brugerne flere muligheder.
 
-**⚠️ VIGTIGT:** I denne sektion bruger vi **test funktioner** til at forstå koncepterne. Disse funktioner er kun til læring og skal **ikke** være en del af din færdige app. Du kan fjerne dem efter, du har forstået koncepterne.
+---
 
-### Trin 1: Gennemgå streng søgning og filtrering
+## Del 1: Udvidelse af Filtrering 🔍
 
-**1a. Forstå din nuværende filterMovies() funktion**
+**Mål:** Udvid din eksisterende filtrering med **år-range** og **rating-range** filtre for at give brugerne flere muligheder.
 
-Åbn din `app.js` og find din `filterMovies()` funktion. Den skulle ligne dette:
+**Fra Session 3:** Du har allerede basis filtrering (søg, genre, sortering). Nu tilføjer vi mere avancerede filtre **én ad gangen**.
 
-```javascript
-// #7: Kombineret søgning, genre og sortering
-function filterMovies() {
-  const searchValue = document.querySelector("#search-input").value.toLowerCase();
-  const genreValue = document.querySelector("#genre-select").value;
-  const sortValue = document.querySelector("#sort-select").value;
+---
 
-  let filteredMovies = allMovies;
+## Feature 1: År Range Filter 📅
 
-  // Filtrer på søgetekst
-  if (searchValue) {
-    filteredMovies = filteredMovies.filter(movie => {
-      return movie.title.toLowerCase().includes(searchValue);
-    });
-  }
+### Trin 1: Tilføj år filter HTML
 
-  // Filtrer på genre
-  if (genreValue !== "all") {
-    filteredMovies = filteredMovies.filter(movie => {
-      return movie.genre.includes(genreValue);
-    });
-  }
+**1a. Tilføj kun år filter HTML**
 
-  // Sorter resultater
-  if (sortValue === "title") {
-    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sortValue === "year") {
-    filteredMovies.sort((a, b) => b.year - a.year);
-  } else if (sortValue === "rating") {
-    filteredMovies.sort((a, b) => b.rating - a.rating);
-  }
-
-  displayMovies(filteredMovies);
-}
-```
-
-**💡 Hvis din funktion ser anderledes ud:** Følg med i denne sektion for at forstå hvert trin!
-
-### Trin 2: Forstå streng søgning med console.log
-
-**2a. Tilføj test funktion til streng søgning**
-
-**🧪 TEST FUNKTION (til læring - kan fjernes senere):**
-
-Lad os tilføje en test funktion for at forstå hvad der sker ved streng søgning:
-
-```javascript
-// 🧪 TEST FUNKTION - Kun til læring (kan fjernes efter forståelse)
-function understandStringSearch() {
-  console.log("=== FORSTÅ STRENG SØGNING ===");
-
-  // Test data
-  const testMovies = [
-    { title: "The Matrix" },
-    { title: "The Dark Knight" },
-    { title: "Avatar" },
-    { title: "Inception" }
-  ];
-
-  const searchTerm = "the";
-
-  console.log(
-    "🎬 Test movies:",
-    testMovies.map(m => m.title)
-  );
-  console.log("🔍 Søger efter:", searchTerm);
-
-  // Step 1: Konverter søgeterm til lowercase
-  const searchLower = searchTerm.toLowerCase();
-  console.log("🔍 Søgeterm (lowercase):", searchLower);
-
-  // Step 2: Test hver film
-  for (const movie of testMovies) {
-    const titleLower = movie.title.toLowerCase();
-    const matches = titleLower.includes(searchLower);
-    console.log(`📝 "${movie.title}" → "${titleLower}" → includes("${searchLower}") → ${matches}`);
-  }
-
-  // Step 3: Filtrer med filter()
-  const results = testMovies.filter(movie => {
-    return movie.title.toLowerCase().includes(searchLower);
-  });
-
-  console.log(
-    "✅ Resultater:",
-    results.map(m => m.title)
-  );
-}
-```
-
-**2b. Test streng søgning i Console**
-
-1. **Tilføj test funktionen** til din `app.js` (kun midlertidigt til læring)
-2. **GEM og refresh** browseren
-3. **Åbn Console** og kør: `understandStringSearch()`
-4. **Se output** og forstå hvert trin:
-   - Hvorfor "The Matrix" matcher "the"
-   - Hvorfor "Avatar" ikke matcher "the"
-   - Hvordan `.toLowerCase()` og `.includes()` virker
-
-**💡 Hvad lærte vi?**
-
-- `.toLowerCase()` gør søgning case-insensitive
-- `.includes()` tjekker om en string indeholder en anden
-- `.filter()` skaber et nyt array med kun matching elementer
-
-**🗑️ Oprydning:** Du kan fjerne `understandStringSearch()` funktionen når du har forstået konceptet.
-
-### Trin 3: Forstå genre filtrering step-by-step
-
-**3a. Tilføj test funktion til genre filtrering**
-
-**🧪 TEST FUNKTION (til læring - kan fjernes senere):**
-
-```javascript
-// 🧪 TEST FUNKTION - Kun til læring (kan fjernes efter forståelse)
-function understandGenreFiltering() {
-  console.log("=== FORSTÅ GENRE FILTRERING ===");
-
-  // Test data (genre er et array!)
-  const testMovies = [
-    { title: "The Matrix", genre: ["Action", "Sci-Fi"] },
-    { title: "Titanic", genre: ["Drama", "Romance"] },
-    { title: "The Avengers", genre: ["Action", "Adventure"] },
-    { title: "The Lion King", genre: ["Animation", "Family"] }
-  ];
-
-  const selectedGenre = "Action";
-
-  console.log("� Test movies:");
-  for (const m of testMovies) {
-    console.log(`  "${m.title}" → [${m.genre.join(", ")}]`);
-  }
-  console.log("�🎭 Valgt genre:", selectedGenre);
-
-  // Test hver film
-  for (const movie of testMovies) {
-    const hasGenre = movie.genre.includes(selectedGenre);
-    console.log(`📝 "${movie.title}" → genre.includes("${selectedGenre}") → ${hasGenre}`);
-  }
-
-  // Filtrer resultater
-  const results = testMovies.filter(movie => {
-    return movie.genre.includes(selectedGenre);
-  });
-
-  console.log(
-    "✅ Action movies:",
-    results.map(m => m.title)
-  );
-}
-```
-
-**3b. Test genre filtrering**
-
-1. **Tilføj test funktionen** til din `app.js` (kun midlertidigt til læring)
-2. **Kør i Console:** `understandGenreFiltering()`
-3. **Forstå output:**
-   - Genre er et array: `["Action", "Sci-Fi"]`
-   - `.includes()` virker også på arrays
-   - En film kan have flere genrer
-
-**💡 Forskel på string og array includes:**
-
-```javascript
-// String includes
-"The Matrix"
-  .includes("Matrix") // true
-
-  [
-    // Array includes
-    ("Action", "Sci-Fi")
-  ].includes("Action"); // true
-```
-
-**🗑️ Oprydning:** Du kan fjerne `understandGenreFiltering()` funktionen når du har forstået konceptet.
-
-### Trin 4: Forstå sortering (alfabetisk og numerisk)
-
-**4a. Tilføj test funktion til sortering**
-
-**🧪 TEST FUNKTION (til læring - kan fjernes senere):**
-
-```javascript
-// 🧪 TEST FUNKTION - Kun til læring (kan fjernes efter forståelse)
-function understandSorting() {
-  console.log("=== FORSTÅ SORTERING ===");
-
-  const testMovies = [
-    { title: "Zebra Movie", year: 2020, rating: 8.5 },
-    { title: "Alpha Movie", year: 2022, rating: 7.2 },
-    { title: "Beta Movie", year: 2021, rating: 9.1 }
-  ];
-
-  console.log("🎬 Original rækkefølge:");
-  for (let i = 0; i < testMovies.length; i++) {
-    const m = testMovies[i];
-    console.log(`  ${i + 1}. "${m.title}" (${m.year}) ⭐${m.rating}`);
-  }
-
-  // 1. Sortér på titel (alfabetisk)
-  console.log("\n📝 Sortér på titel (A-Å):");
-  const byTitle = [...testMovies].sort((a, b) => a.title.localeCompare(b.title));
-  for (let i = 0; i < byTitle.length; i++) {
-    const m = byTitle[i];
-    console.log(`  ${i + 1}. "${m.title}"`);
-  }
-
-  // 2. Sortér på år (nyeste først)
-  console.log("\n📅 Sortér på år (nyeste først):");
-  const byYear = [...testMovies].sort((a, b) => b.year - a.year);
-  for (let i = 0; i < byYear.length; i++) {
-    const m = byYear[i];
-    console.log(`  ${i + 1}. "${m.title}" (${m.year})`);
-  }
-
-  // 3. Sortér på rating (højeste først)
-  console.log("\n⭐ Sortér på rating (højeste først):");
-  const byRating = [...testMovies].sort((a, b) => b.rating - a.rating);
-  for (let i = 0; i < byRating.length; i++) {
-    const m = byRating[i];
-    console.log(`  ${i + 1}. "${m.title}" ⭐${m.rating}`);
-  }
-
-  console.log("\n💡 Bemærk: Original array er uændret:");
-  for (let i = 0; i < testMovies.length; i++) {
-    const m = testMovies[i];
-    console.log(`  ${i + 1}. "${m.title}"`);
-  }
-}
-```
-
-**4b. Test sortering og forstå forskelle**
-
-1. **Tilføj test funktionen** til din `app.js` (kun midlertidigt til læring)
-2. **Kør i Console:** `understandSorting()`
-3. **Forstå de tre sorteringstyper:**
-   - **String sortering:** `a.title.localeCompare(b.title)` (alfabetisk)
-   - **Tal sortering (faldende):** `b.year - a.year` (største først)
-   - **Tal sortering (stigende):** `a.year - b.year` (mindste først)
-
-**💡 Vigtigt at forstå localeCompare():**
-
-`localeCompare()` er den rigtige måde at sortere tekst alfabetisk på dansk/engelsk. Det tager højde for:
-
-- Store/små bogstaver
-- Danske tegn (æ, ø, å)
-- Specialtegn og tal i tekst
-
-```javascript
-// String sammenligning med localeCompare()
-"Alpha".localeCompare("Beta"); // -1 (Alpha kommer før Beta)
-"Beta".localeCompare("Alpha"); // 1  (Beta kommer efter Alpha)
-"äpfel".localeCompare("zebra"); // -1 (ä sorteres som a)
-
-// FORKERT måde at sortere strings:
-"Alpha" > "Beta"; // false (ikke pålidelig!)
-
-// KORREKT måde:
-"Alpha".localeCompare("Beta") < 0; // true (Alpha kommer før Beta)
-
-// Tal sammenligning (simpel matematik)
-// For STIGENDE (mindste først): a - b
-2020 - 2022; // -2 (2020 kommer før 2022)
-
-// For FALDENDE (største først): b - a
-2022 - 2020; // 2  (2022 kommer før 2020)
-```
-
-**🗑️ Oprydning:** Du kan fjerne `understandSorting()` funktionen når du har forstået konceptet.
-
-### Trin 5: Byg en komplet filterMovies() step-by-step
-
-**5a. Tilføj forbedret filterMovies med fuld debugging**
-
-**⚠️ BEMÆRK:** Dette erstatter din eksisterende `filterMovies()` funktion med en version der har debugging. Du kan fjerne console.log linjerne når du har forstået hvordan det virker.
-
-Erstat eller opdater din `filterMovies()` funktion:
-
-```javascript
-// #7: Kombineret søgning, genre og sortering (MED DEBUGGING)
-function filterMovies() {
-  console.log("🔄 ===== STARTER FILTRERING =====");
-
-  // Hent værdier fra UI
-  const searchValue = document.querySelector("#search-input").value.toLowerCase();
-  const genreValue = document.querySelector("#genre-select").value;
-  const sortValue = document.querySelector("#sort-select").value;
-
-  console.log(`🔍 Søgeterm: "${searchValue}"`);
-  console.log(`🎭 Valgt genre: "${genreValue}"`);
-  console.log(`📊 Valgt sortering: "${sortValue}"`);
-
-  // Start med alle film
-  let filteredMovies = allMovies;
-  console.log(`📋 Starter med: ${filteredMovies.length} movies`);
-
-  // TRIN 1: Filtrer på søgetekst (hvis der er skrevet noget)
-  if (searchValue) {
-    console.log(`🔍 Filtrerer på søgetekst: "${searchValue}"`);
-    filteredMovies = filteredMovies.filter(movie => {
-      const matches = movie.title.toLowerCase().includes(searchValue);
-      if (matches) {
-        console.log(`  ✅ "${movie.title}" matcher "${searchValue}"`);
-      }
-      return matches;
-    });
-    console.log(`📊 Efter søgetekst filter: ${filteredMovies.length} movies tilbage`);
-  } else {
-    console.log(`🔍 Ingen søgetekst - springer over`);
-  }
-
-  // TRIN 2: Filtrer på genre (hvis ikke "all")
-  if (genreValue !== "all") {
-    console.log(`🎭 Filtrerer på genre: "${genreValue}"`);
-    filteredMovies = filteredMovies.filter(movie => {
-      const hasGenre = movie.genre.includes(genreValue);
-      if (hasGenre) {
-        console.log(`  ✅ "${movie.title}" har genre "${genreValue}"`);
-      }
-      return hasGenre;
-    });
-    console.log(`📊 Efter genre filter: ${filteredMovies.length} movies tilbage`);
-  } else {
-    console.log(`🎭 Alle genrer valgt - springer over genre filter`);
-  }
-
-  // TRIN 3: Sortér resultater
-  if (sortValue === "title") {
-    console.log(`📝 Sorterer alfabetisk på titel (A-Å)`);
-    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sortValue === "year") {
-    console.log(`📅 Sorterer på år (nyeste først)`);
-    filteredMovies.sort((a, b) => b.year - a.year);
-  } else if (sortValue === "rating") {
-    console.log(`⭐ Sorterer på rating (højeste først)`);
-    filteredMovies.sort((a, b) => b.rating - a.rating);
-  } else {
-    console.log(`📊 Ingen sortering valgt`);
-  }
-
-  console.log(`✅ FINAL RESULTAT: ${filteredMovies.length} movies`);
-  console.log(
-    "📋 Titles:",
-    filteredMovies.map(m => m.title)
-  );
-  console.log("🔄 ===== FILTRERING FÆRDIG =====\n");
-
-  displayMovies(filteredMovies);
-}
-```
-
-**5b. Test den komplette filtrering**
-
-1. **GEM** `app.js` og refresh browseren
-2. **Åbn Console** i Developer Tools
-3. **Test forskellige kombinationer** og se console output:
-
-**Test 1: Kun søgning**
-
-- Skriv "the" i søgefeltet
-- Se hvilke film matcher
-- Bemærk: "The Matrix", "The Dark Knight" matcher
-
-**Test 2: Kun genre**
-
-- Slet søgetekst
-- Vælg "Action" i genre dropdown
-- Se hvilke Action film vises
-
-**Test 3: Kun sortering**
-
-- Vælg "All Genres"
-- Vælg "Rating" i sort dropdown
-- Se film sorteret efter rating
-
-**Test 4: Kombination**
-
-- Skriv "a" i søgefeltet
-- Vælg "Action" genre
-- Vælg "Year" sortering
-- Se komplette filtrering i action
-
-**💡 Hvad skal du bemærke:**
-
-- Antallet af film ændrer sig ved hvert filter-trin
-- Sortering sker EFTER filtrering
-- Console viser præcis hvilke film der matcher hvert trin
-
-### Trin 6: Forstå rækkefølgen af operationer
-
-**6a. Vigtigheden af rækkefølge**
-
-**🧪 TEST FUNKTION (til læring - kan fjernes senere):**
-
-```javascript
-// 🧪 TEST FUNKTION - Kun til læring (kan fjernes efter forståelse)
-function understandFilterOrder() {
-  console.log("=== FORSTÅ FILTER RÆKKEFØLGE ===");
-
-  const testMovies = [
-    { title: "The Action Hero", genre: ["Action"], year: 2020, rating: 8.0 },
-    { title: "Action Adventure", genre: ["Action"], year: 2022, rating: 7.5 },
-    { title: "The Drama", genre: ["Drama"], year: 2021, rating: 9.0 }
-  ];
-
-  console.log(
-    "📋 Start movies:",
-    testMovies.map(m => `"${m.title}"`)
-  );
-
-  // Scenario: Søg "action" + genre "Action" + sort "year"
-
-  // KORREKT rækkefølge: Filter først, sort til sidst
-  console.log("\n✅ KORREKT: Filter → Filter → Sort");
-  let step1 = testMovies.filter(m => m.title.toLowerCase().includes("action"));
-  console.log(
-    "Efter søgning:",
-    step1.map(m => `"${m.title}"`)
-  );
-
-  let step2 = step1.filter(m => m.genre.includes("Action"));
-  console.log(
-    "Efter genre:",
-    step2.map(m => `"${m.title}"`)
-  );
-
-  let step3 = step2.sort((a, b) => b.year - a.year);
-  console.log(
-    "Efter sortering:",
-    step3.map(m => `"${m.title}" (${m.year})`)
-  );
-
-  // FORKERT rækkefølge: Sort først
-  console.log("\n❌ FORKERT: Sort → Filter → Filter");
-  let wrong1 = [...testMovies].sort((a, b) => b.year - a.year);
-  console.log(
-    "Efter sortering:",
-    wrong1.map(m => `"${m.title}" (${m.year})`)
-  );
-
-  let wrong2 = wrong1.filter(m => m.title.toLowerCase().includes("action"));
-  console.log(
-    "Efter søgning:",
-    wrong2.map(m => `"${m.title}"`)
-  );
-
-  let wrong3 = wrong2.filter(m => m.genre.includes("Action"));
-  console.log(
-    "Efter genre:",
-    wrong3.map(m => `"${m.title}"`)
-  );
-
-  console.log("\n💡 Samme resultat, men sortering skal altid være SIDST!");
-}
-```
-
-**6b. Test rækkefølge betydning**
-
-1. **Tilføj test funktionen** til din `app.js` (kun midlertidigt til læring)
-2. **Kør i Console:** `understandFilterOrder()`
-3. **Forstå hvorfor rækkefølge er vigtig:**
-   - Filtrering reducerer antallet af elementer
-   - Sortering arrangerer de tilbageværende elementer
-   - Effektivitet: Sortér færre elementer = hurtigere
-
-**💡 Husk altid: FILTER → FILTER → SORT** ✅
-
-**🗑️ Oprydning:** Du kan fjerne `understandFilterOrder()` funktionen når du har forstået konceptet.
-
-**🧹 SAMLEDE OPRYDNING EFTER DEL 1:**
-Efter du har forstået filtrering og sortering kan du fjerne alle test funktioner:
-
-- `understandStringSearch()`
-- `understandGenreFiltering()`
-- `understandSorting()`
-- `understandFilterOrder()`
-
-Du kan også fjerne eller forenkle console.log linjerne i din `filterMovies()` funktion når du er tryg ved hvordan det virker.
-
-### Trin 7: Udvid filtrering med ny funktionalitet 🚀
-
-**Formål:** Nu skal du anvende din forståelse til at bygge nye filtreringsmuligheder step-by-step!
-
-**7a. Tilføj årstal range filtrering**
-
-Lad os tilføje muligheden for at filtrere film efter årstal (f.eks. "2020-2025").
-
-**Først: Tilføj HTML til index.html**
-
-Find din filter bar og tilføj dette nye input efter genre dropdown:
+Find din `.filterbar` i `index.html` og tilføj KUN år filteret:
 
 ```html
-<div class="filter-bar">
-  <input type="text" id="search-input" placeholder="Søg efter film..." />
-
-  <select id="genre-select">
-    <option value="all">Alle genrer</option>
-    <!-- dine eksisterende genre options -->
-  </select>
-
-  <!-- ✨ NY: År range filter -->
-  <div class="year-filter">
-    <label for="year-from">Fra år:</label>
-    <input type="number" id="year-from" placeholder="2000" min="1900" max="2030" />
-    <label for="year-to">Til år:</label>
-    <input type="number" id="year-to" placeholder="2025" min="1900" max="2030" />
-  </div>
-
-  <select id="sort-select">
-    <option value="none">Ingen sortering</option>
-    <!-- dine eksisterende sort options -->
-  </select>
+<!-- År range filter - TILFØJ KUN DENNE -->
+<div class="year-filter">
+  <label>📅 År:</label>
+  <input type="number" id="year-from" placeholder="Fra år" min="1900" max="2024" />
+  <span>til</span>
+  <input type="number" id="year-to" placeholder="Til år" min="1900" max="2024" />
 </div>
 ```
 
-**7b. Udvid filterMovies() med år filtrering - STEP FOR STEP**
+**🧪 TEST 1a:** GEM og refresh browseren. Du skulle nu se år input felterne i din filterbar.
 
-**📋 Plan:** Vi bygger år filtrering i små trin og tester efter hvert trin!
+**1b. Tilføj CSS for år filter**
 
-**TRIN 1: Forstå og test parseInt() først**
+Tilføj denne CSS til din `app.css`:
 
-Tilføj denne test funktion til din `app.js` for at forstå parseInt():
+```css
+/* År filter styling */
+.year-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-```javascript
-// 🧪 TEST: Forstå parseInt() og default værdier
-function testParseInt() {
-  console.log("=== TEST AF PARSEINT ===");
-
-  // Test forskellige input typer
-  console.log('parseInt("2020"):', parseInt("2020")); // 2020
-  console.log('parseInt(""):', parseInt("")); // NaN
-  console.log('parseInt("abc"):', parseInt("abc")); // NaN
-  console.log('parseInt("2020.5"):', parseInt("2020.5")); // 2020 (fjerner decimaler)
-
-  // Test || operator til default værdier
-  console.log('parseInt("") || 0:', parseInt("") || 0); // 0 (default)
-  console.log('parseInt("2020") || 0:', parseInt("2020") || 0); // 2020
-  console.log('parseInt("abc") || 9999:', parseInt("abc") || 9999); // 9999 (default)
-
-  console.log("💡 NaN er 'falsy', så || giver default værdien");
+.year-filter input {
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text-color);
 }
 ```
 
-**Test det:**
+**🧪 TEST 1b:** Refresh browseren. År felterne skulle nu være pænt stylet.
 
-1. **Tilføj funktionen** til din `app.js`
-2. **Kør i Console:** `testParseInt()`
-3. **Forstå output** - hvorfor får vi default værdier?
+### Trin 2: Forstå Number() konvertering
 
-**TRIN 2: Test hentning af år værdier fra DOM**
+**2a. Forstå problemet med input værdier**
 
-Tilføj denne test funktion:
+HTML input felter giver altid **strings**, selvom de er type="number". Derfor skal vi konvertere dem til tal før vi kan sammenligne med film data.
+
+**2b. Lær Number() - konvertering af strings til tal**
+
+`Number()` konverterer strings til tal så vi kan sammenligne dem med film data:
 
 ```javascript
-// 🧪 TEST: Hent år værdier fra input felter
-function testGetYearValues() {
-  console.log("=== TEST AF ÅR VÆRDIER ===");
+// Number() konverterer string til tal
+Number("2020"); // → 2020 (heltal)
+Number("8.5"); // → 8.5 (decimal)
+Number(""); // → 0 (tom string = 0)
+Number("abc"); // → NaN (invalid tekst)
 
-  // Hent de rå værdier
-  const rawYearFrom = document.querySelector("#year-from").value;
-  const rawYearTo = document.querySelector("#year-to").value;
+// Default værdier med || operator
+Number("") || 0; // → 0
+Number("2020") || 0; // → 2020
+Number("abc") || 9999; // → 9999 (hvis teksten ikke er et tal)
+```
 
-  console.log('Rå værdi fra "year-from":', `"${rawYearFrom}"`);
-  console.log('Rå værdi fra "year-to":', `"${rawYearTo}"`);
+**💡 Hvad Number() gør:**
 
-  // Konverter til tal med default
-  const yearFrom = parseInt(rawYearFrom) || 0;
-  const yearTo = parseInt(rawYearTo) || 9999;
+- ✅ **Konverterer strings til tal** så vi kan sammenligne
+- ✅ **Tom string bliver til 0** automatisk (praktisk for filtre)
+- ✅ **Håndterer både heltal og decimaler**
 
-  console.log("Konverteret yearFrom:", yearFrom);
-  console.log("Konverteret yearTo:", yearTo);
+### Trin 3: Implementer år filter i filterMovies()
 
-  // Test logik
-  console.log("Er der sat år filter?", yearFrom > 0 || yearTo < 9999);
+**3a. Tilføj kun år variabler med Number()**
+
+Find din eksisterende `filterMovies()` funktion og tilføj KUN år variablerne:
+
+```javascript
+function filterMovies() {
+  // Dine eksisterende variable (UÆNDRET)
+  const searchValue = document.querySelector("#search-input").value.toLowerCase();
+  const genreValue = document.querySelector("#genre-select").value;
+  const sortValue = document.querySelector("#sort-select").value;
+
+  // NYE år variable - TILFØJ KUN DISSE TO LINJER
+  const yearFrom = Number(document.querySelector("#year-from").value) || 0;
+  const yearTo = Number(document.querySelector("#year-to").value) || 9999;
+
+  // Test med console.log
+  console.log("År filter:", yearFrom, "til", yearTo);
+
+  // Resten af din funktion UÆNDRET indtil videre
+  let filteredMovies = allMovies;
+
+  // Din eksisterende filtrering (søgning og genre)...
+  // displayMovies(filteredMovies); // til sidst
 }
 ```
 
-**Test det:**
+**💡 Bemærk:**
 
-1. **Kør i Console:** `testGetYearValues()` (med tomme felter)
-2. **Skriv "2020" i "Fra år"** og kør igen
-3. **Skriv "2022" i "Til år"** og kør igen
-4. **Forstå forskellen** mellem tomme og udfyldte felter
+- `Number("")` giver `0` automatisk, så `|| 0` er faktisk unødvendig for tom string
+- Men vi bruger `|| 9999` for at sætte en høj default værdi for "til år"
 
-**TRIN 3: Test år filtrering logik isoleret**
+**🧪 TEST 3a:**
+
+1. GEM og refresh browseren
+2. Prøv at skrive i år felterne (f.eks. "2020" til "2023")
+3. Film listen skulle filtreres automatisk baseret på år
+4. Prøv eksisterende filtre (søg/genre) - alt skulle virke sammen
+
+**3b. Tilføj år filtrering logik**
+
+Nu tilføj år filteret EFTER dine eksisterende filtre, men FØR sortering:
 
 ```javascript
-// 🧪 TEST: År filtrering logik
-function testYearFiltering() {
-  console.log("=== TEST AF ÅR FILTRERING ===");
+// Tilføj EFTER genre filter, FØR sortering
 
-  // Test data
-  const testMovies = [
-    { title: "Old Movie", year: 2018 },
-    { title: "2020 Movie", year: 2020 },
-    { title: "Recent Movie", year: 2022 },
-    { title: "Future Movie", year: 2025 }
-  ];
+// År range filter - TILFØJ DENNE SEKTION
+if (yearFrom > 0 || yearTo < 9999) {
+  console.log("Anvender år filter:", yearFrom, "-", yearTo);
+  const before = filteredMovies.length;
 
-  // Test scenario: Film fra 2020-2022
-  const yearFrom = 2020;
-  const yearTo = 2022;
-
-  console.log(
-    `🎬 Test movies:`,
-    testMovies.map(m => `"${m.title}" (${m.year})`)
-  );
-  console.log(`📅 Filter: ${yearFrom} - ${yearTo}`);
-
-  // Test hver film
-  for (const movie of testMovies) {
-    const inRange = movie.year >= yearFrom && movie.year <= yearTo;
-    console.log(`📝 "${movie.title}" (${movie.year}) → i range? ${inRange}`);
-  }
-
-  // Filter resultatet
-  const filtered = testMovies.filter(movie => {
+  filteredMovies = filteredMovies.filter(movie => {
     return movie.year >= yearFrom && movie.year <= yearTo;
   });
 
-  console.log(
-    `✅ Filtrerede film:`,
-    filtered.map(m => `"${m.title}" (${m.year})`)
-  );
-}
-```
-
-**Test det:**
-
-1. **Kør i Console:** `testYearFiltering()`
-2. **Forstå logikken:** `>=` og `<=` operatorer
-3. **Se hvilke film** der matcher 2020-2022 range
-
-**TRIN 4: Tilføj år værdier til din filterMovies() funktion**
-
-Nu tilføjer vi kun år værdierne til din eksisterende `filterMovies()`:
-
-```javascript
-// #7: Opdater din filterMovies() - TILFØJ DISSE LINJER
-function filterMovies() {
-  console.log("🔄 ===== STARTER FILTRERING =====");
-
-  // Eksisterende værdier (uændret)
-  const searchValue = document.querySelector("#search-input").value.toLowerCase();
-  const genreValue = document.querySelector("#genre-select").value;
-  const sortValue = document.querySelector("#sort-select").value;
-
-  // ✨ TILFØJ DISSE NYE LINJER:
-  const yearFrom = parseInt(document.querySelector("#year-from").value) || 0;
-  const yearTo = parseInt(document.querySelector("#year-to").value) || 9999;
-
-  // Eksisterende console logs (uændret)
-  console.log(`🔍 Søgeterm: "${searchValue}"`);
-  console.log(`🎭 Valgt genre: "${genreValue}"`);
-  console.log(`📊 Valgt sortering: "${sortValue}"`);
-
-  // ✨ TILFØJ DENNE NYE LOG:
-  console.log(`📅 År range: ${yearFrom} - ${yearTo}`);
-
-  // Rest af funktionen forbliver uændret for nu...
-  let filteredMovies = allMovies;
-  console.log(`📋 Starter med: ${filteredMovies.length} movies`);
-
-  // Dine eksisterende filtre (søgning, genre, sortering) - UÆNDRET
-  // ... resten af din kode ...
-
-  displayMovies(filteredMovies);
-}
-```
-
-**Test delvise ændringer:**
-
-1. **GEM** `app.js` og refresh browseren
-2. **Skriv i år felterne** og brug eksisterende filtre
-3. **Se console output** - ser du de nye år værdier?
-4. **Verify** at eksisterende filtrering stadig virker
-
-**TRIN 5: Tilføj selve år filtreringen**
-
-Nu tilføjer vi filtreringslogikken efter dine eksisterende filtre:
-
-```javascript
-// Tilføj EFTER dine eksisterende filtre (søgning og genre), men FØR sortering:
-
-// ✨ NY: Filtrer på år range
-if (yearFrom > 0 || yearTo < 9999) {
-  console.log(`📅 Anvender år filter: ${yearFrom} - ${yearTo}`);
-
-  const beforeYearFilter = filteredMovies.length;
-
-  filteredMovies = filteredMovies.filter(movie => {
-    const movieYear = movie.year;
-    const inRange = movieYear >= yearFrom && movieYear <= yearTo;
-
-    if (inRange) {
-      console.log(`  ✅ "${movie.title}" (${movieYear}) er i range`);
-    } else {
-      console.log(`  ❌ "${movie.title}" (${movieYear}) er IKKE i range`);
-    }
-
-    return inRange;
-  });
-
-  console.log(`📊 År filter: ${beforeYearFilter} → ${filteredMovies.length} movies`);
+  console.log("År filter:", before, "→", filteredMovies.length, "film");
 } else {
-  console.log(`📅 Ingen år filter anvendt (0-9999)`);
+  console.log("Ingen år filter (alle år)");
 }
 ```
 
-**Test år filtreringen:**
+**🧪 TEST 3b:**
 
-1. **GEM** og refresh browseren
-2. **Test scenarios:**
-   - **Tom år felter** → Se "Ingen år filter anvendt"
-   - **Fra: 2020** → Se hvilke film der er fra 2020+
-   - **Til: 2022** → Se hvilke film der er til 2022
-   - **Fra: 2020, Til: 2022** → Se kun film 2020-2022
-3. **Kombiner med eksisterende filtre:**
-   - Søg "the" + År 2020-2022
-   - Genre "Action" + År 2020+
+1. **Test tom år felter:** Brug søgning eller genre → Alle film vises
+2. **Test "Fra år: 2020":** Skriv 2020 i fra-felt → Se kun nyere film
+3. **Test range:** Fra: 2010, Til: 2020 → Se kun film fra dette årti
+4. Prøv at kombinere med andre filtre (søg/genre)
 
-**TRIN 6: Test complete implementering**
+### Trin 4: Tilføj event listeners for år filter
 
-Din komplette `filterMovies()` skulle nu se sådan ud:
+**4a. Tilføj kun år field event listeners**
+
+Find din `initApp()` funktion og tilføj KUN år field listeners:
 
 ```javascript
-function filterMovies() {
-  console.log("🔄 ===== STARTER UDVIDET FILTRERING =====");
-
-  // Hent alle værdier
-  const searchValue = document.querySelector("#search-input").value.toLowerCase();
-  const genreValue = document.querySelector("#genre-select").value;
-  const sortValue = document.querySelector("#sort-select").value;
-  const yearFrom = parseInt(document.querySelector("#year-from").value) || 0;
-  const yearTo = parseInt(document.querySelector("#year-to").value) || 9999;
-
-  // Log alle værdier
-  console.log(`🔍 Søgeterm: "${searchValue}"`);
-  console.log(`🎭 Valgt genre: "${genreValue}"`);
-  console.log(`📅 År range: ${yearFrom} - ${yearTo}`);
-  console.log(`📊 Valgt sortering: "${sortValue}"`);
-
-  // Start filtrering
-  let filteredMovies = allMovies;
-  console.log(`📋 Starter med: ${filteredMovies.length} movies`);
-
-  // FILTER 1: Søgetekst (din eksisterende kode)
-  if (searchValue) {
-    console.log(`🔍 Filtrerer på søgetekst: "${searchValue}"`);
-    filteredMovies = filteredMovies.filter(movie => {
-      return movie.title.toLowerCase().includes(searchValue);
-    });
-    console.log(`📊 Efter søgetekst filter: ${filteredMovies.length} movies`);
-  }
-
-  // FILTER 2: Genre (din eksisterende kode)
-  if (genreValue !== "all") {
-    console.log(`🎭 Filtrerer på genre: "${genreValue}"`);
-    filteredMovies = filteredMovies.filter(movie => {
-      return movie.genre.includes(genreValue);
-    });
-    console.log(`📊 Efter genre filter: ${filteredMovies.length} movies`);
-  }
-
-  // FILTER 3: År range (ny kode)
-  if (yearFrom > 0 || yearTo < 9999) {
-    console.log(`📅 Filtrerer på år: ${yearFrom} - ${yearTo}`);
-    filteredMovies = filteredMovies.filter(movie => {
-      return movie.year >= yearFrom && movie.year <= yearTo;
-    });
-    console.log(`📊 Efter år filter: ${filteredMovies.length} movies`);
-  }
-
-  // SORTERING (din eksisterende kode)
-  if (sortValue === "title") {
-    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
-    console.log("📝 Sorteret alfabetisk");
-  } else if (sortValue === "year") {
-    filteredMovies.sort((a, b) => b.year - a.year);
-    console.log("📅 Sorteret på år");
-  } else if (sortValue === "rating") {
-    filteredMovies.sort((a, b) => b.rating - a.rating);
-    console.log("⭐ Sorteret på rating");
-  }
-
-  console.log(`✅ FINAL: ${filteredMovies.length} movies`);
-  displayMovies(filteredMovies);
-}
-```
-
-**Komplet test af år filtrering:**
-
-1. **Test alle kombinationer** af filtre
-2. **Verificer rækkefølge:** Søg → Genre → År → Sort
-3. **Se console logs** for at forstå hvert trin
-
-**🗑️ Oprydning:** Fjern test funktionerne når du forstår koncepterne:
-
-- `testParseInt()`
-- `testGetYearValues()`
-- `testYearFiltering()`
-
-**7c. Tilføj event listeners for nye felter**
-
-Opdater din `initApp()` funktion til at lytte på de nye år felter:
-
-```javascript
-// #1: Initialize the app (opdateret med nye event listeners)
 function initApp() {
-  console.log("initApp: app.js is running 🎉");
   getMovies();
 
-  // Eksisterende event listeners
+  // Dine eksisterende event listeners (UÆNDRET)
   document.querySelector("#search-input").addEventListener("input", filterMovies);
   document.querySelector("#genre-select").addEventListener("change", filterMovies);
   document.querySelector("#sort-select").addEventListener("change", filterMovies);
 
-  // ✨ NYE: Event listeners for år range
+  // NYE: Kun år felter
   document.querySelector("#year-from").addEventListener("input", filterMovies);
   document.querySelector("#year-to").addEventListener("input", filterMovies);
 }
 ```
 
-**7d. Test den nye år filtrering**
+**🧪 TEST 4a:** Nu skulle år felterne virke når du skriver i dem.
 
-1. **GEM alle filer** og refresh browseren
-2. **Test scenarios:**
-   - **Skriv "2020" i "Fra år"** → Se kun film fra 2020 og senere
-   - **Skriv "2022" i "Til år"** → Se kun film til og med 2022
-   - **Kombiner:** Fra: 2020, Til: 2022 → Se kun film mellem 2020-2022
-   - **Kombiner med søgning:** Søg "the" + Fra: 2020 → Se "The" film fra 2020+
+### Trin 5: Komplet test af år filter
 
-**💡 Hvad lærte du?**
+**5a. Test år filter omfattende:**
 
-- Hvordan man tilføjer nye filter kriterier
-- parseInt() til at konvertere string til tal
-- || operator til at sætte default værdier
-- Rækkefølgen af filtre er vigtig
+1. **Test tomme felter:**
+   - Begge tomme → Se alle film (0-9999)
+2. **Test kun "Fra år":**
+   - Fra: 2020 → Se film fra 2020 og frem
+3. **Test kun "Til år":**
+   - Til: 2015 → Se film til og med 2015
+4. **Test range:**
+   - Fra: 2010, Til: 2020 → Se kun film fra dette årti
+5. **Test kombinationer:**
+   - Søg: "the" + Fra år: 2015 → Se "The" film fra 2015+
+   - Genre: "Action" + År: 2010-2020 → Se Action film fra årtiet
 
-**7e. Tilføj rating range filtrering** **(ekstra)** - du får ikke helt så meget hjælp her - spring videre til 7f, hvis det ikke giver mening for dig.
+**🎯 År filter er nu komplet!** Før du går videre, sørg for at år filteret virker perfekt.
 
-Nu skal du selv implementere rating filtrering! Det er din tur til at anvende det du har lært:
+---
 
-**Din opgave:**
+## Feature 2: Rating Range Filter ⭐
 
-1. **Tilføj HTML** for "Fra rating" og "Til rating" input felter (type="number", min="0", max="10", step="0.1")
-2. **Udvid filterMovies()** med et nyt filter trin for rating range
-3. **Tilføj event listeners** for de nye rating felter
-4. **Test** at det virker med forskellige kombinationer
+### Trin 6: Tilføj rating filter HTML
 
-**Hjælp til implementering:**
+**6a. Tilføj rating filter HTML**
+
+Tilføj nu rating filteret til din `.filterbar` EFTER år filteret:
+
+```html
+<!-- Rating range filter - TILFØJ EFTER år filter -->
+<div class="rating-filter">
+  <label>⭐ Rating:</label>
+  <input type="number" id="rating-from" placeholder="Fra" min="0" max="10" step="0.1" />
+  <span>til</span>
+  <input type="number" id="rating-to" placeholder="Til" min="0" max="10" step="0.1" />
+</div>
+```
+
+**6b. Tilføj CSS for rating filter**
+
+Tilføj til din CSS:
+
+```css
+/* Rating filter styling */
+.rating-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-filter input {
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text-color);
+}
+```
+
+**🧪 TEST 6b:** Refresh browseren. Du skulle nu se både år og rating filtre.
+
+### Trin 7: Number() håndterer både år og rating!
+
+**7a. Number() virker også til rating**
+
+Vi kan bruge den samme `Number()` funktion til rating som vi brugte til år:
 
 ```javascript
-// Hint til rating filter trin:
-const ratingFrom = parseFloat(document.querySelector("#rating-from").value) || 0;
-const ratingTo = parseFloat(document.querySelector("#rating-to").value) || 10;
+// Number() konverterer rating værdier
+Number("8.5"); // → 8.5 (decimal rating)
+Number("8"); // → 8 (heltal rating)
+Number(""); // → 0 (tom = 0)
 
-// Hint til filtering:
+// Default værdier for rating (0 til 10)
+Number("") || 0; // → 0
+Number("") || 10; // → 10
+```
+
+**💡 Praktisk:** Vi bruger samme konverteringsmetode (`Number()`) til både år og rating!
+
+### Trin 8: Implementer rating filter
+
+**8a. Tilføj rating variabler med Number()**
+
+Tilføj rating variablerne til din `filterMovies()` funktion EFTER år variablerne:
+
+```javascript
+// NYE rating variable - TILFØJ EFTER år variablerne
+const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
+const ratingTo = Number(document.querySelector("#rating-to").value) || 10;
+
+console.log("Rating filter:", ratingFrom, "til", ratingTo);
+```
+
+**💡 Bemærk:**
+
+- `Number("")` giver `0`, så `|| 0` er teknisk set unødvendig for "fra" rating
+- Men vi bruger `|| 10` for at sætte max rating som default for "til" rating
+
+**8b. Tilføj rating filtrering logik**
+
+Tilføj EFTER år filteret:
+
+```javascript
+// Rating range filter - TILFØJ EFTER år filter
+if (ratingFrom > 0 || ratingTo < 10) {
+  console.log("Anvender rating filter:", ratingFrom, "-", ratingTo);
+  const before = filteredMovies.length;
+
+  filteredMovies = filteredMovies.filter(movie => {
+    return movie.rating >= ratingFrom && movie.rating <= ratingTo;
+  });
+
+  console.log("Rating filter:", before, "→", filteredMovies.length, "film");
+} else {
+  console.log("Ingen rating filter (alle ratings)");
+}
+```
+
+### Trin 9: Tilføj event listeners for rating
+
+**9a. Tilføj rating field event listeners**
+
+Tilføj til din `initApp()` funktion EFTER år listeners:
+
+```javascript
+// Tilføj EFTER år listeners
+document.querySelector("#rating-from").addEventListener("input", filterMovies);
+document.querySelector("#rating-to").addEventListener("input", filterMovies);
+```
+
+**🧪 TEST 9a:** Nu skulle rating felterne også virke.
+
+### Trin 10: Komplet test af rating filter
+
+**10a. Test rating filter omfattende:**
+
+1. **Test kun "Fra rating":**
+   - Fra: 8.0 → Se kun højt ratede film
+2. **Test kun "Til rating":**
+   - Til: 7.5 → Se film med max 7.5 rating
+3. **Test range:**
+   - Fra: 7.0, Til: 9.0 → Se film i dette interval
+4. **Test kombinationer:**
+   - År: 2020+ OG Rating: 8.0+ → Se nyere, højt ratede film
+   - Genre: "Action" + Rating: 8.0-10 → Se top Action film
+
+**🎯 Rating filter er nu komplet!**
+
+---
+
+## Feature 3: Clear All Filters 🗑️
+
+### Trin 11: Tilføj clear button HTML
+
+**11a. Tilføj clear filters knap**
+
+Tilføj clear knappen til din `.filterbar` EFTER rating filteret:
+
+```html
+<!-- Clear filters knap - TILFØJ TIL SIDST -->
+<button id="clear-filters">🗑️ Ryd alle filtre</button>
+```
+
+**11b. Tilføj CSS for clear knap**
+
+```css
+#clear-filters {
+  padding: 0.75rem 1rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#clear-filters:hover {
+  background: var(--accent-hover);
+}
+```
+
+**🧪 TEST 11b:** Du skulle nu se clear knappen. Den virker endnu ikke.
+
+### Trin 12: Implementer clearAllFilters() funktion
+
+**12a. Tilføj clear funktion**
+
+Tilføj denne nye funktion til din `app.js`:
+
+```javascript
+// Ny funktion: Ryd alle filtre - TILFØJ DENNE
+function clearAllFilters() {
+  console.log("🗑️ Rydder alle filtre");
+
+  // Ryd søgning og dropdown felter
+  document.querySelector("#search-input").value = "";
+  document.querySelector("#genre-select").value = "all";
+  document.querySelector("#sort-select").value = "none";
+
+  // Ryd de nye range felter
+  document.querySelector("#year-from").value = "";
+  document.querySelector("#year-to").value = "";
+  document.querySelector("#rating-from").value = "";
+  document.querySelector("#rating-to").value = "";
+
+  // Kør filtrering igen (viser alle film)
+  filterMovies();
+}
+```
+
+**🧪 TEST 12a:** GEM og refresh browseren. Klik på "Clear Filters" knappen - alle felter skulle ryddes og alle film vises.
+
+### Trin 13: Tilføj event listener for clear button
+
+**13a. Tilføj clear button event listener**
+
+Tilføj til din `initApp()` funktion TIL SIDST:
+
+```javascript
+// Clear filters knap - TILFØJ TIL SIDST
+document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
+```
+
+**🧪 TEST 13a:** GEM og refresh. Clear knappen skulle nu virke når du klikker på den.
+
+### Trin 14: Komplet test af alle features
+
+**14a. Test hele systemet:**
+
+1. **Set flere filtre:**
+
+   - Søg: "a"
+   - Genre: "Action"
+   - År: 2010-2020
+   - Rating: 7.0-10
+   - Sort: "rating"
+
+2. **Klik clear:** Alt nulstilles og alle film vises
+
+3. **Test edge cases:**
+   - Tomme felter → Se alle film
+   - Kun et felt udfyldt → Se partiel filtrering
+   - Ulogiske ranges (Fra: 2020, Til: 2010) → Ingen film
+
+**🎯 Komplet funktionalitet opnået!**
+
+---
+
+**3a. Først tilføj kun år variabler**
+
+Find din eksisterende `filterMovies()` funktion og tilføj KUN år variablerne:
+
+```javascript
+function filterMovies() {
+  // Dine eksisterende variable (UÆNDRET)
+  const searchValue = document.querySelector("#search-input").value.toLowerCase();
+  const genreValue = document.querySelector("#genre-select").value;
+  const sortValue = document.querySelector("#sort-select").value;
+
+  // NYE år variable - TILFØJ DISSE TO LINJER
+  const yearFrom = Number(document.querySelector("#year-from").value) || 0;
+  const yearTo = Number(document.querySelector("#year-to").value) || 9999;
+
+  // Test med console.log
+  console.log("År filter:", yearFrom, "til", yearTo);
+
+  // Resten af din funktion UÆNDRET indtil videre
+  let filteredMovies = allMovies;
+
+  // Din eksisterende filtrering...
+  // displayMovies(filteredMovies); // til sidst
+}
+```
+
+**🧪 TEST 3a:**
+
+1. GEM og refresh browseren
+2. Prøv at skrive i år felterne (f.eks. "2020" til "2023")
+3. Film listen skulle filtreres automatisk baseret på år
+4. Prøv eksisterende filtre (søg/genre) - alt skulle virke sammen
+
+**3b. Tilføj år filtrering logik**
+
+Nu tilføj EFTER dine eksisterende filtre, men FØR sortering:
+
+```javascript
+// Tilføj EFTER genre filter, FØR sortering
+
+// År range filter - TILFØJ DENNE SEKTION
+if (yearFrom > 0 || yearTo < 9999) {
+  console.log("Anvender år filter:", yearFrom, "-", yearTo);
+  const before = filteredMovies.length;
+
+  filteredMovies = filteredMovies.filter(movie => {
+    return movie.year >= yearFrom && movie.year <= yearTo;
+  });
+
+  console.log("År filter:", before, "→", filteredMovies.length, "film");
+} else {
+  console.log("Ingen år filter (alle år)");
+}
+```
+
+**🧪 TEST 3b:**
+
+1. **Test tom år felter:** Brug søgning eller genre → Alle film vises
+2. **Test "Fra år: 2020":** Skriv 2020 i fra-felt → Se kun nyere film
+3. **Test range:** Fra: 2010, Til: 2020 → Se kun film fra dette årti
+4. Prøv at kombinere med andre filtre (søg/genre)
+
+### Trin 4: Tilføj rating filtrering
+
+**4a. Tilføj rating variabler**
+
+Tilføj rating variablerne efter år variablerne:
+
+```javascript
+// NYE rating variable - TILFØJ EFTER år variablerne
+const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
+const ratingTo = Number(document.querySelector("#rating-to").value) || 10;
+
+console.log("Rating filter:", ratingFrom, "til", ratingTo);
+```
+
+**4b. Tilføj rating filtrering logik**
+
+Tilføj EFTER år filteret:
+
+```javascript
+// Rating range filter - TILFØJ EFTER år filter
+if (ratingFrom > 0 || ratingTo < 10) {
+  console.log("Anvender rating filter:", ratingFrom, "-", ratingTo);
+  const before = filteredMovies.length;
+
+  filteredMovies = filteredMovies.filter(movie => {
+    return movie.rating >= ratingFrom && movie.rating <= ratingTo;
+  });
+
+  console.log("Rating filter:", before, "→", filteredMovies.length, "film");
+} else {
+  console.log("Ingen rating filter (alle ratings)");
+}
+```
+
+**🧪 TEST 4b:**
+
+1. **Test "Fra rating: 8.0":** Se kun højt ratede film
+2. **Test range:** Fra: 7.0, Til: 9.0 → Se film i dette interval
+3. **Test kombination:** År 2020+ OG rating 8.0+ → Se nyere, højt ratede film
+
+````
+
+### Trin 5: Tilføj clearAllFilters() funktion
+
+**5a. Implementer clear funktion step-by-step**
+
+Tilføj denne nye funktion til din `app.js`:
+
+```javascript
+// Ny funktion: Ryd alle filtre - TILFØJ DENNE
+function clearAllFilters() {
+  console.log("🗑️ Rydder alle filtre");
+
+  // Ryd search og dropdown felter
+  document.querySelector("#search-input").value = "";
+  document.querySelector("#genre-select").value = "all";
+  document.querySelector("#sort-select").value = "none";
+
+  // Ryd de nye range felter
+  document.querySelector("#year-from").value = "";
+  document.querySelector("#year-to").value = "";
+  document.querySelector("#rating-from").value = "";
+  document.querySelector("#rating-to").value = "";
+
+  // Kør filtrering igen (viser alle film)
+  filterMovies();
+}
+````
+
+**🧪 TEST 5a:** GEM og refresh browseren. Klik på "Clear Filters" knappen - alle felter skulle ryddes og alle film vises.
+
+### Trin 6: Tilføj event listeners step-by-step
+
+**6a. Først kun år field listeners**
+
+Find din `initApp()` funktion og tilføj KUN år field listeners først:
+
+```javascript
+function initApp() {
+  getMovies();
+
+  // Dine eksisterende event listeners (UÆNDRET)
+  document.querySelector("#search-input").addEventListener("input", filterMovies);
+  document.querySelector("#genre-select").addEventListener("change", filterMovies);
+  document.querySelector("#sort-select").addEventListener("change", filterMovies);
+
+  // NYE: Kun år felter først
+  document.querySelector("#year-from").addEventListener("input", filterMovies);
+  document.querySelector("#year-to").addEventListener("input", filterMovies);
+}
+```
+
+**🧪 TEST 6a:** Nu skulle år felterne virke når du skriver i dem.
+
+**6b. Tilføj rating field listeners**
+
+Tilføj rating event listeners:
+
+```javascript
+// Tilføj EFTER år listeners
+document.querySelector("#rating-from").addEventListener("input", filterMovies);
+document.querySelector("#rating-to").addEventListener("input", filterMovies);
+```
+
+**🧪 TEST 6b:** Nu skulle rating felterne også virke.
+
+**6c. Tilføj clear button listener**
+
+Tilføj clear knap event listener:
+
+```javascript
+// Tilføj til sidst
+document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
+```
+
+**🧪 TEST 6c:** Clear knappen skulle nu virke.
+
+### Trin 7: Omfattende test af alle kombinationer
+
+**7a. Test individuelt:**
+
+1. **Kun år filter:**
+
+   - Fra år: 2020 → Se nyere film
+   - Til år: 2015 → Se ældre film
+   - Fra: 2010, Til: 2020 → Se årti
+
+2. **Kun rating filter:**
+   - Fra rating: 8.0 → Se højt ratede
+   - Fra: 7.0, Til: 9.0 → Se medium-høje
+
+**7b. Test kombinationer:**
+
+1. **Søgning + år:**
+   - Søg: "the" + Fra år: 2015
+2. **Genre + rating:**
+   - Genre: "Action" + Fra rating: 8.0
+3. **Alt sammen:**
+   - Søg: "a" + Genre: "Action" + År: 2010-2020 + Rating: 7.0-10 + Sort: "rating"
+
+**7c. Test clear funktionalitet:**
+
+1. Sæt flere filtre → Klik clear → Alt nulstilles
+2. Test at alle filtre virker igen efter clear
+
+**🎯 Debugging tips:**
+
+- Tjek at antallet af film ændrer sig efter hvert filter
+- Test alle filter kombinationer
+- Verify at sortering sker til sidst
+
+````
+
+### Trin 8: Fjern debug logs (valgfrit)
+
+**8a. Ryd op i console.log statements**
+
+Når alt virker, kan du fjerne debug logs for en renere oplevelse:
+
+```javascript
+function filterMovies() {
+  // Bevar variable (UÆNDRET)
+  const searchValue = document.querySelector("#search-input").value.toLowerCase();
+  const genreValue = document.querySelector("#genre-select").value;
+  const sortValue = document.querySelector("#sort-select").value;
+  const yearFrom = Number(document.querySelector("#year-from").value) || 0;
+  const yearTo = Number(document.querySelector("#year-to").value) || 9999;
+  const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
+  const ratingTo = Number(document.querySelector("#rating-to").value) || 10;
+
+  let filteredMovies = allMovies;
+
+  // Eksisterende filtre (fjern console.log hvis ønsket)
+  if (searchValue) {
+    filteredMovies = filteredMovies.filter(movie =>
+      movie.title.toLowerCase().includes(searchValue)
+    );
+  }
+
+  if (genreValue !== "all") {
+    filteredMovies = filteredMovies.filter(movie =>
+      movie.genre.includes(genreValue)
+    );
+  }
+
+  // Nye filtre (fjern console.log hvis ønsket)
+  filteredMovies = filteredMovies.filter(movie =>
+    movie.year >= yearFrom && movie.year <= yearTo
+  );
+
+  filteredMovies = filteredMovies.filter(movie =>
+    movie.rating >= ratingFrom && movie.rating <= ratingTo
+  );
+
+  // Sortering (UÆNDRET)
+  if (sortValue === "title") {
+    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortValue === "year") {
+    filteredMovies.sort((a, b) => b.year - a.year);
+  } else if (sortValue === "rating") {
+    filteredMovies.sort((a, b) => b.rating - a.rating);
+  }
+
+  displayMovies(filteredMovies);
+}
+````
+
+**🎯 Du har nu implementeret:**
+
+- ✅ År range filtrering med step-by-step guidance
+- ✅ Rating range filtrering med test efter hvert trin
+- ✅ Clear all filters funktionalitet
+- ✅ Event listeners for alle nye felter
+- ✅ Komplet debug process med console logs
+- ✅ Omfattende test scenarios
+
+**🚀 Klar til Del 2!** Din filtrering er nu komplet og du forstår hvert trin.
+
+2. **Rating range filter:**
+
+   - Prøv "Fra: 8.0" og "Til: 10"
+   - Se kun højt ratede film
+
+3. **Kombination af filtre:**
+
+   - Søg efter "the"
+   - Vælg "Action" genre
+   - År: 2008-2015
+   - Rating: 7.0-10
+   - Sortér efter rating
+
+4. **Clear filters:**
+   - Klik "Ryd alle filtre" knappen
+   - Alle felter ryddes og alle film vises igen
+
+**🎯 Test din implementation:**
+
+- Antallet af film ændrer sig ved hvert filter-trin
+- Sortering sker EFTER filtrering
+- Clear knappen nulstiller alt
+
+---
+
+## 🎉 Komplet løsning efter Del 1
+
+**Efter øvelserne** har du nu udvidet filtrering. Her er den **komplette løsning** du skal have for at fortsætte til Del 2: ### ✅ Komplet HTML (index.html)
+
+```html
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie App</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎬 Movie Database</h1>
+    </header>
+
+    <main>
+      <!-- Filter bar med alle filtreringsmuligheder -->
+      <div class="filterbar">
+        <!-- Søgning -->
+        <div class="search-filter">
+          <label for="search-input">🔍 Søg:</label>
+          <input type="text" id="search-input" placeholder="Søg efter filmtitel..." />
+        </div>
+
+        <!-- Genre dropdown -->
+        <div class="genre-filter">
+          <label for="genre-select">🎭 Genre:</label>
+          <select id="genre-select">
+            <option value="all">Alle genrer</option>
+          </select>
+        </div>
+
+        <!-- År range -->
+        <div class="year-filter">
+          <label>📅 År:</label>
+          <input type="number" id="year-from" placeholder="Fra år" min="1900" max="2024" />
+          <span>til</span>
+          <input type="number" id="year-to" placeholder="Til år" min="1900" max="2024" />
+        </div>
+
+        <!-- Rating range -->
+        <div class="rating-filter">
+          <label>⭐ Rating:</label>
+          <input type="number" id="rating-from" placeholder="Fra" min="0" max="10" step="0.1" />
+          <span>til</span>
+          <input type="number" id="rating-to" placeholder="Til" min="0" max="10" step="0.1" />
+        </div>
+
+        <!-- Sortering -->
+        <div class="sort-filter">
+          <label for="sort-select">📊 Sortér:</label>
+          <select id="sort-select">
+            <option value="none">Ingen sortering</option>
+            <option value="title">Titel (A-Å)</option>
+            <option value="year">År (nyeste først)</option>
+            <option value="rating">Rating (højeste først)</option>
+          </select>
+        </div>
+
+        <!-- Clear filters -->
+        <button id="clear-filters" class="clear-btn">🗑️ Ryd alle filtre</button>
+      </div>
+
+      <!-- Movie display område -->
+      <section id="movie-list" class="movie-grid"></section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+### ✅ Komplet JavaScript (app.js)
+
+```javascript
+// Global variable til alle movies
+let allMovies = [];
+
+// #1: Initialisér app med event listeners
+function initApp() {
+  getMovies();
+
+  // Event listeners til alle filtre
+  document.querySelector("#search-input").addEventListener("input", filterMovies);
+  document.querySelector("#genre-select").addEventListener("change", filterMovies);
 if (ratingFrom > 0 || ratingTo < 10) {
   filteredMovies = filteredMovies.filter(movie => {
     return movie.rating >= ratingFrom && movie.rating <= ratingTo;
@@ -1199,10 +1150,10 @@ function filterMovies() {
   const searchValue = document.querySelector("#search-input").value.toLowerCase();
   const genreValue = document.querySelector("#genre-select").value;
   const sortValue = document.querySelector("#sort-select").value;
-  const yearFrom = parseInt(document.querySelector("#year-from").value) || 0;
-  const yearTo = parseInt(document.querySelector("#year-to").value) || 9999;
-  const ratingFrom = parseFloat(document.querySelector("#rating-from").value) || 0;
-  const ratingTo = parseFloat(document.querySelector("#rating-to").value) || 10;
+  const yearFrom = Number(document.querySelector("#year-from").value) || 0;
+  const yearTo = Number(document.querySelector("#year-to").value) || 9999;
+  const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
+  const ratingTo = Number(document.querySelector("#rating-to").value) || 10;
 
   console.log(`🔍 Søgeterm: "${searchValue}"`);
   console.log(`🎭 Genre: "${genreValue}"`);
@@ -1625,13 +1576,8 @@ function showMovieModal(movie) {
 Med `<form method="dialog">` får vi automatisk modal lukning! Test det:
 
 1. **GEM** `app.js` og refresh browseren
-2. **Åbn Console** i Developer Tools
-3. **Test modal** med første film:
-   ```javascript
-   // Test i Console
-   showMovieModal(allMovies[0]);
-   ```
-4. **Test automatisk lukning**:
+2. **Test modal** ved at klikke på en film card
+3. **Test automatisk lukning**:
    - **Tryk Escape** → Modal lukker automatisk
    - **Klik på X knappen** → Modal lukker automatisk
    - **Klik udenfor modal** → Modal lukker automatisk (i de fleste browsere)
@@ -1662,16 +1608,11 @@ function initApp() {
 - Close button fungerer automatisk (form submission)
 - Accessibility er built-in### Trin 4: Test modal uden at ændre eksisterende kode
 
-**4a. Test modal direkte i Console**
+**4a. Test modal direkte**
 
 1. **GEM** `app.js` og refresh browseren
-2. **Åbn Console** i Developer Tools
-3. **Test den nye modal** med en eksisterende film:
-   ```javascript
-   // Test med første film
-   showMovieModal(allMovies[0]);
-   ```
-4. **Test automatisk lukning**:
+2. **Test den nye modal** ved at klikke på en film card
+3. **Test automatisk lukning**:
    - **Tryk Escape** → Modal lukker
    - **Klik X knappen** → Modal lukker
    - **Klik udenfor modal** → Modal lukker
