@@ -508,7 +508,7 @@ document.querySelector("#clear-filters").addEventListener("click", clearAllFilte
 
 ## 🎉 Komplet løsning efter Del 1
 
-**Efter alle øvelser og tests** har du nu en fuld forståelse af filtrering. Her er den **komplette, rene løsning** du skal have for at fortsætte til Del 2:
+**Efter alle øvelser og tests** har du nu en fuld forståelse af filtrering. Her er den **komplette, rene løsning** du skal have for at fortsætte til Del 2. Hvis din egen fungerer kan du blot fortsætte. Løsnigen her er mere en hjælp, hvis du er gået i stå og gerne vil videre med Modal/dialog.
 
 ### ✅ Komplet HTML (index.html)
 
@@ -604,12 +604,11 @@ function initApp() {
 
 // #2: Fetch movies from JSON file
 async function getMovies() {
-    const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
-    allMovies = await response.json();
-    console.log("📁 Movies loaded:", allMovies.length);
-    populateGenreDropdown(); // Udfyld dropdown med genrer fra data
-    displayMovies(allMovies);
-
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
+  allMovies = await response.json();
+  console.log("📁 Movies loaded:", allMovies.length);
+  populateGenreDropdown(); // Udfyld dropdown med genrer fra data
+  displayMovies(allMovies);
 }
 
 // #3: Display all movies
@@ -915,9 +914,9 @@ initApp();
 
 **Formål:** Nu hvor du har en komplet filtreringsapp, lad os bygge en professionel modal dialog!
 
-### Trin 1: Tilføj modal HTML til index.html
+### Trin 15: Tilføj modal HTML til index.html
 
-**1a. Forstå `<dialog>` elementet**
+**15a. Forstå `<dialog>` elementet**
 
 `<dialog>` elementet er en moderne HTML5 løsning til at skabe modale dialoger:
 
@@ -945,7 +944,7 @@ Før du fortsætter, skal du læse den officielle dokumentation for `<dialog>` e
 
 **💡 Hvorfor MDN?** Mozilla Developer Network er den autoritative kilde til web standarder og best practices.
 
-**1b. Tilføj dialog element**
+**15b. Tilføj dialog element**
 
 Åbn din `index.html` og tilføj dette EFTER `</main>` og FØR `<script src="app.js">`:
 
@@ -978,7 +977,7 @@ Før du fortsætter, skal du læse den officielle dokumentation for `<dialog>` e
 - **`#dialog-content`**: Container hvor JavaScript indsætter movie detaljer dynamisk
 - **Tom div**: Vi fylder indholdet via JavaScript for maksimal fleksibilitet
 
-**1c. Test HTML struktur**
+**15c. Test HTML struktur**
 
 1. **GEM** `index.html`
 2. **Refresh** browseren
@@ -998,9 +997,9 @@ Ved at bruge `<dialog>` med `<form method="dialog">` følger vi moderne web stan
 
 **🔗 MDN Reference:** Læs mere om `<dialog>` element på: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 
-### Trin 2: Tilføj CSS til modal dialog
+### Trin 16: Tilføj CSS til modal dialog
 
-**2a. Bekræft at modal CSS allerede findes**
+**16a. Bekræft at modal CSS allerede findes**
 
 Åbn din `app.css` og scroll ned til linjen der starter med:
 
@@ -1088,7 +1087,7 @@ dialog#movie-dialog::backdrop {
 }
 ```
 
-**2b. Responsive design er også inkluderet**
+**16b. Responsive design er også inkluderet**
 
 Din CSS inkluderer også responsive design:
 
@@ -1118,9 +1117,9 @@ Din CSS inkluderer også responsive design:
 
 **Formål:** Erstat `alert()` med rigtig modal dialog funktionalitet.
 
-### Trin 3: Opret modal-funktioner
+### Trin 17: Opret modal funktioner
 
-**3a. Tilføj `showMovieModal` funktion**
+**17a. Tilføj showMovieModal funktion**
 
 Tilføj denne nye funktion til din `app.js` (erstatter ikke `showMovieDetails` endnu):
 
@@ -1155,7 +1154,7 @@ function showMovieModal(movie) {
 - **Performant**: Ingen unødvendige DOM elementer når modal er lukket
 - **Maintainable**: Al modal logik er i JavaScript
 
-**3b. Test modal funktionalitet**
+**17b. Test modal funktionalitet**
 
 Med `<form method="dialog">` får vi automatisk modal lukning! Test det:
 
@@ -1168,7 +1167,7 @@ Med `<form method="dialog">` får vi automatisk modal lukning! Test det:
 
 **💡 Ingen JavaScript lukning nødvendig!** `<form method="dialog">` håndterer alt automatisk.
 
-**3c. Verificer din eksisterende initApp funktion**
+**17c. Verificer din eksisterende initApp funktion**
 
 Din `initApp()` funktion fra Session 3 skulle ligne dette (måske har du mere i forhold til udvidet filtrering - og det er helt, som det skal være!):
 
@@ -1191,10 +1190,10 @@ function initApp() {
 - Browser håndterer backdrop clicks automatisk
 - Close button fungerer automatisk (form submission)
 - Accessibility er built-in
- 
-### Trin 4: Test modal uden at ændre eksisterende kode
 
-**4a. Test modal direkte**
+### Trin 18: Test modal uden at ændre eksisterende kode
+
+**18a. Test modal direkte**
 
 1. **GEM** `app.js` og refresh browseren
 2. **Test den nye modal** ved at klikke på en film card
@@ -1211,9 +1210,9 @@ function initApp() {
 
 **💡 Modal virker!** Men vi bruger stadig `alert()` i din app...
 
-### Trin 5: Skift fra alert til modal
+### Trin 19: Skift fra alert til modal
 
-**5a. Opdater displayMovie funktion**
+**19a. Opdater displayMovie funktion**
 
 Find din `displayMovie()` funktion og ændr `showMovieDetails` til `showMovieModal`:
 
@@ -1255,7 +1254,7 @@ function displayMovie(movie) {
 }
 ```
 
-**5b. Test den komplette modal integration**
+**19b. Test den komplette modal integration**
 
 1. **GEM** `app.js` og refresh browseren
 2. **Klik på en movie card** → Modal åbner (ikke alert!)
@@ -1271,7 +1270,7 @@ function displayMovie(movie) {
 
 **💡 Alt fungerer uden JavaScript event handling!** `<form method="dialog">` giver os alt gratis.
 
-**5c. Fjern den gamle showMovieDetails funktion (valgfrit)**
+**19c. Fjern den gamle showMovieDetails funktion (valgfrit)**
 
 Du kan nu fjerne eller kommentere din gamle `showMovieDetails()` funktion ud, da den ikke bruges længere.
 
