@@ -1170,7 +1170,7 @@ Med `<form method="dialog">` får vi automatisk modal lukning! Test det:
 
 **3c. Verificer din eksisterende initApp funktion**
 
-Din `initApp()` funktion fra Session 3 skulle ligne dette:
+Din `initApp()` funktion fra Session 3 skulle ligne dette (måske har du mere - og det er helt ok!):
 
 ```javascript
 // #1: Initialize the app (fra Session 3)
