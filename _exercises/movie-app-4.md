@@ -1118,9 +1118,9 @@ Din CSS inkluderer også responsive design:
 
 **Formål:** Erstat `alert()` med rigtig modal dialog funktionalitet.
 
-### Trin 3: Opret modal funktioner
+### Trin 3: Opret modal-funktioner
 
-**3a. Tilføj showMovieModal funktion**
+**3a. Tilføj `showMovieModal` funktion**
 
 Tilføj denne nye funktion til din `app.js` (erstatter ikke `showMovieDetails` endnu):
 
@@ -1170,7 +1170,7 @@ Med `<form method="dialog">` får vi automatisk modal lukning! Test det:
 
 **3c. Verificer din eksisterende initApp funktion**
 
-Din `initApp()` funktion fra Session 3 skulle ligne dette (måske har du mere - og det er helt ok!):
+Din `initApp()` funktion fra Session 3 skulle ligne dette (måske har du mere i forhold til udvidet filtrering - og det er helt, som det skal være!):
 
 ```javascript
 // #1: Initialize the app (fra Session 3)
@@ -1190,7 +1190,9 @@ function initApp() {
 - `<form method="dialog">` giver automatisk Escape key support
 - Browser håndterer backdrop clicks automatisk
 - Close button fungerer automatisk (form submission)
-- Accessibility er built-in### Trin 4: Test modal uden at ændre eksisterende kode
+- Accessibility er built-in
+ 
+### Trin 4: Test modal uden at ændre eksisterende kode
 
 **4a. Test modal direkte**
 
