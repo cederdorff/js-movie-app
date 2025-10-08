@@ -158,12 +158,7 @@ function filterMovies() {
 - `Number("")` giver `0` automatisk, så `|| 0` er faktisk unødvendig for tom string
 - Men vi bruger `|| 9999` for at sætte en høj default værdi for "til år"
 
-**🧪 TEST 3a:**
-
-1. GEM og refresh browseren
-2. Prøv at skrive i år felterne (f.eks. "2020" til "2023")
-3. Film listen skulle filtreres automatisk baseret på år
-4. Prøv eksisterende filtre (søg/genre) - alt skulle virke sammen
+**💡 I dette trin har vi IKKE tilføjet filtreringslogikken endnu - kun variablerne.**
 
 **3b. Tilføj år filtrering logik**
 
@@ -187,12 +182,7 @@ if (yearFrom > 0 || yearTo < 9999) {
 }
 ```
 
-**🧪 TEST 3b:**
-
-1. **Test tom år felter:** Brug søgning eller genre → Alle film vises
-2. **Test "Fra år: 2020":** Skriv 2020 i fra-felt → Se kun nyere film
-3. **Test range:** Fra: 2010, Til: 2020 → Se kun film fra dette årti
-4. Prøv at kombinere med andre filtre (søg/genre)
+**💡 Nu har vi tilføjet filtreringslogikken, men inputfelterne virker stadig ikke fordi vi mangler event listeners.**
 
 ### Trin 4: Tilføj event listeners for år filter
 
@@ -215,7 +205,13 @@ function initApp() {
 }
 ```
 
-**🧪 TEST 4a:** Nu skulle år felterne virke når du skriver i dem.
+**🧪 TEST 4a: NU kan du teste år filteret!**
+
+1. **GEM og refresh browseren**
+2. **Test tomme felter:** Alle film vises (0-9999 range)
+3. **Test "Fra år: 2020":** Skriv 2020 i fra-felt → Se kun nyere film
+4. **Test range:** Fra: 2010, Til: 2020 → Se kun film fra dette årti
+5. **Test kombination:** Søg + år filtre sammen
 
 ### Trin 5: Komplet test af år filter
 
@@ -317,6 +313,8 @@ console.log("Rating filter:", ratingFrom, "til", ratingTo);
 - `Number("")` giver `0`, så `|| 0` er teknisk set unødvendig for "fra" rating
 - Men vi bruger `|| 10` for at sætte max rating som default for "til" rating
 
+**💡 I dette trin har vi IKKE tilføjet filtreringslogikken endnu - kun variablerne.**
+
 **8b. Tilføj rating filtrering logik**
 
 Tilføj EFTER år filteret:
@@ -337,6 +335,8 @@ if (ratingFrom > 0 || ratingTo < 10) {
 }
 ```
 
+**💡 Nu har vi tilføjet rating filtreringslogikken, men inputfelterne virker stadig ikke fordi vi mangler event listeners.**
+
 ### Trin 9: Tilføj event listeners for rating
 
 **9a. Tilføj rating field event listeners**
@@ -349,7 +349,12 @@ document.querySelector("#rating-from").addEventListener("input", filterMovies);
 document.querySelector("#rating-to").addEventListener("input", filterMovies);
 ```
 
-**🧪 TEST 9a:** Nu skulle rating felterne også virke.
+**🧪 TEST 9a: NU kan du teste rating filteret!**
+
+1. **GEM og refresh browseren**
+2. **Test "Fra rating: 8.0":** Se kun højt ratede film
+3. **Test range:** Fra: 7.0, Til: 9.0 → Se film i dette interval
+4. **Test kombination:** År: 2020+ OG Rating: 8.0+ → Se nyere, højt ratede film
 
 ### Trin 10: Komplet test af rating filter
 
@@ -429,7 +434,7 @@ function clearAllFilters() {
 }
 ```
 
-**🧪 TEST 12a:** GEM og refresh browseren. Klik på "Clear Filters" knappen - alle felter skulle ryddes og alle film vises.
+**💡 Du har nu lavet funktionen, men knappen virker endnu ikke fordi vi mangler event listeneren.**
 
 ### Trin 13: Tilføj event listener for clear button
 
@@ -442,7 +447,12 @@ Tilføj til din `initApp()` funktion TIL SIDST:
 document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
 ```
 
-**🧪 TEST 13a:** GEM og refresh. Clear knappen skulle nu virke når du klikker på den.
+**🧪 TEST 13a: NU kan du teste clear funktionaliteten!**
+
+1. **GEM og refresh browseren**
+2. **Sæt flere filtre:** Søg + genre + år + rating
+3. **Klik "Clear Filters"** → Alle felter ryddes og alle film vises
+4. **Test at alle filtre virker igen** efter clear
 
 ### Trin 14: Komplet test af alle features
 
