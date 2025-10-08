@@ -45,11 +45,19 @@ function displayMovie(movie) {
       </article>
     `
   );
-  movieList.lastElementChild.addEventListener("click", () => showMovieDialog(movie)); // Add click event to show movie details
+  // Tilføj click event til den nye card
+  const newCard = movieList.lastElementChild;
+
+  newCard.addEventListener("click", function () {
+    console.log(`🎬 Klik på: "${movie.title}"`);
+    showMovieDialog(movie);
+  });
 }
 
 // #5: Show movie details in a modal dialog
 function showMovieDialog(movie) {
+  console.log(movie); // Log opening dialog
+
   document.querySelector("#dialog-content").innerHTML = /*html*/ `
     <img src="${movie.image}" class="movie-poster" />
     <div class="dialog-details">
