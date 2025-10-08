@@ -1,5 +1,7 @@
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 // Global variabel til alle film
 let allMovies = [];
 
@@ -222,6 +224,3 @@ function filterMovies() {
 
   displayMovies(filteredMovies);
 }
-
-// Start appen når siden er loaded
-initApp();
