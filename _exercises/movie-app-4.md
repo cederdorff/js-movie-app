@@ -569,8 +569,6 @@ if (ratingFrom > 0 || ratingTo < 10) {
 2. **Test range:** Fra: 7.0, Til: 9.0 → Se film i dette interval
 3. **Test kombination:** År 2020+ OG rating 8.0+ → Se nyere, højt ratede film
 
-````
-
 ### Trin 5: Tilføj clearAllFilters() funktion
 
 **5a. Implementer clear funktion step-by-step**
@@ -596,7 +594,7 @@ function clearAllFilters() {
   // Kør filtrering igen (viser alle film)
   filterMovies();
 }
-````
+```
 
 **🧪 TEST 5a:** GEM og refresh browseren. Klik på "Clear Filters" knappen - alle felter skulle ryddes og alle film vises.
 
