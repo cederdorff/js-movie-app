@@ -678,8 +678,6 @@ document.querySelector("#clear-filters").addEventListener("click", clearAllFilte
 - Test alle filter kombinationer
 - Verify at sortering sker til sidst
 
-````
-
 ### Trin 8: Fjern debug logs (valgfrit)
 
 **8a. Ryd op i console.log statements**
@@ -701,25 +699,17 @@ function filterMovies() {
 
   // Eksisterende filtre (fjern console.log hvis ønsket)
   if (searchValue) {
-    filteredMovies = filteredMovies.filter(movie =>
-      movie.title.toLowerCase().includes(searchValue)
-    );
+    filteredMovies = filteredMovies.filter(movie => movie.title.toLowerCase().includes(searchValue));
   }
 
   if (genreValue !== "all") {
-    filteredMovies = filteredMovies.filter(movie =>
-      movie.genre.includes(genreValue)
-    );
+    filteredMovies = filteredMovies.filter(movie => movie.genre.includes(genreValue));
   }
 
   // Nye filtre (fjern console.log hvis ønsket)
-  filteredMovies = filteredMovies.filter(movie =>
-    movie.year >= yearFrom && movie.year <= yearTo
-  );
+  filteredMovies = filteredMovies.filter(movie => movie.year >= yearFrom && movie.year <= yearTo);
 
-  filteredMovies = filteredMovies.filter(movie =>
-    movie.rating >= ratingFrom && movie.rating <= ratingTo
-  );
+  filteredMovies = filteredMovies.filter(movie => movie.rating >= ratingFrom && movie.rating <= ratingTo);
 
   // Sortering (UÆNDRET)
   if (sortValue === "title") {
@@ -732,7 +722,7 @@ function filterMovies() {
 
   displayMovies(filteredMovies);
 }
-````
+```
 
 **🎯 Du har nu implementeret:**
 
