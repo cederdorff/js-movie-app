@@ -86,11 +86,19 @@ Tilføj denne CSS til din `app.css`:
 
 .year-filter input {
   width: 80px;
-  padding: 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   background: var(--bg-card);
-  color: var(--text-color);
+  color: var(--text);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.year-filter input:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
 }
 ```
 
@@ -265,13 +273,23 @@ Tilføj til din CSS:
 
 .rating-filter input {
   width: 80px;
-  padding: 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   background: var(--bg-card);
-  color: var(--text-color);
+  color: var(--text);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.rating-filter input:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
 }
 ```
+
+````
 
 **🧪 TEST 6b:** Refresh browseren. Du skulle nu se både år og rating filtre.
 
@@ -290,7 +308,7 @@ Number(""); // → 0 (tom = 0)
 // Default værdier for rating (0 til 10)
 Number("") || 0; // → 0
 Number("") || 10; // → 10
-```
+````
 
 **💡 Praktisk:** Vi bruger samme konverteringsmetode (`Number()`) til både år og rating!
 
@@ -391,17 +409,28 @@ Tilføj clear knappen til din `.filterbar` EFTER rating filteret:
 
 ```css
 #clear-filters {
-  padding: 0.75rem 1rem;
-  background: var(--accent-color);
-  color: white;
-  border: none;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--secondary);
   border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
   cursor: pointer;
   font-weight: 500;
 }
 
 #clear-filters:hover {
-  background: var(--accent-hover);
+  background: var(--error);
+  color: white;
+  border-color: var(--error);
+  transform: translateY(-2px);
+}
+
+#clear-filters:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
 }
 ```
 
@@ -1236,13 +1265,14 @@ initApp();
 .year-filter input,
 .rating-filter input {
   width: 80px;
-  padding: 0.5rem;
   background: var(--bg-card);
   color: var(--text);
   border: 1px solid var(--secondary);
   border-radius: var(--radius);
-  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
   transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
 .year-filter input:focus,
@@ -1251,22 +1281,29 @@ initApp();
   border-color: var(--secondary);
 }
 
-.clear-btn {
-  background: var(--error);
-  color: white;
-  border: none;
-  padding: 0.75rem 1rem;
+#clear-filters {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--secondary);
   border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
   transition: var(--transition);
   box-shadow: var(--shadow);
+  cursor: pointer;
+  font-weight: 500;
 }
 
-.clear-btn:hover {
+#clear-filters:hover {
   background: var(--error);
-  opacity: 0.9;
+  color: white;
+  border-color: var(--error);
   transform: translateY(-2px);
+}
+
+#clear-filters:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
 }
 
 .no-results {
