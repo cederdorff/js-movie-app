@@ -48,12 +48,6 @@ function showMovieDetails(movie) {
 
 **Mål:** Udvid din eksisterende filtrering med **år-range** og **rating-range** filtre for at give brugerne flere muligheder.
 
----
-
-## Del 1: Udvidelse af Filtrering 🔍
-
-**Mål:** Udvid din eksisterende filtrering med **år-range** og **rating-range** filtre for at give brugerne flere muligheder.
-
 **Fra Session 3:** Du har allerede basis filtrering (søg, genre, sortering). Nu tilføjer vi mere avancerede filtre **én ad gangen**.
 
 ---

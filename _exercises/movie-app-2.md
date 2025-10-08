@@ -1027,7 +1027,7 @@ const movieListContainer = document.querySelector("#movie-list");
 // Tilføj Barbie movie DIREKTE med template string
 const barbieHTML = `
   <article class="movie-card" tabindex="0">
-    <img src="${barbieMovie.poster}" 
+    <img src="${barbieMovie.image}" 
          alt="Poster of ${barbieMovie.title}" 
          class="movie-poster" />
     <div class="movie-info">
