@@ -1,114 +1,221 @@
-// #0: Listen for page load
-window.addEventListener("load", initApp); // When the page is loaded, run initApp function
+"use strict";
 
-let allMovies = []; // Global array to hold all movies
+// ===== APP INITIALISERING =====
+// Start app når DOM er loaded (hele HTML siden er færdig med at indlæse)
+document.addEventListener("DOMContentLoaded", initApp);
 
-// #1: Initialize the app
+// Global variabel til alle film - tilgængelig for alle funktioner
+let allMovies = [];
+
+// #1: Initialize the app - sæt event listeners og hent data
 function initApp() {
-  console.log("initApp: app.js is running 🎉"); // Log to the console that the app is running
-  getMovies(); // Fetch and display movies
-  document.querySelector("#search-input").addEventListener("input", filterSortDisplayMovies);
-  document.querySelector("#sort-select").addEventListener("change", filterSortDisplayMovies);
-  document.querySelector("#genre-select").addEventListener("change", filterSortDisplayMovies);
+  getMovies(); // Hent film data fra JSON fil
+
+  // Event listeners for alle filtre - kører filterMovies når brugeren ændrer noget
+  document.querySelector("#search-input").addEventListener("input", filterMovies);
+  document.querySelector("#genre-select").addEventListener("change", filterMovies);
+  document.querySelector("#sort-select").addEventListener("change", filterMovies);
+  document.querySelector("#year-from").addEventListener("input", filterMovies);
+  document.querySelector("#year-to").addEventListener("input", filterMovies);
+  document.querySelector("#rating-from").addEventListener("input", filterMovies);
+  document.querySelector("#rating-to").addEventListener("input", filterMovies);
+
+  // Event listener for clear-knappen - rydder alle filtre
+  document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
 }
 
-// #2: Fetch movies from JSON and display them
+// #2: Fetch movies from JSON file - asynkron funktion der henter data
 async function getMovies() {
+  // Hent data fra URL - await venter på svar før vi går videre
   const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
+
+  // Pars JSON til JS array og gem i global variabel, der er tilgængelig for alle funktioner
   allMovies = await response.json();
-  populateGenreDropdown();
-  filterSortDisplayMovies();
+
+  populateGenreDropdown(); // Udfyld dropdown med genrer fra data
+  displayMovies(allMovies); // Vis alle film ved start
 }
 
-// #3: Render all movies in the grid
+// ===== VISNING AF FILM =====
+// #3: Display all movies - vis en liste af film på siden
 function displayMovies(movies) {
-  document.querySelector("#movie-list").innerHTML = "";
+  const movieList = document.querySelector("#movie-list"); // Find container til film
+  movieList.innerHTML = ""; // Ryd gammel liste (fjern alt HTML indhold)
+
+  // Hvis ingen film matcher filtrene, vis en besked til brugeren
+  if (movies.length === 0) {
+    movieList.innerHTML = '<p class="no-results">Ingen film matchede dine filtre 😢</p>';
+    return; // Stop funktionen her - return betyder "stop her og gå ikke videre"
+  }
+
+  // Loop gennem alle film og vis hver enkelt
   for (const movie of movies) {
-    displayMovie(movie); // Render each movie card -> see step #4
+    displayMovie(movie); // Kald displayMovie for hver film
   }
 }
 
-// #4: Render a single movie card and add event listeners
+// #4: Render a single movie card and add event listeners - lav et film kort
 function displayMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
-  movieList.insertAdjacentHTML(
-    "beforeend",
-    /*html*/ `
-      <article class="movie-card" tabindex="0">
-        <img src="${movie.image}" alt="Poster of ${movie.title}" class="movie-poster" />
-        <div class="movie-info">
-          <h3>${movie.title} <span class="movie-year">(${movie.year})</span></h3>
-          <p class="movie-genre">${movie.genre.join(", ")}</p>
-          <p class="movie-rating">⭐ ${movie.rating}</p>
-          <p class="movie-director"><strong>Director:</strong> ${movie.director}</p>
-        </div>
-      </article>
-    `
-  );
-  // Tilføj click event til den nye card
+  const movieList = document.querySelector("#movie-list"); // Find container til film
+
+  // Byg HTML struktur dynamisk - template literal med ${} til at indsætte data
+  const movieHTML = /*html*/ `
+    <article class="movie-card" tabindex="0">
+      <img src="${movie.image}" 
+           alt="Poster of ${movie.title}" 
+           class="movie-poster" />
+      <div class="movie-info">
+        <h3>${movie.title} <span class="movie-year">(${movie.year})</span></h3>
+        <p class="movie-genre">${movie.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p class="movie-director"><strong>Director:</strong> ${movie.director}</p>
+      </div>
+    </article>
+  `;
+
+  // Tilføj movie card til DOM (HTML) - insertAdjacentHTML sætter HTML ind uden at overskrive
+  movieList.insertAdjacentHTML("beforeend", movieHTML);
+
+  // Find det kort vi lige har tilføjet (det sidste element)
   const newCard = movieList.lastElementChild;
 
+  // Tilføj click event til kortet - når brugeren klikker på kortet
   newCard.addEventListener("click", function () {
-    console.log(`🎬 Klik på: "${movie.title}"`);
-    showMovieDialog(movie);
+    showMovieModal(movie); // Vis modal med film detaljer
+  });
+
+  // Tilføj keyboard support (Enter og mellemrum) for tilgængelighed
+  newCard.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault(); // Forhindre scroll ved mellemrum
+      showMovieModal(movie); // Vis modal med film detaljer
+    }
   });
 }
 
-// #5: Show movie details in a modal dialog
-function showMovieDialog(movie) {
-  console.log(movie); // Log opening dialog
+// ===== DROPDOWN OG MODAL FUNKTIONER =====
+// #5: Udfyld genre-dropdown med alle unikke genrer fra data
+function populateGenreDropdown() {
+  const genreSelect = document.querySelector("#genre-select"); // Find genre dropdown
+  const genres = new Set(); // Set fjerner automatisk dubletter
 
+  // Samle alle unikke genrer fra alle film
+  // Hver film kan have flere genrer (array), så vi løber gennem dem alle
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre); // Set sikrer kun unikke værdier
+    }
+  }
+
+  // Fjern gamle options undtagen 'Alle genrer' (reset dropdown)
+  genreSelect.innerHTML = /*html*/ `<option value="all">Alle genrer</option>`;
+
+  // Sortér genres alfabetisk og tilføj dem som options
+  const sortedGenres = [...genres].sort(); // Konvertér Set til Array og sortér genrer
+  for (const genre of sortedGenres) {
+    genreSelect.insertAdjacentHTML("beforeend", /*html*/ `<option value="${genre}">${genre}</option>`);
+  }
+}
+
+// #6: Vis movie i modal dialog - popup vindue med film detaljer
+function showMovieModal(movie) {
+  // Find modal indhold container og byg HTML struktur dynamisk
   document.querySelector("#dialog-content").innerHTML = /*html*/ `
-    <img src="${movie.image}" class="movie-poster" />
+    <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
     <div class="dialog-details">
       <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
       <p class="movie-genre">${movie.genre.join(", ")}</p>
       <p class="movie-rating">⭐ ${movie.rating}</p>
-      <p class="movie-director"><strong>Director:</strong> ${movie.director}</p>
+      <p><strong>Director:</strong> ${movie.director}</p>
       <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
       <p class="movie-description">${movie.description}</p>
     </div>
   `;
+
+  // Åbn modalen - showModal() er en built-in browser funktion
   document.querySelector("#movie-dialog").showModal();
 }
 
-// #6: Udfyld genre-dropdown med alle unikke genrer
-function populateGenreDropdown() {
-  const genreSelect = document.querySelector("#genre-select");
-  const genres = new Set();
+// ===== FILTER FUNKTIONER =====
+// #7: Ryd alle filtre - reset alle filter felter til tomme værdier
+function clearAllFilters() {
+  // Ryd alle input felter - sæt value til tom string eller standard værdi
+  document.querySelector("#search-input").value = "";
+  document.querySelector("#genre-select").value = "all";
+  document.querySelector("#sort-select").value = "none";
+  document.querySelector("#year-from").value = "";
+  document.querySelector("#year-to").value = "";
+  document.querySelector("#rating-from").value = "";
+  document.querySelector("#rating-to").value = "";
 
-  for (const movie of allMovies) {
-    for (const genre of movie.genre) {
-      genres.add(genre);
-    }
-  }
-
-  // Fjern gamle options undtagen 'Alle genrer'
-  genreSelect.innerHTML = '<option value="all">Alle genrer</option>';
-  const sortedGenres = Array.from(genres).sort();
-  for (const genre of sortedGenres) {
-    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
-  }
+  // Kør filtrering igen (vil vise alle film da alle filtre er ryddet)
+  filterMovies();
 }
 
-// #7: Samlet filter, søg og sort funktion
-function filterSortDisplayMovies() {
-  const searchValue = document.querySelector("#search-input").value.toLowerCase();
+// #8: Komplet filtrering med alle funktioner - den vigtigste funktion!
+function filterMovies() {
+  // Hent alle filter værdier fra input felterne
+  const searchValue = document.querySelector("#search-input").value.toLowerCase(); // Konvertér til lowercase for case-insensitive søgning
   const genreValue = document.querySelector("#genre-select").value;
   const sortValue = document.querySelector("#sort-select").value;
-  let movies = allMovies;
 
-  // Filtrér på søgning
-  movies = movies.filter(movie => movie.title.toLowerCase().includes(searchValue));
-  // Filtrér på genre
+  // Number() konverterer string til tal, || 0 giver default værdi hvis tomt
+  const yearFrom = Number(document.querySelector("#year-from").value) || 0;
+  const yearTo = Number(document.querySelector("#year-to").value) || 9999;
+  const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
+  const ratingTo = Number(document.querySelector("#rating-to").value) || 10;
+
+  // Start med alle film - kopiér til ny variabel så vi ikke ændrer originalen
+  let filteredMovies = allMovies;
+
+  // FILTER 1: Søgetekst - filtrer på film titel
+  if (searchValue) {
+    // Kun filtrer hvis der er indtastet noget
+    filteredMovies = filteredMovies.filter(movie => {
+      // includes() checker om søgeteksten findes i titlen
+      return movie.title.toLowerCase().includes(searchValue);
+    });
+  }
+
+  // FILTER 2: Genre - filtrer på valgt genre
   if (genreValue !== "all") {
-    movies = movies.filter(movie => movie.genre.includes(genreValue));
+    // Kun filtrer hvis ikke "all" er valgt
+    filteredMovies = filteredMovies.filter(movie => {
+      // includes() checker om genren findes i filmens genre array
+      return movie.genre.includes(genreValue);
+    });
   }
-  // Sortér
+
+  // FILTER 3: År range - filtrer film mellem to årstal
+  if (yearFrom > 0 || yearTo < 9999) {
+    // Kun filtrer hvis der er sat grænser
+    filteredMovies = filteredMovies.filter(movie => {
+      // Check om filmens år er mellem min og max værdi
+      return movie.year >= yearFrom && movie.year <= yearTo;
+    });
+  }
+
+  // FILTER 4: Rating range - filtrer film mellem to ratings
+  if (ratingFrom > 0 || ratingTo < 10) {
+    // Kun filtrer hvis der er sat grænser
+    filteredMovies = filteredMovies.filter(movie => {
+      // Check om filmens rating er mellem min og max værdi
+      return movie.rating >= ratingFrom && movie.rating <= ratingTo;
+    });
+  }
+
+  // SORTERING (altid til sidst efter alle filtre er anvendt)
   if (sortValue === "title") {
-    movies.sort((a, b) => a.title.localeCompare(b.title));
+    // Alfabetisk sortering - localeCompare() håndterer danske bogstaver korrekt
+    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
   } else if (sortValue === "year") {
-    movies.sort((a, b) => b.year - a.year);
+    // Sortér på år (nyeste først) - b - a giver descending order
+    filteredMovies.sort((a, b) => b.year - a.year);
+  } else if (sortValue === "rating") {
+    // Sortér på rating (højeste først) - b - a giver descending order
+    filteredMovies.sort((a, b) => b.rating - a.rating);
   }
-  displayMovies(movies);
+
+  // Vis de filtrerede film på siden
+  displayMovies(filteredMovies);
 }
