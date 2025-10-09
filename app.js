@@ -26,21 +26,14 @@ function initApp() {
 
 // #2: Fetch movies from JSON file - asynkron funktion der henter data
 async function getMovies() {
-  try {
-    // Hent data fra URL - await venter på svar før vi går videre
-    const response = await fetch(
-      "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json"
-    );
+  // Hent data fra URL - await venter på svar før vi går videre
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
 
-    // Pars JSON til JS array og gem i global variabel, der er tilgængelig for alle funktioner
-    allMovies = await response.json();
+  // Pars JSON til JS array og gem i global variabel, der er tilgængelig for alle funktioner
+  allMovies = await response.json();
 
-    populateGenreDropdown(); // Udfyld dropdown med genrer fra data
-    displayMovies(allMovies); // Vis alle film ved start
-  } catch (error) {
-    // Vis fejl hvis noget går galt med fetch
-    console.error("Fejl ved hentning af film data:", error);
-  }
+  populateGenreDropdown(); // Udfyld dropdown med genrer fra data
+  displayMovies(allMovies); // Vis alle film ved start
 }
 
 // ===== VISNING AF FILM =====
