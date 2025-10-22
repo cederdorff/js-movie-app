@@ -198,15 +198,16 @@ Tilføj denne linje efter dine console.log linjer:
 
 ```javascript
 // Prøv at ændre en const (dette vil give en fejl!)
-movieTitle = "Inception"; // Fejl! Kan ikke ændre en const
-movieYear = 2010; // Fejl! Kan ikke ændre en const
+title = "Inception"; // Fejl! Kan ikke ændre en const
+year = 2010; // Fejl! Kan ikke ændre en const
 ```
 
 #### ✅ Test det!
 
 1. Gem og refresh
-2. Se fejlen i konsollen: `TypeError: Assignment to constant variable`
-3. Udkommenter eller slet fejl-linjerne igen
+2. Se fejlen i konsollen - du skulle få en fejl der siger: `TypeError: Assignment to constant variable`
+   Dette er forventet! Det viser at vi ikke kan ændre en `const` variabel.
+3. Udkommenter eller slet fejl-linjerne igen så vi kan fortsætte
 
 **Nu prøver vi med `let` i stedet:**
 
@@ -215,7 +216,7 @@ movieYear = 2010; // Fejl! Kan ikke ændre en const
 let userRating = 4.5; // Start rating
 console.log("Start rating:", userRating);
 
-userRating = 5.0; // Opdater rating
+userRating = 5.0; // Opdater rating - dette virker fint med let!
 console.log("Ny rating:", userRating);
 
 // Flere eksempler på let
@@ -230,7 +231,11 @@ console.log("Efter opdatering:", isFavorite);
 
 1. Gem filen (Ctrl+S eller Cmd+S)
 2. Refresh browseren og tjek konsollen
-3. **Du får en fejl!** 🚨 Det er fint - det er præcis hvad vi ville se!
+3. Nu skulle du se to beskeder:
+   - "Start rating: 4.5"
+   - "Ny rating: 5.0"
+
+Dette viser at vi **kan** ændre værdien af en `let` variabel!
 
 **💡 Hvad har vi lært?**
 
