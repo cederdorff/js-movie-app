@@ -95,7 +95,7 @@ Nu skal vi teste at alt virker korrekt:
 
 ---
 
-## Del 1: Grundlæggende JavaScript
+## Opgave 1: Grundlæggende JavaScript
 
 ### Opgave 1.1: Variabler og datatyper
 
@@ -448,7 +448,7 @@ Se den pænt formaterede besked i konsollen!
 ```javascript
 "use strict";
 
-window.addEventListener("load", initApp);
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   console.log("Movie App kører! 🎬");
@@ -714,7 +714,7 @@ Du har nu lært:
 ```javascript
 "use strict";
 
-window.addEventListener("load", initApp);
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   console.log("Movie App kører! 🎬");
@@ -1084,7 +1084,7 @@ Du kan nu:
 ```javascript
 "use strict";
 
-window.addEventListener("load", initApp);
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   console.log("Movie App kører! 🎬");
@@ -1415,7 +1415,7 @@ Du kan nu:
 
 ---
 
-## Del 2: Funktioner
+## Opgave 2: Funktioner
 
 ### Opgave 2.1: Introduktion til funktioner
 
@@ -1428,7 +1428,7 @@ Du kan nu:
 ```javascript
 "use strict";
 
-window.addEventListener("load", initApp);
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   console.log("Movie App kører! 🎬");
@@ -1603,12 +1603,56 @@ if (movie) {
 
 ---
 
-## Del 3: DOM-manipulation
+
+## Opgave 3: DOM-manipulation
+
+**Formål:** Lær at forbinde JavaScript med HTML og ændre indhold på selve hjemmesiden.  
+Efter denne del vil du kunne vise data (f.eks. film) direkte på siden — præcis som i en rigtig web-app.
+
+---
+
+## 🎯 Opgave 3.1 – Find og ændr elementer
+
+### 🧱 Formål
+Forstå hvordan JavaScript “ser” din HTML og kan ændre den.
+
+---
+
+### 🪄 Step 1: Forbered HTML
+
+Åbn `index.html` og indsæt denne struktur:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie App</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎬 Movie App</h1>
+    </header>
+
+    <main>
+      <section id="test-section">
+        <p>Dette er en testtekst...</p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+
+## Opgave 3: DOM-manipulation
 
 ### Opgave 3.1: Introduktion til DOM
 
 **⚠️ Inden vi starter med DOM:**
-
 1. Åbn din `app.js` fil
 2. Slet den tidligere kode med funktioner
 3. Opret denne basis HTML-struktur i din `index.html`:
@@ -1644,7 +1688,7 @@ Først skal vi lære at få fat i HTML-elementer fra JavaScript:
 ```javascript
 "use strict";
 
-window.addEventListener("load", initApp);
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   // Find vores movies-sektion
@@ -2085,7 +2129,7 @@ Nu behersker du:
 ```javascript
 "use strict";
 
-window.addEventListener("load", initApp);
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   console.log("Movie App kører! 🎬");
