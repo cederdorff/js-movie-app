@@ -484,7 +484,7 @@ console.log("Film 3:", movie3);
 ```javascript
 // En array (liste) af film - MEGET bedre!
 const titles = ["The Matrix", "Inception", "Interstellar"];
-console.log("Alle film:", movieTitles);
+console.log("Alle film:", titles);
 ```
 
 #### ✅ Test det!
@@ -588,8 +588,8 @@ const isFavorite = [true, false, true];
 const movieInfo = ["The Matrix", 1999, 8.7, true];
 
 // Vis alle arrays
-console.log("Titler:", movieTitles);
-console.log("Årstal:", releaseYears);
+console.log("Titler:", titles);
+console.log("Årstal:", years);
 console.log("Ratings:", ratings);
 console.log("Favoritter:", isFavorite);
 console.log("Blandet info:", movieInfo);
