@@ -1226,8 +1226,6 @@ console.log("Inception skuespillere:", allMovies[1].actors.join(", "));
 - En film kan have flere skuespillere
 - `.join(", ")` laver array til pæn tekst
 
-````
-
 #### ✅ Test det!
 
 Se den komplekse database struktur!
@@ -1250,7 +1248,7 @@ console.log("Dark Knight number of genres:", allMovies[2].genre.length);
 // Hent alle genrer for første film
 const matrixGenres = allMovies[0].genre;
 console.log("Matrix alle genrer:", matrixGenres.join(", "));
-````
+```
 
 #### ✅ Test det!
 
