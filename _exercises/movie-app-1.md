@@ -106,15 +106,15 @@ Nu skal vi teste at alt virker korrekt:
 Lad os starte helt simpelt! Tilføj denne kode **inde i** `initApp` funktionen (lige under console.log linjen):
 
 ```javascript
-// My first variable
-const movieTitle = "The Matrix";
-console.log("Movie:", movieTitle);
+// Vores første film-variabel
+const title = "The Matrix";
+console.log("Film titel:", title);
 ```
 
 **💡 Forklaring:**
 
 - `const` betyder konstant - værdien kan ikke ændres
-- `movieTitle` er variabelnavnet (professional naming på engelsk)
+- `title` er property-navnet (samme navn som i den endelige app)
 - `"The Matrix"` er en **string** (tekst) - bemærk anførselstegnene
 - `console.log()` viser værdien i browseren
 
@@ -139,24 +139,28 @@ Nu skal vi udforske flere properties fra vores movie objekt. **Tilføj** disse l
 
 ```javascript
 // Numbers (tal)
-const movieYear = 1999; // Helt tal - ingen anførselstegn
-const movieRating = 8.7; // Decimal tal - med punktum
+const year = 1999; // Helt tal - ingen anførselstegn
+const rating = 8.7; // Decimal tal - med punktum
 
 // Strings (tekst)
-const movieGenre = "Action"; // Tekst - med anførselstegn
-const movieDirector = "Christopher Nolan";
+const genre = "Action"; // Tekst - med anførselstegn
+const director = "Christopher Nolan";
 
-// Boolean (sand/falsk)
-const isNewMovie = false; // true eller false - ingen anførselstegn
-const hasWonOscar = true;
+// Arrays (lister)
+const actors = ["Keanu Reeves", "Laurence Fishburne"]; // Liste af skuespillere
+
+// Mere tekst
+const description = "A computer programmer discovers..."; // Film beskrivelse
+const image = "matrix.jpg"; // Reference til film plakat
 
 // Test alle vores variabler
-console.log("Year:", movieYear);
-console.log("Rating:", movieRating);
-console.log("Genre:", movieGenre);
-console.log("Director:", movieDirector);
-console.log("Is it a new movie?:", isNewMovie);
-console.log("Has won Oscar?:", hasWonOscar);
+console.log("År:", year);
+console.log("Rating:", rating);
+console.log("Genre:", genre);
+console.log("Instruktør:", director);
+console.log("Skuespillere:", actors);
+console.log("Beskrivelse:", description);
+console.log("Plakat:", image);
 ```
 
 **💡 Forklaring af datatyper:**
