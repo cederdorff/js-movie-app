@@ -2,33 +2,33 @@
 
 ## Opgaver til første undervisningsgang
 
-> **Vigtig:** Åbn Developer Tools i din browser og hold øje med Console-fanen mens du arbejder. Det er her dine `console.log()` beskeder vises!. Du kan åbne Developer Tools med:
+> **Vigtig:** Åbn Developer Tools i din browser og hold øje med Console-fanen mens du arbejder. Det er her dine `console.log()` beskeder vises!.
+>
+> Du kan åbne Developer Tools med:
 
     - PC: `ctrl` + `shift` + `i`
     - Mac: `cmd` + `option` + `i`
 
 ---
 
-## Opgave 0: Tilpas dit projekt til Movie App 🎬
+## Opgave 0: Opret dit Movie App projekt 🎬
 
-**Formål:** Du har allerede oprettet dit GitHub projekt gennem guiden. Nu skal vi tilpasse det til at blive en Movie App og teste at alt virker.
+**Formål:** Vi skal oprette et nyt projekt der skal blive til vores Movie App og sikre at alt er sat korrekt op.
 
-### Step 1: Tjek at dit projekt er korrekt oprettet
+### Step 1: Opret et nyt projekt med GitHub Desktop
 
-1. Du skulle have fulgt denne guide: [Opret et nyt projekt med GitHub Desktop](https://race.notion.site/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed)
-2. Du skulle have en mappe der hedder `movie-app` åben i VS Code
-3. Du skulle have disse filer: `index.html`, `app.js`, `app.css`, og en `img` mappe
+1. Følg denne guide: [Opret et nyt projekt med GitHub Desktop](https://race.notion.site/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed)
+2. **VIGTIGT:** Navngiv dit projekt `movie-app` når du opretter det
+3. Efter guiden skulle du have:
+   - En mappe der hedder `movie-app` åben i VS Code
+   - Disse filer i mappen: `index.html`, `app.js` og `app.css`
 
-### Step 2: Tilpas projektet til Movie App
+### Step 2: Tilføj Movie App indhold til dine filer
 
-Nu skal vi ændre standardteksten til noget der passer til vores filmapp:
+Nu skal vi tilføje det grundlæggende indhold til vores nye filer:
 
-**Opdater `index.html`:**
-Ændr disse linjer i din `index.html` fil:
-
-- Linje med `<title>`: ændr til `<title>Movie App</title>`
-- Linje med `<meta name="description"`: ændr til `<meta name="description" content="Movie App" />`
-- Linje med `<h1>`: ændr til `<h1>🎬 Movie App</h1>`
+**Opret `index.html`:**
+Kopier dette ind i din tomme `index.html` fil:
 
 Din `index.html` skulle nu se sådan ud:
 
@@ -53,14 +53,14 @@ Din `index.html` skulle nu se sådan ud:
 </html>
 ```
 
-**Opdater `app.js`:**
-Ændr console.log beskeden så den passer til vores movie app:
+**Opret `app.js` (hvis ikke du allerede har den):**
+Kopier eller erstat din `app.js` med dette:
 
 ```javascript
 "use strict"; // Enable strict mode for better error checking
 
-// #0: Listen for page load
-window.addEventListener("load", initApp); // When the page is loaded, run initApp function
+// #0: Start app når DOM er loaded (hele HTML siden er færdig med at indlæse)
+document.addEventListener("DOMContentLoaded", initApp);
 
 // #1: Initialize the app
 function initApp() {
@@ -103,7 +103,7 @@ Nu skal vi teste at alt virker korrekt:
 
 #### Step 1: Din første JavaScript variabel
 
-Lad os starte helt simpelt! Tilføj kun denne ene linje efter `initApp` funktionen i din `app.js` fil:
+Lad os starte helt simpelt! Tilføj denne kode **inde i** `initApp` funktionen (lige under console.log linjen):
 
 ```javascript
 // My first variable
@@ -120,63 +120,192 @@ console.log("Movie:", movieTitle);
 
 #### ✅ Test det nu!
 
-1. Gem filen (Ctrl+S)
-2. Refresh din browser og tjek konsollen
-3. Ser du "Movie: The Matrix"? Godt! ✨
+1. Gem `app.js` filen (Ctrl+S eller Cmd+S)
+2. Refresh din browser
+3. Åbn Developer Tools (F12) og vælg Console fanen
+4. Du skulle nu se:
+   - "Movie App kører! 🎬"
+   - "Movie: The Matrix"
+
+Hvis du ikke ser begge beskeder, tjek:
+
+- At du har indsat koden det rigtige sted (inde i `initApp` funktionen)
+- At du ikke har slettet eller ændret den oprindelige `console.log`
+- At din syntax er korrekt (tjek for manglende semikoloner, kommaer etc.)
 
 #### Step 2: Tilføj flere datatyper
 
-Nu tilføjer vi flere typer data. Tilføj disse linjer under din første variabel:
+Nu skal vi udforske flere properties fra vores movie objekt. **Tilføj** disse linjer **efter** din første `console.log` i `initApp` funktionen:
 
 ```javascript
-// Different data types (following your project structure)
-const movieYear = 1999; // Number (tal) - no quotes needed
-const movieGenre = "Action"; // Another string
+// Numbers (tal)
+const movieYear = 1999; // Helt tal - ingen anførselstegn
+const movieRating = 8.7; // Decimal tal - med punktum
 
+// Strings (tekst)
+const movieGenre = "Action"; // Tekst - med anførselstegn
+const movieDirector = "Christopher Nolan";
+
+// Boolean (sand/falsk)
+const isNewMovie = false; // true eller false - ingen anførselstegn
+const hasWonOscar = true;
+
+// Test alle vores variabler
 console.log("Year:", movieYear);
+console.log("Rating:", movieRating);
 console.log("Genre:", movieGenre);
+console.log("Director:", movieDirector);
+console.log("Is it a new movie?:", isNewMovie);
+console.log("Has won Oscar?:", hasWonOscar);
 ```
 
-**💡 Forklaring:**
+**💡 Forklaring af datatyper:**
 
-- **Number:** Tal uden anførselstegn (1999, 42, 3.14)
-- **Boolean:** Kun `true` eller `false` (ingen anførselstegn)
-- Vi bruger engelsk variable names som i dit projekt
+- **String:** Tekst i anførselstegn (`"Action"`, `"Christopher Nolan"`)
+- **Number:** Tal uden anførselstegn (`1999`, `8.7`)
+- **Boolean:** Kun `true` eller `false` værdier
+- Vi bruger engelske variabelnavne som i vores projekt
 
 #### ✅ Test igen!
 
-Refresh browseren - ser du nu tre linjer i konsollen?
+1. Gem filen igen (Ctrl+S eller Cmd+S)
+2. Refresh browseren
+3. I konsollen skulle du nu se:
+   - "Movie App kører! 🎬"
+   - "Movie title: The Matrix"
+   - "Year: 1999"
+   - "Rating: 8.7"
+   - "Genre: Action"
+   - "Director: Christopher Nolan"
+   - "Is it a new movie?: false"
+   - "Has won Oscar?: true"
 
-#### Step 3: Prøv at ændre en variabel (og se hvad der sker!)
+Hvis du ikke ser alle linjer:
 
-**Først - lad os prøve at ændre en const og se hvad der sker:**
+- Tjek at du har kopieret al koden korrekt
+- Se efter manglende kommaer eller semikoloner
+- Kontroller at alle console.log er inden i `initApp` funktionen
 
-Tilføj denne linje under din eksisterende kode:
+#### Step 3: Forskellen på const og let
+
+**Først - lad os se hvad der sker når vi prøver at ændre en const:**
+
+Tilføj denne linje efter dine console.log linjer:
 
 ```javascript
-// Try to change movieTitle (this will give an error!)
-movieTitle = "Inception";
+// Prøv at ændre en const (dette vil give en fejl!)
+movieTitle = "Inception"; // Fejl! Kan ikke ændre en const
+movieYear = 2010; // Fejl! Kan ikke ændre en const
+```
+
+#### ✅ Test det!
+
+1. Gem og refresh
+2. Se fejlen i konsollen: `TypeError: Assignment to constant variable`
+3. Udkommenter eller slet fejl-linjerne igen
+
+**Nu prøver vi med `let` i stedet:**
+
+```javascript
+// let variabler KAN ændres
+let userRating = 4.5; // Start rating
+console.log("Start rating:", userRating);
+
+userRating = 5.0; // Opdater rating
+console.log("Ny rating:", userRating);
+
+// Flere eksempler på let
+let isFavorite = false;
+console.log("Er det en favoritfilm?", isFavorite);
+
+isFavorite = true; // Ændrer boolean værdi
+console.log("Efter opdatering:", isFavorite);
 ```
 
 #### ✅ Test det nu!
 
-1. Gem filen (Ctrl+S)
+1. Gem filen (Ctrl+S eller Cmd+S)
 2. Refresh browseren og tjek konsollen
 3. **Du får en fejl!** 🚨 Det er fint - det er præcis hvad vi ville se!
 
-**💡 Hvad skete der?**
+**💡 Hvad har vi lært?**
 
-- Du får en fejl som: `TypeError: Assignment to constant variable`
-- Det betyder: "Du kan ikke ændre en const variabel"
-- **const** betyder konstant = kan IKKE ændres efter den er oprettet
+- `const` variabler kan IKKE ændres efter de er oprettet
+- `let` variabler KAN ændres når som helst
+- Brug `const` når værdien skal forblive den samme
+- Brug `let` når værdien skal kunne ændres
 
-**Fjern den fejlende linje igen** (slet eller kommenter den ud med `//`):
+**Typiske anvendelser:**
+
+- `const`: Film titler, årstal, instruktører (ændrer sig ikke)
+- `let`: Ratings, favoritter, tællere (ændrer sig ofte)
+
+#### ✅ Test det hele!
+
+1. Gem filen og refresh browseren
+2. I konsollen skulle du nu se:
+   - De oprindelige værdier
+   - Fejlen når vi prøver at ændre const
+   - Start rating og ny rating
+   - Boolean værdi før og efter ændring
+
+#### 🎯 Små opgaver til dig:
+
+1. Prøv at tilføje en ny `let` variabel kaldet `views` med værdien `0`
+2. Øg værdien med 1 (`views = views + 1`)
+3. Print den nye værdi med `console.log`
+4. Prøv at ændre flere af dine `const` variabler og se fejlene
+
+**💡 Tips:**
+
+- Husk at fjerne eller udkommentere kode der giver fejl
+- Eksperimenter med forskellige værdier
+- Se hvordan konsollen hjælper dig med at finde fejl
+
+#### Step 4: Arbejde med strings og tal
+
+Lad os prøve at arbejde mere med vores variabler:
 
 ```javascript
-// movieTitle = "Inception";  // ← Kommenteret ud så den ikke kører
+// String sammensætning (concatenation)
+const director = "Christopher Nolan";
+const movie = "Inception";
+const year = 2010;
+
+// Den gamle måde (med +)
+const oldWay = "Filmen " + movie + " fra " + year + " er instrueret af " + director;
+console.log("Gamle måde:", oldWay);
+
+// Den nye måde (med template literals ` `)
+const newWay = `Filmen ${movie} fra ${year} er instrueret af ${director}`;
+console.log("Nye måde:", newWay);
+
+// Regn med tal
+let rating = 8.5;
+rating = rating + 0.3; // Læg 0.3 til
+console.log("Ny rating:", rating);
+
+let views = 0;
+views = views + 1; // Tæl én visning
+console.log("Antal visninger:", views);
+
+// Genveje til matematik
+views += 1; // Samme som: views = views + 1
+rating += 0.1; // Samme som: rating = rating + 0.1
+console.log("Opdaterede værdier:", views, rating);
 ```
 
-#### Nu - lad os prøve med `let` i stedet:
+**💡 Forklaring:**
+
+- Template literals bruger ` ` (backticks) og ${} til at indsætte variabler
+- Vi kan regne med tal-variabler
+- `+=` er en genvej til at lægge til en variabel
+
+#### ✅ Test det!
+
+1. Gem og refresh
+2. Se hvordan strings kan sammensættes på forskellige måder
+3. Se hvordan tal kan opdateres med forskellige metoder
 
 Tilføj denne kode:
 
@@ -301,83 +430,163 @@ Se den pænt formaterede besked i konsollen!
 
 ### Opgave 1.2: Arrays (lister af data)
 
-**Formål:** Lær at gemme flere elementer i en liste og arbejde med dem.
+**Formål:** Lær at gemme og arbejde med lister af data.
 
-#### Step 1: Problemet - vi har kun én film!
+#### Step 1: Introduktion til arrays
 
-Lige nu har vi kun én film gemt i vores `movieTitle` variabel. Men hvad nu hvis vi vil gemme flere film?
+Hvis vi vil gemme flere filmtitler, kunne vi gøre det sådan her:
 
 ```javascript
-// This doesn't work well...
+// Separate variabler (ikke så smart!)
 const movie1 = "The Matrix";
 const movie2 = "Inception";
 const movie3 = "Interstellar";
-// What if we have 100 movies? 😰
+console.log("Film 1:", movie1);
+console.log("Film 2:", movie2);
+console.log("Film 3:", movie3);
 ```
 
 **💡 Problemet:**
 
-- For mange variabler at holde styr på
-- Svært at arbejde med mange film
-- Vi har brug for en bedre løsning!
+- For mange variabler
+- Svært at holde styr på
+- Besværligt at arbejde med
+- Umuligt med 100 film!
 
-#### Step 2: Arrays - listen til redning!
-
-Her kommer løsningen - **arrays** (lister):
+**Løsningen - Arrays:**
 
 ```javascript
-// Array - a list of movies! 🎉 (like allMovies in your project)
+// En array (liste) af film - MEGET bedre!
 const movieTitles = ["The Matrix", "Inception", "Interstellar"];
-console.log("Movie list:", movieTitles);
+console.log("Alle film:", movieTitles);
 ```
 
 #### ✅ Test det!
 
-Refresh og se listen i konsollen!
+1. Erstat den første kode med array-versionen
+2. Gem og refresh
+3. Se hvordan alle film nu er samlet i én liste
 
-**💡 Forklaring:**
+#### Step 2: Arbejde med arrays
 
-- `[]` firkantede parenteser laver en liste
-- Komma `,` adskiller hvert element
-- Alle film er nu samlet ét sted - som `allMovies` i dit projekt!
-
-#### Step 3: Hvad kan vi putte i arrays?
-
-Arrays kan indeholde mange forskellige ting:
+Lad os lære at arbejde med vores film-array:
 
 ```javascript
-// Only strings (text)
+// Opret array af filmtitler
 const movieTitles = ["The Matrix", "Inception", "Interstellar"];
 
-// Only numbers
-const movieYears = [1999, 2010, 2014];
+// Få fat i enkelte film (VIGTIGT: vi starter fra 0!)
+console.log("Første film:", movieTitles[0]); // The Matrix
+console.log("Anden film:", movieTitles[1]); // Inception
+console.log("Tredje film:", movieTitles[2]); // Interstellar
 
-// Movie ratings (numbers)
-const movieRatings = [8.7, 8.8, 8.6];
-
-// Blandet indhold (fungerer også!)
-const randomArray = ["The Matrix", 1999, 8.7];
-
-console.log("Movie titles:", movieTitles);
-console.log("Movie years:", movieYears);
-console.log("Movie ratings:", movieRatings);
-console.log("Mixed array:", randomArray);
+// Find ud af hvor mange film vi har
+console.log("Antal film:", movieTitles.length); // 3
 ```
+
+**💡 Vigtigt at huske:**
+
+- Arrays bruger `[]` firkantede parenteser
+- Det første element har index `[0]`
+- Det andet element har index `[1]`
+- `.length` fortæller os hvor mange elementer der er
+
+#### ✅ Test det!
+
+1. Gem og refresh
+2. Se i konsollen:
+   - Listen af alle film
+   - Hver enkelt film
+   - Det totale antal film
+3. Prøv at ændre rækkefølgen af film i array'et
+
+#### Step 3: Ændre arrays
+
+Vi kan tilføje og fjerne elementer fra vores array:
+
+```javascript
+// Start med nogle film
+const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+console.log("Start:", movieTitles);
+
+// Tilføj en film til slutningen
+movieTitles.push("The Dark Knight");
+console.log("Efter tilføjelse:", movieTitles);
+
+// Tilføj flere film på én gang
+movieTitles.push("Pulp Fiction", "Goodfellas");
+console.log("Efter flere tilføjelser:", movieTitles);
+
+// Fjern den sidste film
+const removedMovie = movieTitles.pop();
+console.log("Fjernet film:", removedMovie);
+console.log("Efter fjernelse:", movieTitles);
+```
+
+**💡 Array metoder:**
+
+- `.push()` - tilføj til slutningen
+- `.pop()` - fjern fra slutningen
+- `.push()` kan tage flere argumenter
+- `.pop()` returnerer det fjernede element
+
+#### ✅ Test det!
+
+1. Gem og refresh
+2. Se hvordan din liste ændrer sig for hver handling
+3. Prøv selv at:
+   - Tilføj dine egne favorit film
+   - Fjern nogle film
+   - Print listen efter hver ændring
 
 #### ✅ Test og se forskellen!
 
 Se hvordan arrays kan indeholde forskellige typer data!
 
-#### Step 4: Hent enkelt elementer fra listen
+#### Step 4: Forskellige typer af arrays
 
-Nu lærer vi at hente specifikke film fra listen:
+Arrays kan indeholde forskellige typer af data:
 
 ```javascript
-// Hent enkelt film (VIGTIGT: arrays starter fra 0!)
-console.log("Første film (index 0):", movieTitles[0]);
-console.log("Anden film (index 1):", movieTitles[1]);
-console.log("Tredje film (index 2):", movieTitles[2]);
+// Array med tekst (strings)
+const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+
+// Array med tal (numbers)
+const releaseYears = [1999, 2010, 2014];
+const ratings = [8.7, 8.8, 8.6];
+
+// Array med true/false (booleans)
+const isFavorite = [true, false, true];
+
+// Array med blandet indhold
+const movieInfo = ["The Matrix", 1999, 8.7, true];
+
+// Vis alle arrays
+console.log("Titler:", movieTitles);
+console.log("Årstal:", releaseYears);
+console.log("Ratings:", ratings);
+console.log("Favoritter:", isFavorite);
+console.log("Blandet info:", movieInfo);
+
+// Beregn gennemsnit af ratings
+const sum = ratings[0] + ratings[1] + ratings[2];
+const average = sum / ratings.length;
+console.log("Gennemsnitlig rating:", average);
 ```
+
+**💡 Husk:**
+
+- Arrays kan indeholde alle datatyper
+- Du kan mixe forskellige typer i samme array
+- Du kan regne med tal i arrays
+- `.length` virker på alle arrays
+
+#### 🎯 Opgaver til dig:
+
+1. Lav en array med dine 3 yndlingsfilm
+2. Lav en array med deres udgivelsesår
+3. Beregn gennemsnitsåret
+4. Print både film og beregningen
 
 #### ✅ Test det!
 
@@ -456,41 +665,188 @@ Se hvordan film forsvinder fra listen!
 - `.shift()` fjerner første element og returnerer det
 - Begge metoder ændrer den originale liste!
 
-#### ✅ Endelig test af alt!
+#### ✅ Opsummering af arrays
 
-Gem din `app.js` fil og refresh browseren. I konsollen skulle du se:
+Du har nu lært:
 
-1. Den originale filmliste (movieTitles)
-2. Film der bliver tilføjet
-3. Enkelt film hentet fra listen
-4. Antal film i listen
-5. Film der bliver fjernet
-6. Søgeresultater
-
-**🎯 Læringsmål:**
-Du kan nu:
-
-- Oprette arrays med `[]`
-- Tilføje elementer med `.push()`
-- Hente elementer med `[index]`
-- Fjerne elementer med `.pop()` og `.shift()`
-- Søge med `.includes()` og `.indexOf()`
-- Finde længden med `.length`
+- At oprette arrays med `[]`
+- At få fat i elementer med `[index]`
+- At tilføje elementer med `.push()`
+- At arrays kan indeholde forskellige datatyper
+- At arbejde med `.length`
 
 ---
 
 ### Opgave 1.3: Objekter (struktureret data)
 
-**Formål:** Lær at gemme relateret data sammen i objekter - præcis som i dit movie app project!
+**⚠️ Inden vi starter med objekter:**
 
-#### Step 1: Problemet - arrays er ikke nok!
-
-Indtil nu har vi brugt arrays til at gemme film:
+1. Åbn din `app.js` fil
+2. Slet **al** den tidligere kode med arrays
+3. Behold kun den grundlæggende struktur:
 
 ```javascript
-// This works OK for simple lists...
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+"use strict";
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+  console.log("Movie App kører! 🎬");
+  // Her skal vi tilføje den nye kode med objekter
+}
 ```
+
+**Hvorfor objekter?**
+Indtil nu har vi brugt separate arrays til forskellige typer af data:
+
+**Formål:** Lær at samle relateret data i objekter - den datastruktur vi skal bruge i vores Movie App!
+
+#### Step 1: Problemet med separate arrays
+
+Se hvordan vi indtil nu skulle bruge separate arrays for hver type information:
+
+```javascript
+// Separate arrays for hver type information
+const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+const movieYears = [1999, 2010, 2014];
+const movieDirectors = ["Wachowski Sisters", "Christopher Nolan", "Christopher Nolan"];
+const movieRatings = [8.7, 8.8, 8.6];
+
+// For at vise info om én film skal vi huske alle indexes
+console.log("Film info:");
+console.log("Titel:", movieTitles[0]);
+console.log("År:", movieYears[0]);
+console.log("Instruktør:", movieDirectors[0]);
+console.log("Rating:", movieRatings[0]);
+
+// Hvad hvis vi blander indexes ved et uheld?
+console.log("Forkert match:");
+console.log("Titel:", movieTitles[0]); // The Matrix
+console.log("År:", movieYears[1]); // 2010 (forkert år!)
+console.log("Instruktør:", movieDirectors[2]); // Christopher Nolan (forkert instruktør!)
+```
+
+#### Step 2: Dit første objekt
+
+Lad os starte med et helt simpelt movie objekt:
+
+```javascript
+// Et simpelt movie objekt med to properties
+const movie = {
+  title: "The Matrix",
+  year: 1999
+};
+
+// Sådan læser vi værdier fra objektet
+console.log("Film titel:", movie.title);
+console.log("Udgivelsesår:", movie.year);
+```
+
+**💡 Objekt grundregler:**
+
+- Objekter bruger `{}` krølparenteser
+- Properties har et navn og en værdi
+- Navn og værdi adskilles med `:`
+- Properties adskilles med `,`
+- Vi får fat i værdier med `.` (fx `movie.title`)
+
+#### Step 3: Tilføj flere properties
+
+Nu udvider vi vores objekt med flere properties:
+
+```javascript
+// Et movie objekt med flere properties
+const movie = {
+  title: "The Matrix",
+  year: 1999,
+  director: "Wachowski Sisters",
+  rating: 8.7
+};
+
+// Vi kan stadig få fat i værdierne på samme måde
+console.log("Film info:");
+console.log("Titel:", movie.title);
+console.log("År:", movie.year);
+console.log("Instruktør:", movie.director);
+console.log("Rating:", movie.rating);
+```
+
+**💡 Fordele ved objekter:**
+
+- Al information om én film er samlet ét sted
+- Vi kan ikke blande data ved et uheld
+- Let at tilgå med `.` notation (fx `movie.title`)
+- Koden er mere læsbar og logisk
+
+#### ✅ Test det!
+
+1. Slet din tidligere kode med arrays
+2. Indsæt den nye kode med movie objektet
+3. Gem og refresh
+4. Se hvordan al information om filmen nu er pænt organiseret
+
+#### Step 4: Ændre værdier i objektet
+
+Vi kan også ændre værdier i vores objekt:
+
+```javascript
+// Start med vores basis movie objekt
+const movie = {
+  title: "The Matrix",
+  year: 1999,
+  director: "Wachowski Sisters",
+  rating: 8.7,
+  inTheaters: true
+};
+
+// Print original værdi
+console.log("Original rating:", movie.rating);
+
+// Opdater nogle værdier
+movie.rating = 9.0; // Ændrer rating
+movie.inTheaters = false; // Ændrer boolean værdi
+
+// Print opdaterede værdier
+console.log("Ny rating:", movie.rating);
+console.log("Stadig i biografen?", movie.inTheaters);
+```
+
+#### Step 5: Arrays i objekter
+
+Nu er vi klar til at tilføje arrays i vores objekt:
+
+```javascript
+// Et movie objekt med arrays
+const movie = {
+  title: "The Matrix",
+  year: 1999,
+  director: "Wachowski Sisters",
+  rating: 8.7,
+  genres: ["Action", "Sci-Fi"], // Array af genres
+  stars: ["Keanu Reeves", "Carrie-Anne Moss"] // Array af skuespillere
+};
+
+// Læs værdier fra arrays i objektet
+console.log("Første genre:", movie.genres[0]);
+console.log("Hovedrolle:", movie.stars[0]);
+
+// Tilføj nye værdier til arrays
+movie.genres.push("Cyberpunk");
+movie.stars.push("Laurence Fishburne");
+
+// Se de opdaterede arrays
+console.log("Alle genres:", movie.genres);
+console.log("Alle stars:", movie.stars);
+```
+
+**💡 Husk:**
+
+- Objekter bruger `{}` krølparenteser
+- Properties adskilles med komma
+- Vi kan have arrays inde i objekter
+- Vi kan ændre værdier med `=`
+- Vi kan tilføje til arrays i objekter med `.push()`
+  const movieTitles = ["The Matrix", "Inception", "Interstellar"];
 
 Men hvad hvis vi vil gemme mere information om hver film?
 
@@ -686,55 +1042,81 @@ Du kan nu:
 
 ### Opgave 1.4: Arrays af objekter (som i dit movie app)
 
-**Formål:** Lær at kombinere arrays og objekter - præcis som i din allMovies array i dit projekt!
+**Formål:** Lær at kombinere arrays og objekter for at bygge en rigtig filmdatabase - præcis som i dit endelige projekt!
 
-#### Step 1: Problemet - en enkelt film er ikke nok!
+#### Step 1: Fra ét objekt til mange
 
-Indtil nu har vi arbejdet med ét movie object:
+Vi har lært at arbejde med ét movie objekt:
 
 ```javascript
-// This works fine for one movie...
-const singleMovie = {
+// Ét enkelt movie objekt
+const movie = {
   title: "The Matrix",
   year: 1999,
   rating: 8.7
 };
+
+console.log("Én film:", movie);
 ```
 
-Men hvad hvis vi vil have en hel movie collection? Som i dit rigtige projekt?
-
-**💡 Problemet:**
-
-- Vi kan ikke gemme mange film i separate variabler
-- Det bliver umuligt at arbejde med store databaser
-- Vi har brug for arrays + objekter sammen!
-
-#### Step 2: Arrays af objekter - den perfekte løsning!
-
-Her kombinerer vi det bedste fra begge verdener (præcis som allMovies i dit projekt):
+Men i en rigtig movie app har vi brug for at gemme MANGE film. Vi kunne prøve med flere variabler:
 
 ```javascript
-// Array of movie objects - exactly like allMovies in your project! 🎉
+// Dette bliver hurtigt uoverskueligt...
+const movie1 = {
+  title: "The Matrix",
+  year: 1999,
+  rating: 8.7
+};
+
+const movie2 = {
+  title: "Inception",
+  year: 2010,
+  rating: 8.8
+};
+
+console.log("Film 1:", movie1);
+console.log("Film 2:", movie2);
+```
+
+**💡 Problemet med separate variabler:**
+
+- Svært at holde styr på mange variabler
+- Umuligt at loope gennem filmene
+- Ikke en god løsning for en database
+- Ikke sådan professionelle apps gør!
+
+#### Step 2: Arrays af objekter - den smarte løsning!
+
+Lad os starte med en simpel array af objekter:
+
+```javascript
+// En array der indeholder movie objekter
 const allMovies = [
   {
-    id: 1,
     title: "The Matrix",
     year: 1999,
-    rating: 8.7,
-    genre: ["Action", "Sci-Fi"]
+    rating: 8.7
   },
   {
-    id: 2,
     title: "Inception",
     year: 2010,
-    rating: 8.8,
-    genre: ["Action", "Thriller"]
+    rating: 8.8
   }
 ];
 
-console.log("Complete movie database:", allMovies);
-console.log("Number of movies:", allMovies.length);
+// Se vores første movie database!
+console.log("Alle film:", allMovies);
+console.log("Antal film:", allMovies.length);
 ```
+
+**💡 Fordele ved arrays af objekter:**
+
+- Én variabel `allMovies` indeholder alle film
+- Let at tilføje nye film
+- Let at loope gennem alle film
+- Samme struktur som rigtige databaser
+- Præcis sådan movie apps gemmer data!
 
 #### ✅ Test det!
 
@@ -771,12 +1153,45 @@ Se hvordan vi kombinerer array[index] og objekt.nøgle!
 - `allMovies[0].title` henter titlen fra første movie
 - `allMovies[1].year` henter året fra anden movie direkte
 
-#### Step 4: Tilføj mere komplekse objekter
+#### Step 4: Byg den rigtige database struktur
 
-Lad os gøre objekterne mere realistiske:
+Nu skal vi gradvist bygge den struktur vi skal bruge i vores endelige projekt. Lad os starte med at tilføje ID'er:
 
 ```javascript
-// Udvid databasen med mere komplekse objekter
+// Start med basis struktur + id
+const allMovies = [
+  {
+    id: 1,
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7
+  },
+  {
+    id: 2,
+    title: "Inception",
+    year: 2010,
+    rating: 8.8
+  }
+];
+
+// Test vores nye id'er
+console.log("Film #1:", allMovies[0].id, "-", allMovies[0].title);
+console.log("Film #2:", allMovies[1].id, "-", allMovies[1].title);
+```
+
+**💡 Hvorfor ID'er?**
+
+- Hvert objekt får et unikt nummer
+- Gør det let at identificere præcis én film
+- Standard i databaser
+- Bruges når vi skal opdatere/slette film
+
+#### Step 5: Tilføj arrays i objekterne
+
+Nu gør vi strukturen mere avanceret ved at tilføje arrays:
+
+```javascript
+// Tilføj genre og actors arrays
 const allMovies = [
   {
     id: 1,
@@ -784,28 +1199,30 @@ const allMovies = [
     year: 1999,
     rating: 8.7,
     genre: ["Action", "Sci-Fi"],
-    director: "Lana Wachowski, Lilly Wachowski"
+    actors: ["Keanu Reeves", "Laurence Fishburne"]
   },
   {
     id: 2,
     title: "Inception",
     year: 2010,
     rating: 8.8,
-    genre: ["Action", "Thriller", "Sci-Fi"],
-    director: "Christopher Nolan"
-  },
-  {
-    id: 3,
-    title: "The Dark Knight",
-    year: 2008,
-    rating: 9.0,
-    genre: ["Action", "Crime", "Drama"],
-    director: "Christopher Nolan"
+    genre: ["Action", "Sci-Fi", "Thriller"],
+    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"]
   }
 ];
 
-console.log("All movies:", allMovies);
+// Test arrays i objekterne
+console.log("Matrix genrer:", allMovies[0].genre.join(", "));
+console.log("Inception skuespillere:", allMovies[1].actors.join(", "));
 ```
+
+**💡 Arrays i objekter:**
+
+- En film kan have flere genrer
+- En film kan have flere skuespillere
+- `.join(", ")` laver array til pæn tekst
+
+````
 
 #### ✅ Test det!
 
@@ -829,7 +1246,7 @@ console.log("Dark Knight number of genres:", allMovies[2].genre.length);
 // Hent alle genrer for første film
 const matrixGenres = allMovies[0].genre;
 console.log("Matrix alle genrer:", matrixGenres.join(", "));
-```
+````
 
 #### ✅ Test det!
 
@@ -841,7 +1258,60 @@ Se hvordan vi navigerer gennem komplekse strukturer!
 - `[1].director` = anden film, director
 - Vi kombinerer array-, objekt- og array-adgang!
 
-#### Step 6: Loop gennem movie database
+#### Step 6: Den endelige database struktur
+
+Nu har vi alle elementer på plads til vores endelige database struktur:
+
+```javascript
+// Den komplette movie database struktur
+const allMovies = [
+  {
+    id: 1,
+    title: "The Matrix",
+    year: 1999,
+    genre: ["Action", "Sci-Fi"],
+    director: "Lana Wachowski, Lilly Wachowski",
+    rating: 8.7,
+    image: "matrix.jpg",
+    actors: ["Keanu Reeves", "Laurence Fishburne"],
+    description: "A computer programmer discovers a mysterious world..."
+  },
+  {
+    id: 2,
+    title: "Inception",
+    year: 2010,
+    genre: ["Action", "Sci-Fi", "Thriller"],
+    director: "Christopher Nolan",
+    rating: 8.8,
+    image: "inception.jpg",
+    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
+    description: "A thief who steals corporate secrets through..."
+  }
+];
+
+// Lav en pæn udskrift af første film
+const movie = allMovies[0];
+const movieInfo = `
+🎬 ${movie.title} (${movie.year})
+🎭 Genre: ${movie.genre.join(", ")}
+👤 Instruktør: ${movie.director}
+⭐ Rating: ${movie.rating}
+👥 Skuespillere: ${movie.actors.join(", ")}
+📝 ${movie.description}
+`;
+
+console.log(movieInfo);
+```
+
+**💡 Den endelige struktur indeholder:**
+
+- Unik `id` til hver film
+- Basis info: `title`, `year`, `rating`
+- Arrays: `genre`, `actors`
+- Tekst: `director`, `description`
+- Billede reference: `image`
+
+#### Step 7: Arbejde med hele databasen
 
 Nu lærer vi at arbejde med hele databasen:
 
@@ -889,44 +1359,330 @@ Du kan nu:
 
 ## Del 2: Funktioner
 
-### Opgave 2.1: Simple funktioner
+### Opgave 2.1: Introduktion til funktioner
 
-**Formål:** Lær at oprette og bruge funktioner til at organisere din kode.
+**⚠️ Inden vi starter med funktioner:**
 
-#### Step 1: Problemet - gentaget kode!
-
-Indtil nu har vi skrevet al kode direkte. Men hvad hvis vi vil gøre det samme mange gange?
+1. Åbn din `app.js` fil
+2. Slet den tidligere kode med arrays og objekter
+3. Behold kun den grundlæggende struktur:
 
 ```javascript
-// Gentaget kode - ikke så smart... 😕
-console.log("Hej Emma! Velkommen til filmappen! 🎬");
-console.log("Hej Lucas! Velkommen til filmappen! 🎬");
-console.log("Hej Sofie! Velkommen til filmappen! 🎬");
-console.log("Hej Thomas! Velkommen til filmappen! 🎬");
-// Hvad hvis vi skal hilse på 100 personer?
+"use strict";
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+  console.log("Movie App kører! 🎬");
+  // Her skal vi tilføje den nye kode med funktioner
+}
 ```
 
-**💡 Problemet:**
+**Formål:** Lær at skrive genbrugelig kode med funktioner - den grundsten der gør det muligt at bygge større apps!
 
-- Meget gentaget kode
-- Svært at ændre beskeden hvis vi vil opdatere den
-- Vi har brug for en smartere løsning!
+#### Step 1: Din første funktion
 
-#### Step 2: Funktioner - genbrugelig kode!
-
-Her kommer løsningen - **funktioner**:
+Lad os starte med en helt simpel funktion:
 
 ```javascript
-// En funktion - genbrugelig kode! 🎉
+// Definér en funktion
 function sayHello() {
-  console.log("Hej! Velkommen til filmappen! 🎬");
+  console.log("Velkommen til Movie App! 🎬");
 }
 
-// Nu kan vi bruge den mange gange
+// Kald (brug) funktionen
 sayHello();
-sayHello();
-sayHello();
+sayHello(); // Vi kan kalde den flere gange!
 ```
+
+**💡 Sådan virker funktioner:**
+
+- `function` fortæller JavaScript at vi laver en funktion
+- `sayHello` er funktionens navn (brug beskrivende navne!)
+- `()` parenteser er hvor vi senere kan give input
+- `{}` krølparenteser indeholder koden der skal køres
+- Vi kalder funktionen ved at skrive dens navn + `()`
+
+#### Step 2: Funktioner med input (parametre)
+
+Hvad hvis vi vil personalisere vores velkomst? Her kommer parametre ind i billedet:
+
+```javascript
+// En funktion der tager imod input
+function sayHelloTo(name) {
+  console.log(`Velkommen til Movie App, ${name}! 🎬`);
+}
+
+// Nu kan vi hilse på forskellige personer
+sayHelloTo("Emma");
+sayHelloTo("Lucas");
+sayHelloTo("Sofia");
+
+// Prøv også med en variabel
+const userName = "Thomas";
+sayHelloTo(userName);
+```
+
+**💡 Om parametre:**
+
+- `name` er et parameter (input) til funktionen
+- Vi kan sende forskellige værdier hver gang
+- Funktionen bruger værdien vi sender
+- Vi kan også sende variabler som input
+
+#### Step 3: Funktioner der returnerer værdier
+
+Nu skal vi lære at få værdier tilbage fra funktioner:
+
+```javascript
+// En funktion der returnerer en værdi
+function calculateMovieLength(hours, minutes) {
+  const totalMinutes = hours * 60 + minutes;
+  return totalMinutes; // Send resultatet tilbage
+}
+
+// Brug funktionen og gem resultatet
+const length1 = calculateMovieLength(2, 15); // 2 timer og 15 minutter
+console.log("Film længde i minutter:", length1);
+
+const length2 = calculateMovieLength(1, 45); // 1 time og 45 minutter
+console.log("Anden film længde:", length2);
+
+// Vi kan også bruge returværdien direkte
+if (calculateMovieLength(3, 0) > 150) {
+  console.log("Det er en lang film!");
+}
+```
+
+**💡 Om return værdier:**
+
+- `return` sender et resultat tilbage
+- Vi kan gemme resultatet i en variabel
+- Vi kan bruge resultatet direkte
+- Funktionen stopper når den når til `return`
+
+#### Step 4: Funktioner til vores Movie App
+
+Nu skal vi se hvordan funktioner kan hjælpe os med vores film database:
+
+```javascript
+// Vores movie database
+const allMovies = [
+  {
+    id: 1,
+    title: "The Matrix",
+    year: 1999,
+    genre: ["Action", "Sci-Fi"],
+    rating: 8.7
+  },
+  {
+    id: 2,
+    title: "Inception",
+    year: 2010,
+    genre: ["Action", "Sci-Fi", "Thriller"],
+    rating: 8.8
+  }
+];
+
+// Funktion der finder en film ud fra id
+function findMovieById(movieId) {
+  for (const movie of allMovies) {
+    if (movie.id === movieId) {
+      return movie;
+    }
+  }
+  return null; // Returner null hvis filmen ikke findes
+}
+
+// Funktion der laver en pæn tekst om filmen
+function createMovieDescription(movie) {
+  return `
+    🎬 ${movie.title} (${movie.year})
+    🎭 Genre: ${movie.genre.join(", ")}
+    ⭐ Rating: ${movie.rating}
+    `;
+}
+
+// Nu kan vi nemt finde og vise film!
+const movie = findMovieById(1); // Find The Matrix
+if (movie) {
+  console.log(createMovieDescription(movie));
+}
+```
+
+**💡 Fordele ved funktioner:**
+
+- Koden bliver mere organiseret
+- Vi kan genbruge kode
+- Lettere at vedligeholde
+- Gør koden mere læsbar
+
+---
+
+## Del 3: DOM-manipulation
+
+### Opgave 3.1: Introduktion til DOM
+
+**⚠️ Inden vi starter med DOM:**
+
+1. Åbn din `app.js` fil
+2. Slet den tidligere kode med funktioner
+3. Opret denne basis HTML-struktur i din `index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie App</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <h1>🎬 Movie App</h1>
+
+    <!-- Her tilføjer vi en container til vores film -->
+    <section id="movies">
+      <!-- Film bliver vist her -->
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+**Formål:** Lær at forbinde JavaScript med HTML - så vi kan vise vores film på siden!
+
+#### Step 1: Find elementer i HTML
+
+Først skal vi lære at få fat i HTML-elementer fra JavaScript:
+
+```javascript
+"use strict";
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+  // Find vores movies-sektion
+  const moviesSection = document.querySelector("#movies");
+  console.log("Movies section fundet:", moviesSection);
+
+  // Find h1 overskriften
+  const header = document.querySelector("h1");
+  console.log("Header fundet:", header);
+}
+```
+
+**💡 Sådan finder vi elementer:**
+
+- `document` er hele HTML-dokumentet
+- `querySelector()` finder ét element
+- `#movies` finder element med id="movies"
+- `h1` finder første h1-element
+
+#### ✅ Test det!
+
+1. Gem filerne og refresh
+2. Åbn konsollen (F12)
+3. Se at elementerne er fundet
+4. Prøv at ændre selectors og se hvad der sker
+
+#### Step 2: Ændre indhold i elementer
+
+Nu skal vi lære at ændre indholdet af HTML-elementer:
+
+```javascript
+function initApp() {
+  // Find elementerne
+  const moviesSection = document.querySelector("#movies");
+  const header = document.querySelector("h1");
+
+  // Ændre tekstindhold
+  header.textContent = "🎬 Velkommen til Movie App!";
+
+  // Tilføj HTML-indhold
+  moviesSection.innerHTML = `
+        <article class="movie">
+            <h2>The Matrix</h2>
+            <p>Udgivet: 1999</p>
+        </article>
+    `;
+}
+```
+
+**💡 To måder at ændre indhold:**
+
+- `textContent` = ren tekst (sikker, men ingen HTML)
+- `innerHTML` = HTML-indhold (mere fleksibel)
+
+#### ✅ Test det!
+
+1. Gem og refresh
+2. Se hvordan siden opdateres
+3. Prøv at ændre teksterne
+4. Bemærk forskellen på textContent og innerHTML
+
+#### Step 3: Vis film fra databasen
+
+Nu skal vi kombinere det vi har lært om arrays, objekter og DOM:
+
+```javascript
+function initApp() {
+  // Vores film database
+  const allMovies = [
+    {
+      id: 1,
+      title: "The Matrix",
+      year: 1999,
+      genre: ["Action", "Sci-Fi"],
+      rating: 8.7
+    },
+    {
+      id: 2,
+      title: "Inception",
+      year: 2010,
+      genre: ["Action", "Sci-Fi", "Thriller"],
+      rating: 8.8
+    }
+  ];
+
+  // Find vores movies-sektion
+  const moviesSection = document.querySelector("#movies");
+
+  // Opret HTML for hver film
+  let movieHTML = "";
+
+  for (const movie of allMovies) {
+    movieHTML += `
+            <article class="movie">
+                <h2>${movie.title}</h2>
+                <p>Udgivet: ${movie.year}</p>
+                <p>Rating: ⭐ ${movie.rating}</p>
+                <p>Genre: ${movie.genre.join(", ")}</p>
+            </article>
+        `;
+  }
+
+  // Indsæt al HTML på én gang
+  moviesSection.innerHTML = movieHTML;
+}
+```
+
+**💡 Sådan virker det:**
+
+- Vi bruger et loop til at gå gennem alle film
+- For hver film laver vi et stykke HTML
+- Vi samler al HTML i én variabel
+- Til sidst indsætter vi det hele på én gang
+
+#### ✅ Test det!
+
+1. Gem og refresh
+2. Se hvordan filmene vises på siden
+3. Prøv at tilføje flere film til databasen
+4. Prøv at ændre HTML-strukturen for hver film
+
+````
 
 #### ✅ Test det!
 
@@ -953,7 +1709,7 @@ function sayHelloTo(name) {
 sayHelloTo("Emma");
 sayHelloTo("Lucas");
 sayHelloTo("Sofie");
-```
+````
 
 #### ✅ Test det!
 
