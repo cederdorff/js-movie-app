@@ -344,7 +344,7 @@ Først - lad os prøve den gammeldags måde at sammensætte tekst på:
 
 ```javascript
 // Old way (works, but messy)
-const oldMessage = "The movie " + movieTitle + " is from " + movieYear;
+const oldMessage = "The movie " + movie + " is from " + year;
 console.log("Old way:", oldMessage);
 ```
 
@@ -358,7 +358,7 @@ Nu prøver vi den smarte måde:
 
 ```javascript
 // Smart way with template literals
-const smartMessage = `The movie ${movieTitle} is from ${movieYear}`;
+const smartMessage = `The movie ${movie} is from ${year}`;
 console.log("Smart way:", smartMessage);
 ```
 
@@ -385,7 +385,7 @@ Lad os tilføje flere variabler i én besked:
 
 ```javascript
 // Multiple variables in same template literal
-const complexMessage = `Movie: ${movieTitle}, Year: ${movieYear}, Rating: ${userRating}, Genre: ${movieGenre}`;
+const complexMessage = `Movie: ${title}, Year: ${year}, Rating: ${userRating}, Genre: ${genre}`;
 console.log("Complete info:", complexMessage);
 ```
 
@@ -406,10 +406,10 @@ Template literals kan også håndtere flere linjer:
 ```javascript
 // Multiple lines in same message (like your project's movie details)
 const multiLineMessage = `🎬 MOVIE INFO:
-Title: ${movieTitle}
-Year: ${movieYear}
+Title: ${title}
+Year: ${year}
 Rating: ${userRating}/10
-Genre: ${movieGenre}`;
+Genre: ${genre}`;
 console.log(multiLineMessage);
 ```
 
@@ -428,9 +428,9 @@ Se den pænt formaterede besked i konsollen!
 
 1. Gem din `app.js` fil (Ctrl+S)
 2. Refresh din browser og tjek konsollen
-3. **Prøv dette:** Ændr `movieTitle` til en anden film og se forskellen!
+3. **Prøv dette:** Ændr `title` til en anden film og se forskellen!
 4. **Prøv dette:** Ændr `userRating` til `9.5` og se resultatet!
-5. **Prøv dette:** Ændr `movieYear` til `2024` og se output!
+5. **Prøv dette:** Ændr `year` til `2024` og se output!
 6. **Eksperimentér:** Prøv forskellige værdier og se hvordan template literals virker!
 
 **🎯 Læringsmål:** Du kan nu oprette variabler og forstår forskellen på string, number og boolean.
@@ -438,6 +438,23 @@ Se den pænt formaterede besked i konsollen!
 ---
 
 ### Opgave 1.2: Arrays (lister af data)
+
+**⚠️ Inden vi starter med arrays:**
+
+1. Åbn din `app.js` fil
+2. Slet alt indhold fra den tidligere opgave
+3. Behold kun denne grundlæggende struktur:
+
+```javascript
+"use strict";
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+  console.log("Movie App kører! 🎬");
+  // Her skal vi tilføje den nye kode med arrays
+}
+```
 
 **Formål:** Lær at gemme og arbejde med lister af data.
 
@@ -466,7 +483,7 @@ console.log("Film 3:", movie3);
 
 ```javascript
 // En array (liste) af film - MEGET bedre!
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+const titles = ["The Matrix", "Inception", "Interstellar"];
 console.log("Alle film:", movieTitles);
 ```
 
@@ -482,15 +499,15 @@ Lad os lære at arbejde med vores film-array:
 
 ```javascript
 // Opret array af filmtitler
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+const titles = ["The Matrix", "Inception", "Interstellar"];
 
 // Få fat i enkelte film (VIGTIGT: vi starter fra 0!)
-console.log("Første film:", movieTitles[0]); // The Matrix
-console.log("Anden film:", movieTitles[1]); // Inception
-console.log("Tredje film:", movieTitles[2]); // Interstellar
+console.log("Første film:", titles[0]); // The Matrix
+console.log("Anden film:", titles[1]); // Inception
+console.log("Tredje film:", titles[2]); // Interstellar
 
 // Find ud af hvor mange film vi har
-console.log("Antal film:", movieTitles.length); // 3
+console.log("Antal film:", titles.length); // 3
 ```
 
 **💡 Vigtigt at huske:**
@@ -515,21 +532,21 @@ Vi kan tilføje og fjerne elementer fra vores array:
 
 ```javascript
 // Start med nogle film
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
-console.log("Start:", movieTitles);
+const titles = ["The Matrix", "Inception", "Interstellar"];
+console.log("Start:", titles);
 
 // Tilføj en film til slutningen
-movieTitles.push("The Dark Knight");
-console.log("Efter tilføjelse:", movieTitles);
+titles.push("The Dark Knight");
+console.log("Efter tilføjelse:", titles);
 
 // Tilføj flere film på én gang
-movieTitles.push("Pulp Fiction", "Goodfellas");
-console.log("Efter flere tilføjelser:", movieTitles);
+titles.push("Pulp Fiction", "Goodfellas");
+console.log("Efter flere tilføjelser:", titles);
 
 // Fjern den sidste film
-const removedMovie = movieTitles.pop();
+const removedMovie = titles.pop();
 console.log("Fjernet film:", removedMovie);
-console.log("Efter fjernelse:", movieTitles);
+console.log("Efter fjernelse:", titles);
 ```
 
 **💡 Array metoder:**
@@ -558,10 +575,10 @@ Arrays kan indeholde forskellige typer af data:
 
 ```javascript
 // Array med tekst (strings)
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+const titles = ["The Matrix", "Inception", "Interstellar"];
 
 // Array med tal (numbers)
-const releaseYears = [1999, 2010, 2014];
+const years = [1999, 2010, 2014];
 const ratings = [8.7, 8.8, 8.6];
 
 // Array med true/false (booleans)
@@ -605,15 +622,15 @@ Se hvordan vi får fat i hver enkelt film!
 
 - Arrays starter fra **0** (ikke 1!)
 - Første element er `[0]`, anden er `[1]`, osv.
-- `movieTitles[0]` = "The Matrix"
-- `movieTitles[1]` = "Inception"
+- `titles[0]` = "The Matrix"
+- `titles[1]` = "Inception"
 
 #### Step 5: Hvor mange elementer har vi?
 
 ```javascript
 // Find længden af listen
-console.log("Antal film i listen:", movieTitles.length);
-console.log("Sidste film (smart måde):", movieTitles[movieTitles.length - 1]);
+console.log("Antal film i listen:", titles.length);
+console.log("Sidste film (smart måde):", titles[titles.length - 1]);
 ```
 
 #### ✅ Test det!
@@ -629,13 +646,13 @@ Se hvor mange film vi har!
 
 ```javascript
 // Tilføj film til slutningen
-movieTitles.push("The Dark Knight");
-console.log("Efter tilføjelse:", movieTitles);
-console.log("Nu har vi", movieTitles.length, "film!");
+titles.push("The Dark Knight");
+console.log("Efter tilføjelse:", titles);
+console.log("Nu har vi", titles.length, "film!");
 
 // Tilføj flere på én gang
-movieTitles.push("Pulp Fiction", "Goodfellas");
-console.log("Efter flere tilføjelser:", movieTitles);
+titles.push("Pulp Fiction", "Goodfellas");
+console.log("Efter flere tilføjelser:", titles);
 ```
 
 #### ✅ Test det!
@@ -654,14 +671,14 @@ Nogle gange vil vi fjerne film fra listen:
 
 ```javascript
 // Fjern den sidste film
-const removedMovie = movieTitles.pop();
+const removedMovie = titles.pop();
 console.log("Removed movie:", removedMovie);
-console.log("List now:", movieTitles);
+console.log("List now:", titles);
 
 // Fjern den første film
-const firstRemoved = movieTitles.shift();
+const firstRemoved = titles.shift();
 console.log("First removed:", firstRemoved);
-console.log("List now:", movieTitles);
+console.log("List now:", titles);
 ```
 
 #### ✅ Test det!
@@ -716,23 +733,23 @@ Se hvordan vi indtil nu skulle bruge separate arrays for hver type information:
 
 ```javascript
 // Separate arrays for hver type information
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
-const movieYears = [1999, 2010, 2014];
-const movieDirectors = ["Wachowski Sisters", "Christopher Nolan", "Christopher Nolan"];
-const movieRatings = [8.7, 8.8, 8.6];
+const titles = ["The Matrix", "Inception", "Interstellar"];
+const years = [1999, 2010, 2014];
+const directors = ["Wachowski Sisters", "Christopher Nolan", "Christopher Nolan"];
+const ratings = [8.7, 8.8, 8.6];
 
 // For at vise info om én film skal vi huske alle indexes
 console.log("Film info:");
-console.log("Titel:", movieTitles[0]);
-console.log("År:", movieYears[0]);
-console.log("Instruktør:", movieDirectors[0]);
-console.log("Rating:", movieRatings[0]);
+console.log("Titel:", titles[0]);
+console.log("År:", years[0]);
+console.log("Instruktør:", directors[0]);
+console.log("Rating:", ratings[0]);
 
 // Hvad hvis vi blander indexes ved et uheld?
 console.log("Forkert match:");
-console.log("Titel:", movieTitles[0]); // The Matrix
-console.log("År:", movieYears[1]); // 2010 (forkert år!)
-console.log("Instruktør:", movieDirectors[2]); // Christopher Nolan (forkert instruktør!)
+console.log("Titel:", titles[0]); // The Matrix
+console.log("År:", years[1]); // 2010 (forkert år!)
+console.log("Instruktør:", directors[2]); // Christopher Nolan (forkert instruktør!)
 ```
 
 #### Step 2: Dit første objekt
@@ -831,21 +848,21 @@ const movie = {
   year: 1999,
   director: "Wachowski Sisters",
   rating: 8.7,
-  genres: ["Action", "Sci-Fi"], // Array af genres
-  stars: ["Keanu Reeves", "Carrie-Anne Moss"] // Array af skuespillere
+  genre: ["Action", "Sci-Fi"], // Array af genres (ændret fra 'genres' til 'genre' for at matche endelig løsning)
+  actors: ["Keanu Reeves", "Carrie-Anne Moss"] // Array af skuespillere (ændret fra 'stars' til 'actors' for at matche endelig løsning)
 };
 
 // Læs værdier fra arrays i objektet
-console.log("Første genre:", movie.genres[0]);
-console.log("Hovedrolle:", movie.stars[0]);
+console.log("Første genre:", movie.genre[0]);
+console.log("Hovedrolle:", movie.actors[0]);
 
 // Tilføj nye værdier til arrays
-movie.genres.push("Cyberpunk");
-movie.stars.push("Laurence Fishburne");
+movie.genre.push("Cyberpunk");
+movie.actors.push("Laurence Fishburne");
 
 // Se de opdaterede arrays
-console.log("Alle genres:", movie.genres);
-console.log("Alle stars:", movie.stars);
+console.log("Alle genrer:", movie.genre);
+console.log("Alle skuespillere:", movie.actors);
 ```
 
 **💡 Husk:**
@@ -929,21 +946,25 @@ Lad os lave et objekt der matcher din movies.json struktur:
 
 ```javascript
 // Real movie object structure (exactly like your movies.json!)
-const realMovie = {
+const movie = {
   id: 2,
   title: "The Matrix",
   year: 1999,
   genre: ["Action", "Sci-Fi"],
   director: "Lana Wachowski, Lilly Wachowski",
   rating: 8.7,
-  actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
+  image: "matrix.jpg",
+  actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+  description: "A computer programmer discovers that reality is not what it seems..."
 };
 
-console.log("Movie ID:", realMovie.id);
-console.log("Title:", realMovie.title);
-console.log("First genre:", realMovie.genre[0]);
-console.log("Director:", realMovie.director);
-console.log("First actor:", realMovie.actors[0]);
+console.log("Movie ID:", movie.id);
+console.log("Title:", movie.title);
+console.log("First genre:", movie.genre[0]);
+console.log("Director:", movie.director);
+console.log("First actor:", movie.actors[0]);
+console.log("Image:", movie.image);
+console.log("Description:", movie.description);
 ```
 
 #### ✅ Test det!
@@ -960,11 +981,11 @@ Se hvordan objekter kan rumme alt muligt data - præcis som i dit projekt!
 
 ```javascript
 // Vi kan tilføje nyt data til eksisterende objekter
-realMovie.watched = false;
-realMovie.review = "Fantastisk film!";
+movie.actors.push("Hugo Weaving");
+movie.genre.push("Drama");
 
-console.log("Er filmen set?", realMovie.watched);
-console.log("Anmeldelse:", realMovie.review);
+console.log("Opdaterede skuespillere:", movie.actors);
+console.log("Opdaterede genrer:", movie.genre);
 ```
 
 #### ✅ Test det!
@@ -981,13 +1002,13 @@ Se hvordan vi kan udvide objektet!
 
 ```javascript
 // Vi kan også ændre data der allerede findes
-console.log("Gammel rating:", realMovie.rating);
+console.log("Gammel rating:", movie.rating);
 
-realMovie.rating = 9.0; // Opgraderet!
-realMovie.watched = true; // Nu har vi set den!
+movie.rating = 9.0; // Opgraderet!
+movie.description = "En banebrydende sci-fi film der udfordrer vores opfattelse af virkeligheden..."; // Opdateret beskrivelse
 
-console.log("Ny rating:", realMovie.rating);
-console.log("Nu er den set:", realMovie.watched);
+console.log("Ny rating:", movie.rating);
+console.log("Ny beskrivelse:", movie.description);
 ```
 
 #### ✅ Test det!
@@ -1001,12 +1022,12 @@ Nu kombinerer vi det vi har lært om template literals og objekter:
 ```javascript
 // Lav en flot beskrivelse med objektdata
 const movieDescription = `
-🎬 ${realMovie.title} (${realMovie.year})
-⭐ Rating: ${realMovie.rating}/10  
-🎭 First genre: ${realMovie.genre[0]}
-� Director: ${realMovie.director}
-👥 First actor: ${realMovie.actors[0]}
-📝 ${realMovie.review}
+🎬 ${movie.title} (${movie.year})
+⭐ Rating: ${movie.rating}/10  
+🎭 Genre: ${movie.genre.join(", ")}
+🎥 Director: ${movie.director}
+👥 Actors: ${movie.actors.join(", ")}
+📝 ${movie.description}
 `;
 
 console.log("Movie info:");
@@ -1227,9 +1248,9 @@ console.log("Inception skuespillere:", allMovies[1].actors.join(", "));
 
 **💡 Arrays i objekter:**
 
-- En film kan have flere genrer
-- En film kan have flere skuespillere
-- `.join(", ")` laver array til pæn tekst
+- Hver film har en `genre` array med alle filmens genrer
+- Hver film har en `actors` array med alle filmens skuespillere
+- `.join(", ")` laver array til pæn tekst med komma-separator
 
 #### ✅ Test det!
 
@@ -1246,13 +1267,18 @@ Nu bliver det interessant - arrays inde i objekter inde i arrays:
 
 ```javascript
 // Hent komplekse data
-console.log("Matrix first genre:", allMovies[0].genre[0]);
-console.log("Inception director:", allMovies[1].director);
-console.log("Dark Knight number of genres:", allMovies[2].genre.length);
+console.log("Matrix første genre:", allMovies[0].genre[0]);
+console.log("Inception instruktør:", allMovies[1].director);
+console.log("Matrix beskrivelse:", allMovies[0].description);
 
-// Hent alle genrer for første film
-const matrixGenres = allMovies[0].genre;
-console.log("Matrix alle genrer:", matrixGenres.join(", "));
+// Hent alle data for første film
+const firstMovie = allMovies[0];
+console.log(`
+Film: ${firstMovie.title}
+År: ${firstMovie.year}
+Genrer: ${firstMovie.genre.join(", ")}
+Skuespillere: ${firstMovie.actors.join(", ")}
+`);
 ```
 
 #### ✅ Test det!
@@ -1323,13 +1349,15 @@ console.log(movieInfo);
 Nu lærer vi at arbejde med hele databasen:
 
 ```javascript
-// Loop through all movies
+// Loop gennem alle film
 for (const movie of allMovies) {
-  console.log(`🎬 ${movie.title} (${movie.year})`);
-  console.log(`⭐ Rating: ${movie.rating}`);
-  console.log(`🎭 Genre: ${movie.genre[0]}`);
-  console.log("---");
-}
+  console.log(`
+🎬 ${movie.title} (${movie.year})
+⭐ Rating: ${movie.rating}
+🎭 Genrer: ${movie.genre.join(", ")}
+👥 Skuespillere: ${movie.actors.join(", ")}
+📝 ${movie.description}
+---`);
 ```
 
 #### ✅ Test det!
@@ -1480,14 +1508,22 @@ const allMovies = [
     title: "The Matrix",
     year: 1999,
     genre: ["Action", "Sci-Fi"],
-    rating: 8.7
+    director: "Lana Wachowski, Lilly Wachowski",
+    rating: 8.7,
+    image: "matrix.jpg",
+    actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+    description: "A computer programmer discovers that reality is not what it seems..."
   },
   {
     id: 2,
     title: "Inception",
     year: 2010,
     genre: ["Action", "Sci-Fi", "Thriller"],
-    rating: 8.8
+    director: "Christopher Nolan",
+    rating: 8.8,
+    image: "inception.jpg",
+    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
+    description: "A thief who enters the dreams of others to steal secrets..."
   }
 ];
 
@@ -1506,7 +1542,10 @@ function createMovieDescription(movie) {
   return `
     🎬 ${movie.title} (${movie.year})
     🎭 Genre: ${movie.genre.join(", ")}
+    👤 Instruktør: ${movie.director}
     ⭐ Rating: ${movie.rating}
+    👥 Skuespillere: ${movie.actors.join(", ")}
+    📝 ${movie.description}
     `;
 }
 
@@ -1642,14 +1681,22 @@ function initApp() {
       title: "The Matrix",
       year: 1999,
       genre: ["Action", "Sci-Fi"],
-      rating: 8.7
+      director: "Lana Wachowski, Lilly Wachowski",
+      rating: 8.7,
+      image: "matrix.jpg",
+      actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+      description: "A computer programmer discovers that reality is not what it seems..."
     },
     {
       id: 2,
       title: "Inception",
       year: 2010,
       genre: ["Action", "Sci-Fi", "Thriller"],
-      rating: 8.8
+      director: "Christopher Nolan",
+      rating: 8.8,
+      image: "inception.jpg",
+      actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
+      description: "A thief who enters the dreams of others to steal secrets..."
     }
   ];
 
@@ -1662,10 +1709,14 @@ function initApp() {
   for (const movie of allMovies) {
     movieHTML += `
             <article class="movie">
+                <img src="img/${movie.image}" alt="${movie.title}">
                 <h2>${movie.title}</h2>
                 <p>Udgivet: ${movie.year}</p>
+                <p>Instruktør: ${movie.director}</p>
                 <p>Rating: ⭐ ${movie.rating}</p>
                 <p>Genre: ${movie.genre.join(", ")}</p>
+                <p>Skuespillere: ${movie.actors.join(", ")}</p>
+                <p>${movie.description}</p>
             </article>
         `;
   }
@@ -1835,7 +1886,14 @@ console.log(`🎬 ${movie2.title} (${movie2.year}) - Rating: ⭐ ${movie2.rating
 ```javascript
 // Function that takes a movie object as parameter (like your displayMovie function)
 function displayMovieInfo(movie) {
-  const movieInfo = `🎬 ${movie.title} (${movie.year}) - Rating: ⭐ ${movie.rating}`;
+  const movieInfo = `
+    🎬 ${movie.title} (${movie.year})
+    👤 Instruktør: ${movie.director}
+    ⭐ Rating: ${movie.rating}
+    🎭 Genre: ${movie.genre.join(", ")}
+    👥 Skuespillere: ${movie.actors.join(", ")}
+    📝 ${movie.description}
+  `;
   return movieInfo;
 }
 
@@ -1904,12 +1962,30 @@ Se hvordan vi kan hente data fra objekter!
 Nu kommer det sjove - lad os kombinere alt vi har lært! Vi tager vores funktioner og bruger dem på mange film:
 
 ```javascript
-// Create a test database (match your project structure)
+// Opret en test database (matcher din projekt struktur)
 const allMovies = [
-  { title: "The Matrix", year: 1999, rating: 8.7, genre: ["Action", "Sci-Fi"] },
-  { title: "Inception", year: 2010, rating: 8.8, genre: ["Action", "Thriller"] },
-  { title: "The Dark Knight", year: 2008, rating: 9.0, genre: ["Action", "Crime"] },
-  { title: "Pulp Fiction", year: 1994, rating: 8.9, genre: ["Crime", "Drama"] }
+  {
+    id: 1,
+    title: "The Matrix",
+    year: 1999,
+    genre: ["Action", "Sci-Fi"],
+    director: "Lana Wachowski, Lilly Wachowski",
+    rating: 8.7,
+    image: "matrix.jpg",
+    actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+    description: "A computer programmer discovers that reality is not what it seems..."
+  },
+  {
+    id: 2,
+    title: "Inception",
+    year: 2010,
+    genre: ["Action", "Sci-Fi", "Thriller"],
+    director: "Christopher Nolan",
+    rating: 8.8,
+    image: "inception.jpg",
+    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
+    description: "A thief who enters the dreams of others to steal secrets..."
+  }
 ];
 
 // Function that displays all movies nicely
@@ -2384,8 +2460,8 @@ Nu skulle årene være formateret som "Year: 1994" i stedet for bare "1994"
 
 ```javascript
 function formatRating(rating) {
-  const stars = "★".repeat(Math.floor(rating / 2)) + "☆".repeat(5 - Math.floor(rating / 2));
-  return `${stars} ${rating}/10`;
+  const stars = "⭐".repeat(Math.floor(rating));
+  return `${stars} (${rating}/10)`;
 }
 ```
 
@@ -2395,12 +2471,16 @@ function displayAllMovies() {
 
   for (const movie of allMovies) {
     const movieHTML = `
-      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
+      <article class="movie">
+        <img src="img/${movie.image}" alt="${movie.title}">
         <h3>${movie.title}</h3>
         <p><strong>Year:</strong> ${formatYear(movie.year)}</p>
+        <p><strong>Director:</strong> ${movie.director}</p>
         <p><strong>Rating:</strong> ${formatRating(movie.rating)}</p>
-        <p><strong>Genre:</strong> ${movie.genre[0]}</p>
-      </div>
+        <p><strong>Genre:</strong> ${movie.genre.join(", ")}</p>
+        <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
+        <p class="description">${movie.description}</p>
+      </article>
     `;
 
     movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
