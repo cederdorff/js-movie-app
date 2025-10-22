@@ -708,8 +708,8 @@ Du har nu lært:
 **⚠️ Inden vi starter med objekter:**
 
 1. Åbn din `app.js` fil
-2. Slet **al** den tidligere kode med arrays
-3. Behold kun den grundlæggende struktur:
+2. **VIGTIGT:** Slet ALT indhold fra arrays-opgaven
+3. Indsæt kun denne grundlæggende struktur:
 
 ```javascript
 "use strict";
@@ -721,6 +721,9 @@ function initApp() {
   // Her skal vi tilføje den nye kode med objekter
 }
 ```
+
+4. Gem filen og refresh browseren
+5. Tjek at du kun ser "Movie App kører! 🎬" i konsollen
 
 **Hvorfor objekter?**
 Indtil nu har vi brugt separate arrays til forskellige typer af data:
@@ -1071,6 +1074,26 @@ Du kan nu:
 ---
 
 ### Opgave 1.4: Arrays af objekter (som i dit movie app)
+
+**⚠️ Inden vi starter med arrays af objekter:**
+
+1. Åbn din `app.js` fil
+2. **VIGTIGT:** Slet ALT indhold fra objekter-opgaven
+3. Indsæt kun denne grundlæggende struktur:
+
+```javascript
+"use strict";
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+  console.log("Movie App kører! 🎬");
+  // Her skal vi tilføje vores movie database og kode
+}
+```
+
+4. Gem filen og refresh browseren
+5. Tjek at du kun ser "Movie App kører! 🎬" i konsollen
 
 **Formål:** Lær at kombinere arrays og objekter for at bygge en rigtig filmdatabase - præcis som i dit endelige projekt!
 
@@ -1549,9 +1572,24 @@ function createMovieDescription(movie) {
     `;
 }
 
-// Nu kan vi nemt finde og vise film!
+// Funktion der looper gennem alle film og viser detaljer
+function showAllMovies() {
+  for (const movie of allMovies) {
+    console.log("=== Film Info ===");
+    console.log("🎬 Titel:", movie.title);
+    console.log("📅 År:", movie.year);
+    console.log("🎭 Genre:", movie.genre.join(", "));
+    console.log("⭐ Rating:", movie.rating);
+    console.log("---------------");
+  }
+}
+
+// Nu kan vi nemt vise alle film eller finde en specifik!
+showAllMovies(); // Vis alle film
+
 const movie = findMovieById(1); // Find The Matrix
 if (movie) {
+  console.log("\nDetaljer for en specifik film:");
   console.log(createMovieDescription(movie));
 }
 ```
@@ -1740,8 +1778,6 @@ function initApp() {
 3. Prøv at tilføje flere film til databasen
 4. Prøv at ændre HTML-strukturen for hver film
 
-````
-
 #### ✅ Test det!
 
 Refresh og se funktionen virker!
@@ -1767,7 +1803,7 @@ function sayHelloTo(name) {
 sayHelloTo("Emma");
 sayHelloTo("Lucas");
 sayHelloTo("Sofie");
-````
+```
 
 #### ✅ Test det!
 
@@ -2039,6 +2075,52 @@ Nu behersker du:
 ---
 
 ## Del 3: DOM-manipulation 🎬
+
+**⚠️ Inden vi starter med DOM-manipulation:**
+
+1. Åbn din `app.js` fil
+2. **VIGTIGT:** Slet ALT indhold fra funktions-opgaverne
+3. Indsæt denne grundlæggende struktur:
+
+```javascript
+"use strict";
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+  console.log("Movie App kører! 🎬");
+  // Her skal vi tilføje vores DOM-manipulation kode
+}
+```
+
+4. Opdater din `index.html` fil så den ser sådan ud:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie App</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎬 Movie App</h1>
+    </header>
+    <main>
+      <!-- Movie list container (som i dit projekt) -->
+      <section id="movies">
+        <!-- Film vil blive vist her -->
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+5. Gem begge filer og refresh browseren
+6. Tjek at du ser overskriften og "Movie App kører! 🎬" i konsollen
 
 **Formål:** Lær at ændre på hjemmesiden med JavaScript - det der gør det til en rigtig web-app!
 
