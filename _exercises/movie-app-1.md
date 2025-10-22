@@ -181,11 +181,8 @@ console.log("Plakat:", image);
    - "Rating: 8.7"
    - "Genre: Action"
    - "Director: Christopher Nolan"
-   - "Is it a new movie?: false"
-   - "Has won Oscar?: true"
 
 Hvis du ikke ser alle linjer:
-
 - Tjek at du har kopieret al koden korrekt
 - Se efter manglende kommaer eller semikoloner
 - Kontroller at alle console.log er inden i `initApp` funktionen
@@ -209,15 +206,15 @@ year = 2010; // Fejl! Kan ikke ændre en const
    Dette er forventet! Det viser at vi ikke kan ændre en `const` variabel.
 3. Udkommenter eller slet fejl-linjerne igen så vi kan fortsætte
 
-**Nu prøver vi med `let` i stedet:**
+**Nu prøver vi med `let` i stedet (du skal ændre din eksisterende `const rating` til `let rating`):**
 
 ```javascript
 // let variabler KAN ændres
-let userRating = 4.5; // Start rating
-console.log("Start rating:", userRating);
+let rating = 4.5; // Start rating
+console.log("Start rating:", rating);
 
-userRating = 5.0; // Opdater rating - dette virker fint med let!
-console.log("Ny rating:", userRating);
+rating = 5.0; // Opdater rating - dette virker fint med let!
+console.log("Ny rating:", rating);
 
 // Flere eksempler på let
 let isFavorite = false;
@@ -277,16 +274,16 @@ Lad os prøve at arbejde mere med vores variabler:
 
 ```javascript
 // String sammensætning (concatenation)
-const director = "Christopher Nolan";
-const movie = "Inception";
-const year = 2010;
+const title = "Inception"; // du har allerede denne variabel
+const director = "Christopher Nolan"; // du har allerede denne variabel
+const year = 2010; // du har allerede denne variabel
 
 // Den gamle måde (med +)
-const oldWay = "Filmen " + movie + " fra " + year + " er instrueret af " + director;
+const oldWay = "Filmen " + title + " fra " + year + " er instrueret af " + director;
 console.log("Gamle måde:", oldWay);
 
 // Den nye måde (med template literals ` `)
-const newWay = `Filmen ${movie} fra ${year} er instrueret af ${director}`;
+const newWay = `Filmen ${title} fra ${year} er instrueret af ${director}`;
 console.log("Nye måde:", newWay);
 
 // Regn med tal
@@ -316,27 +313,6 @@ console.log("Opdaterede værdier:", views, rating);
 2. Se hvordan strings kan sammensættes på forskellige måder
 3. Se hvordan tal kan opdateres med forskellige metoder
 
-Tilføj denne kode:
-
-```javascript
-// let = can be changed later
-let userRating = 4.5;
-console.log("Start rating:", userRating);
-
-// Change the value (this works!)
-userRating = 5.0;
-console.log("New rating:", userRating);
-```
-
-#### ✅ Test igen!
-
-Refresh browseren - nu skulle du se både start og ny rating!
-
-**💡 Hvad lærte vi?**
-
-- `const` = konstant, kan IKKE ændres (brug til movie title, year osv.)
-- `let` = variabel, KAN ændres (brug til ratings, counters osv.)
-- Fejl er normale og hjælper os med at lære! 🎯
 
 #### Step 4a: Det "gamle" problem (string sammensætning)
 
@@ -344,7 +320,7 @@ Først - lad os prøve den gammeldags måde at sammensætte tekst på:
 
 ```javascript
 // Old way (works, but messy)
-const oldMessage = "The movie " + movie + " is from " + year;
+const oldMessage = "The movie " + title + " is from " + year;
 console.log("Old way:", oldMessage);
 ```
 
@@ -358,7 +334,7 @@ Nu prøver vi den smarte måde:
 
 ```javascript
 // Smart way with template literals
-const smartMessage = `The movie ${movie} is from ${year}`;
+const smartMessage = `The movie ${title} is from ${year}`;
 console.log("Smart way:", smartMessage);
 ```
 
@@ -385,7 +361,7 @@ Lad os tilføje flere variabler i én besked:
 
 ```javascript
 // Multiple variables in same template literal
-const complexMessage = `Movie: ${title}, Year: ${year}, Rating: ${userRating}, Genre: ${genre}`;
+const complexMessage = `Movie: ${title}, Year: ${year}, Rating: ${rating}, Genre: ${genre}`;
 console.log("Complete info:", complexMessage);
 ```
 
@@ -400,7 +376,6 @@ console.log("Complete info:", complexMessage);
 Se den flotte, komplette besked!
 
 #### Step 4d: Template literals med linjeskift
-
 Template literals kan også håndtere flere linjer:
 
 ```javascript
@@ -453,6 +428,7 @@ document.addEventListener("DOMContentLoaded", initApp);
 function initApp() {
   console.log("Movie App kører! 🎬");
   // Her skal vi tilføje den nye kode med arrays
+  //...
 }
 ```
 
@@ -470,6 +446,7 @@ const movie3 = "Interstellar";
 console.log("Film 1:", movie1);
 console.log("Film 2:", movie2);
 console.log("Film 3:", movie3);
+// What if we have 100 movies? 😰
 ```
 
 **💡 Problemet:**
@@ -630,6 +607,7 @@ Se hvordan vi får fat i hver enkelt film!
 ```javascript
 // Find længden af listen
 console.log("Antal film i listen:", titles.length);
+// hvis du vil finde sidste film
 console.log("Sidste film (smart måde):", titles[titles.length - 1]);
 ```
 
@@ -640,7 +618,7 @@ Se hvor mange film vi har!
 **💡 Forklaring:**
 
 - `.length` fortæller hvor mange elementer der er
-- Sidste element er altid `[length - 1]` (fordi vi starter fra 0)
+- Sidste element er altid `[length - 1]` (fordi vi starter fra 0 - index 0)
 
 #### Step 6: Tilføj nye film til listen
 
@@ -730,46 +708,62 @@ Indtil nu har vi brugt separate arrays til forskellige typer af data:
 
 **Formål:** Lær at samle relateret data i objekter - den datastruktur vi skal bruge i vores Movie App!
 
-#### Step 1: Problemet med separate arrays
 
-Se hvordan vi indtil nu skulle bruge separate arrays for hver type information:
+
+#### Step 1: Problemet - arrays er ikke nok!
+
+Indtil nu har vi brugt arrays til at gemme film:
 
 ```javascript
-// Separate arrays for hver type information
+// This works OK for simple lists...
+const movieTitles = ["The Matrix", "Inception", "Interstellar"];
+```
+
+Men hvad hvis vi vil gemme mere information om hver film?
+
+```javascript
+// This becomes messy quickly... 😰
 const titles = ["The Matrix", "Inception", "Interstellar"];
 const years = [1999, 2010, 2014];
 const directors = ["Wachowski Sisters", "Christopher Nolan", "Christopher Nolan"];
 const ratings = [8.7, 8.8, 8.6];
 
-// For at vise info om én film skal vi huske alle indexes
-console.log("Film info:");
-console.log("Titel:", titles[0]);
-console.log("År:", years[0]);
-console.log("Instruktør:", directors[0]);
-console.log("Rating:", ratings[0]);
-
-// Hvad hvis vi blander indexes ved et uheld?
-console.log("Forkert match:");
-console.log("Titel:", titles[0]); // The Matrix
-console.log("År:", years[1]); // 2010 (forkert år!)
-console.log("Instruktør:", directors[2]); // Christopher Nolan (forkert instruktør!)
+// How do we keep track that index 0 belongs together?
 ```
 
-#### Step 2: Dit første objekt
+**💡 Problemet:**
 
-Lad os starte med et helt simpelt movie objekt:
+- Svært at holde relateret data sammen
+- Hvis vi flytter rundt på én liste, bliver de andre forkerte
+- Vi har brug for en bedre måde!
+
+
+
+#### Step 2: Objekter - saml relateret data!
+
+Her kommer løsningen - **objekter** (præcis som i din `movies.json` fil):
 
 ```javascript
-// Et simpelt movie objekt med to properties
+// An object collects ALL data about one movie! 🎉
 const movie = {
   title: "The Matrix",
-  year: 1999
+  year: 1999,
+  rating: 8.7
 };
 
-// Sådan læser vi værdier fra objektet
-console.log("Film titel:", movie.title);
-console.log("Udgivelsesår:", movie.year);
+console.log("Complete movie object:", movie);
 ```
+
+#### ✅ Test det!
+
+Refresh og se objektet i konsollen!
+
+**💡 Forklaring:**
+
+- `{}` krøllede parenteser laver et objekt
+- `key: value` gemmer data sammen (engelsk notation som i dit projekt)
+- Alt om filmen er nu samlet ét sted!
+
 
 **💡 Objekt grundregler:**
 
@@ -779,7 +773,29 @@ console.log("Udgivelsesår:", movie.year);
 - Properties adskilles med `,`
 - Vi får fat i værdier med `.` (fx `movie.title`)
 
-#### Step 3: Tilføj flere properties
+#### Step 3: Tilgå data med dot notation
+
+Nu lærer vi at hente data ud af objektet:
+
+```javascript
+// Get specific properties with dot notation
+console.log("Movie title:", movie.title);
+console.log("Release year:", movie.year);
+console.log("Rating:", movie.rating);
+```
+
+#### ✅ Test det!
+
+Se hvordan vi får fat i hver del af data!
+
+**💡 Forklaring:**
+
+- `movie.title` henter titel-delen
+- `objectName.key` er formatet
+- Super nemt at læse og forstå!
+
+
+#### Step 4: Tilføj flere properties
 
 Nu udvider vi vores objekt med flere properties:
 
@@ -788,8 +804,8 @@ Nu udvider vi vores objekt med flere properties:
 const movie = {
   title: "The Matrix",
   year: 1999,
-  director: "Wachowski Sisters",
-  rating: 8.7
+  rating: 8.7, 
+  director: "Wachowski Sisters"
 };
 
 // Vi kan stadig få fat i værdierne på samme måde
@@ -804,7 +820,7 @@ console.log("Rating:", movie.rating);
 
 - Al information om én film er samlet ét sted
 - Vi kan ikke blande data ved et uheld
-- Let at tilgå med `.` notation (fx `movie.title`)
+- Let at tilgå med `.` notation (fx `movie.title`) - ja det hedder dot-notation
 - Koden er mere læsbar og logisk
 
 #### ✅ Test det!
@@ -814,7 +830,7 @@ console.log("Rating:", movie.rating);
 3. Gem og refresh
 4. Se hvordan al information om filmen nu er pænt organiseret
 
-#### Step 4: Ændre værdier i objektet
+#### Step 5: Ændre værdier i objektet
 
 Vi kan også ændre værdier i vores objekt:
 
@@ -840,112 +856,10 @@ console.log("Ny rating:", movie.rating);
 console.log("Stadig i biografen?", movie.inTheaters);
 ```
 
-#### Step 5: Arrays i objekter
 
-Nu er vi klar til at tilføje arrays i vores objekt:
+#### Step 6: Real movie data struktur (som i dit projekt)
 
-```javascript
-// Et movie objekt med arrays
-const movie = {
-  title: "The Matrix",
-  year: 1999,
-  director: "Wachowski Sisters",
-  rating: 8.7,
-  genre: ["Action", "Sci-Fi"], // Array af genres (ændret fra 'genres' til 'genre' for at matche endelig løsning)
-  actors: ["Keanu Reeves", "Carrie-Anne Moss"] // Array af skuespillere (ændret fra 'stars' til 'actors' for at matche endelig løsning)
-};
-
-// Læs værdier fra arrays i objektet
-console.log("Første genre:", movie.genre[0]);
-console.log("Hovedrolle:", movie.actors[0]);
-
-// Tilføj nye værdier til arrays
-movie.genre.push("Cyberpunk");
-movie.actors.push("Laurence Fishburne");
-
-// Se de opdaterede arrays
-console.log("Alle genrer:", movie.genre);
-console.log("Alle skuespillere:", movie.actors);
-```
-
-**💡 Husk:**
-
-- Objekter bruger `{}` krølparenteser
-- Properties adskilles med komma
-- Vi kan have arrays inde i objekter
-- Vi kan ændre værdier med `=`
-- Vi kan tilføje til arrays i objekter med `.push()`
-  const movieTitles = ["The Matrix", "Inception", "Interstellar"];
-
-Men hvad hvis vi vil gemme mere information om hver film?
-
-```javascript
-// This becomes messy quickly... 😰
-const movieTitles = ["The Matrix", "Inception", "Interstellar"];
-const movieYears = [1999, 2010];
-const movieRatings = [8.7, 8.8];
-const movieGenres = [
-  ["Action", "Sci-Fi"],
-  ["Action", "Thriller"]
-];
-// How do we keep track that index 0 belongs together?
-```
-
-**💡 Problemet:**
-
-- Svært at holde relateret data sammen
-- Hvis vi flytter rundt på én liste, bliver de andre forkerte
-- Vi har brug for en bedre måde!
-
-#### Step 2: Objekter - saml relateret data!
-
-Her kommer løsningen - **objekter** (præcis som i din movies.json fil):
-
-```javascript
-// An object collects ALL data about one movie! 🎉
-const movie = {
-  title: "The Matrix",
-  year: 1999,
-  rating: 8.7
-};
-
-console.log("Complete movie object:", movie);
-```
-
-#### ✅ Test det!
-
-Refresh og se objektet i konsollen!
-
-**💡 Forklaring:**
-
-- `{}` krøllede parenteser laver et objekt
-- `key: value` gemmer data sammen (engelsk notation som i dit projekt)
-- Alt om filmen er nu samlet ét sted!
-
-#### Step 3: Tilgå data med dot notation
-
-Nu lærer vi at hente data ud af objektet:
-
-```javascript
-// Get specific properties with dot notation
-console.log("Movie title:", movie.title);
-console.log("Release year:", movie.year);
-console.log("Rating:", movie.rating);
-```
-
-#### ✅ Test det!
-
-Se hvordan vi får fat i hver del af data!
-
-**💡 Forklaring:**
-
-- `movie.title` henter titel-delen
-- `objectName.key` er formatet
-- Super nemt at læse og forstå!
-
-#### Step 4: Real movie data struktur (som i dit projekt)
-
-Lad os lave et objekt der matcher din movies.json struktur:
+Lad os lave et objekt der matcher strukturen vi skal ende med (erstat det foregående movieobjekt):
 
 ```javascript
 // Real movie object structure (exactly like your movies.json!)
@@ -980,7 +894,7 @@ Se hvordan objekter kan rumme alt muligt data - præcis som i dit projekt!
 - `realMovie.genre[0]` kombinerer objekt- og array-adgang
 - Super fleksibelt!
 
-#### Step 5: Tilføj nye egenskaber efter oprettelse
+#### Step 7: Tilføj nye egenskaber efter oprettelse
 
 ```javascript
 // Vi kan tilføje nyt data til eksisterende objekter
@@ -1001,7 +915,7 @@ Se hvordan vi kan udvide objektet!
 - Objektet opdateres med det samme
 - Ingen grænse for hvor meget data vi kan gemme!
 
-#### Step 6: Ændr eksisterende data
+#### Step 8: Ændr eksisterende data
 
 ```javascript
 // Vi kan også ændre data der allerede findes
@@ -1018,7 +932,7 @@ console.log("Ny beskrivelse:", movie.description);
 
 Se hvordan data opdateres!
 
-#### Step 7: Brug template literals med objekter
+#### Step 9: Brug template literals med objekter
 
 Nu kombinerer vi det vi har lært om template literals og objekter:
 
@@ -1043,11 +957,12 @@ Se den flotte formaterede movie info!
 
 **💡 Forklaring:**
 
-- `${realMovie.title}` henter title fra objektet
-- `${realMovie.genre[0]}` henter første genre fra array
-- `${realMovie.actors[0]}` henter første skuespiller fra array
+- `${movie.title}` henter title fra objektet
+- `${movie.genre[0]}` henter første genre fra array
+- `${movie.actors[0]}` henter første skuespiller fra array
 - Template literals kombinerer tekst og objektdata perfekt!
 - Dette ligner hvordan rigtige movie apps viser information!
+
 
 #### ✅ Endelig test af alt!
 
@@ -1201,7 +1116,9 @@ console.log("Second movie rating:", allMovies[1].rating);
 Se hvordan vi kombinerer array[index] og objekt.nøgle!
 
 **💡 Forklaring:**
-
+- `[]` bruges til at vælge _hvilket objekt_
+- `.` bruges til at vælge hvilken property
+- Kombineret: `allMovies[0].title`
 - `allMovies[0]` henter første movie object
 - `allMovies[0].title` henter titlen fra første movie
 - `allMovies[1].year` henter året fra anden movie direkte
@@ -1241,7 +1158,7 @@ console.log("Film #2:", allMovies[1].id, "-", allMovies[1].title);
 
 #### Step 5: Tilføj arrays i objekterne
 
-Nu gør vi strukturen mere avanceret ved at tilføje arrays:
+Nu gør vi strukturen mere realistisk — film har flere **genrer** og **skuespillere**:
 
 ```javascript
 // Tilføj genre og actors arrays
@@ -1269,54 +1186,45 @@ console.log("Matrix genrer:", allMovies[0].genre.join(", "));
 console.log("Inception skuespillere:", allMovies[1].actors.join(", "));
 ```
 
-**💡 Arrays i objekter:**
+✅ **Test:**  
+Du skulle nu se pæne tekstlister i konsollen.
 
-- Hver film har en `genre` array med alle filmens genrer
-- Hver film har en `actors` array med alle filmens skuespillere
-- `.join(", ")` laver array til pæn tekst med komma-separator
+💡 **Nyt:**
+- Arrays **inden i** objekter
+- `.join(", ")` gør array til læsbar tekst
 
-#### ✅ Test det!
 
-Se den komplekse database struktur!
+## Step 6: Tilgå komplekse data
 
-**💡 Forklaring:**
-
-- Hver film har nu id, arrays af genrer og director
-- Dette matcher strukturen i den rigtige filmapp!
-
-#### Step 5: Tilgå komplekse data
-
-Nu bliver det interessant - arrays inde i objekter inde i arrays:
+Når vi kombinerer arrays og objekter, kan vi tilgå _meget præcis data_:
 
 ```javascript
-// Hent komplekse data
 console.log("Matrix første genre:", allMovies[0].genre[0]);
-console.log("Inception instruktør:", allMovies[1].director);
-console.log("Matrix beskrivelse:", allMovies[0].description);
+console.log("Inception første skuespiller:", allMovies[1].actors[0]);
 
-// Hent alle data for første film
-const firstMovie = allMovies[0];
+// Kombiner alt i én flot besked
+const movie = allMovies[0];
 console.log(`
-Film: ${firstMovie.title}
-År: ${firstMovie.year}
-Genrer: ${firstMovie.genre.join(", ")}
-Skuespillere: ${firstMovie.actors.join(", ")}
+🎬 ${movie.title} (${movie.year})
+⭐ ${movie.rating}/10
+🎭 Genre: ${movie.genre.join(", ")}
+👥 Skuespillere: ${movie.actors.join(", ")}
 `);
-```
 
-#### ✅ Test det!
+````
 
-Se hvordan vi navigerer gennem komplekse strukturer!
+✅ **Test:**  
+Se hvordan du kan hente _dybe data_ på flere niveauer.
 
-**💡 Forklaring:**
+💡 **Forklaring:**
+- Først array-index `[0]`
+- Så objekt-egenskab `.genre`
+- Så index i det indre array `[0]`
 
-- `[0].genre[0]` = første film, første genre
-- `[1].director` = anden film, director
-- Vi kombinerer array-, objekt- og array-adgang!
 
-#### Step 6: Den endelige database struktur
+### Step 7: Den komplette Movie Database
 
-Nu har vi alle elementer på plads til vores endelige database struktur:
+Nu bygger vi den fulde datastruktur – som i dit rigtige projekt:
 
 ```javascript
 // Den komplette movie database struktur
@@ -1367,7 +1275,12 @@ console.log(movieInfo);
 - Tekst: `director`, `description`
 - Billede reference: `image`
 
-#### Step 7: Arbejde med hele databasen
+✅ **Test:**  
+Se alle film listet pænt i konsollen.
+
+💡 **Nu matcher din struktur den rigtige `movies.json` i dit projekt!**
+
+#### Step 8: Arbejde med hele databasen
 
 Nu lærer vi at arbejde med hele databasen:
 
@@ -1416,9 +1329,6 @@ Du kan nu:
 ---
 
 ## Opgave 2: Funktioner
-
-### Opgave 2.1: Introduktion til funktioner
-
 **⚠️ Inden vi starter med funktioner:**
 
 1. Åbn din `app.js` fil
@@ -1432,395 +1342,49 @@ document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   console.log("Movie App kører! 🎬");
-  // Her skal vi tilføje den nye kode med funktioner
 }
 ```
 
 **Formål:** Lær at skrive genbrugelig kode med funktioner - den grundsten der gør det muligt at bygge større apps!
 
-#### Step 1: Din første funktion
+### Opgave 2.1: Simple funktioner
 
-Lad os starte med en helt simpel funktion:
+**Formål:** Lær at oprette og bruge funktioner til at organisere din kode.
+
+#### Step 1: Problemet - gentaget kode!
+
+Indtil nu har vi skrevet al kode direkte. Men hvad hvis vi vil gøre det samme mange gange?
 
 ```javascript
-// Definér en funktion
+// Gentaget kode - ikke så smart... 😕
+console.log("Hej Emma! Velkommen til filmappen! 🎬");
+console.log("Hej Lucas! Velkommen til filmappen! 🎬");
+console.log("Hej Sofie! Velkommen til filmappen! 🎬");
+console.log("Hej Thomas! Velkommen til filmappen! 🎬");
+// Hvad hvis vi skal hilse på 100 personer?
+```
+
+**💡 Problemet:**
+
+- Meget gentaget kode
+- Svært at ændre beskeden hvis vi vil opdatere den
+- Vi har brug for en smartere løsning!
+
+#### Step 2: Funktioner - genbrugelig kode!
+
+Her kommer løsningen - **funktioner**:
+
+```javascript
+// En funktion - genbrugelig kode! 🎉
 function sayHello() {
-  console.log("Velkommen til Movie App! 🎬");
+  console.log("Hej! Velkommen til filmappen! 🎬");
 }
 
-// Kald (brug) funktionen
+// Nu kan vi bruge den mange gange
 sayHello();
-sayHello(); // Vi kan kalde den flere gange!
+sayHello();
+sayHello();
 ```
-
-**💡 Sådan virker funktioner:**
-
-- `function` fortæller JavaScript at vi laver en funktion
-- `sayHello` er funktionens navn (brug beskrivende navne!)
-- `()` parenteser er hvor vi senere kan give input
-- `{}` krølparenteser indeholder koden der skal køres
-- Vi kalder funktionen ved at skrive dens navn + `()`
-
-#### Step 2: Funktioner med input (parametre)
-
-Hvad hvis vi vil personalisere vores velkomst? Her kommer parametre ind i billedet:
-
-```javascript
-// En funktion der tager imod input
-function sayHelloTo(name) {
-  console.log(`Velkommen til Movie App, ${name}! 🎬`);
-}
-
-// Nu kan vi hilse på forskellige personer
-sayHelloTo("Emma");
-sayHelloTo("Lucas");
-sayHelloTo("Sofia");
-
-// Prøv også med en variabel
-const userName = "Thomas";
-sayHelloTo(userName);
-```
-
-**💡 Om parametre:**
-
-- `name` er et parameter (input) til funktionen
-- Vi kan sende forskellige værdier hver gang
-- Funktionen bruger værdien vi sender
-- Vi kan også sende variabler som input
-
-#### Step 3: Funktioner der returnerer værdier
-
-Nu skal vi lære at få værdier tilbage fra funktioner:
-
-```javascript
-// En funktion der returnerer en værdi
-function calculateMovieLength(hours, minutes) {
-  const totalMinutes = hours * 60 + minutes;
-  return totalMinutes; // Send resultatet tilbage
-}
-
-// Brug funktionen og gem resultatet
-const length1 = calculateMovieLength(2, 15); // 2 timer og 15 minutter
-console.log("Film længde i minutter:", length1);
-
-const length2 = calculateMovieLength(1, 45); // 1 time og 45 minutter
-console.log("Anden film længde:", length2);
-
-// Vi kan også bruge returværdien direkte
-if (calculateMovieLength(3, 0) > 150) {
-  console.log("Det er en lang film!");
-}
-```
-
-**💡 Om return værdier:**
-
-- `return` sender et resultat tilbage
-- Vi kan gemme resultatet i en variabel
-- Vi kan bruge resultatet direkte
-- Funktionen stopper når den når til `return`
-
-#### Step 4: Funktioner til vores Movie App
-
-Nu skal vi se hvordan funktioner kan hjælpe os med vores film database:
-
-```javascript
-// Vores movie database
-const allMovies = [
-  {
-    id: 1,
-    title: "The Matrix",
-    year: 1999,
-    genre: ["Action", "Sci-Fi"],
-    director: "Lana Wachowski, Lilly Wachowski",
-    rating: 8.7,
-    image: "matrix.jpg",
-    actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-    description: "A computer programmer discovers that reality is not what it seems..."
-  },
-  {
-    id: 2,
-    title: "Inception",
-    year: 2010,
-    genre: ["Action", "Sci-Fi", "Thriller"],
-    director: "Christopher Nolan",
-    rating: 8.8,
-    image: "inception.jpg",
-    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
-    description: "A thief who enters the dreams of others to steal secrets..."
-  }
-];
-
-// Funktion der finder en film ud fra id
-function findMovieById(movieId) {
-  for (const movie of allMovies) {
-    if (movie.id === movieId) {
-      return movie;
-    }
-  }
-  return null; // Returner null hvis filmen ikke findes
-}
-
-// Funktion der laver en pæn tekst om filmen
-function createMovieDescription(movie) {
-  return `
-    🎬 ${movie.title} (${movie.year})
-    🎭 Genre: ${movie.genre.join(", ")}
-    👤 Instruktør: ${movie.director}
-    ⭐ Rating: ${movie.rating}
-    👥 Skuespillere: ${movie.actors.join(", ")}
-    📝 ${movie.description}
-    `;
-}
-
-// Funktion der looper gennem alle film og viser detaljer
-function showAllMovies() {
-  for (const movie of allMovies) {
-    console.log("=== Film Info ===");
-    console.log("🎬 Titel:", movie.title);
-    console.log("📅 År:", movie.year);
-    console.log("🎭 Genre:", movie.genre.join(", "));
-    console.log("⭐ Rating:", movie.rating);
-    console.log("---------------");
-  }
-}
-
-// Nu kan vi nemt vise alle film eller finde en specifik!
-showAllMovies(); // Vis alle film
-
-const movie = findMovieById(1); // Find The Matrix
-if (movie) {
-  console.log("\nDetaljer for en specifik film:");
-  console.log(createMovieDescription(movie));
-}
-```
-
-**💡 Fordele ved funktioner:**
-
-- Koden bliver mere organiseret
-- Vi kan genbruge kode
-- Lettere at vedligeholde
-- Gør koden mere læsbar
-
----
-
-
-## Opgave 3: DOM-manipulation
-
-**Formål:** Lær at forbinde JavaScript med HTML og ændre indhold på selve hjemmesiden.  
-Efter denne del vil du kunne vise data (f.eks. film) direkte på siden — præcis som i en rigtig web-app.
-
----
-
-## 🎯 Opgave 3.1 – Find og ændr elementer
-
-### 🧱 Formål
-Forstå hvordan JavaScript “ser” din HTML og kan ændre den.
-
----
-
-### 🪄 Step 1: Forbered HTML
-
-Åbn `index.html` og indsæt denne struktur:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie App</title>
-    <link rel="stylesheet" href="app.css" />
-  </head>
-  <body>
-    <header>
-      <h1>🎬 Movie App</h1>
-    </header>
-
-    <main>
-      <section id="test-section">
-        <p>Dette er en testtekst...</p>
-      </section>
-    </main>
-
-    <script src="app.js"></script>
-  </body>
-</html>
-
-
-
-## Opgave 3: DOM-manipulation
-
-### Opgave 3.1: Introduktion til DOM
-
-**⚠️ Inden vi starter med DOM:**
-1. Åbn din `app.js` fil
-2. Slet den tidligere kode med funktioner
-3. Opret denne basis HTML-struktur i din `index.html`:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie App</title>
-    <link rel="stylesheet" href="app.css" />
-  </head>
-  <body>
-    <h1>🎬 Movie App</h1>
-
-    <!-- Her tilføjer vi en container til vores film -->
-    <section id="movies">
-      <!-- Film bliver vist her -->
-    </section>
-
-    <script src="app.js"></script>
-  </body>
-</html>
-```
-
-**Formål:** Lær at forbinde JavaScript med HTML - så vi kan vise vores film på siden!
-
-#### Step 1: Find elementer i HTML
-
-Først skal vi lære at få fat i HTML-elementer fra JavaScript:
-
-```javascript
-"use strict";
-
-document.addEventListener("DOMContentLoaded", initApp);
-
-function initApp() {
-  // Find vores movies-sektion
-  const moviesSection = document.querySelector("#movies");
-  console.log("Movies section fundet:", moviesSection);
-
-  // Find h1 overskriften
-  const header = document.querySelector("h1");
-  console.log("Header fundet:", header);
-}
-```
-
-**💡 Sådan finder vi elementer:**
-
-- `document` er hele HTML-dokumentet
-- `querySelector()` finder ét element
-- `#movies` finder element med id="movies"
-- `h1` finder første h1-element
-
-#### ✅ Test det!
-
-1. Gem filerne og refresh
-2. Åbn konsollen (F12)
-3. Se at elementerne er fundet
-4. Prøv at ændre selectors og se hvad der sker
-
-#### Step 2: Ændre indhold i elementer
-
-Nu skal vi lære at ændre indholdet af HTML-elementer:
-
-```javascript
-function initApp() {
-  // Find elementerne
-  const moviesSection = document.querySelector("#movies");
-  const header = document.querySelector("h1");
-
-  // Ændre tekstindhold
-  header.textContent = "🎬 Velkommen til Movie App!";
-
-  // Tilføj HTML-indhold
-  moviesSection.innerHTML = `
-        <article class="movie">
-            <h2>The Matrix</h2>
-            <p>Udgivet: 1999</p>
-        </article>
-    `;
-}
-```
-
-**💡 To måder at ændre indhold:**
-
-- `textContent` = ren tekst (sikker, men ingen HTML)
-- `innerHTML` = HTML-indhold (mere fleksibel)
-
-#### ✅ Test det!
-
-1. Gem og refresh
-2. Se hvordan siden opdateres
-3. Prøv at ændre teksterne
-4. Bemærk forskellen på textContent og innerHTML
-
-#### Step 3: Vis film fra databasen
-
-Nu skal vi kombinere det vi har lært om arrays, objekter og DOM:
-
-```javascript
-function initApp() {
-  // Vores film database
-  const allMovies = [
-    {
-      id: 1,
-      title: "The Matrix",
-      year: 1999,
-      genre: ["Action", "Sci-Fi"],
-      director: "Lana Wachowski, Lilly Wachowski",
-      rating: 8.7,
-      image: "matrix.jpg",
-      actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-      description: "A computer programmer discovers that reality is not what it seems..."
-    },
-    {
-      id: 2,
-      title: "Inception",
-      year: 2010,
-      genre: ["Action", "Sci-Fi", "Thriller"],
-      director: "Christopher Nolan",
-      rating: 8.8,
-      image: "inception.jpg",
-      actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
-      description: "A thief who enters the dreams of others to steal secrets..."
-    }
-  ];
-
-  // Find vores movies-sektion
-  const moviesSection = document.querySelector("#movies");
-
-  // Opret HTML for hver film
-  let movieHTML = "";
-
-  for (const movie of allMovies) {
-    movieHTML += `
-            <article class="movie">
-                <img src="img/${movie.image}" alt="${movie.title}">
-                <h2>${movie.title}</h2>
-                <p>Udgivet: ${movie.year}</p>
-                <p>Instruktør: ${movie.director}</p>
-                <p>Rating: ⭐ ${movie.rating}</p>
-                <p>Genre: ${movie.genre.join(", ")}</p>
-                <p>Skuespillere: ${movie.actors.join(", ")}</p>
-                <p>${movie.description}</p>
-            </article>
-        `;
-  }
-
-  // Indsæt al HTML på én gang
-  moviesSection.innerHTML = movieHTML;
-}
-```
-
-**💡 Sådan virker det:**
-
-- Vi bruger et loop til at gå gennem alle film
-- For hver film laver vi et stykke HTML
-- Vi samler al HTML i én variabel
-- Til sidst indsætter vi det hele på én gang
-
-#### ✅ Test det!
-
-1. Gem og refresh
-2. Se hvordan filmene vises på siden
-3. Prøv at tilføje flere film til databasen
-4. Prøv at ændre HTML-strukturen for hver film
 
 #### ✅ Test det!
 
@@ -1966,14 +1530,7 @@ console.log(`🎬 ${movie2.title} (${movie2.year}) - Rating: ⭐ ${movie2.rating
 ```javascript
 // Function that takes a movie object as parameter (like your displayMovie function)
 function displayMovieInfo(movie) {
-  const movieInfo = `
-    🎬 ${movie.title} (${movie.year})
-    👤 Instruktør: ${movie.director}
-    ⭐ Rating: ${movie.rating}
-    🎭 Genre: ${movie.genre.join(", ")}
-    👥 Skuespillere: ${movie.actors.join(", ")}
-    📝 ${movie.description}
-  `;
+  const movieInfo = `🎬 ${movie.title} (${movie.year}) - Rating: ⭐ ${movie.rating}`;
   return movieInfo;
 }
 
@@ -2042,30 +1599,12 @@ Se hvordan vi kan hente data fra objekter!
 Nu kommer det sjove - lad os kombinere alt vi har lært! Vi tager vores funktioner og bruger dem på mange film:
 
 ```javascript
-// Opret en test database (matcher din projekt struktur)
+// Create a test database (match your project structure)
 const allMovies = [
-  {
-    id: 1,
-    title: "The Matrix",
-    year: 1999,
-    genre: ["Action", "Sci-Fi"],
-    director: "Lana Wachowski, Lilly Wachowski",
-    rating: 8.7,
-    image: "matrix.jpg",
-    actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-    description: "A computer programmer discovers that reality is not what it seems..."
-  },
-  {
-    id: 2,
-    title: "Inception",
-    year: 2010,
-    genre: ["Action", "Sci-Fi", "Thriller"],
-    director: "Christopher Nolan",
-    rating: 8.8,
-    image: "inception.jpg",
-    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
-    description: "A thief who enters the dreams of others to steal secrets..."
-  }
+  { title: "The Matrix", year: 1999, rating: 8.7, genre: ["Action", "Sci-Fi"] },
+  { title: "Inception", year: 2010, rating: 8.8, genre: ["Action", "Thriller"] },
+  { title: "The Dark Knight", year: 2008, rating: 9.0, genre: ["Action", "Crime"] },
+  { title: "Pulp Fiction", year: 1994, rating: 8.9, genre: ["Crime", "Drama"] }
 ];
 
 // Function that displays all movies nicely
@@ -2116,59 +1655,11 @@ Nu behersker du:
 
 **💪 Fantastisk! Nu kan du organisere din kode med funktioner som en professionel udvikler!**
 
----
+## Opgave 3: DOM-manipulation
 
-## Del 3: DOM-manipulation 🎬
-
-**⚠️ Inden vi starter med DOM-manipulation:**
-
-1. Åbn din `app.js` fil
-2. **VIGTIGT:** Slet ALT indhold fra funktions-opgaverne
-3. Indsæt denne grundlæggende struktur:
-
-```javascript
-"use strict";
-
-document.addEventListener("DOMContentLoaded", initApp);
-
-function initApp() {
-  console.log("Movie App kører! 🎬");
-  // Her skal vi tilføje vores DOM-manipulation kode
-}
-```
-
-4. Opdater din `index.html` fil så den ser sådan ud:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie App</title>
-    <link rel="stylesheet" href="app.css" />
-  </head>
-  <body>
-    <header>
-      <h1>🎬 Movie App</h1>
-    </header>
-    <main>
-      <!-- Movie list container (som i dit projekt) -->
-      <section id="movies">
-        <!-- Film vil blive vist her -->
-      </section>
-    </main>
-    <script src="app.js"></script>
-  </body>
-</html>
-```
-
-5. Gem begge filer og refresh browseren
-6. Tjek at du ser overskriften og "Movie App kører! 🎬" i konsollen
-
-**Formål:** Lær at ændre på hjemmesiden med JavaScript - det der gør det til en rigtig web-app!
-
-### Vigtig note om funktioner fra Del 2
+**Formål:** Lær at forbinde JavaScript med HTML og ændre indhold på selve hjemmesiden.  
+Efter denne del vil du kunne vise data (f.eks. film) direkte på siden — præcis som i en rigtig web-app.
+### Vigtig note om funktioner fra Opgave 2: Funktioner
 
 I Del 3 bruger vi de funktioner vi lærte i Del 2 til at formatere vores movie data. Husk at du kan bruge:
 
@@ -2281,7 +1772,6 @@ Se forskellen - nu har teksten HTML formatering!
 ```javascript
 // Ændr begge elementer
 testSection.innerHTML = "<p>🎉 JavaScript har overtaget kontrollen!</p>";
-ntrollen!</p>";
 movieListContainer.innerHTML = "<p>📽️ Her vil filminfo komme...</p>";
 ```
 
@@ -2586,8 +2076,8 @@ Nu skulle årene være formateret som "Year: 1994" i stedet for bare "1994"
 
 ```javascript
 function formatRating(rating) {
-  const stars = "⭐".repeat(Math.floor(rating));
-  return `${stars} (${rating}/10)`;
+  const stars = "★".repeat(Math.floor(rating / 2)) + "☆".repeat(5 - Math.floor(rating / 2));
+  return `${stars} ${rating}/10`;
 }
 ```
 
@@ -2597,16 +2087,12 @@ function displayAllMovies() {
 
   for (const movie of allMovies) {
     const movieHTML = `
-      <article class="movie">
-        <img src="img/${movie.image}" alt="${movie.title}">
+      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
         <h3>${movie.title}</h3>
         <p><strong>Year:</strong> ${formatYear(movie.year)}</p>
-        <p><strong>Director:</strong> ${movie.director}</p>
         <p><strong>Rating:</strong> ${formatRating(movie.rating)}</p>
-        <p><strong>Genre:</strong> ${movie.genre.join(", ")}</p>
-        <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
-        <p class="description">${movie.description}</p>
-      </article>
+        <p><strong>Genre:</strong> ${movie.genre[0]}</p>
+      </div>
     `;
 
     movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
@@ -2648,19 +2134,6 @@ Du kan nu:
 
 ---
 
-## 🔧 Forbedringer til progressionen (gennemført)
-
-Progressionen er nu opdateret med følgende forbedringer:
-
-✅ **Konsistent datastruktur**: Alle `allMovies` definitioner bruger nu engelsk property names (title, year, rating, genre) som matcher dit rigtige projekt
-
-✅ **Fjernet duplikering**: Ingen gentagne definitioner - hver sektion har sin egen klare datastruktur
-
-✅ **Bedre integration**: Del 3 refererer nu eksplicit til funktioner fra Del 2, og den praktiske opgave viser hvordan man bruger dem sammen
-
-✅ **Klarere navigation**: "Del 3" er nu DOM-manipulation grundlaget, og "🎯 Praktisk Opgave" er anvendelsen - mindre forvirring
-
-✅ **Step-by-step guidance**: Hver opgave er opdelt i micro-steps med test-punkter
 
 ---
 
