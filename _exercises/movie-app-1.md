@@ -2076,12 +2076,6 @@ function displayMovieInfo(movie) {
 }
 ```
 
-**2a. Brug displayMovieInfo i vores loop:**
-
-Nu kan vi bruge denne funktion i stedet for at bygge beskeden manuelt hver gang!
-
-**2a. Brug displayMovieInfo i vores loop:**
-
 Nu kan vi bruge denne funktion i stedet for at bygge beskeden manuelt hver gang!
 
 ```javascript
