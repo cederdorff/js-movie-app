@@ -183,6 +183,7 @@ console.log("Plakat:", image);
    - "Director: Christopher Nolan"
 
 Hvis du ikke ser alle linjer:
+
 - Tjek at du har kopieret al koden korrekt
 - Se efter manglende kommaer eller semikoloner
 - Kontroller at alle console.log er inden i `initApp` funktionen
@@ -313,7 +314,6 @@ console.log("Opdaterede værdier:", views, rating);
 2. Se hvordan strings kan sammensættes på forskellige måder
 3. Se hvordan tal kan opdateres med forskellige metoder
 
-
 #### Step 4a: Det "gamle" problem (string sammensætning)
 
 Først - lad os prøve den gammeldags måde at sammensætte tekst på:
@@ -376,6 +376,7 @@ console.log("Complete info:", complexMessage);
 Se den flotte, komplette besked!
 
 #### Step 4d: Template literals med linjeskift
+
 Template literals kan også håndtere flere linjer:
 
 ```javascript
@@ -708,8 +709,6 @@ Indtil nu har vi brugt separate arrays til forskellige typer af data:
 
 **Formål:** Lær at samle relateret data i objekter - den datastruktur vi skal bruge i vores Movie App!
 
-
-
 #### Step 1: Problemet - arrays er ikke nok!
 
 Indtil nu har vi brugt arrays til at gemme film:
@@ -737,8 +736,6 @@ const ratings = [8.7, 8.8, 8.6];
 - Hvis vi flytter rundt på én liste, bliver de andre forkerte
 - Vi har brug for en bedre måde!
 
-
-
 #### Step 2: Objekter - saml relateret data!
 
 Her kommer løsningen - **objekter** (præcis som i din `movies.json` fil):
@@ -763,7 +760,6 @@ Refresh og se objektet i konsollen!
 - `{}` krøllede parenteser laver et objekt
 - `key: value` gemmer data sammen (engelsk notation som i dit projekt)
 - Alt om filmen er nu samlet ét sted!
-
 
 **💡 Objekt grundregler:**
 
@@ -794,7 +790,6 @@ Se hvordan vi får fat i hver del af data!
 - `objectName.key` er formatet
 - Super nemt at læse og forstå!
 
-
 #### Step 4: Tilføj flere properties
 
 Nu udvider vi vores objekt med flere properties:
@@ -804,7 +799,7 @@ Nu udvider vi vores objekt med flere properties:
 const movie = {
   title: "The Matrix",
   year: 1999,
-  rating: 8.7, 
+  rating: 8.7,
   director: "Wachowski Sisters"
 };
 
@@ -855,7 +850,6 @@ movie.inTheaters = false; // Ændrer boolean værdi
 console.log("Ny rating:", movie.rating);
 console.log("Stadig i biografen?", movie.inTheaters);
 ```
-
 
 #### Step 6: Real movie data struktur (som i dit projekt)
 
@@ -962,7 +956,6 @@ Se den flotte formaterede movie info!
 - `${movie.actors[0]}` henter første skuespiller fra array
 - Template literals kombinerer tekst og objektdata perfekt!
 - Dette ligner hvordan rigtige movie apps viser information!
-
 
 #### ✅ Endelig test af alt!
 
@@ -1116,7 +1109,8 @@ console.log("Second movie rating:", allMovies[1].rating);
 Se hvordan vi kombinerer array[index] og objekt.nøgle!
 
 **💡 Forklaring:**
-- `[]` bruges til at vælge _hvilket objekt_
+
+- `[]` bruges til at vælge *hvilket objekt*
 - `.` bruges til at vælge hvilken property
 - Kombineret: `allMovies[0].title`
 - `allMovies[0]` henter første movie object
@@ -1190,13 +1184,13 @@ console.log("Inception skuespillere:", allMovies[1].actors.join(", "));
 Du skulle nu se pæne tekstlister i konsollen.
 
 💡 **Nyt:**
+
 - Arrays **inden i** objekter
 - `.join(", ")` gør array til læsbar tekst
 
-
 ## Step 6: Tilgå komplekse data
 
-Når vi kombinerer arrays og objekter, kan vi tilgå _meget præcis data_:
+Når vi kombinerer arrays og objekter, kan vi tilgå *meget præcis data*:
 
 ```javascript
 console.log("Matrix første genre:", allMovies[0].genre[0]);
@@ -1210,17 +1204,16 @@ console.log(`
 🎭 Genre: ${movie.genre.join(", ")}
 👥 Skuespillere: ${movie.actors.join(", ")}
 `);
-
-````
+```
 
 ✅ **Test:**  
-Se hvordan du kan hente _dybe data_ på flere niveauer.
+Se hvordan du kan hente *dybe data* på flere niveauer.
 
 💡 **Forklaring:**
+
 - Først array-index `[0]`
 - Så objekt-egenskab `.genre`
 - Så index i det indre array `[0]`
-
 
 ### Step 7: Den komplette Movie Database
 
@@ -1329,6 +1322,7 @@ Du kan nu:
 ---
 
 ## Opgave 2: Funktioner
+
 **⚠️ Inden vi starter med funktioner:**
 
 1. Åbn din `app.js` fil
@@ -1655,17 +1649,49 @@ Nu behersker du:
 
 **💪 Fantastisk! Nu kan du organisere din kode med funktioner som en professionel udvikler!**
 
+---
+
 ## Opgave 3: DOM-manipulation
+
+**⚠️ Inden vi starter med DOM:**
+
+1. Åbn din `app.js` fil
+2. Slet den tidligere kode fra funktions-øvelserne
+3. Start med denne basis - MEN behold de funktioner vi har lært:
+
+```javascript
+"use strict";
+
+document.addEventListener("DOMContentLoaded", initApp);
+
+// === Movie Database ===
+const allMovies = [
+  { title: "The Matrix", year: 1999, rating: 8.7, genre: ["Action", "Sci-Fi"] },
+  { title: "Inception", year: 2010, rating: 8.8, genre: ["Action", "Thriller"] },
+  { title: "The Dark Knight", year: 2008, rating: 9.0, genre: ["Action", "Crime"] }
+];
+
+// === Genbrugelige funktioner fra Opgave 2 ===
+// Vi tager vores favorit-funktion med os!
+function displayMovieInfo(movie) {
+  return `🎬 ${movie.title} (${movie.year}) - Rating: ⭐ ${movie.rating}`;
+}
+
+// Hovedfunktion
+function initApp() {
+  console.log("Movie App kører! 🎬");
+  console.log("Vi har", allMovies.length, "film i databasen");
+}
+```
+
+**💡 Vigtigt:**
+
+- Vi beholder `allMovies` arrayet - vi skal bruge det!
+- Vi beholder `displayMovieInfo` funktionen - den er guld værd til at formatere film!
+- Nu skal vi lære at vise filmene på hjemmesiden i stedet for i konsollen
 
 **Formål:** Lær at forbinde JavaScript med HTML og ændre indhold på selve hjemmesiden.  
 Efter denne del vil du kunne vise data (f.eks. film) direkte på siden — præcis som i en rigtig web-app.
-### Vigtig note om funktioner fra Opgave 2: Funktioner
-
-I Del 3 bruger vi de funktioner vi lærte i Del 2 til at formatere vores movie data. Husk at du kan bruge:
-
-- `displayMovieInfo(movie)` - til at formatere film information
-- `formatYear(year)` - til at formatere årstal
-- `formatRating(rating)` - til at formatere ratings
 
 ### Opgave 3.1: Grundlæggende DOM-manipulation
 
@@ -1724,7 +1750,7 @@ Nu lærer vi at forbinde JavaScript med HTML:
 // ========== DOM MANIPULATION ==========
 
 // Find HTML elements by their id (like your project)
-consconst testSection = document.querySelector("#test-section");
+const testSection = document.querySelector("#test-section");
 const movieListContainer = document.querySelector("#movie-list");
 
 console.log("Found test section:", testSection);
@@ -1955,11 +1981,7 @@ Nu skal vi bruge det vi har lært i Del 1, 2 og 3 til at bygge en komplet filmvi
 
 ## 🎯 Praktisk Opgave: Byg komplet filmvisning
 
-Nu kombinerer vi alt vi har lært - data fra Del 1, funktioner fra Del 2, og DOM-manipulation fra Del 3!
-
-## 🎯 Praktisk Opgave: Byg komplet filmvisning
-
-Nu kombinerer vi alt vi har lært - data fra Del 1, funktioner fra Del 2, og DOM-manipulation fra Del 3!
+Nu kombinerer vi alt vi har lært - data fra Opgave 1, funktioner fra Opgave 2, og DOM-manipulation fra Opgave 3!
 
 ### Opgave 1: En funktion til at vise alle film
 
@@ -2033,92 +2055,166 @@ displayAllMovies();
 
 Nu skulle alle film være vist på hjemmesiden med styling!
 
-### Opgave 2: Forbedre filmvisningen med funktioner fra Del 2
+**💡 Forklaring:**
 
-**Mål:** Brug funktioner fra Del 2 til at gøre filmvisningen endnu bedre
+- Vi bruger `for...of` loop til at gå gennem `allMovies` arrayet
+- For hver film bygger vi HTML med template literals
+- `insertAdjacentHTML("beforeend")` tilføjer hver film til slutningen
+- Nu kan vi vise så mange film vi vil!
 
-**2a. Tilføj formatYear funktionen til filmvisningen:**
+---
 
-**Husk først:** Du skal bruge `formatYear()` funktionen fra Del 2. Hvis du ikke har den, så tilføj den først:
+### Opgave 2: Genbrug displayMovieInfo funktionen (fra Opgave 2!)
+
+**Mål:** Brug funktionen fra Opgave 2 til at gøre koden endnu bedre - det er dét genbrug handler om!
+
+**Husk fra Opgave 2:** Vi lavede denne funktion:
 
 ```javascript
-function formatYear(year) {
-  return `Year: ${year}`;
+function displayMovieInfo(movie) {
+  return `🎬 ${movie.title} (${movie.year}) - Rating: ⭐ ${movie.rating}`;
 }
 ```
 
+**2a. Brug displayMovieInfo i vores loop:**
+
+Nu kan vi bruge denne funktion i stedet for at bygge beskeden manuelt hver gang!
+
+**2a. Brug displayMovieInfo i vores loop:**
+
+Nu kan vi bruge denne funktion i stedet for at bygge beskeden manuelt hver gang!
+
 ```javascript
+function displayAllMovies() {
+  // Ryd gammel indhold og tilføj overskrift
+  movieListContainer.innerHTML = "<h2>🎬 All Movies</h2>";
+
+  // Loop gennem alle film
+  for (const movie of allMovies) {
+    // Brug vores displayMovieInfo funktion! 🎉
+    const movieDescription = displayMovieInfo(movie);
+
+    // Byg HTML med funktionens resultat
+    const movieHTML = `
+      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
+        <p>${movieDescription}</p>
+        <p><strong>Genres:</strong> ${movie.genre.join(", ")}</p>
+      </div>
+    `;
+
+    // Tilføj HTML til siden
+    movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
+  }
+}
+
+// Kald funktionen
+displayAllMovies();
+```
+
+#### ✅ Test det!
+
+Nu ser du hvordan vi genbruger funktionen fra Opgave 2 - smart!
+
+**💡 Forklaring - Genbrug af funktioner:**
+
+- `displayMovieInfo(movie)` formatterer filmdata (fra Opgave 2)
+- Vi bruger resultatet direkte i vores HTML
+- Koden bliver mere læsbar og lettere at vedligeholde
+- Hvis vi vil ændre hvordan film beskrives, skal vi kun ændre ét sted!
+
+---
+
+### Opgave 3: Tilføj mere funktionalitet
+
+**Mål:** Lav flere genbrugelige funktioner til at håndtere filmdata
+
+**3a. Lav en funktion til at lave pæne genre-lister:**
+
+```javascript
+// Ny hjælpefunktion til genre
+function formatGenres(genreArray) {
+  return genreArray.join(" • ");
+}
+
+// Brug den i displayAllMovies
 function displayAllMovies() {
   movieListContainer.innerHTML = "<h2>🎬 All Movies</h2>";
 
   for (const movie of allMovies) {
+    const movieDescription = displayMovieInfo(movie);
+    const genres = formatGenres(movie.genre); // Brug den nye funktion!
+
     const movieHTML = `
-      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
-        <h3>${movie.title}</h3>
-        <p><strong>Year:</strong> ${formatYear(movie.year)}</p>
-        <p><strong>Rating:</strong> ⭐ ${movie.rating}/10</p>
-        <p><strong>Genre:</strong> ${movie.genre[0]}</p>
+      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 8px;">
+        <p>${movieDescription}</p>
+        <p><strong>Genres:</strong> ${genres}</p>
       </div>
     `;
 
     movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
   }
 }
+
+displayAllMovies();
 ```
 
 #### ✅ Test det!
 
-Nu skulle årene være formateret som "Year: 1994" i stedet for bare "1994"
+Nu skulle genrerne være vist med pænere formatering: "Action • Sci-Fi • Thriller"
 
-**2b. Tilføj also formatRating funktionen:**
+**3b. Tilføj endnu en hjælpefunktion for filmkort:**
 
-**Husk først:** Du skal også bruge `formatRating()` funktionen fra Del 2. Hvis du ikke har den, så tilføj den:
+Lad os lave en funktion der bygger hele HTML-kortet for en film:
 
 ```javascript
-function formatRating(rating) {
-  const stars = "★".repeat(Math.floor(rating / 2)) + "☆".repeat(5 - Math.floor(rating / 2));
-  return `${stars} ${rating}/10`;
+// Funktion der bygger et komplet filmkort
+function createMovieCard(movie) {
+  const movieDescription = displayMovieInfo(movie);
+  const genres = formatGenres(movie.genre);
+
+  return `
+    <div style="border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 8px; background-color: #f9f9f9;">
+      <p style="font-size: 1.1em; margin: 0;">${movieDescription}</p>
+      <p style="margin: 5px 0;"><strong>Genres:</strong> ${genres}</p>
+    </div>
+  `;
 }
-```
 
-```javascript
+// Nu bliver displayAllMovies meget simpel!
 function displayAllMovies() {
   movieListContainer.innerHTML = "<h2>🎬 All Movies</h2>";
 
   for (const movie of allMovies) {
-    const movieHTML = `
-      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
-        <h3>${movie.title}</h3>
-        <p><strong>Year:</strong> ${formatYear(movie.year)}</p>
-        <p><strong>Rating:</strong> ${formatRating(movie.rating)}</p>
-        <p><strong>Genre:</strong> ${movie.genre[0]}</p>
-      </div>
-    `;
-
-    movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
+    // En linje - så simpelt kan det blive! 🎉
+    movieListContainer.insertAdjacentHTML("beforeend", createMovieCard(movie));
   }
 }
+
+displayAllMovies();
 ```
 
 #### ✅ Test det!
 
-Nu skulle ratings være formateret som "★★★★★ 8.5/10" eller "★★☆☆☆ 6.0/10"
+Se hvor simpel displayAllMovies er blevet! Dette er professionel kode-organisering.
 
-**💡 Perfekt integration:**
+**💡 Forklaring - Funktions-hierarki:**
 
-- Vi bruger funktioner fra Del 2 til at formatere data
-- DOM manipulation fra Del 3 til at vise data
-- Alt arbejder sammen som et professionelt system!
+- `createMovieCard()` bruger `displayMovieInfo()` og `formatGenres()`
+- `displayAllMovies()` bruger `createMovieCard()`
+- Hver funktion har ét klart ansvar
+- Koden er let at læse, teste og vedligeholde
+- Dette er hvordan rigtige apps er bygget!
 
 #### ✅ Endelig test af komplet integration!
 
-Gem alle filer og refresh browseren. Nu skulle du kunne:
+Gem alle filer og refresh browseren. Nu skulle du se:
 
-1. **Se alle film** vist pænt på hjemmesiden med professional styling
-2. **Formaterede år** med din formatYear funktion
-3. **Formaterede ratings** med din formatRating funktion
-4. **Struktureret data** fra JavaScript arrays til HTML
-5. **Integration** mellem alle tre dele af kurset!
+1. **Alle film vist** på hjemmesiden med professional styling
+2. **displayMovieInfo genbrugt** - funktionen fra Opgave 2 arbejder perfekt med DOM
+3. **formatGenres funktion** - pæne genre-lister med bullets
+4. **createMovieCard funktion** - komplet kort-bygning
+5. **Hierarki af funktioner** - funktioner der bruger andre funktioner
+6. **Struktureret kode** - let at læse og vedligeholde!
 
 **🎯 Læringsmål - Komplet integration:**
 Du kan nu:
@@ -2127,17 +2223,29 @@ Du kan nu:
 - ✅ **insertAdjacentHTML**: Tilføje HTML effektivt uden at overskrive
 - ✅ **Template literals**: Bygge kompleks HTML med `${data}`
 - ✅ **Dynamiske lister**: Vise arrays som HTML med loops
-- ✅ **Funktions-integration**: Kombinere funktioner med DOM manipulation
+- ✅ **Funktions-genbrug**: Bruge funktioner fra tidligere opgaver
+- ✅ **Funktions-hierarki**: Funktioner der kalder andre funktioner
 - ✅ **Professional patterns**: Separation mellem data, logic og presentation
 
 **💪 Du har nu alle grundlæggende færdigheder til at bygge filmapps!**
 
 ---
 
+## 🎉 Opgave 3 Komplet!
+
+**Hvad har du lært?**
+
+✅ **DOM-manipulation** - Forbind JavaScript med HTML  
+✅ **querySelector** - Find HTML-elementer  
+✅ **innerHTML & insertAdjacentHTML** - Ændr og tilføj indhold  
+✅ **Template literals** - Byg dynamisk HTML  
+✅ **Funktions-genbrug** - Brug funktioner fra tidligere opgaver  
+✅ **Integration** - Kombiner data, funktioner og DOM
+
+**🚀 Næste skridt:**  
+Nu er du klar til at arbejde med rigtig filmdata fra JSON-filer og bygge en komplet filmapp!
 
 ---
-
-## 🎉 Session 1 Komplet!
 
 **Du har nu lært de grundlæggende JavaScript-koncepter:**
 
