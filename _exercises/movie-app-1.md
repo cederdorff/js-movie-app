@@ -1188,7 +1188,7 @@ Du skulle nu se pæne tekstlister i konsollen.
 - Arrays **inden i** objekter
 - `.join(", ")` gør array til læsbar tekst
 
-## Step 6: Tilgå komplekse data
+### Step 6: Tilgå komplekse data
 
 Når vi kombinerer arrays og objekter, kan vi tilgå *meget præcis data*:
 
@@ -1905,10 +1905,10 @@ const firstMovie = allMovies[0];
 
 // Byg HTML for den film
 const firstMovieHTML = `
-  <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+  <article class="movie-card">
     <h4>${firstMovie.title}</h4>
     <p>Year: ${firstMovie.year}</p>
-  </div>
+  </article>
 `;
 
 // TILFØJ (overskriver IKKE)
@@ -1927,10 +1927,10 @@ const secondMovie = allMovies[1];
 
 // Byg HTML for den anden film
 const secondMovieHTML = `
-  <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+  <article class="movie-card">
     <h4>${secondMovie.title}</h4>
     <p>Year: ${secondMovie.year}</p>
-  </div>
+  </article>
 `;
 
 // TILFØJ den anden film - bemærk den overskriver IKKE den første!
@@ -2030,12 +2030,12 @@ function displayAllMovies() {
   for (const movie of allMovies) {
     // Byg HTML for denne film
     const movieHTML = `
-      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
+      <article class="movie-card">
         <h3>${movie.title}</h3>
         <p><strong>Year:</strong> ${movie.year}</p>
         <p><strong>Rating:</strong> ⭐ ${movie.rating}/10</p>
         <p><strong>Genre:</strong> ${movie.genre[0]}</p>
-      </div>
+      </article>
     `;
 
     // Tilføj HTML til siden
@@ -2096,10 +2096,10 @@ function displayAllMovies() {
 
     // Byg HTML med funktionens resultat
     const movieHTML = `
-      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px;">
+      <article class="movie-card">
         <p>${movieDescription}</p>
         <p><strong>Genres:</strong> ${movie.genre.join(", ")}</p>
-      </div>
+      </article>
     `;
 
     // Tilføj HTML til siden
@@ -2145,10 +2145,10 @@ function displayAllMovies() {
     const genres = formatGenres(movie.genre); // Brug den nye funktion!
 
     const movieHTML = `
-      <div style="border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 8px;">
+      <article class="movie-card">
         <p>${movieDescription}</p>
         <p><strong>Genres:</strong> ${genres}</p>
-      </div>
+      </article>
     `;
 
     movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
@@ -2173,10 +2173,10 @@ function createMovieCard(movie) {
   const genres = formatGenres(movie.genre);
 
   return `
-    <div style="border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 8px; background-color: #f9f9f9;">
-      <p style="font-size: 1.1em; margin: 0;">${movieDescription}</p>
-      <p style="margin: 5px 0;"><strong>Genres:</strong> ${genres}</p>
-    </div>
+    <article class="movie-card">
+      <p class="movie-title">${movieDescription}</p>
+      <p class="movie-genres"><strong>Genres:</strong> ${genres}</p>
+    </article>
   `;
 }
 
