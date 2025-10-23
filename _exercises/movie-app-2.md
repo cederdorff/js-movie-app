@@ -527,57 +527,13 @@ Midlertidigt ændr `object-fit` i din CSS og se forskellen på poster visning.
 
 ---
 
-### Trin 10: Loading states og empty states
-
-**10a. Tilføj loading placeholder styling**
-
-Til fremtidige JavaScript funktioner:
-
-```css
-.movie-card.loading {
-  background: #f0f0f0;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.movie-list-empty {
-  grid-column: 1 / -1; /* Fylder alle kolonner */
-  text-align: center;
-  padding: 60px 20px;
-  color: #666;
-}
-```
-
-#### ✅ Test placeholders!
-
-Tilføj midlertidigt til HTML for at teste:
-
-```html
-<div class="movie-list-empty">
-  <p>🎬 Ingen film fundet...</p>
-</div>
-```
-
----
-
 ## Del 5: Fra HTML til JavaScript Objekter 🎬→📝
 
 **Formål:** Konverter din eksisterende HTML movie data til JavaScript objekter.
 
-### Trin 11: Analyser eksisterende movie data
+### Trin 10: Analyser eksisterende movie data
 
-**11a. Undersøg din HTML struktur**
+**10a. Undersøg din HTML struktur**
 
 Se på en af dine movie cards i `index.html`:
 
@@ -612,13 +568,13 @@ Fra hver movie card kan vi udtrække:
 
 ---
 
-### Trin 12: Opret individuelle movie objekter
+### Trin 11: Opret individuelle movie objekter
 
-**12a. Åbn din `app.js` fil**
+**11a. Åbn din `app.js` fil**
 
 Vi starter med at oprette et JavaScript objekt for hver film individuelt.
 
-**12b. Opret første movie objekt - Barbie**
+**11b. Opret første movie objekt - Barbie**
 
 ```javascript
 // ========== MOVIE OBJECTS ==========
@@ -646,7 +602,7 @@ console.log("Barbie movie object:", barbieMovie);
 2. Refresh siden
 3. Tjek Console - ser du movie objektet?
 
-**12c. Opret andet movie objekt - Dune**
+**11c. Opret andet movie objekt - Dune**
 
 ```javascript
 // Movie 2: Dune
@@ -695,7 +651,7 @@ console.log("Dune: Part Two movie object:", duneTwoMovie);
 
 ---
 
-### Trin 13: Opret resterende movie objekter selv! 💪
+### Trin 12: Opret resterende movie objekter selv! 💪
 
 **13a. Nu er det din tur!**
 
@@ -838,7 +794,7 @@ console.log("Inception movie:", inceptionMovie);
 
 ---
 
-### Trin 14: Test objekt egenskaber
+### Trin 13: Test objekt egenskaber
 
 **14a. Tilgang til objekt properties**
 
@@ -869,7 +825,7 @@ console.log(`${fightClubMovie.title} er fra ${fightClubMovie.year} og har rating
 
 ---
 
-### Trin 15: Sammenlign HTML vs JavaScript
+### Trin 14: Sammenlign HTML vs JavaScript
 
 **15a. Forstå forskellen**
 
@@ -903,7 +859,7 @@ console.log(`${barbieMovie.title} er ${barbieAge} år gammel`);
 
 ---
 
-### Trin 15B: Nulstil JavaScript til ren movie data 🧹
+### Trin 14B: Nulstil JavaScript til ren movie data 🧹
 
 **Før vi starter DOM manipulation, skal vi have en ren `app.js` fil OG en tom movie container.**
 
@@ -1016,7 +972,7 @@ Nu er vi klar til at lære DOM manipulation! 🚀
 
 ---
 
-### Trin 16: Fra JavaScript til DOM - Oplev problemet først! 🎨
+### Trin 15: Fra JavaScript til DOM - Oplev problemet først! 🎨
 
 **16a. Start med at skrive HTML direkte (den "forkerte" måde)**
 
@@ -1109,7 +1065,7 @@ console.log("Dune: Part Two added!");
 
 ---
 
-### Trin 17: Løsningen - Lav en funktion! 🚀
+### Trin 16: Løsningen - Lav en funktion! 🚀
 
 **17a. Opret en smart funktion der gør ALT arbejdet**
 
@@ -1213,7 +1169,7 @@ displayMovie(testMovie);
 
 ---
 
-### Trin 18: Tilføj ALLE movies med funktionen! 🎬
+### Trin 17: Tilføj ALLE movies med funktionen! 🎬
 
 **Nu kan vi tilføje alle vores movies super nemt:**
 
@@ -1274,7 +1230,7 @@ displayMovie(myFavoriteMovie);
 
 ---
 
-### Trin 19: Forbedring - Fra objekter til array! 🗃️
+### Trin 18: Forbedring - Fra objekter til array! 🗃️
 
 **19a. Problemet med mange individuelle variabler**
 
@@ -1952,11 +1908,6 @@ async function loadMovies() {
 loadMovies();
 ```
 
-// Start processen
-loadMovies();
-
-````
-
 **27c. Test den komplette løsning**
 
 1. **Kommentér ud** eller slet din gamle lokale movies array og funktions kald
@@ -1985,7 +1936,7 @@ const movies = [
   /* 8 movies */
 ];
 displayMovies(movies); // Instant visning
-````
+```
 
 **Efter (ekstern JSON med async/await):**
 
@@ -2012,15 +1963,13 @@ loadMovies();
 **⚠️ Nye udfordringer:**
 
 - 🌐 **Kræver internet** - virker ikke offline
-- ⏱️ **Loading tid** - brugere skal vente
 - 🐛 **Fejl håndtering** - hvad hvis serveren er nede?
 - 🔄 **Asynkron programmering** - mere kompleks kode
 
 #### ✅ Refleksion!
 
 1. Hvornår ville du bruge lokale arrays vs. ekstern JSON?
-2. Hvordan kunne vi vise en loading indikator mens data hentes?
-3. Hvad ville der ske hvis JSON URL'en ændrer sig?
+2. Hvad ville der ske hvis JSON URL'en ændrer sig?
 
 ---
 
@@ -2108,7 +2057,6 @@ function displayMovies(movieArray) {
 
 // Load and display movies with async/await
 async function loadMovies() {
-  console.log("🌐 Loading movies from external JSON...");
   const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
   const movies = await response.json();
   displayMovies(movies);
