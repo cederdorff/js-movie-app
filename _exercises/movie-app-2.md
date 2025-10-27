@@ -2,7 +2,7 @@
 
 ## Opgaver til anden undervisningsgang
 
-> **Vigtig:** Åbn Developer Tools i din browser og hold øje med både Console-fanen og Elements-fanen mens du arbejder. Du kan åbne Developer Tools med:
+> **Vigtig:** Åbn Developer Tools i din browser og hold øje med både Console-fanen og Elements-fanen mens du arbejder. Vend dig til at bruge og forstå den!. Du kan åbne Developer Tools med:
 >
 > - **Mac:** `Cmd + Option + I`
 > - **PC:** `F12` eller `Ctrl + Shift + I`
@@ -18,44 +18,55 @@
 **0a. Gå til template repository**
 
 1. Åbn din browser og gå til: https://github.com/cederdorff/js-movie-app-template
-2. Du skulle se et repository med en grøn "Use this template" knap
+2. Du skulle se et repository med en grøn "Use this template" knap.
 
 **0b. Opret dit eget repository**
 
-1. Klik på den grønne **"Use this template"** knap
+1. Klik på den grønne **"Use this template"** knap. Du skal være logget ind på GitHub for at kunne se den.
 2. Vælg **"Create a new repository"**
 3. Udfyld repository information:
    - **Repository name**: `movie-app-[dit-navn]` (f.eks. `movie-app-sarah`)
    - **Description**: "Movie App projekt til undervisning"
-   - **Public** eller **Private** (vælg hvad du foretrækker)
+   - **Public** eller **Private** (vælg gerne public)
 4. Klik **"Create repository"**
 
 #### ✅ Check punkt!
 
 Du skulle nu have dit eget repository baseret på template!
 
-**0c. Clone dit repository lokalt**
+**0c. Clone dit repository lokalt med GitHub Desktop**
 
-1. Klik på den grønne **"Code"** knap i dit nye repository
-2. Kopier HTTPS URL'en (f.eks. `https://github.com/dit-brugernavn/movie-app-dit-navn.git`)
-3. Åbn Terminal/Command Prompt
-4. Navigér til hvor du vil have projektet (f.eks. Desktop eller Documents)
-5. Kør kommandoen:
+1. Åbn **GitHub Desktop** applikationen
+2. Klik på **"File"** → **"Clone repository..."** (eller brug genvejen `Ctrl+Shift+O` / `Cmd+Shift+O`)
+3. Vælg fanen **"URL"**
+4. Gå tilbage til dit repository på GitHub.com og klik på den grønne **"Code"** knap
+5. Kopier HTTPS URL'en (f.eks. `https://github.com/dit-brugernavn/movie-app-dit-navn.git`)
+6. Indsæt URL'en i GitHub Desktop
+7. Vælg hvor projektet skal gemmes lokalt (f.eks. i din "Developer" eller "Documents" mappe)
+8. Klik **"Clone"**
 
-```bash
-git clone https://github.com/dit-brugernavn/movie-app-dit-navn.git
-```
+#### ✅ Check punkt!
+
+GitHub Desktop skulle nu vise dit repository og du skulle se filerne i den lokale mappe!
 
 **0d. Åbn projekt i VS Code**
 
-1. Åbn VS Code
-2. File → Open Folder
-3. Vælg din `movie-app-dit-navn` mappe
-4. Du skulle nu se projektfilerne:
+1. I GitHub Desktop, klik på **"Repository"** i menulinjen
+2. Vælg **"Open in Visual Studio Code"** (eller brug genvejen `Ctrl+Shift+A` / `Cmd+Shift+A`)
+3. VS Code åbner nu dit projekt
+4. Du skulle nu se projektfilerne i VS Code's fil-explorer:
    - `index.html`
    - `app.css`
    - `app.js`
    - `img/favicon.png`
+
+**Alternativ metode:**
+
+1. Åbn VS Code
+2. Klik på **File** → **Open Folder...**
+3. Navigér til mappen hvor du clonede projektet
+4. Vælg `movie-app-dit-navn` mappen
+5. Klik **"Open"**
 
 #### ✅ Test dit projekt!
 
@@ -91,19 +102,35 @@ Dit nye projekt indeholder allerede:
 
 **1a. Åbn dit projekt og undersøg `index.html`**
 
-Se på din nuværende HTML struktur. Du skulle have:
+Se på din nuværende HTML struktur. Du skulle have noget der minder om det her:
 
 ```html
 <main>
   <!-- Movie List -->
   <section id="movie-list">
-    <article class="movie-card" tabindex="0">
-      <img src="..." alt="Poster of Barbie" class="movie-poster" />
+    <article class="movie-card">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg"
+        alt="Poster of Barbie"
+        class="movie-poster" />
       <div class="movie-info">
         <h3>Barbie <span class="movie-year">(2023)</span></h3>
         <p class="movie-genre">Adventure, Comedy, Fantasy</p>
         <p class="movie-rating">⭐ 7</p>
         <p class="movie-director"><strong>Director:</strong> Greta Gerwig</p>
+      </div>
+    </article>
+
+    <article class="movie-card">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg"
+        alt="Poster of Dune"
+        class="movie-poster" />
+      <div class="movie-info">
+        <h3>Dune <span class="movie-year">(2021)</span></h3>
+        <p class="movie-genre">Adventure, Drama, Sci-Fi</p>
+        <p class="movie-rating">⭐ 8</p>
+        <p class="movie-director"><strong>Director:</strong> Denis Villeneuve</p>
       </div>
     </article>
     <!-- Flere movie cards... -->
@@ -153,7 +180,7 @@ Hver movie card består af:
 
 #### ✅ Eksperiment!
 
-Prøv at ændre disse CSS værdier midlertidigt for at se hvad der sker:
+Prøv at ændre disse CSS værdier midlertidigt for at se hvad der sker (find den eksisterende `.movie-card` og tilpas den givne linie):
 
 ```css
 .movie-card {
@@ -185,7 +212,10 @@ Lige nu er dine movie cards sandsynligvis arrangeret i:
 
 ### Trin 3: Forstå CSS Grid koncepter
 
+**_Du skal ikke skrive noget kode i dette trin - men læs og forstår!_**
+
 **3a. Grid container vs Grid items**
+Et grid består ofte af noget styling for en container og de items der ligger i containeren. Fx:
 
 ```css
 /* Grid Container - parent element */
@@ -208,7 +238,7 @@ Lige nu er dine movie cards sandsynligvis arrangeret i:
 
 #### ✅ Test grundlæggende Grid!
 
-Tilføj dette til din `#movie-list` i CSS:
+Tilføj dette til din `#movie-list` i CSS (tilføj blot i bunden af `app.css`):
 
 ```css
 #movie-list {
@@ -218,7 +248,8 @@ Tilføj dette til din `#movie-list` i CSS:
 }
 ```
 
-Refresh siden - ser du forskellen?
+- Refresh siden - ser du forskellen?
+- Forstår du CSS'en? Måske ikke det hele? Det kommer vi til i næste trin.
 
 ---
 
@@ -242,7 +273,7 @@ grid-template-columns: repeat(3, 200px); /* 3 kolonner, hver 200px */
 
 #### ✅ Eksperimentér!
 
-Prøv disse forskellige grid konfigurationer:
+Prøv disse forskellige grid konfigurationer (du skal ændre den eksisterende `grid-template-columns` for `#movie-list`):
 
 ```css
 /* 3 kolonner */
@@ -259,95 +290,13 @@ grid-template-columns: 200px 1fr 200px;
 
 ## Del 3: Implementér CSS Grid Layout 🎯
 
-**Formål:** Opret et responsive grid system for dine movie cards.
+**Formål:** Opret et responsive grid system for dine movie cards ved at starte mobil og bygge op.
 
-### Trin 5: Basis Grid Setup
+### Trin 5: Start med Mobile-First Grid
 
-**5a. Opdater din `#movie-list` CSS**
+**5a. Aktivér Grid og sæt mobile layout**
 
-Find din `#movie-list` CSS regel og erstat/tilføj:
-
-```css
-#movie-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-```
-
-#### ✅ Forstå koden!
-
-- `auto-fit` - Tilpasser antal kolonner automatisk
-- `minmax(250px, 1fr)` - Minimum 250px bred, maksimum fylder tilgængelig plads
-- `gap: 20px` - 20px mellemrum mellem cards
-- `padding: 20px` - 20px indre margin i containeren
-
-**5b. Test dit responsive grid**
-
-1. Refresh siden
-2. Resize browser vinduet langsomt
-3. Observer hvordan kolonner tilpasser sig automatisk
-
-#### ✅ Experiment!
-
-Prøv forskellige `minmax` værdier:
-
-```css
-/* Smaller cards */
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-/* Larger cards */
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-```
-
----
-
-### Trin 6: Forbedret Grid Styling
-
-**6a. Tilføj grid spacing og alignment**
-
-```css
-#movie-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
-  padding: 24px;
-  justify-items: stretch; /* Strækker items til fuld kolonne bredde */
-  align-items: start; /* Aligner items til toppen */
-}
-```
-
-**6b. Forbedret movie card styling for grid**
-
-```css
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Fylder fuld højde af grid cell */
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s ease;
-}
-
-.movie-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-```
-
-#### ✅ Test forbedringerne!
-
-1. Refresh siden
-2. Hover over movie cards - ser du effekten?
-3. Er alle cards samme højde nu?
-
----
-
-### Trin 7: Progressive Responsive Design
-
-**7a. Start med mobile-first tilgang**
+Find din `#movie-list` CSS regel igen og tilføj basis grid setup:
 
 ```css
 /* Mobile først - 1 kolonne */
@@ -355,54 +304,113 @@ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding: 2rem 0;
+  padding: 1rem;
 }
 ```
 
-#### ✅ Test mobile layout!
+#### ✅ Forstå koden!
 
-1. Gør browser vinduet smalt (mobile størrelse)
-2. Observer at movie cards fylder hele bredden
+- `display: grid` - Aktiverer CSS Grid layout
+- `grid-template-columns: 1fr` - Én kolonne der fylder hele bredden
+- `gap: 1.5rem` - Mellemrum mellem movie cards
+- `padding: 1rem` - Indre margin i containeren
 
-**7b. Tilføj tablet breakpoint**
+**5b. Test mobile layout**
+
+1. Refresh siden
+2. Gør browser vinduet smalt (ca. 375px - iPhone størrelse)
+3. Observer at alle movie cards ligger under hinanden i én kolonne
+
+#### ✅ Bekræft mobile layout!
+
+- [ ] Movie cards fylder hele bredden
+- [ ] Der er pænt mellemrum mellem cards
+- [ ] Layout fungerer på smal skærm
+
+---
+
+### Trin 6: Tilføj Media Queries for Større Skærme
+
+**6a. Tilføj tablet breakpoint (2 kolonner)**
+
+Nu tilføjer vi vores første media query for tablets:
 
 ```css
-/* Mobile først */
+/* Mobile først - 1 kolonne */
 #movie-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding: 2rem 0;
+  padding: 1rem;
 }
 
 /* Tablet - 2 kolonner */
 @media (min-width: 600px) {
   #movie-list {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
   }
 }
 ```
 
-#### ✅ Test tablet layout!
+#### ✅ Forstå media query!
+
+- `@media (min-width: 600px)` - Aktiveres når skærmen er mindst 600px bred
+- `1fr 1fr` - To lige store kolonner
+- Vi øger også `gap` og `padding` for større skærme
+
+**6b. Test tablet layout**
 
 1. Udvid browser til ca. 600px bredde
-2. Observer at du nu får 2 kolonner
+2. Observer at du nu får 2 kolonner ved siden af hinanden
+3. Prøv at gøre vinduet smallere og bredere - se layoutet skifte
 
-**7c. Tilføj desktop breakpoints**
+**6c. Tilføj desktop breakpoint (3 kolonner)**
 
 ```css
-/* Mobile først */
+/* Mobile først - 1 kolonne */
 #movie-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding: 2rem 0;
+  padding: 1rem;
 }
 
 /* Tablet - 2 kolonner */
 @media (min-width: 600px) {
   #movie-list {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+/* Desktop - 3 kolonner */
+@media (min-width: 992px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+```
+
+**6d. Tilføj store skærme breakpoint (4 kolonner)**
+
+```css
+/* Mobile først - 1 kolonne */
+#movie-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Tablet - 2 kolonner */
+@media (min-width: 600px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
   }
 }
 
@@ -423,67 +431,148 @@ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
 #### ✅ Test alle breakpoints!
 
-1. Start smal (mobile)
-2. Udvid til 600px+ (tablet - 2 kolonner)
-3. Udvid til 992px+ (desktop - 3 kolonner)
-4. Udvid til 1400px+ (store skærme - 4 kolonner)
+Test dit responsive grid grundigt:
 
-**7d. Forstå fordele ved denne tilgang**
+1. **Mobile** (< 600px): 1 kolonne
+2. **Tablet** (600px - 991px): 2 kolonner
+3. **Desktop** (992px - 1399px): 3 kolonner
+4. **Store skærme** (≥ 1400px): 4 kolonner
 
-- **Specifik kontrol** - Du bestemmer præcis hvor mange kolonner ved hver størrelse
-- **Forudsigelig** - Samme layout på alle enheder af samme størrelse
-- **Lettere at debug** - Klare breakpoints du kan teste
-- **Performance** - Browseren ved præcis hvilken layout der skal bruges
+**Tips til test:**
+
+- Brug Developer Tools → Toggle device toolbar (Cmd+Shift+M / Ctrl+Shift+M)
+- Eller resize browser vinduet manuelt
+- Observer hvordan layoutet ændrer sig ved hver breakpoint
+
+#### ✅ Forstå fordelene!
+
+- ✅ **Specifik kontrol** - Du bestemmer præcist antal kolonner ved hver skærmstørrelse
+- ✅ **Forudsigelig** - Samme layout på alle enheder af samme størrelse
+- ✅ **Mobile-first** - Starter simpelt og bygger op
+- ✅ **Lettere at debug** - Klare breakpoints du kan teste
 
 ---
 
-### Trin 8: Avanceret Grid (Valgfrit)
+### Trin 7: Avanceret Grid med Auto-Fit
 
-**8a. Alternative tilgang med auto-fit (til senere)**
+**Formål:** Lær en mere dynamisk tilgang til grid layout.
 
-Når du er komfortabel med basis grid, kan du eksperimentere med:
+**7a. Forstå `auto-fit` og `minmax()`**
+
+I stedet for faste breakpoints kan vi lade browseren bestemme antal kolonner automatisk:
 
 ```css
-/* Alternativ: Automatisk tilpasning */
 #movie-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  padding: 2rem 0;
+  padding: 1rem;
 }
 ```
 
-#### ✅ Sammenlign tilgange!
+#### ✅ Forstå avanceret grid!
 
-- **Faste breakpoints** (din nuværende): Præcis kontrol
-- **Auto-fit**: Dynamisk tilpasning baseret på plads
+- `repeat(auto-fit, ...)` - Lav så mange kolonner som der er plads til
+- `minmax(250px, 1fr)` - Hver kolonne er minimum 250px og maksimum 1fr (fylder tilgængelig plads)
+- Browseren beregner automatisk antal kolonner baseret på skærmbredde
 
-**8b. Hvornår bruge hvad?**
+**7b. Sammenlign de to tilgange**
 
-- **Faste breakpoints**: Når du vil have specifik kontrol over layout
-- **Auto-fit**: Når du vil have fleksibel tilpasning til skærmstørrelse
+| Tilgang               | Fordele                                          | Ulemper                                      |
+| --------------------- | ------------------------------------------------ | -------------------------------------------- |
+| **Faste breakpoints** | Præcis kontrol, forudsigelig, lettere at debugge | Flere kodelinjer, skal vedligeholdes         |
+| **Auto-fit**          | Mindre kode, fleksibel, tilpasser sig automatisk | Mindre kontrol, kan give uventede resultater |
 
 #### ✅ Eksperimentér!
 
-Prøv begge tilgange og se hvilken du foretrækker til dit projekt!---
+Prøv at skifte mellem de to tilgange:
 
-## Del 4: Finpudsning og Optimering ✨
+1. **Metode 1**: Brug din mobile-first CSS med media queries (Trin 6)
+2. **Metode 2**: Erstat med auto-fit versionen (Trin 7a)
+3. Resize vinduet og observer forskellene
 
-**Formål:** Analyser den eksisterende styling og forstå hvordan den fungerer.
+**7c. Hvornår bruge hvad?**
 
-### Trin 9: Analyser eksisterende poster styling
+- **Brug faste breakpoints når:**
 
-**9a. Undersøg den nuværende movie poster CSS**
+  - Du vil have specifik kontrol over layout
+  - Design kræver præcise antal kolonner
+  - Du skal matche et design system
 
-Se på din `app.css` - find `.movie-poster` reglen:
+- **Brug auto-fit når:**
+  - Du vil have maksimal fleksibilitet
+  - Du har meget dynamisk content
+  - Du vil minimere vedligeholdelse
+
+#### ✅ Vælg din tilgang!
+
+Beslut hvilken grid tilgang der fungerer bedst for dit projekt.
+
+**Anbefaling:** Start med faste breakpoints (Trin 6) - det giver dig bedre forståelse og kontrol!
+
+---
+
+## Del 4: Forstå Eksisterende Styling 🎨
+
+**Formål:** Analyser og forstå den eksisterende CSS styling for movie cards og posters.
+
+### Trin 8: Undersøg Movie Card Styling
+
+**8a. Find og analyser `.movie-card` CSS**
+
+Åbn din `app.css` fil og find `.movie-card` reglen. Den skulle indeholde noget lignende:
+
+```css
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+```
+
+#### ✅ Forstå hver CSS regel!
+
+- `display: flex` - Aktiverer flexbox layout
+- `flex-direction: column` - Layouter indhold lodret (billede over tekst)
+- `border-radius: 8px` - Afrundede hjørner
+- `overflow: hidden` - Holder indhold inden for border-radius
+- `box-shadow` - Skaber dybde effekt
+- `transition` - Smooth animationer ved hover
+- `transform: translateY(-4px)` - Løfter card 4px op ved hover
+
+**8b. Test card styling**
+
+#### ✅ Interaktivitets test!
+
+1. Hover langsomt over forskellige movie cards
+2. Observer lift-effekten når du hover
+3. Se hvordan skyggen ændrer sig
+4. Åbn Developer Tools → Elements → Hover over en `.movie-card`
+5. Se CSS properties i "Styles" panelet
+
+---
+
+### Trin 9: Forstå Movie Poster Styling
+
+**9a. Find og analyser `.movie-poster` CSS**
+
+Find `.movie-poster` reglen i din `app.css`:
 
 ```css
 .movie-poster {
   width: 100%;
   height: 400px;
   object-fit: cover;
-  background: linear-gradient(135deg, var(--secondary-light), var(--primary-light));
-  transition: var(--transition);
+  transition: transform 0.3s ease;
 }
 
 .movie-card:hover .movie-poster {
@@ -495,41 +584,161 @@ Se på din `app.css` - find `.movie-poster` reglen:
 
 - `width: 100%` - Billedet fylder hele card bredden
 - `height: 400px` - Fast højde sikrer alle posters er samme størrelse
-- `object-fit: cover` - Bibeholder billedets proportioner og fylder hele området
-- `background: linear-gradient(...)` - Fallback hvis billede ikke loader
-- `transition: var(--transition)` - Smooth animationer
-- `transform: scale(1.05)` - Zoom effekt på hover
+- `object-fit: cover` - **VIGTIG!** Bevarer billedproportioner og fylder hele området
+- `transition` - Smooth animation ved hover
+- `transform: scale(1.05)` - Zoom effekt (5% større) ved hover
 
-**9b. Test poster funktionalitet**
+**9b. Test poster hover effekt**
 
-#### ✅ Eksperimentér med poster styling!
+#### ✅ Zoom test!
 
-1. **Test hover effekt**: Hover over movie cards - ser du zoom effekten?
-2. **Test responsivitet**: Resize vinduet - forbliver alle posters samme højde?
-3. **Inspicér et billede**:
-   - Højreklik på en poster → "Inspect Element"
-   - Se hvordan `object-fit: cover` virker
-   - Prøv at ændre `cover` til `contain` midlertidigt - se forskellen
+1. Hover over movie cards
+2. Observer hvordan poster billeder zoomer subtilt ind
+3. Se at zoom effekten er smooth (ikke hoppende)
 
-**9c. Forstå object-fit værdier**
+---
+
+### Trin 10: Dybdegående - Forstå `object-fit`
+
+**Formål:** Forstå hvorfor `object-fit: cover` er vigtig for movie posters.
+
+**10a. Problemet med billeder**
+
+Movie posters har forskellige størrelser og proportioner:
+
+- Nogle er høje og smalle (typisk filmplakater)
+- Andre er brede og lave
+- Hvis vi bare sætter `width` og `height`, bliver billeder strækket og forvrænsket! 😱
+
+**10b. Løsningen: `object-fit`**
+
+CSS `object-fit` property styrer hvordan billeder tilpasser sig deres container:
 
 ```css
 /* Forskellige object-fit værdier */
-object-fit: cover; /* Standard - fylder området, bevarer proportioner */
-object-fit: contain; /* Viser hele billedet, kan have whitespace */
-object-fit: fill; /* Strækker billedet til at fylde (kan forvrænge) */
+object-fit: cover; /* Fylder hele området, kan croppe kanter */
+object-fit: contain; /* Viser hele billedet, kan efterlade whitespace */
+object-fit: fill; /* Strækker til at fylde (forvrænger billedet!) */
 object-fit: scale-down; /* Som contain, men aldrig større end original */
 ```
 
-#### ✅ Test object-fit værdier!
+#### ✅ Visualisér forskellen!
 
-Midlertidigt ændr `object-fit` i din CSS og se forskellen på poster visning.
+Tænk på en høj smal filmplakat i en bred container:
+
+- **`cover`**: Fylder hele containeren, cropper top/bund hvis nødvendigt ✅ (Vores valg!)
+- **`contain`**: Viser hele plakaten, men med whitespace på siderne ❌
+- **`fill`**: Strækker plakaten så den bliver bred og flad ❌❌
+
+**10c. Eksperimentér med object-fit**
+
+#### ✅ Hands-on test!
+
+1. Find `.movie-poster` i din `app.css`
+2. Ændr midlertidigt `object-fit: cover` til `object-fit: contain`
+3. Refresh siden og observer forskellen
+4. Se hvordan nogle posters nu har whitespace (hvide/grå områder)
+5. Prøv også `object-fit: fill` - se hvordan billeder bliver forvrænsket!
+6. Skift tilbage til `object-fit: cover` - meget bedre! ✨
+
+**10d. Hvorfor `cover` er bedst til posters**
+
+- ✅ Fylder hele card området - ingen whitespace
+- ✅ Bevarer billedproportioner - ingen forvrængning
+- ✅ Konsistent visuelt udtryk - alle cards ser ens ud
+- ✅ Professionelt look - som Netflix, IMDb, osv.
+
+#### ✅ Developer Tools Inspect!
+
+1. Højreklik på en movie poster → "Inspect Element"
+2. Find `<img class="movie-poster">` i Elements panelet
+3. Se i Styles panelet hvordan `object-fit: cover` er anvendt
+4. Prøv at disable/enable properties - se effekten live!
+
+---
+
+### Trin 11: Sammenfatning af Styling
+
+#### ✅ Hvad har du lært?
+
+- [ ] Forstår hvordan `.movie-card` bruger flexbox til layout
+- [ ] Forstår hover effekter med `transform` og `transition`
+- [ ] Forstår hvorfor `object-fit: cover` er vigtig for billeder
+- [ ] Kan forklare forskellen mellem `cover`, `contain` og `fill`
+- [ ] Har eksperimenteret med CSS i Developer Tools
+
+#### 🎉 Godt gået!
+
+Du forstår nu den eksisterende styling og er klar til næste del!
 
 ---
 
 ## Del 5: Fra HTML til JavaScript Objekter 🎬→📝
 
 **Formål:** Konverter din eksisterende HTML movie data til JavaScript objekter.
+
+### Hvorfor JavaScript objekter? 🤔
+
+**Lige nu har vi et problem:**
+
+Vores movie data er "låst fast" i HTML:
+
+```html
+<article class="movie-card">
+  <img src="..." alt="Barbie" />
+  <div class="movie-info">
+    <h3>Barbie <span class="movie-year">(2023)</span></h3>
+    <p class="movie-genre">Adventure, Comedy, Fantasy</p>
+    <!-- osv. -->
+  </div>
+</article>
+```
+
+#### ❌ Problemer med HTML-only data:
+
+1. **Svært at søge** - Hvordan finder vi alle film fra 2023?
+2. **Svært at sortere** - Hvordan sorterer vi efter rating?
+3. **Svært at filtrere** - Hvordan viser vi kun action film?
+4. **Svært at opdatere** - Skal manuelt ændre HTML for hver film
+5. **Ikke dynamisk** - Kan ikke tilføje nye film uden at skrive HTML
+6. **Gentaget kode** - Samme HTML struktur kopieret mange gange
+
+#### ✅ Fordele ved JavaScript objekter:
+
+```javascript
+const barbieMovie = {
+  id: 1,
+  title: "Barbie",
+  year: 2023,
+  genre: ["Adventure", "Comedy", "Fantasy"],
+  rating: 7.0,
+  director: "Greta Gerwig"
+  // osv.
+};
+```
+
+1. **Nemt at søge** - `movies.filter(movie => movie.year === 2023)`
+2. **Nemt at sortere** - `movies.sort((a, b) => b.rating - a.rating)`
+3. **Nemt at filtrere** - `movies.filter(movie => movie.genre.includes("Action"))`
+4. **Dynamisk** - Generer HTML automatisk fra data
+5. **Kan hentes fra database** - F.eks. JSON fil eller API
+6. **Separation of Concerns** - Data adskilt fra præsentation
+
+#### 🎯 Vores mål:
+
+1. **Konverter** alle movie cards fra HTML til JavaScript objekter
+2. **Gem** objekterne i et array: `const movies = [movie1, movie2, ...]`
+3. **Generer** HTML dynamisk fra JavaScript (senere!)
+
+#### 💡 Real-world eksempler:
+
+- **Netflix**: Henter film data fra database → viser som cards
+- **IMDb**: Tusindvis af film i database → genererer HTML dynamisk
+- **Spotify**: Sange som objekter → viser dem som playlister
+
+**Lad os komme i gang!** 🚀
+
+---
 
 ### Trin 10: Analyser eksisterende movie data
 
@@ -538,7 +747,7 @@ Midlertidigt ændr `object-fit` i din CSS og se forskellen på poster visning.
 Se på en af dine movie cards i `index.html`:
 
 ```html
-<article class="movie-card" tabindex="0">
+<article class="movie-card">
   <img
     src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg"
     alt="Poster of Barbie"
@@ -662,6 +871,7 @@ Du har lært mønsteret - nu skal du selv oprette objekter for de resterende 5 f
 - Forrest Gump (1994)
 - Goodfellas (1990)
 - Inception (2010)
+- Eller nogle helt andre hvis du ønsker!
 
 #### ✅ Husk objekt strukturen!
 
@@ -861,7 +1071,7 @@ console.log(`${barbieMovie.title} er ${barbieAge} år gammel`);
 
 ### Trin 14B: Nulstil JavaScript til ren movie data 🧹
 
-**Før vi starter DOM manipulation, skal vi have en ren `app.js` fil OG en tom movie container.**
+Før vi starter DOM manipulation, skal vi have en ren `app.js` fil OG en tom movie container.
 
 **15B.1. Backup din nuværende `app.js`**
 
@@ -874,10 +1084,10 @@ Gå til din `index.html` og fjern ALT indhold mellem `<section id="movie-list">`
 ```html
 <!-- Fra dette: -->
 <section id="movie-list">
-  <article class="movie-card" tabindex="0">
+  <article class="movie-card">
     <!-- Masse HTML for Barbie... -->
   </article>
-  <article class="movie-card" tabindex="0">
+  <article class="movie-card">
     <!-- Masse HTML for Dune... -->
   </article>
   <!-- ...alle de andre movie cards... -->
@@ -889,7 +1099,41 @@ Gå til din `index.html` og fjern ALT indhold mellem `<section id="movie-list">`
 </section>
 ```
 
+Det til sige at din html ender med at se sådan ud:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Dit navn" />
+    <meta name="description" content="Project Template" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <title>Movie App</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Movie App</h1>
+    </header>
+    <main>
+      <!-- Movie List -->
+      <section id="movie-list"></section>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <p>© Dit Navn</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
 **15B.3. Erstat indholdet af `app.js` med kun movie objekterne**
+Ryd op i din `app.js`, så du kun har dine movie objekter gemt i variabler. Du må gerne have c`onsole.log`s, som du har testet med:
 
 ```javascript
 // ========== MOVIE APP - SESSION 2 ==========
@@ -982,7 +1226,7 @@ const movieListContainer = document.querySelector("#movie-list");
 
 // Tilføj Barbie movie DIREKTE med template string
 const barbieHTML = `
-  <article class="movie-card" tabindex="0">
+  <article class="movie-card">
     <img src="${barbieMovie.image}" 
          alt="Poster of ${barbieMovie.title}" 
          class="movie-poster" />
@@ -1010,7 +1254,7 @@ console.log("Barbie added!");
 ```javascript
 // Tilføj Dune movie DIREKTE (bemærk hvor meget du skriver igen!)
 const duneHTML = `
-  <article class="movie-card" tabindex="0">
+  <article class="movie-card">
     <img src="${duneMovie.poster}" 
          alt="Poster of ${duneMovie.title}" 
          class="movie-poster" />
@@ -1032,7 +1276,7 @@ console.log("Dune added!");
 ```javascript
 // Tilføj Dune: Part Two (SAMME kode igen og igen!)
 const duneTwoHTML = `
-  <article class="movie-card" tabindex="0">
+  <article class="movie-card">
     <img src="${duneTwoMovie.poster}" 
          alt="Poster of ${duneTwoMovie.title}" 
          class="movie-poster" />
@@ -1079,7 +1323,7 @@ function displayMovie(movieObject) {
   const genreString = movieObject.genre.join(", ");
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movieObject.image}" 
            alt="Poster of ${movieObject.title}" 
            class="movie-poster" />
@@ -1174,9 +1418,6 @@ displayMovie(testMovie);
 **Nu kan vi tilføje alle vores movies super nemt:**
 
 ```javascript
-// Ryd container hvis nødvendigt
-movieListContainer.innerHTML = "";
-
 // Tilføj alle movies - ÉN linje per movie! (bruger individuelle objekter)
 displayMovie(barbieMovie);
 displayMovie(duneMovie);
@@ -1199,7 +1440,188 @@ console.log("Alle 8 movies tilføjet! 🎉");
 
 💡 **Note:** Vi bruger stadig individuelle objekter her - i næste trin lærer vi en bedre måde!
 
-**18a. BONUS - Opret dit eget movie**
+---
+
+### 📋 Sådan burde din `app.js` se ud nu:
+
+<details>
+<summary>🔍 Klik her for at se komplet løsning</summary>
+
+```javascript
+// ========== MOVIE OBJECTS ==========
+
+// Movie 1: Barbie
+const barbieMovie = {
+  id: 1,
+  title: "Barbie",
+  year: 2023,
+  genre: ["Adventure", "Comedy", "Fantasy"],
+  rating: 7.0,
+  director: "Greta Gerwig",
+  image: "https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg",
+  actors: ["Margot Robbie", "Ryan Gosling", "America Ferrera"],
+  description:
+    "Barbie and Ken embark on a journey of self-discovery after leaving the utopian Barbie Land for the real world."
+};
+
+// Movie 2: Dune
+const duneMovie = {
+  id: 2,
+  title: "Dune",
+  year: 2021,
+  genre: ["Adventure", "Drama", "Sci-Fi"],
+  rating: 8.0,
+  director: "Denis Villeneuve",
+  image: "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg",
+  actors: ["Timothée Chalamet", "Rebecca Ferguson", "Oscar Isaac"],
+  description:
+    "Paul Atreides leads nomadic tribes in a battle to control the desert planet Arrakis and its valuable spice."
+};
+
+// Movie 3: Dune: Part Two
+const duneTwoMovie = {
+  id: 3,
+  title: "Dune: Part Two",
+  year: 2024,
+  genre: ["Action", "Adventure", "Drama"],
+  rating: 8.7,
+  director: "Denis Villeneuve",
+  image:
+    "https://m.media-amazon.com/images/M/MV5BNTc0YmQxMjEtODI5MC00NjFiLTlkMWUtOGQ5NjFmYWUyZGJhXkEyXkFqcGc@._V1_.jpg",
+  actors: ["Timothée Chalamet", "Zendaya", "Rebecca Ferguson"],
+  description:
+    "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family."
+};
+
+// Movie 4: Spider-Man: Across the Spider-Verse
+const spider = {
+  id: 4,
+  title: "Spider-Man: Across the Spider-Verse",
+  year: 2023,
+  genre: ["Animation", "Action", "Adventure"],
+  rating: 8.7,
+  director: "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
+  image:
+    "https://m.media-amazon.com/images/M/MV5BZjE1ODk2NDgtNTMxZC00ZWQ1LWFlZmItNjQ1ZWRhZTQ5NTliXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  actors: ["Shameik Moore", "Hailee Steinfeld", "Oscar Isaac"],
+  description:
+    "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence."
+};
+
+// Movie 5: Avatar: The Way of Water
+const avatar = {
+  id: 5,
+  title: "Avatar: The Way of Water",
+  year: 2022,
+  genre: ["Action", "Adventure", "Fantasy"],
+  rating: 7.6,
+  director: "James Cameron",
+  image:
+    "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGc@._V1_.jpg",
+  actors: ["Sam Worthington", "Zoe Saldana", "Sigourney Weaver"],
+  description:
+    "Jake Sully and Ney'tiri have formed a family and are doing everything to stay together. However, they must leave their home and explore the regions of Pandora."
+};
+
+// Movie 6: Top Gun: Maverick
+const topgun = {
+  id: 6,
+  title: "Top Gun: Maverick",
+  year: 2022,
+  genre: ["Action", "Drama"],
+  rating: 8.3,
+  director: "Joseph Kosinski",
+  image:
+    "https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  actors: ["Tom Cruise", "Miles Teller", "Jennifer Connelly"],
+  description:
+    "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission that demands the ultimate sacrifice from those chosen to fly it."
+};
+
+// Movie 7: Interstellar
+const interstellar = {
+  id: 7,
+  title: "Interstellar",
+  year: 2014,
+  genre: ["Adventure", "Drama", "Sci-Fi"],
+  rating: 8.7,
+  director: "Christopher Nolan",
+  image:
+    "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_.jpg",
+  actors: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
+  description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+};
+
+// Movie 8: John Wick: Chapter 4
+const johnwick = {
+  id: 8,
+  title: "John Wick: Chapter 4",
+  year: 2023,
+  genre: ["Action", "Crime", "Thriller"],
+  rating: 7.7,
+  director: "Chad Stahelski",
+  image:
+    "https://m.media-amazon.com/images/M/MV5BNjRmMTk1ZjgtZTQ5ZS00NmM5LWJlNWYtY2M1NzI3NWU3ZmFjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  actors: ["Keanu Reeves", "Donnie Yen", "Bill Skarsgård"],
+  description:
+    "John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe."
+};
+
+// ========== FUNCTIONS ==========
+
+/**
+ * Displays a single movie card in the movie list
+ * @param {Object} movieObject - The movie object containing all movie data
+ */
+function displayMovie(movieObject) {
+  const htmlTemplate = `
+    <article class="movie-card">
+      <img 
+        src="${movieObject.image}" 
+        alt="Poster of ${movieObject.title}"
+        class="movie-poster" 
+      />
+      <div class="movie-info">
+        <h3>${movieObject.title} <span class="movie-year">(${movieObject.year})</span></h3>
+        <p class="movie-genre">${movieObject.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movieObject.rating}</p>
+        <p class="movie-director"><strong>Director:</strong> ${movieObject.director}</p>
+      </div>
+    </article>
+  `;
+
+  document.querySelector("#movie-list").insertAdjacentHTML("beforeend", htmlTemplate);
+}
+
+// ========== DISPLAY ALL MOVIES ==========
+
+// Tilføj alle movies - ÉN linje per movie!
+displayMovie(barbieMovie);
+displayMovie(duneMovie);
+displayMovie(duneTwoMovie);
+displayMovie(spider);
+displayMovie(avatar);
+displayMovie(topgun);
+displayMovie(interstellar);
+displayMovie(johnwick);
+
+console.log("Alle 8 movies tilføjet! 🎉");
+```
+
+#### ✅ Checklist for din kode:
+
+- [ ] Alle 8 movie objekter er defineret
+- [ ] `movieListContainer` reference er oprettet
+- [ ] `displayMovie()` funktionen er defineret
+- [ ] Alle 8 movies kaldes med `displayMovie()`
+- [ ] Ingen fejl i Console
+- [ ] Alle movies vises i browseren i CSS Grid layout
+
+</details>
+
+---
+
+**18a. BONUS - Opret din egen movie**
 
 ```javascript
 // Opret et nyt movie object
@@ -1249,6 +1671,7 @@ displayMovie(johnwick);
 ```
 
 **19b. Løsningen - Saml alt i et array!**
+Lidt som i en database eller JSON fil, kan vi samle alle vores movie objekter i et enkelt array:
 
 ```javascript
 // I stedet for mange separate variabler, definer alt data direkte i arrayet!
@@ -1365,6 +1788,7 @@ const movies = [
 4. Tjek Console - ser du arrayet med alle movies?
 
 **19c. Test adgang til enkelte movies via indeks**
+Brug din eksisterende `displayMovie` funktion til at tilføje enkelte movies ved hjælp af array indeks - fx `movies[0]`, `movies[1]`, osv.:
 
 ```javascript
 // Nu kan vi tilgå movies via array indeks
@@ -1385,11 +1809,12 @@ console.log("3 movies tilføjet via array indeks!");
 
 #### ✅ Eksperimentér med array adgang!
 
-1. Prøv forskellige indeks: `movies[0]`, `movies[3]`, `movies[7]`
+1. Prøv forskellige indeks: `movies[0]`, `movies[3]`, `movies[7]` - eller måske dem alle sammen?
 2. Tilføj kun de movies du vil have vist
 3. Se hvordan array indeks giver os mere kontrol
 
 **19d. Gradvis introduktion til loops - tilføj alle movies**
+Fjern eller udkommenter de manuelle kald til `displayMovie` og brug et `for-of` loop til at tilføje alle movies fra arrayet:
 
 ```javascript
 // I stedet for at skrive 8 linjer...
@@ -1401,9 +1826,6 @@ console.log("3 movies tilføjet via array indeks!");
 // displayMovie(movies[5]);
 // displayMovie(movies[6]);
 // displayMovie(movies[7]);
-
-// Kan vi bruge et loop! (den moderne måde)
-movieListContainer.innerHTML = ""; // Ryd først
 
 // For-of loop - gå gennem hver movie i arrayet
 for (const movie of movies) {
@@ -1508,6 +1930,9 @@ displayMovies(movies);
 console.log(`Nu vises ${movies.length} movies!`);
 ```
 
+- Hvad sker der når du kører `displayMovies(movies)` igen efter at have tilføjet en ny movie?
+- Prøv at tilføje flere movies dynamisk!
+
 #### 🎯 Hvad lærte vi i Del 5 + Arrays?
 
 - **Template strings** (`${}`) til dynamisk HTML
@@ -1520,11 +1945,62 @@ console.log(`Nu vises ${movies.length} movies!`);
 
 ---
 
----
-
 ## Del 6: Fra Lokale Arrays til Ekstern JSON Data 🌐→📡
 
 **Formål:** Lær at hente movie data fra en ekstern JSON fil i stedet for lokale JavaScript arrays.
+
+### Hvorfor eksterne data? 🤔
+
+**Det store spring - Fra statisk til dynamisk:**
+
+Lige nu har vi hardkodet vores movies direkte i `app.js`:
+
+```javascript
+const movies = [
+  { id: 1, title: "Barbie", year: 2023, ... },
+  { id: 2, title: "Dune", year: 2021, ... },
+  // ... osv.
+];
+```
+
+**Dette fungerer til læring, men i virkeligheden:**
+
+#### ❌ Problemer med hardkoded data:
+
+1. **Skal gendeploye hele app'en** for at tilføje én film
+2. **Udviklere skal ændre kode** - content creators kan ikke hjælpe
+3. **Ikke skalerbart** - 1000 film i JavaScript filen? 😱
+4. **Kan ikke deles** - Andre apps/systemer kan ikke bruge data
+5. **Ingen real-time opdateringer** - Data er "frozen" i koden
+6. **Svært at vedligeholde** - Skal søge gennem kode for at rette stavefejl
+
+#### ✅ Fordele ved eksterne data (JSON):
+
+1. **Adskillelse af data og kode** - Content kan opdateres uafhængigt
+2. **Content creators kan opdatere** - Ingen kode-viden nødvendig
+3. **Skalerbart** - Millioner af film? Ingen problem!
+4. **Kan deles** - API'er kan bruges af mange apps
+5. **Real-time data** - Hent friske data hver gang
+6. **Centraliseret** - Én kilde til sandhed, delt af alle
+
+#### 🌍 Real-world eksempler:
+
+- **Netflix**: Henter film data fra database via API
+- **Spotify**: Musikdata kommer fra servere, ikke hardkodet
+- **Instagram**: Posts hentes dynamisk, ikke i koden
+- **Din bank app**: Konto balance kommer fra server!
+
+#### 🎯 Hvad skal vi lære?
+
+1. **Forstå JSON format** - Web'ets data sprog
+2. **Fetch API** - Hent data fra eksterne kilder
+3. **Async/Await** - Håndter asynkrone operationer
+4. **Error handling** - Hvad hvis serveren er nede?
+5. **Loading states** - Vis brugeren at data hentes
+
+**Lad os gøre vores app mere professionel!** 🚀
+
+---
 
 ### Trin 22: Forstå problemet med lokale data
 
@@ -1569,7 +2045,8 @@ const movies = [
 
 **23a. Hvad er JSON?**
 
-**JSON** står for **J**ava**S**cript **O**bject **N**otation og er web'ets mest populære dataformat:
+- **JSON** står for **J**ava**S**cript **O**bject **N**otation og er web'ets mest populære dataformat.
+- **JSON** anvendes til at udveksle data på web'et - mellem client og server - via HTTP.
 
 ```json
 {
@@ -1585,7 +2062,7 @@ const movies = [
 - 📝 **Tekst-baseret** - kan læses af mennesker og computere
 - 🌐 **Sprog-uafhængigt** - virker med alle programmeringssprog
 - 📊 **Struktureret data** - objekter, arrays, strings, numbers, booleans
-- 🔗 **Nemt at parse** - JavaScript kan nemt konvertere til objekter
+- 🔗 **Nemt at parse** til og fra JavaScript - JavaScript kan nemt konvertere til objekter
 
 **JSON vs JavaScript objekter:**
 
@@ -1606,14 +2083,14 @@ const person = {
 **23b. Åbn JSON filen i din browser**
 
 1. Åbn en ny tab i din browser
-2. Gå til: `https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json`
+2. Gå til: https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
 3. **STOP! Læs JSON'en grundigt før du fortsætter** 👀
 
 #### ✅ Analyser JSON strukturen!
 
 Se på den første film i JSON'en og besvar:
 
-1. **Hvilke properties har hver film?** (sammenlign med din lokale array)
+1. **Hvilke properties har hver film?** (sammenlign med dit lokale array)
 2. **Hvilke nye properties ser du som vi ikke har lokalt?**
 3. **Hvilke properties er arrays?** (hint: der er et par stykker)
 4. **Hvor mange film er der i alt?** (scroll til bunden)
@@ -1674,6 +2151,7 @@ Se på den første film i JSON'en og besvar:
 ### Trin 24: Introduktion til moderne data hentning 🎣
 
 **24a. Den moderne måde at hente data på**
+_Du skal ikke skrive noget kode i dette trin - bare læs og forstå._
 
 JavaScript har en elegant måde at hente data fra internettet på ved hjælp af `async` og `await`:
 
@@ -1693,7 +2171,7 @@ async function loadMovies() {
 **💡 Tænk på `async/await` som ventetid:**
 
 - `async` = "Denne funktion kan tage tid"
-- `await` = "Vent her til data er klar"
+- `await` = "Vent her til data er klar" - vi ved ikke hvor lang tid det tager fx at hente noget data fra en server over nettet.
 - Det ligner normal kode, men venter pænt på internettet
 
 **24b. Sådan virker det:**
@@ -1708,14 +2186,14 @@ async function loadMovies() {
 
 ### Trin 25: Din første async/await funktion 🎯
 
-**25a. Opret din første async funktion**
+**25a. Start med en simpel test funktion**
 
-Tilføj denne kode til din `app.js` (efter dine eksisterende funktioner):
+Lad os først teste at vi kan hente data - uden at vise noget endnu:
 
 ```javascript
-// ========== ASYNC MOVIE LOADER ==========
+// ========== TEST ASYNC FETCH ==========
 
-async function loadMovies() {
+async function testFetchMovies() {
   console.log("🚀 Starter hentning af movie data...");
 
   // Vent på at få response fra serveren
@@ -1729,12 +2207,10 @@ async function loadMovies() {
   console.log("🎬 Movies fra JSON:", moviesFromJSON);
   console.log("📊 Antal movies:", moviesFromJSON.length);
   console.log("🎭 Første movie:", moviesFromJSON[0]);
-
-  return moviesFromJSON;
 }
 
 // Kald funktionen
-loadMovies();
+testFetchMovies();
 ```
 
 **25b. Forstå hvad der sker trin for trin:**
@@ -1742,7 +2218,7 @@ loadMovies();
 1. **`async function`** - Fortæller JavaScript "denne funktion kan tage tid"
 2. **`await fetch(...)`** - "Vent her til serveren svarer"
 3. **`await response.json()`** - "Vent her til data er konverteret"
-4. **Return data** - Sender movie data tilbage
+4. **Console logs** - Lad os se hvad vi fik
 
 #### ✅ Test din første async funktion!
 
@@ -1751,64 +2227,235 @@ loadMovies();
 3. Refresh siden
 4. Åbn Console (F12) og se de detaljerede logs!
 
-**💡 Bemærk:** Funktionen kører automatisk når siden loader - du ser data i Console!
-
 **Du skulle se:**
 
-1. "🚀 Starter fetch test..." (med det samme)
-2. "⚡ Kode fortsætter..." (med det samme)
-3. "📡 Response modtaget..." (lidt senere)
-4. "🎬 Movies fra JSON..." (lidt senere)
+1. "🚀 Starter hentning..." (med det samme)
+2. "📡 Response modtaget..." (lidt senere)
+3. "🎬 Movies fra JSON..." (lidt senere)
+4. "📊 Antal movies: 17"
 
-**25b. Analyser JSON response i Console**
+**25c. Analyser JSON response i Console**
 
 Når data er hentet, undersøg det i Console:
 
-1. **Expand** `moviesFromJSON` arrayet
+1. **Expand** `moviesFromJSON` arrayet (klik på pilen)
 2. **Click** på den første movie ([0])
 3. **Se** alle properties: id, title, genre array, actors array, etc.
 
 #### ✅ Sammenlign med din lokale data!
 
-- Er genre nu et array? `["Adventure", "Comedy", "Fantasy"]`
+- Er der flere movies? (17 vs. 8)
 - Findes der actors? `["Margot Robbie", "Ryan Gosling", "America Ferrera"]`
 - Er der en description?
-- Hedder billedet `image` i stedet for `poster`?
-
-**25c. Forstå console output**
-
-```javascript
-// Du ser response objektet først:
-Response {
-  status: 200,        // ← HTTP status (200 = success)
-  ok: true,          // ← Alt gik godt
-  url: "https://...", // ← URL der blev hentet fra
-  // ... og meget mere
-}
-
-// Derefter det parsede JSON:
-[
-  { id: 1, title: "Barbie", genre: [...], ... },
-  { id: 2, title: "The Matrix", genre: [...], ... },
-  // ... 15 andre movies
-]
-```
+- Hedder billedet `image`?
 
 ---
 
-### Trin 26: Fantastisk! Din funktion virker allerede! 🎉
+### Trin 26: Test med én movie først �
 
-**26a. Godt nyt - ingen ændringer nødvendige!**
+**26a. Godt nyt - din displayMovie funktion virker allerede!**
 
-Fordi vi brugte den samme struktur fra starten, virker din `displayMovie` funktion allerede perfekt med JSON data:
+Fordi vi designede vores struktur godt fra starten, virker `displayMovie` funktionen med JSON data uden ændringer!
+
+Lad os teste det:
 
 ```javascript
+// ========== TEST DISPLAY ONE MOVIE ==========
+
+async function testDisplayOneMovie() {
+  console.log("🧪 Tester at vise ÉN movie fra JSON...");
+
+  // Hent data
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
+  const moviesFromJSON = await response.json();
+
+  // Ryd container først
+  movieListContainer.innerHTML = "";
+
+  // Vis kun første movie som test
+  displayMovie(moviesFromJSON[0]);
+
+  console.log("✅ Test success - én movie fra JSON vist!");
+}
+
+// Kør testen
+testDisplayOneMovie();
+```
+
+#### ✅ Test processen!
+
+1. **Kommentér ud** din `testFetchMovies()` funktion (tilføj `//` foran hver linje)
+2. Tilføj `testDisplayOneMovie()` funktionen til din `app.js`
+3. **GEM filen** (`Ctrl+S` / `Cmd+S`)
+4. Refresh siden
+5. Ser du ÉN movie card fra JSON data?
+
+**Sådan skulle din app.js se ud nu:**
+
+```javascript
+// Kommenteret ud - vi bruger den ikke mere:
+// async function testFetchMovies() { ... }
+
+// Ny test funktion - aktiv:
+async function testDisplayOneMovie() {
+  console.log("🧪 Tester at vise ÉN movie fra JSON...");
+  // ... funktionskode ...
+}
+
+testDisplayOneMovie(); // ← Denne kører nu
+```
+
+**💡 Hvorfor virker det?**
+
+Fordi JSON strukturen matcher vores objekt struktur:
+
+- Begge har `title`, `year`, `genre`, `rating`, `director`, `image`
+- `displayMovie()` forventer et objekt med disse properties
+- JSON giver os netop det! ✨
+
+---
+
+### Trin 27: Vis alle JSON movies! 🎬🎬🎬
+
+**27a. Nu skal vi vise ALLE movies - ikke bare én**
+
+Vi skal nu erstatte vores test-kode med den endelige løsning. Følg disse trin nøje:
+
+**TRIN 1: Slet/kommentér test funktioner**
+
+Find og kommentér ud (eller slet) disse test funktioner:
+
+```javascript
+// SLET ELLER KOMMENTÉR UD:
+// async function testFetchMovies() { ... }
+// testFetchMovies();
+
+// async function testDisplayOneMovie() { ... }
+// testDisplayOneMovie();
+```
+
+**TRIN 2: Tjek om du har displayMovies() funktion**
+
+Søg i din `app.js` efter en funktion der hedder `displayMovies`.
+
+- **Hvis du IKKE har den:** Tilføj den nedenfor
+- **Hvis du HAR den:** Spring til TRIN 3
+
+```javascript
+// ========== DISPLAY ALL MOVIES ==========
+
+function displayMovies(movieArray) {
+  // Ryd container først
+  movieListContainer.innerHTML = "";
+
+  console.log(`🎬 Viser ${movieArray.length} movies...`);
+
+  // Loop gennem alle movies
+  for (const movie of movieArray) {
+    displayMovie(movie);
+  }
+
+  console.log(`🎉 ${movieArray.length} movies vist!`);
+}
+```
+
+**TRIN 3: Opret den endelige loadMovies() funktion**
+
+Tilføj denne nye funktion (eller erstat hvis du allerede har en):
+
+```javascript
+// ========== LOAD MOVIES FROM JSON ==========
+
+async function loadMovies() {
+  console.log("🌐 Henter alle movies fra JSON...");
+
+  // Hent data fra JSON fil
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
+  const moviesFromJSON = await response.json();
+
+  console.log("📊 JSON data modtaget:", moviesFromJSON.length, "movies");
+
+  // Vis alle movies
+  displayMovies(moviesFromJSON);
+}
+```
+
+**TRIN 4: Kald loadMovies() når siden loader**
+
+Find din `DOMContentLoaded` event listener (eller tilføj den):
+
+```javascript
+// ===== APP INITIALISERING =====
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  loadMovies(); // Hent og vis movies fra JSON
+}
+```
+
+**TRIN 5: Ryd op - slet gammel lokal data**
+
+Find og **SLET** (ikke kommentér, men slet helt):
+
+```javascript
+// SLET DETTE:
+const movies = [
+  { id: 1, title: "Barbie", ... },
+  { id: 2, title: "Dune", ... },
+  // ... alle dine lokale movies
+];
+
+// SLET OGSÅ DETTE hvis du har det:
+displayMovies(movies);
+```
+
+#### ✅ Test den komplette løsning!
+
+1. **GEM filen** (`Ctrl+S` / `Cmd+S`)
+2. Refresh siden
+3. Åbn Console
+
+**Du skulle nu se:**
+
+- 🎬 **17 movies** (fra JSON, ikke 8)
+- 📊 Console log: "JSON data modtaget: 17 movies"
+- 🎉 Console log: "17 movies vist!"
+- ⭐ Nye film som "The Matrix", "The Dark Knight", etc.
+
+**27b. Fejlfinding hvis det ikke virker**
+
+**Problem:** Ingen movies vises
+
+**Tjek:**
+
+1. Er der fejl i Console? (Røde beskeder)
+2. Kører `loadMovies()` fra `initApp()`?
+3. Er din gamle `movies` array slettet?
+
+**Problem:** Jeg ser stadig kun 8 movies
+
+**Løsning:**
+
+- Du har glemt at slette din gamle lokale `movies` array
+- Eller du kalder stadig `displayMovies(movies)` med den gamle data
+- Søg efter "const movies = [" og slet det hele
+
+---
+
+### Trin 28: Verificér din endelige kode struktur ✅
+
+**28a. Sådan SKAL din app.js se ud nu:**
+
+```javascript
+// ========== DOM REFERENCE ==========
+const movieListContainer = document.querySelector("#movie-list");
+
+// ========== DISPLAY SINGLE MOVIE ==========
 function displayMovie(movieObject) {
-  // Konverter genre array til string
   const genreString = movieObject.genre.join(", ");
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movieObject.image}" 
            alt="Poster of ${movieObject.title}" 
            class="movie-poster" />
@@ -1822,109 +2469,57 @@ function displayMovie(movieObject) {
   `;
 
   movieListContainer.insertAdjacentHTML("beforeend", movieHTML);
-  console.log(`${movieObject.title} tilføjet fra JSON!`);
-}
-```
-
-#### ✅ Fordele ved konsistent struktur!
-
-- 🎯 **Ingen refactoring** - samme funktion virker til alt
-- 🧹 **Cleaner kode** - ingen duplikerede funktioner
-- 🚀 **Fremtidssikret** - klar til alle datakilder
-- 💪 **Professionel tilgang** - sådan designer man systemer
-
-**26b. Test din eksisterende funktion med JSON data**
-
-```javascript
-// Test din eksisterende funktion med JSON data
-async function testDisplayMovie() {
-  console.log("🧪 Tester displayMovie med JSON data...");
-
-  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
-  const moviesFromJSON = await response.json();
-
-  // Vis første movie som test
-  displayMovie(moviesFromJSON[0]);
-  console.log("✅ Test fuldført - det virkede!");
 }
 
-// Kør testen
-testDisplayMovie();
-
-// Kør testen
-testDisplayMovie();
-```
-
-#### ✅ Test processen!
-
-1. Tilføj koden til din `app.js`
-2. **GEM filen** (`Ctrl+S` / `Cmd+S`)
-3. Refresh siden
-4. Ser du en movie card fra JSON data?
-5. Tjek Console for success beskeder!
-
----
-
-### Trin 27: Vis alle JSON movies! 🎬
-
-**27a. Opret displayMovies funktion (kan bruges til alt!)**
-
-```javascript
 // ========== DISPLAY ALL MOVIES ==========
-
 function displayMovies(movieArray) {
-  // Ryd container først
   movieListContainer.innerHTML = "";
 
-  console.log(`🎬 Viser ${movieArray.length} movies...`);
-
-  // Loop gennem alle movies
   for (const movie of movieArray) {
-    displayMovie(movie); // Samme funktion til alt!
+    displayMovie(movie);
   }
 
-  console.log(`🎉 ${movieArray.length} movies vist successfully!`);
+  console.log(`🎉 ${movieArray.length} movies vist!`);
 }
-```
 
-**27b. Hent og vis alle movies med async/await**
-
-```javascript
-// ========== MAIN ASYNC FUNCTION ==========
-
+// ========== LOAD MOVIES FROM JSON ==========
 async function loadMovies() {
-  console.log("🌐 Henter alle movies fra JSON...");
+  console.log("🌐 Henter movies fra JSON...");
 
   const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
   const moviesFromJSON = await response.json();
 
-  console.log("📊 JSON data modtaget:", moviesFromJSON.length, "movies");
+  console.log("📊 Data modtaget:", moviesFromJSON.length, "movies");
 
-  // Vis alle movies fra JSON!
   displayMovies(moviesFromJSON);
 }
 
-// Start processen
-loadMovies();
+// ===== APP INITIALISERING =====
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  loadMovies();
+}
 ```
 
-**27c. Test den komplette løsning**
+#### ✅ Verificér din kode!
 
-1. **Kommentér ud** eller slet din gamle lokale movies array og funktions kald
-2. Tilføj den nye async kode til din `app.js`
-3. **GEM filen** (`Ctrl+S` / `Cmd+S`)
-4. Refresh siden
+- [ ] Ingen `const movies = [...]` lokal array
+- [ ] Ingen test funktioner (`testFetchMovies`, `testDisplayOneMovie`)
+- [ ] `displayMovie()` funktion eksisterer
+- [ ] `displayMovies()` funktion eksisterer
+- [ ] `loadMovies()` async funktion eksisterer
+- [ ] `initApp()` kalder `loadMovies()`
+- [ ] Ingen fejl i Console
+- [ ] 17 movies vises på siden
 
-#### ✅ Du skulle nu se!
+**28b. Hvis noget mangler - tilføj det nu!**
 
-- 🎬 **17 movies** i stedet for 8 (fra JSON)
-- 📊 **Nye film** som "Ternet Ninja 3", "The Dark Knight", etc.
-- ⭐ **Rigtige data** hentet live fra internettet
-- 🎭 **Clean kode** med moderne async/await
+Sammenlign din kode med strukturen ovenfor og tilføj hvad der mangler.
 
 ---
 
-### Trin 28: Sammenlign lokale vs. eksterne data 📊
+### Trin 29: Sammenlign før og efter 📊
 
 **28a. Hvad har vi opnået?**
 
@@ -1985,7 +2580,7 @@ function displayMovie(movieObject) {
   const actorsString = movieObject.actors.join(", "); // Ny linje!
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movieObject.image}" 
            alt="Poster of ${movieObject.title}" 
            class="movie-poster" />
@@ -2008,7 +2603,7 @@ function displayMovie(movieObject) {
 ```javascript
 // Tilføj description som data attribut for senere brug
 const movieHTML = `
-  <article class="movie-card" tabindex="0" data-description="${movieObject.description}">
+  <article class="movie-card" data-description="${movieObject.description}">
     <!-- ... resten af HTML ... -->
   </article>
 `;
@@ -2062,8 +2657,14 @@ async function loadMovies() {
   displayMovies(movies);
 }
 
+// ===== APP INITIALISERING =====
+// Start app når DOM er loaded (hele HTML siden er færdig med at indlæse)
+document.addEventListener("DOMContentLoaded", initApp);
+
 // Start the app
-loadMovies();
+function initApp() {
+  loadMovies();
+}
 ```
 
 #### ✅ Endelig test!
