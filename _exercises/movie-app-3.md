@@ -264,7 +264,7 @@ function displayMovie(movie) {
 
 **1a. Tilføj filter bar til din HTML**
 
-Erstat din eksisterende HTML med denne struktur i `index.html`:
+Udvid din eksisterende HTML med denne struktur i `index.html`:
 
 ```html
 <main>
