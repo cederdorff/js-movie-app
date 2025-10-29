@@ -4,7 +4,49 @@
 
 > **Vigtig:** Du bygger videre på dit projekt fra Session 2. Sørg for at din `loadMovies()` funktion virker og viser film data fra JSON - ellers er der hjælp at hente i del 0.
 
-Prøv at forstå og skriv koden selv - ikke bare copy-paste  🥲
+---
+
+## 💪 Udfordring og læring
+
+**Der er kode eksempler i denne guide, men vi opfordrer dig til at:**
+
+### 🎯 **Lær aktivt - ikke passivt:**
+
+- ✍️ **Skriv koden selv** i stedet for copy-paste
+- 🤔 **Tænk over hvad hver linje gør** før du skriver den
+- 🔍 **Eksperimentér** - prøv at ændre værdier og se hvad der sker
+- 🐛 **Lav fejl** - det er sådan du lærer bedst!
+- 💡 **Forstå logikken** - ikke bare få det til at virke
+
+### 📝 **Forskellige læringsniveauer:**
+
+**Niveau 1 - Begynder:**
+
+- Copy-paste koden og læs kommentarerne grundigt
+- Sørg for du forstår hvad hver linje gør
+- Eksperimentér med at ændre værdier
+
+**Niveau 2 - Mellem:**
+
+- Se på kode eksemplet
+- Luk filen og prøv at skrive det selv
+- Kig kun tilbage hvis du sidder fast
+
+**Niveau 3 - Avanceret:**
+
+- Læs kun beskrivelsen af hvad funktionen skal gøre
+- Skriv din egen løsning først
+- Sammenlign derefter med eksemplet
+
+### 🎓 **Vigtigste læring:**
+
+> **Dine fejl er dine bedste lærere!**
+>
+> Hvis du bare copy-paster, lærer du ikke at debugge eller tænke som en programmør. Prøv selv først, lav fejl, ret dem, og bliv bedre! 💪
+
+**Husk:** Der er ikke én "rigtig" måde at løse problemerne på. Hvis din kode virker og er forståelig, er den god nok! 🎉
+
+---
 
 > **Developer Tools:** Hold øje med Console-fanen mens du arbejder - vi bruger `console.log()` til at forstå hvad der sker!
 
@@ -26,6 +68,7 @@ Prøv at forstå og skriv koden selv - ikke bare copy-paste  🥲
    - Virker CSS styling korrekt?
 
 **0b. Forbered global `movie` storage**
+*Måske giver det bedst mening at slette alt i `app.js` og så fortsætte her fra...*
 
 Vi skal gemme alle movies i en global variabel, så vi kan filtrere dem senere:
 
@@ -356,8 +399,8 @@ const movie = {
 const hasComedy = movie.genre.includes("Comedy"); // true
 console.log(hasComedy);
 ```
-Du kan teste koden i bunden af din app.js og derefter fjerne den igen. 
 
+Du kan teste koden i bunden af din app.js og derefter fjerne den igen.
 
 **💡 Vigtigt at forstå:**
 
