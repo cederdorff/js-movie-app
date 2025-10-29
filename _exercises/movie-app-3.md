@@ -4,6 +4,8 @@
 
 > **Vigtig:** Du bygger videre på dit projekt fra Session 2. Sørg for at din `loadMovies()` funktion virker og viser film data fra JSON - ellers er der hjælp at hente i del 0.
 
+Prøv at forstå og skriv koden selv - ikke bare copy-paste  🥲
+
 > **Developer Tools:** Hold øje med Console-fanen mens du arbejder - vi bruger `console.log()` til at forstå hvad der sker!
 
 ---
@@ -68,7 +70,7 @@ function displayMovie(movie) {
   movieList.insertAdjacentHTML(
     "beforeend",
     /*html*/ `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movie.image}" alt="Poster of ${movie.title}" class="movie-poster" />
       <div class="movie-info">
         <h3>${movie.title} <span class="movie-year">(${movie.year})</span></h3>
@@ -143,7 +145,7 @@ function displayMovie(movie) {
   movieList.insertAdjacentHTML(
     "beforeend",
     /*html*/ `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movie.image}" alt="Poster of ${movie.title}" class="movie-poster" />
       <div class="movie-info">
         <h3>${movie.title} <span class="movie-year">(${movie.year})</span></h3>
@@ -269,9 +271,10 @@ console.log(matches);
 
 #### ✅ Test søge-logikken!
 
-1. **GEM filen** og refresh browseren
-2. **Åbn Console** og se outputtet
-3. **Forstå hvad der sker**:
+1. Tilføj koden nederst i din app.js - den har ikke noget at gøre med din eksisterende kode. Du skal blot teste den for forståelsen.
+2. **GEM filen** og refresh browseren
+3. **Åbn Console** og se outputtet
+4. **Forstå hvad der sker**:
    - "Barbie" → "barbie" → includes "dark"? `false`
    - "The Dark Knight" → "the dark knight" → includes "dark"? `true`
    - Kun "The Dark Knight" er i filtrerede resultater!
@@ -353,6 +356,8 @@ const movie = {
 const hasComedy = movie.genre.includes("Comedy"); // true
 console.log(hasComedy);
 ```
+Du kan teste koden i bunden af din app.js og derefter fjerne den igen. 
+
 
 **💡 Vigtigt at forstå:**
 
@@ -362,7 +367,7 @@ console.log(hasComedy);
 
 ### Trin 4: Byg automatisk genre dropdown
 
-**4a. Opret populateGenreDropdown funktionen**
+**4a. Opret `populateGenreDropdown` funktionen**
 
 ```javascript
 // #6: Udfyld genre-dropdown med alle unikke genrer
@@ -423,7 +428,7 @@ async function getMovies() {
 
 **5a. Opret kombineret filter funktion**
 
-Erstat din `searchMovies()` funktion med denne:
+Erstat din `searchMovies()` funktion med denne - prøv at forstå - ikke bare copy-paste:
 
 ```javascript
 // #5: Kombineret søgning og genre filtrering
@@ -434,18 +439,16 @@ function filterMovies() {
   // Start med alle movies
   let filteredMovies = allMovies;
 
-  // TRIN 1: Filtrer på søgetekst
+  // TRIN 1: Filtrer på søgetekst, hvis der er skrevet noget (searchValue).
   if (searchValue) {
     filteredMovies = filteredMovies.filter(movie => {
       return movie.title.toLowerCase().includes(searchValue);
     });
   }
 
-  // TRIN 2: Filtrer på genre
+  // TRIN 2: Filtrer på genre, hvis valgte genre ikke er lig med "all".
   if (genreValue !== "all") {
-    filteredMovies = filteredMovies.filter(movie => {
-      return movie.genre.includes(genreValue);
-    });
+    filteredMovies = filteredMovies.filter(movie => movie.genre.includes(genreValue));
   }
 
   displayMovies(filteredMovies);
@@ -596,7 +599,7 @@ function displayMovie(movie) {
   const movieList = document.querySelector("#movie-list");
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movie.image}" 
            alt="Poster of ${movie.title}" 
            class="movie-poster" />
