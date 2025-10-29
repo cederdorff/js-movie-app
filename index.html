@@ -9,7 +9,6 @@
   <body>
     <header>
       <h1>🎬 Movie Database</h1>
-      <p>Søg, filtrer og sortér dine yndlingsfilm</p>
     </header>
 
     <main>
@@ -21,8 +20,10 @@
           <!-- Genre options will be populated from JS -->
         </select>
         <select id="sort-select">
+          <option value="none">Ingen sortering</option>
           <option value="title">Sortér: Titel (A-Å)</option>
-          <option value="year">Sortér: År (nyeste)</option>
+          <option value="year">Sortér: År (nyeste først)</option>
+          <option value="rating">Sortér: Rating (højeste først)</option>
         </select>
       </section>
       <!-- Movie List -->

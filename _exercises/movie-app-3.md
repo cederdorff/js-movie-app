@@ -450,7 +450,7 @@ Opdater din `getMovies` funktion:
 async function getMovies() {
   const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
   allMovies = await response.json();
-  populateGenreDropdown(); // Udfyld dropdown med genres
+  populateGenreDropdown(); // Udfyld dropdown med genres <-----
   displayMovies(allMovies);
 }
 ```
@@ -555,7 +555,7 @@ Vi har nu tekstsøgning og genre-filtrering. Næste skridt er at tilføje sorter
 
 ### Trin 7: Udvid filterMovies til også at sortere
 
-Nu skal vi udvide vores `filterMovies()` funktion til også at håndtere sortering:
+Nu skal vi udvide vores `filterMovies()` funktion til også at håndtere sortering (se trin 3):
 
 ```javascript
 // #5: Kombineret søgning, genre og sortering
@@ -564,33 +564,33 @@ function filterMovies() {
   const genreValue = document.querySelector("#genre-select").value;
   const sortValue = document.querySelector("#sort-select").value;
 
-  // Start med alle movies
+  // Start med alle movies - vi vil altid gerne begynde med hele datasættet
   let filteredMovies = allMovies;
 
-  // TRIN 1: Filtrer på søgetekst
+  // TRIN 1: Filtrer på søgetekst (fra input-felt)
   if (searchValue) {
     filteredMovies = filteredMovies.filter(movie => {
       return movie.title.toLowerCase().includes(searchValue);
     });
   }
 
-  // TRIN 2: Filtrer på genre
+  // TRIN 2: Filtrer på genre (fra dropdown)
   if (genreValue !== "all") {
     filteredMovies = filteredMovies.filter(movie => {
       return movie.genre.includes(genreValue);
     });
   }
 
-  // TRIN 3: Sorter resultater
+  // TRIN 3: Sorter resultater (fra dropdown)
   if (sortValue === "title") {
-    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+    filteredMovies.sort((a, b) => a.title.localeCompare(b.title)); // A-Å
   } else if (sortValue === "year") {
     filteredMovies.sort((a, b) => b.year - a.year); // Nyeste først
   } else if (sortValue === "rating") {
     filteredMovies.sort((a, b) => b.rating - a.rating); // Højeste først
   }
 
-  displayMovies(filteredMovies);
+  displayMovies(filteredMovies); // Vis de filtrerede og sorterede movies
 }
 ```
 
@@ -697,6 +697,7 @@ function showMovieDetails(movie) {
 ### Trin 10: Forbedre brugeroplevelsen
 
 **10a. Tilføj hover effekter (CSS)**
+Det er muligvis allerede i din CSS, men så prøv at forstå, hvad det gør! 
 
 ```css
 /* Tilføj til din app.css */
@@ -711,17 +712,6 @@ function showMovieDetails(movie) {
 }
 ```
 
-**10b. Tilføj keyboard support**
-
-```javascript
-// Tilføj også keyboard event til displayMovie:
-newCard.addEventListener("keydown", function (event) {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    showMovieDetails(movie);
-  }
-});
-```
 
 #### ✅ Test forbedret interaktion!
 
@@ -783,7 +773,6 @@ newCard.addEventListener("keydown", function (event) {
 ### 🖱️ **Click Events**
 
 - `addEventListener("click")` til mouse interaktion
-- `addEventListener("keydown")` til keyboard support
 - Event handling på dynamisk oprettede elementer
 - Forberedelse til modal visning
 
@@ -801,17 +790,8 @@ newCard.addEventListener("keydown", function (event) {
 - ✅ Sortere på titel, år eller rating
 - ✅ Kombinere alle tre funktioner samtidig
 - ✅ Reagere på klik med alert (forberedt til modal)
-- ✅ Understøtte keyboard navigation
 
 ---
 
-## 🚀 Næste session preview
 
-**Session 4** vil fokusere på:
-
-1. **🎭 Modal Dialog** - Erstat alerts med flot popup dialog
-2. **🎨 Avanceret Styling** - Forbedret UI/UX og animationer
-3. **❤️ Favorit System** - Gem og administrer favorit film
-4. **⚡ Performance** - Optimering og loading states
-
-**🎊 Tillykke! Du har nu en fuldt funktionel Movie App med søgning, filtrering og sortering! 🎉**
+Tillykke! Du har nu en fuldt funktionel Movie App med søgning, filtrering og sortering! 🎉**

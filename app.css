@@ -138,7 +138,27 @@ footer {
 /* =====================
    MOVIE GRID & CARDS
    ===================== */
-/* TODO !!! */
+#movie-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: 2rem 0;
+}
+@media (min-width: 600px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 1400px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
 
 .movie-card {
   background: var(--bg-card);
@@ -374,6 +394,23 @@ dialog#movie-dialog::backdrop {
   border-radius: var(--radius);
   border-left: 4px solid var(--secondary);
   font-style: italic;
+}
+
+/* =====================
+   RESPONSIVE & ACCESSIBILITY
+   ===================== */
+@media (max-width: 480px) {
+  #movie-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .movie-card {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  header h1 {
+    font-size: 1.75rem;
+  }
 }
 
 /* Focus styles for keyboard navigation */
