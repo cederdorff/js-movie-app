@@ -1,6 +1,6 @@
-# Session 4: Movie App - Modal Dialog Implementation 🎭
+# Session 4: Movie App - Modal Dialog Implementation
 
-**Kompetencemål:** Implementér en modal dialog til at vise detaljerede filminformationer.
+**Formål:** Implementér en modal dialog til at vise detaljerede filminformationer.
 
 **Fra Session 3 til Session 4:**
 
@@ -15,7 +15,7 @@
 
 - ✅ `filterMovies()` funktion (kombineret søg/filter/sort)
 - ✅ `showMovieDetails()` funktion med `alert()`
-- ✅ Keyboard support (Enter/Space)
+- ✅ `showMovieDetails()` funktion med `alert()`
 
 **Sådan tjekker du dit startpunkt:**
 
@@ -104,13 +104,13 @@ Tilføj denne CSS til din `app.css`:
 
 **🧪 TEST 1b:** Refresh browseren. År felterne skulle nu være pænt stylet.
 
-### Trin 2: Forstå Number() konvertering
+### Trin 2: Forstå `Number()` konvertering
 
 **2a. Forstå problemet med input værdier**
 
-HTML input felter giver altid **strings**, selvom de er type="number". Derfor skal vi konvertere dem til tal før vi kan sammenligne med film data.
+HTML input felter giver altid **strings**, selvom de er `type="number"`. Derfor skal vi konvertere dem til tal før vi kan sammenligne med film data.
 
-**2b. Lær Number() - konvertering af strings til tal**
+**2b. Lær `Number()` - konvertering af strings til tal**
 
 `Number()` konverterer strings til tal så vi kan sammenligne dem med film data:
 
@@ -289,8 +289,6 @@ Tilføj til din CSS:
 }
 ```
 
-````
-
 **🧪 TEST 6b:** Refresh browseren. Du skulle nu se både år og rating filtre.
 
 ### Trin 7: Number() håndterer både år og rating!
@@ -308,7 +306,7 @@ Number(""); // → 0 (tom = 0)
 // Default værdier for rating (0 til 10)
 Number("") || 0; // → 0
 Number("") || 10; // → 10
-````
+```
 
 **💡 Praktisk:** Vi bruger samme konverteringsmetode (`Number()`) til både år og rating!
 
@@ -586,6 +584,9 @@ document.querySelector("#clear-filters").addEventListener("click", clearAllFilte
 // Global variabel til alle film
 let allMovies = [];
 
+// #0: Listen for page load - og start app ved at kalde funktionen initApp
+window.addEventListener("load", initApp);
+
 // #1: Initialize the app
 function initApp() {
   console.log("initApp: app.js is running 🎉");
@@ -631,7 +632,7 @@ function displayMovie(movie) {
   const movieList = document.querySelector("#movie-list");
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movie.image}" 
            alt="Poster of ${movie.title}" 
            class="movie-poster" />
@@ -651,14 +652,6 @@ function displayMovie(movie) {
   newCard.addEventListener("click", function () {
     console.log(`🎬 Klik på: "${movie.title}"`);
     showMovieDetails(movie);
-  });
-
-  // Tilføj keyboard support
-  newCard.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      showMovieDetails(movie);
-    }
   });
 }
 
@@ -793,9 +786,6 @@ function filterMovies() {
 
   displayMovies(filteredMovies);
 }
-
-// Start appen når siden er loaded
-initApp();
 ```
 
 ### ✅ Ekstra CSS til nye filtre (tilføj til din app.css)
@@ -890,7 +880,7 @@ initApp();
 }
 ```
 
-### 🎯 Nu har du:
+Nu har du:
 
 - ✅ **Komplet HTML** med alle filter muligheder
 - ✅ **Komplet JavaScript** med fuld funktionalitet:
@@ -900,17 +890,16 @@ initApp();
   - Rating range filtrering
   - Sortering (titel, år, rating)
   - Clear all filters knap
-  - Keyboard navigation
 - ✅ **CSS styling** til de nye elementer
 - ✅ **Robust fejlhåndtering** og user feedback
 
-**🗑️ Ryd op:** Du kan nu fjerne alle test funktioner fra Del 1 og forenkle console.log hvis du vil.
+**Ryd op:** Du kan nu fjerne alle test funktioner fra Del 1 og forenkle console.log hvis du vil.
 
-**🚀 Klar til Del 2:** Nu har du en solid, funktionel base at bygge modal funktionalitet på!
+**Klar til Del 2:** Nu har du en solid, funktionel base at bygge modal funktionalitet på!
 
 ---
 
-## Del 2: Modal Dialog HTML og CSS 🎭
+## Del 2: Modal Dialog HTML og CSS
 
 **Formål:** Nu hvor du har en komplet filtreringsapp, lad os bygge en professionel modal dialog!
 
@@ -1113,7 +1102,7 @@ Din CSS inkluderer også responsive design:
 
 ---
 
-## Del 3: JavaScript Modal Funktionalitet 🔧
+## Del 3: JavaScript Modal Funktionalitet
 
 **Formål:** Erstat `alert()` med rigtig modal dialog funktionalitet.
 
@@ -1222,7 +1211,7 @@ function displayMovie(movie) {
   const movieList = document.querySelector("#movie-list");
 
   const movieHTML = `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card">
       <img src="${movie.image}" 
            alt="Poster of ${movie.title}" 
            class="movie-poster" />
@@ -1243,14 +1232,6 @@ function displayMovie(movie) {
     console.log(`🎬 Klik på: "${movie.title}"`);
     showMovieModal(movie); // ÆNDRET: Fra showMovieDetails til showMovieModal
   });
-
-  // Tilføj keyboard support
-  newCard.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      showMovieModal(movie); // ÆNDRET: Fra showMovieDetails til showMovieModal
-    }
-  });
 }
 ```
 
@@ -1263,20 +1244,16 @@ function displayMovie(movie) {
    - **Tryk Escape** → Modal lukker automatisk
    - **Klik X knappen** → Modal lukker automatisk
    - **Klik udenfor modal** → Modal lukker automatisk
-4. **Test keyboard navigation**:
-   - Tab til movie card
-   - Tryk Enter → Modal åbner
-   - Tryk Escape → Modal lukker automatisk
+
 
 **💡 Alt fungerer uden JavaScript event handling!** `<form method="dialog">` giver os alt gratis.
 
 **19c. Fjern den gamle showMovieDetails funktion (valgfrit)**
-
 Du kan nu fjerne eller kommentere din gamle `showMovieDetails()` funktion ud, da den ikke bruges længere.
 
 ---
 
-## 🎉 Tillykke! Du har nu en komplet modal dialog!
+## Yaaay! Du har nu en komplet modal dialog 🎉
 
 **Du har lært:**
 
@@ -1290,7 +1267,7 @@ Du kan nu fjerne eller kommentere din gamle `showMovieDetails()` funktion ud, da
 
 - Professionel grid layout med film billede og detaljer
 - Responsive design der fungerer på mobile
-- Accessibility med keyboard navigation
+  - Accessibility (modal håndterer fokus og Escape automatisk)
 - Smooth animations og hover effects
 - Konsistent design der matcher din app
 
@@ -1301,11 +1278,3 @@ Du kan nu fjerne eller kommentere din gamle `showMovieDetails()` funktion ud, da
 - Hover animations
 - Accessibility fokus styling
 - Professional grid layout
-
-**💡 Næste skridt (Session 5):** I næste session kan du udforske:
-
-- Local storage til favoritter
-- API integration til rigtige film data
-- Avanceret filtrering og sortering
-- Dark/light mode toggle
-- Export funktionalitet
