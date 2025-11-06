@@ -171,37 +171,29 @@ function filterMovies() {
   // FILTER 1: Søgetekst - filtrer på film titel
   if (searchValue) {
     // Kun filtrer hvis der er indtastet noget
-    filteredMovies = filteredMovies.filter(movie => {
-      // includes() checker om søgeteksten findes i titlen
-      return movie.title.toLowerCase().includes(searchValue);
-    });
+    // includes() checker om søgeteksten findes i titlen
+    filteredMovies = filteredMovies.filter(movie => movie.title.toLowerCase().includes(searchValue));
   }
 
   // FILTER 2: Genre - filtrer på valgt genre
   if (genreValue !== "all") {
     // Kun filtrer hvis ikke "all" er valgt
-    filteredMovies = filteredMovies.filter(movie => {
-      // includes() checker om genren findes i filmens genre array
-      return movie.genre.includes(genreValue);
-    });
+    // includes() checker om genren findes i filmens genre array
+    filteredMovies = filteredMovies.filter(movie => movie.genre.includes(genreValue));
   }
 
   // FILTER 3: År range - filtrer film mellem to årstal
   if (yearFrom > 0 || yearTo < 9999) {
     // Kun filtrer hvis der er sat grænser
-    filteredMovies = filteredMovies.filter(movie => {
-      // Check om filmens år er mellem min og max værdi
-      return movie.year >= yearFrom && movie.year <= yearTo;
-    });
+    // Check om filmens år er mellem min og max værdi
+    filteredMovies = filteredMovies.filter(movie => movie.year >= yearFrom && movie.year <= yearTo);
   }
 
   // FILTER 4: Rating range - filtrer film mellem to ratings
   if (ratingFrom > 0 || ratingTo < 10) {
     // Kun filtrer hvis der er sat grænser
-    filteredMovies = filteredMovies.filter(movie => {
-      // Check om filmens rating er mellem min og max værdi
-      return movie.rating >= ratingFrom && movie.rating <= ratingTo;
-    });
+    // Check om filmens rating er mellem min og max værdi
+    filteredMovies = filteredMovies.filter(movie => movie.rating >= ratingFrom && movie.rating <= ratingTo);
   }
 
   // SORTERING (altid til sidst efter alle filtre er anvendt)
