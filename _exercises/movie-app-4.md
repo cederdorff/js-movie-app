@@ -1113,7 +1113,7 @@ Din CSS inkluderer også responsive design:
 Tilføj denne nye funktion til din `app.js` (erstatter ikke `showMovieDetails` endnu):
 
 ```javascript
-// #8: Vis movie i modal dialog
+// #6: Vis movie i modal dialog
 function showMovieModal(movie) {
   console.log("🎭 Åbner modal for:", movie.title);
 
@@ -1244,7 +1244,6 @@ function displayMovie(movie) {
    - **Tryk Escape** → Modal lukker automatisk
    - **Klik X knappen** → Modal lukker automatisk
    - **Klik udenfor modal** → Modal lukker automatisk
-
 
 **💡 Alt fungerer uden JavaScript event handling!** `<form method="dialog">` giver os alt gratis.
 
