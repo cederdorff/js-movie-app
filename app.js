@@ -24,15 +24,16 @@ function initApp() {
   document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
 }
 
-// Fetch movies from JSON file - asynkron funktion der henter data
+// #2: Fetch movies from JSON file - asynkron funktion der henter data
 async function getMovies() {
   // Hent data fra URL - await venter på svar før vi går videre
   const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
 
   // Pars JSON til JS array og gem i global variabel, der er tilgængelig for alle funktioner
-  const data = await response.json();
+  allMovies = await response.json();
 
-  console.log(data);
+  populateGenreDropdown(); // Udfyld dropdown med genrer fra data
+  displayMovies(allMovies); // Vis alle film ved start
 }
 
 // ===== VISNING AF FILM =====
