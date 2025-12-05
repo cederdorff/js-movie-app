@@ -10,7 +10,7 @@
 
   <body>
     <header>
-      <h1>🎬 Movie Database</h1>
+      <h1>Movie Database</h1>
     </header>
 
     <main>
@@ -19,12 +19,12 @@
         <!-- Øverste række: Søg og genre -->
         <div class="filter-row-main">
           <div class="filter-group search-group">
-            <label for="search-input">🔍 Søg</label>
+            <label for="search-input">Søg</label>
             <input type="text" id="search-input" placeholder="Søg efter film..." />
           </div>
 
           <div class="filter-group">
-            <label for="genre-select">🎭 Genre</label>
+            <label for="genre-select">Genre</label>
             <select id="genre-select">
               <option value="all">Alle genrer</option>
               <!-- Genrer indsættes dynamisk via JavaScript -->
@@ -32,7 +32,7 @@
           </div>
 
           <div class="filter-group">
-            <label for="sort-select">📊 Sortering</label>
+            <label for="sort-select">Sortering</label>
             <select id="sort-select">
               <option value="none">Ingen sortering</option>
               <option value="title">Titel (A-Å)</option>
@@ -46,7 +46,7 @@
         <div class="filter-row-ranges">
           <!-- År range filter -->
           <div class="filter-group range-group">
-            <label class="range-label">📅 Udgivelsesår</label>
+            <label class="range-label">Udgivelsesår</label>
             <div class="range-inputs">
               <input type="number" id="year-from" placeholder="1990" min="1900" max="2030" />
               <span class="range-separator">→</span>
@@ -56,7 +56,7 @@
 
           <!-- Rating range filter -->
           <div class="filter-group range-group">
-            <label class="range-label">⭐ Rating</label>
+            <label class="range-label">Rating</label>
             <div class="range-inputs">
               <input type="number" id="rating-from" placeholder="0.0" min="0" max="10" step="0.1" />
               <span class="range-separator">→</span>
@@ -66,7 +66,6 @@
 
           <!-- Ryd alle filtre knap -->
           <button id="clear-filters" class="clear-btn">
-            <span class="btn-icon">🗑️</span>
             <span class="btn-text">Ryd filtre</span>
           </button>
         </div>
