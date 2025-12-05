@@ -14,8 +14,24 @@
     </header>
 
     <main>
+      <!-- Favorites tab/toggle -->
+      <div class="favorites-header">
+        <button id="toggle-favorites" class="toggle-favorites-btn" title="Vis favoritter">
+          ♥ Mine Favoritter <span class="favorites-count">(0)</span>
+        </button>
+      </div>
+
+      <!-- Favorites view -->
+      <section id="favorites-view" class="favorites-view hidden">
+        <h2>Mine Favoritter</h2>
+        <div id="favorites-list" class="movie-grid">
+          <!-- Favoritted movies vil blive indsat her dynamisk -->
+        </div>
+        <button id="close-favorites" class="close-favorites-btn">Tilbage til alle film</button>
+      </section>
+
       <!-- Filter bar med alle filtreringsmuligheder -->
-      <section class="filterbar">
+      <section class="filterbar" id="filterbar">
         <!-- Øverste række: Søg og genre -->
         <div class="filter-row-main">
           <div class="filter-group search-group">

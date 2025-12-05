@@ -6,9 +6,11 @@ document.addEventListener("DOMContentLoaded", initApp);
 
 // Global variabel til alle film - tilgængelig for alle funktioner
 let allMovies = [];
+let favoriteMovies = []; // Array til at holde favoritt film
 
 // #1: Initialize the app - sæt event listeners og hent data
 function initApp() {
+  loadFavorites(); // Hent favoritter fra localStorage
   getMovies(); // Hent film data fra JSON fil
 
   // Event listeners for alle filtre - kører filterMovies når brugeren ændrer noget
@@ -22,6 +24,10 @@ function initApp() {
 
   // Event listener for clear-knappen - rydder alle filtre
   document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
+
+  // Event listeners for favorites
+  document.querySelector("#toggle-favorites").addEventListener("click", toggleFavoritesView);
+  document.querySelector("#close-favorites").addEventListener("click", closeFavoritesView);
 }
 
 // #2: Fetch movies from JSON file - asynkron funktion der henter data
@@ -55,12 +61,18 @@ function displayMovies(movies) {
 }
 
 // #4: Render a single movie card and add event listeners - lav et film kort
-function displayMovie(movie) {
-  const movieList = document.querySelector("#movie-list"); // Find container til film
+function displayMovie(movie, container = "#movie-list") {
+  const movieList = document.querySelector(container); // Find container til film
+  const isFavorite = favoriteMovies.some(fav => fav.id === movie.id);
 
   // Byg HTML struktur dynamisk - template literal med ${} til at indsætte data
   const movieHTML = /*html*/ `
-    <article class="movie-card" tabindex="0">
+    <article class="movie-card ${isFavorite ? "is-favorite" : ""}" tabindex="0" data-movie-id="${movie.id}">
+      <button class="favorite-btn" title="${
+        isFavorite ? "Fjern fra favoritter" : "Tilføj til favoritter"
+      }" aria-label="${isFavorite ? "Fjern fra favoritter" : "Tilføj til favoritter"}">
+        ${isFavorite ? "♥" : "♡"}
+      </button>
       <img src="${movie.image}" 
            alt="Poster of ${movie.title}" 
            class="movie-poster" />
@@ -80,8 +92,19 @@ function displayMovie(movie) {
   const newCard = movieList.lastElementChild;
 
   // Tilføj click event til kortet - når brugeren klikker på kortet
-  newCard.addEventListener("click", function () {
-    showMovieModal(movie); // Vis modal med film detaljer
+  newCard.addEventListener("click", function (event) {
+    // Hvis der klikkes på favorit-knappen, stop event bubbling
+    if (event.target.classList.contains("favorite-btn") || event.target.closest(".favorite-btn")) {
+      event.stopPropagation();
+    } else {
+      showMovieModal(movie); // Vis modal med film detaljer
+    }
+  });
+
+  // Favorit knap
+  const favoriteBtn = newCard.querySelector(".favorite-btn");
+  favoriteBtn.addEventListener("click", function () {
+    toggleFavorite(movie);
   });
 
   // Tilføj keyboard support (Enter og mellemrum) for tilgængelighed
@@ -210,4 +233,115 @@ function filterMovies() {
 
   // Vis de filtrerede film på siden
   displayMovies(filteredMovies);
+}
+
+// ===== FAVORITES FUNKTIONER =====
+// #9: Toggle favorite status for en film
+function toggleFavorite(movie) {
+  const isFavorite = favoriteMovies.some(fav => fav.id === movie.id);
+
+  if (isFavorite) {
+    // Fjern fra favoritter
+    favoriteMovies = favoriteMovies.filter(fav => fav.id !== movie.id);
+  } else {
+    // Tilføj til favoritter
+    favoriteMovies.push(movie);
+  }
+
+  // Gem favoritter i localStorage
+  saveFavorites();
+
+  // Opdater UI
+  updateFavoritesCount();
+  updateFavoritesButtonStates();
+
+  // Hvis vi er i favorites view, opdater listen
+  if (!document.querySelector("#favorites-view").classList.contains("hidden")) {
+    displayFavorites();
+  }
+}
+
+// #10: Gem favoritter til localStorage
+function saveFavorites() {
+  localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
+}
+
+// #11: Hent favoritter fra localStorage
+function loadFavorites() {
+  const saved = localStorage.getItem("favoriteMovies");
+  if (saved) {
+    favoriteMovies = JSON.parse(saved);
+  }
+  updateFavoritesCount();
+}
+
+// #12: Vis favoritter i en separat sektion
+function displayFavorites() {
+  const favoritesList = document.querySelector("#favorites-list");
+  favoritesList.innerHTML = ""; // Ryd listen
+
+  if (favoriteMovies.length === 0) {
+    favoritesList.innerHTML = '<p class="no-results">Du har ingen favoritter endnu ♡</p>';
+    return;
+  }
+
+  // Vis alle favoritter
+  for (const movie of favoriteMovies) {
+    displayMovie(movie, "#favorites-list");
+  }
+}
+
+// #13: Toggle favorites view
+function toggleFavoritesView() {
+  const favoritesView = document.querySelector("#favorites-view");
+  const filterbar = document.querySelector("#filterbar");
+  const moviesView = document.querySelector("#movie-list");
+
+  const isHidden = favoritesView.classList.contains("hidden");
+
+  if (isHidden) {
+    // Vis favorites
+    favoritesView.classList.remove("hidden");
+    filterbar.classList.add("hidden");
+    moviesView.classList.add("hidden");
+    displayFavorites();
+  }
+}
+
+// #14: Luk favorites view
+function closeFavoritesView() {
+  const favoritesView = document.querySelector("#favorites-view");
+  const filterbar = document.querySelector("#filterbar");
+  const moviesView = document.querySelector("#movie-list");
+
+  favoritesView.classList.add("hidden");
+  filterbar.classList.remove("hidden");
+  moviesView.classList.remove("hidden");
+}
+
+// #15: Opdater favoritter knap-tekst
+function updateFavoritesCount() {
+  const count = favoriteMovies.length;
+  document.querySelector(".favorites-count").textContent = `(${count})`;
+}
+
+// #16: Opdater visual state af favorit knapper
+function updateFavoritesButtonStates() {
+  document.querySelectorAll(".movie-card").forEach(card => {
+    const movieId = card.getAttribute("data-movie-id");
+    const isFavorite = favoriteMovies.some(fav => fav.id === parseInt(movieId));
+    const btn = card.querySelector(".favorite-btn");
+
+    if (btn) {
+      if (isFavorite) {
+        btn.textContent = "♥";
+        btn.title = "Fjern fra favoritter";
+        card.classList.add("is-favorite");
+      } else {
+        btn.textContent = "♡";
+        btn.title = "Tilføj til favoritter";
+        card.classList.remove("is-favorite");
+      }
+    }
+  });
 }

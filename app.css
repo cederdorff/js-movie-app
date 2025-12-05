@@ -37,6 +37,11 @@
   padding: 0;
 }
 
+/* Utility classes */
+.hidden {
+  display: none !important;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   font-size: 1rem;
@@ -53,6 +58,87 @@ main {
   max-width: min(1400px, 95vw);
   margin: 0 auto;
   padding: clamp(5rem, 10vw, 8rem) 1rem 2rem;
+}
+
+/* =====================
+   FAVORITES HEADER
+   ===================== */
+.favorites-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-favorites-btn {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--text);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.toggle-favorites-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.toggle-favorites-btn:active {
+  transform: translateY(0);
+}
+
+.favorites-count {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* =====================
+   FAVORITES VIEW
+   ===================== */
+.favorites-view {
+  animation: slideIn 300ms ease;
+}
+
+.favorites-view.hidden {
+  display: none;
+}
+
+.favorites-view h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.close-favorites-btn {
+  display: block;
+  margin: 2rem auto 0;
+  background: var(--secondary-light);
+  color: var(--text);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.close-favorites-btn:hover {
+  background: var(--primary);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* =====================
@@ -203,24 +289,32 @@ footer {
 /* =====================
    MOVIE GRID & CARDS
    ===================== */
-#movie-list {
+#movie-list,
+#favorites-list,
+.movie-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding: 2rem 0;
 }
 @media (min-width: 600px) {
-  #movie-list {
+  #movie-list,
+  #favorites-list,
+  .movie-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 @media (min-width: 992px) {
-  #movie-list {
+  #movie-list,
+  #favorites-list,
+  .movie-grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @media (min-width: 1400px) {
-  #movie-list {
+  #movie-list,
+  #favorites-list,
+  .movie-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
@@ -233,6 +327,7 @@ footer {
   transition: var(--transition);
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
 }
 
 .movie-card:hover {
@@ -244,6 +339,42 @@ footer {
 .movie-card:focus {
   outline: 3px solid var(--secondary);
   outline-offset: 2px;
+}
+
+.movie-card.is-favorite {
+  border-color: var(--warning);
+  background: rgba(251, 192, 45, 0.05);
+}
+
+/* Favorite button styling */
+.favorite-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(38, 76, 89, 0.9);
+  border: 2px solid var(--secondary);
+  color: var(--text);
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 10;
+  padding: 0;
+}
+
+.favorite-btn:hover {
+  background: var(--warning);
+  color: #000;
+  transform: scale(1.1);
+}
+
+.favorite-btn:active {
+  transform: scale(0.95);
 }
 
 .movie-poster {
