@@ -232,10 +232,6 @@ footer {
   gap: 0.25rem;
 }
 
-.movie-rating::before {
-  content: "⭐";
-}
-
 .movie-director {
   color: var(--text-light);
   font-size: 0.875rem;
