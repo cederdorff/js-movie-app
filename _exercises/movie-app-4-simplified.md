@@ -35,7 +35,8 @@ Opdatér `index.html` - tilføj søgefeltet:
 
 ```html
 <header>
-  <h1>Min Film-app</h1>
+  <h1>Movie Database</h1>
+  <p class="subtitle">Search, genre og sortering</p>
 </header>
 
 <section class="controls">
@@ -72,26 +73,48 @@ Opdatér `index.html` - tilføj søgefeltet:
 Tilføj i `app.css`:
 
 ```css
-.search-section {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+.movie-card {
+  background: linear-gradient(180deg, #434b54 0%, #3f464e 100%);
+  border: 1px solid rgba(143, 178, 199, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.search-section input {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  border: 2px solid #667eea;
-  border-radius: 50px;
-  outline: none;
-  transition: all 0.3s;
-  box-sizing: border-box;
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.search-section input:focus {
-  border-color: #764ba2;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+.year-badge {
+  border-radius: 999px;
+  background: rgba(105, 200, 240, 0.24);
+  color: #92dafd;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.38rem 0.45rem;
+}
+
+.rating-row {
+  margin-top: 0.52rem;
+  color: #e8f2fa;
+}
+
+#movie-modal {
+  width: min(92vw, 920px);
+  background: #454b53;
+}
+
+#modal-body {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 1rem;
+}
+
+.modal-description {
+  padding-left: 0.72rem;
+  border-left: 3px solid rgba(168, 208, 232, 0.75);
+  font-style: italic;
 }
 ```
 
@@ -102,23 +125,26 @@ Tilføj i `app.css`:
 ```javascript
 const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 
-async function start() {
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  document.querySelector("#search-input").addEventListener("input", applyFilters);
+  document.querySelector("#genre-select").addEventListener("change", applyFilters);
+  document.querySelector("#sort-select").addEventListener("change", applyFilters);
+
+  getMovies();
+}
+
+async function getMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
-  setupFilters();
   populateGenreSelect();
   applyFilters();
 }
 
-function setupFilters() {
-  document.querySelector("#search-input").addEventListener("input", applyFilters);
-  document.querySelector("#genre-select").addEventListener("change", applyFilters);
-  document.querySelector("#sort-select").addEventListener("change", applyFilters);
-}
-
 function applyFilters() {
-  const searchTerm = document.querySelector("#search-input").value.toLowerCase();
+  const searchTerm = document.querySelector("#search-input").value.trim().toLowerCase();
   const selectedGenre = document.querySelector("#genre-select").value;
   const sortOption = document.querySelector("#sort-select").value;
 
@@ -128,15 +154,23 @@ function applyFilters() {
     return matchesTitle && matchesGenre;
   });
 
-  if (sortOption === "title") {
-    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sortOption === "year") {
-    filteredMovies.sort((a, b) => b.year - a.year);
-  } else if (sortOption === "rating") {
-    filteredMovies.sort((a, b) => b.rating - a.rating);
-  }
+  filteredMovies = sortMovies(filteredMovies, sortOption);
 
   showMovies(filteredMovies);
+}
+
+function sortMovies(movies, sortOption) {
+  const sortedMovies = [...movies];
+
+  if (sortOption === "title") {
+    sortedMovies.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortOption === "year") {
+    sortedMovies.sort((a, b) => b.year - a.year);
+  } else if (sortOption === "rating") {
+    sortedMovies.sort((a, b) => b.rating - a.rating);
+  }
+
+  return sortedMovies;
 }
 ```
 
@@ -178,52 +212,45 @@ const filteredMovies = allMovies.filter(function (movie) {
 
 **Formål:** Når man klikker en film → vis mere info i en modal.
 
-### 2.1: Simpel løsning med `alert()`
+### 2.1: Cardvisning der matcher løsningen
 
-**Start simpelt - brug `alert()` først:**
-
-Opdatér `showMovie()` funktionen:
+Opdatér `showMovies()`:
 
 ```javascript
-function showMovie(movie) {
-  let movieList = document.querySelector("#movie-list");
+function showMovies(movies) {
+  const movieList = document.querySelector("#movie-list");
+  const movieCount = document.querySelector("#movie-count");
 
-  let html = `
-    <div class="movie-card" data-id="${movie.id}">
-      <img src="${movie.image}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-      <p>Ar: ${movie.year}</p>
-      <p>Rating: ${movie.rating}</p>
-      <p style="font-size: 0.85rem; color: #999;">${movie.genre.join(", ")}</p>
-    </div>
-  `;
+  movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
 
-  movieList.insertAdjacentHTML("beforeend", html);
+  for (const movie of movies) {
+    const movieCard = `
+      <article class="movie-card" tabindex="0">
+        <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+        <div class="movie-info">
+          <div class="title-row">
+            <h2>${movie.title}</h2>
+            <span class="year-badge">(${movie.year})</span>
+          </div>
+          <p class="genre">${movie.genre.join(", ")}</p>
+          <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
+          <p class="director-line"><strong>Director:</strong> ${movie.director}</p>
+        </div>
+      </article>
+    `;
 
-  // Find det kort vi lige lavede
-  let card = movieList.lastElementChild;
+    movieList.insertAdjacentHTML("beforeend", movieCard);
 
-  // Tilføj click event
-  card.addEventListener("click", function () {
-    showDetails(movie);
-  });
-}
-
-function showDetails(movie) {
-  // Simpel alert version
-  alert(`
-${movie.title} (${movie.year})
-
-Rating: ${movie.rating}
-Genre: ${movie.genre.join(", ")}
-Instruktor: ${movie.director}
-
- ${movie.description}
-  `);
+    const newCard = movieList.lastElementChild;
+    newCard.addEventListener("click", function () {
+      showDetails(movie);
+    });
+  }
 }
 ```
 
-**Test det!** Klik på en film → se detaljer i alert.
+**Test det!** Du skal nu have cards med badge, genre, rating og director-linje.
 
 ### 2.2: Bedre løsning med HTML dialog
 
@@ -250,59 +277,28 @@ Tilføj EFTER `<main>`:
 #### Step 2: Tilføj CSS
 
 ```css
-/* Modal styling */
 #movie-modal {
-  border: none;
-  border-radius: 20px;
-  padding: 0;
-  width: 90%;
-  max-width: 600px;
-  max-height: min(88vh, 900px);
-  margin: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  width: min(92vw, 920px);
+  background: #454b53;
 }
 
-#movie-modal::backdrop {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
+#modal-body {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 1rem;
 }
 
-.modal-content {
-  padding: 2rem;
-  position: relative;
-  overflow-y: auto;
-  max-height: min(88vh, 900px);
+.modal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-.close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #27435a;
-  color: white;
-  border: none;
-  height: 38px;
-  padding: 0 0.9rem;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.close-btn:hover {
-  background: #1b3143;
-}
-
-#modal-body img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-#modal-body h2 {
-  margin-top: 0;
-  color: #667eea;
+.modal-description {
+  padding-left: 0.72rem;
+  border-left: 3px solid rgba(168, 208, 232, 0.75);
+  font-style: italic;
 }
 ```
 
@@ -310,28 +306,22 @@ Tilføj EFTER `<main>`:
 
 ```javascript
 function showDetails(movie) {
-  console.log("Viser detaljer for:", movie.title);
+  const modal = document.querySelector("#movie-modal");
+  const modalBody = document.querySelector("#modal-body");
 
-  // Find modal og body
-  let modal = document.querySelector("#movie-modal");
-  let modalBody = document.querySelector("#modal-body");
-
-  // Lav HTML til modal
-  let html = `
-    <img src="${movie.image}" alt="${movie.title}">
-    <h2>${movie.title}</h2>
-    <p><strong>Ar:</strong> ${movie.year}</p>
-    <p><strong>Rating:</strong> ${movie.rating} / 10</p>
-    <p><strong>Genre:</strong> ${movie.genre.join(", ")}</p>
-    <p><strong>Instruktor:</strong> ${movie.director}</p>
-    <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
-    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #ddd;">
-    <p style="line-height: 1.6;">${movie.description}</p>
+  modalBody.innerHTML = `
+    <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
+    <div class="modal-title-row">
+      <h2>${movie.title}</h2>
+      <span class="year-badge">(${movie.year})</span>
+    </div>
+    <p class="genre">${movie.genre.join(", ")}</p>
+    <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
+    <p><strong>Director:</strong> ${movie.director}</p>
+    <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
+    <p class="modal-description">${movie.description}</p>
   `;
 
-  modalBody.innerHTML = html;
-
-  // Åbn modalen
   modal.showModal();
 }
 ```
@@ -551,16 +541,20 @@ modal.showModal();
 ### Click event virker ikke?
 
 ```javascript
-function showMovie(movie) {
-  // ... HTML creation ...
+function showMovies(movies) {
+  const movieList = document.querySelector("#movie-list");
 
-  let card = movieList.lastElementChild;
-  console.log("Tilføjer click til:", card);
+  for (const movie of movies) {
+    // ... HTML creation ...
 
-  card.addEventListener("click", function () {
-    console.log("Clicked!", movie.title);
-    showDetails(movie);
-  });
+    const card = movieList.lastElementChild;
+    console.log("Tilføjer click til:", card);
+
+    card.addEventListener("click", function () {
+      console.log("Clicked!", movie.title);
+      showDetails(movie);
+    });
+  }
 }
 ```
 

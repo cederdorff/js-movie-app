@@ -53,7 +53,7 @@ function applyFilters() {
   });
 
   filteredMovies = sortMovies(filteredMovies, sortOption);
-  renderMovies(filteredMovies);
+  showMovies(filteredMovies);
 }
 
 function sortMovies(movies, sortOption) {
@@ -70,7 +70,7 @@ function sortMovies(movies, sortOption) {
   return sortedMovies;
 }
 
-function renderMovies(movies) {
+function showMovies(movies) {
   const movieList = document.querySelector("#movie-list");
   const movieCount = document.querySelector("#movie-count");
 
@@ -87,10 +87,13 @@ function renderMovies(movies) {
       <article class="movie-card" tabindex="0">
         <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
         <div class="movie-info">
-          <h2>${movie.title}</h2>
-          <p class="meta">Ar: ${movie.year} · Rating: ${movie.rating}</p>
+          <div class="title-row">
+            <h2>${movie.title}</h2>
+            <span class="year-badge">(${movie.year})</span>
+          </div>
           <p class="genre">${movie.genre.join(", ")}</p>
-          <p class="description">${movie.description}</p>
+          <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
+          <p class="director-line"><strong>Director:</strong> ${movie.director}</p>
         </div>
       </article>
     `;
@@ -116,12 +119,14 @@ function showDetails(movie) {
 
   modalBody.innerHTML = `
     <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
-    <h2>${movie.title}</h2>
-    <p><strong>Ar:</strong> ${movie.year}</p>
-    <p><strong>Rating:</strong> ${movie.rating} / 10</p>
-    <p><strong>Genrer:</strong> ${movie.genre.join(", ")}</p>
-    <p><strong>Instruktor:</strong> ${movie.director}</p>
-    <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
+    <div class="modal-title-row">
+      <h2>${movie.title}</h2>
+      <span class="year-badge">(${movie.year})</span>
+    </div>
+    <p class="genre">${movie.genre.join(", ")}</p>
+    <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
+    <p><strong>Director:</strong> ${movie.director}</p>
+    <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
     <p class="modal-description">${movie.description}</p>
   `;
 
