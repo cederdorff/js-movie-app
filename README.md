@@ -89,10 +89,10 @@ js-movie-app/
 ├── app.js                  # Fetch + title-søgning + genre-filter + simpel sortering
 ├── app.css                 # Root styling til slutapp
 ├── _exercises/
-│   ├── movie-app-1-simplified.md
-│   ├── movie-app-2-simplified.md
-│   ├── movie-app-3-simplified.md
-│   ├── movie-app-4-simplified.md
+│   ├── movie-app-1.md
+│   ├── movie-app-2.md
+│   ├── movie-app-3.md
+│   ├── movie-app-4.md
 │   └── examples/
 │       ├── dag1/app.js     # DAG 1 eksempel
 │       ├── dag1/index.html

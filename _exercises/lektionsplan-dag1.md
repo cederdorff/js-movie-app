@@ -109,7 +109,7 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 
 **Opgaver:**
 
-- [Movie App - DAG 1](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-1-simplified.md)
+- [Movie App - DAG 1](movie-app-1.md)
 - [Hello JavaScript](https://www.notion.so/Hello-JavaScript-6ca283a288bd4fafbcea2a11b2c9806e?pvs=21) (ekstra øvelse)
 
 **Eksempel kode:**
