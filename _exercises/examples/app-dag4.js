@@ -1,32 +1,23 @@
 "use strict";
 
-// DAG 4 - Søgning, Modal & Details Example
-// Formål: Søgefunktion, vis film details i modal
-
-console.log("Movie App med sogning starter...");
+document.addEventListener("DOMContentLoaded", initApp);
 
 const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
 
-start();
-
-async function start() {
-  console.log("Henter film data...");
-
-  const response = await fetch(MOVIES_URL);
-  allMovies = await response.json();
-
-  console.log("Hentet", allMovies.length, "film!");
-
-  setupFilters();
-  populateGenreSelect();
-  applyFilters();
-}
-
-function setupFilters() {
+function initApp() {
   document.querySelector("#search-input").addEventListener("input", applyFilters);
   document.querySelector("#genre-select").addEventListener("change", applyFilters);
   document.querySelector("#sort-select").addEventListener("change", applyFilters);
+
+  getMovies();
+}
+
+async function getMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+  populateGenreSelect();
+  applyFilters();
 }
 
 function populateGenreSelect() {
@@ -38,6 +29,8 @@ function populateGenreSelect() {
       genres.add(genre);
     }
   }
+
+  genreSelect.innerHTML = '<option value="all">Alle genrer</option>';
 
   const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
   for (const genre of sortedGenres) {
@@ -75,73 +68,59 @@ function sortMovies(movies, sortOption) {
 }
 
 function showMovies(movies) {
-  console.log("Viser", movies.length, "film...");
-
   const movieList = document.querySelector("#movie-list");
+  const movieCount = document.querySelector("#movie-count");
+
   movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
 
   if (movies.length === 0) {
-    movieList.innerHTML = '<p style="text-align: center; color: white;">Ingen film matchede filteret.</p>';
-    document.querySelector("#movie-count").textContent = "Viser 0 film";
+    movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
     return;
   }
 
-  const counter = document.querySelector("#movie-count");
-  counter.textContent = `Viser ${movies.length} film`;
-
   for (const movie of movies) {
-    showMovie(movie);
+    const movieCard = `
+      <article class="movie-card" tabindex="0">
+        <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+        <div class="movie-info">
+          <h2>${movie.title}</h2>
+          <p class="meta">Ar: ${movie.year} · Rating: ${movie.rating}</p>
+          <p class="genre">${movie.genre.join(", ")}</p>
+          <p class="description">${movie.description}</p>
+        </div>
+      </article>
+    `;
+
+    movieList.insertAdjacentHTML("beforeend", movieCard);
+
+    const newCard = movieList.lastElementChild;
+    newCard.addEventListener("click", function () {
+      showDetails(movie);
+    });
+    newCard.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        showDetails(movie);
+      }
+    });
   }
 }
 
-function showMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
-
-  const html = `
-    <div class="movie-card" tabindex="0">
-      <img src="${movie.image}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-      <p>Ar: ${movie.year}</p>
-      <p>Rating: ${movie.rating}</p>
-      <p class="genre">${movie.genre.join(", ")}</p>
-    </div>
-  `;
-
-  movieList.insertAdjacentHTML("beforeend", html);
-
-  // Find kortet vi lige lavede og tilføj click event
-  const card = movieList.lastElementChild;
-  card.addEventListener("click", function () {
-    showDetails(movie);
-  });
-  card.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      showDetails(movie);
-    }
-  });
-}
-
 function showDetails(movie) {
-  console.log("Viser details for:", movie.title);
-
   const modal = document.querySelector("#movie-modal");
   const modalBody = document.querySelector("#modal-body");
 
-  const html = `
-    <img src="${movie.image}" alt="${movie.title}">
+  modalBody.innerHTML = `
+    <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
     <h2>${movie.title}</h2>
     <p><strong>Ar:</strong> ${movie.year}</p>
     <p><strong>Rating:</strong> ${movie.rating} / 10</p>
-    <p><strong>Genre:</strong> ${movie.genre.join(", ")}</p>
+    <p><strong>Genrer:</strong> ${movie.genre.join(", ")}</p>
     <p><strong>Instruktor:</strong> ${movie.director}</p>
     <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
-    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #ddd;">
-    <p style="line-height: 1.6;">${movie.description}</p>
+    <p class="modal-description">${movie.description}</p>
   `;
 
-  modalBody.innerHTML = html;
   modal.showModal();
 }
-
-console.log("Script klar!");
