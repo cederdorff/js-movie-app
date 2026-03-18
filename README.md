@@ -1,4 +1,4 @@
-# JavaScript Movie App - Simplified Version
+# JavaScript Movie App
 
 Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studerende.
 
@@ -85,9 +85,9 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 
 ```
 js-movie-app/
-├── index.html              # Root demo (simplified slutapp)
+├── index.html              # Root demo (slutapp)
 ├── app.js                  # Fetch + title-søgning + genre-filter + simpel sortering
-├── app.css                 # Root styling til simplified slutapp
+├── app.css                 # Root styling til slutapp
 ├── _exercises/
 │   ├── movie-app-1-simplified.md
 │   ├── movie-app-2-simplified.md
@@ -120,7 +120,7 @@ js-movie-app/
 # Start med tom mappe
 mkdir movie-app
 cd movie-app
-# Følg instruktioner i movie-app-1-simplified.md
+# Følg instruktioner i movie-app-1.md
 ```
 
 **DAG 2-4:**
@@ -149,12 +149,6 @@ git clone https://github.com/cederdorff/js-movie-app.git
 cd js-movie-app
 ```
 
-**Switch til simplified version:**
-
-```bash
-git checkout simplified-version
-```
-
 **Åbn eksempler:**
 
 ```bash
@@ -174,15 +168,15 @@ git checkout simplified-version
 
 ---
 
-## Sammenligning: Original vs Simplified
+## App funktioner efter dag
 
-| Feature          | Original                          | Simplified            |
-| ---------------- | --------------------------------- | --------------------- |
-| **DAG 1**        | Variables, arrays, objects, loops | KUN click counter     |
-| **DAG 2**        | Fetch + async + JSON samtidigt    | Hardcoded data først  |
-| **DAG 3**        | Kombinerede filtre + ranges       | ÉN filter knap        |
-| **DAG 4**        | Avanceret modal + favorites       | Basic modal + søgning |
-| **Sværhedsgrad** | Høj                               | Lav                   |
+| Feature   | DAG 1-2                     | DAG 3-4                  |
+| --------- | --------------------------- | ------------------------ |
+| **DAG 1** | Click counter               | Counter basics           |
+| **DAG 2** | Arrays & loops              | Liste med hardcoded data |
+| **DAG 3** | Fetch & genre filter        | ÉN filter knap           |
+| **DAG 4** | Søgning + sortering + modal | Komplet app              |
+| **Fokus** | Grundlæggende JavaScript    | API + DOM manipulation   |
 
 ---
 

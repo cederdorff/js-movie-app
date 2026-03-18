@@ -110,7 +110,7 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 
 **Opgaver:**
 
-- [Movie App - DAG 4 Simplified](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-4-simplified.md)
+- [Movie App - DAG 4](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-4-simplified.md)
 - [Deploy dit website til GitHub Pages](https://www.notion.so/Deploy-dit-website-til-GitHub-Pages-2cba6f1413dc474883b58fdd4eba57bb?pvs=21)
 
 **Eksempel kode:**
@@ -122,7 +122,7 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 **Movie App løsning:**
 
 - GitHub (kode): https://github.com/cederdorff/js-movie-app
-- GitHub Pages (simplified version): https://cederdorff.com/js-movie-app/
+- GitHub Pages: https://cederdorff.com/js-movie-app/
 
 **Links:**
 

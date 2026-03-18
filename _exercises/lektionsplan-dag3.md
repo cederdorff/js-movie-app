@@ -104,7 +104,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 **Opgaver:**
 
-- [Movie App - DAG 3 Simplified](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-3-simplified.md)
+- [Movie App - DAG 3](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-3-simplified.md)
 
 **Eksempel kode:**
 

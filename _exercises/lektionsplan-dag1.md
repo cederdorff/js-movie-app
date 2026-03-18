@@ -12,7 +12,7 @@ Dagens formål er at introducere jer til de allermest grundlæggende elementer i
 - Reagere på klik med `addEventListener()`
 - Bygge en fungerende click counter som første skridt i Movie App
 
-**Progression i simplified-forløbet:**
+**Progression i forløbet:**
 
 - **DAG 1:** Click counter og JavaScript fundamentals
 - **DAG 2:** Arrays, loops og hardcoded movie data
@@ -109,7 +109,7 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 
 **Opgaver:**
 
-- [Movie App - DAG 1 Simplified](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-1-simplified.md)
+- [Movie App - DAG 1](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-1-simplified.md)
 - [Hello JavaScript](https://www.notion.so/Hello-JavaScript-6ca283a288bd4fafbcea2a11b2c9806e?pvs=21) (ekstra øvelse)
 
 **Eksempel kode:**

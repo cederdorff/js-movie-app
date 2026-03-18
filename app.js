@@ -1,5 +1,5 @@
 "use strict";
-// Root version: simplified slutapp til undervisning
+// Root version: slutapp til undervisning
 // Fokus: fetch + genre-filter + title-sogning
 // Sortering er en del af DAG 4-løsningen
 
