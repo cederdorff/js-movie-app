@@ -79,7 +79,7 @@ function showMovies(movies) {
   }
 
   for (const movie of movies) {
-    const movieCard = `
+    const movieCard = /*html*/ `
       <article class="movie-card" tabindex="0">
         <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
         <div class="movie-info">
@@ -113,7 +113,7 @@ function showDetails(movie) {
   const modal = document.querySelector("#movie-modal");
   const modalBody = document.querySelector("#modal-body");
 
-  modalBody.innerHTML = `
+  modalBody.innerHTML = /*html*/ `
     <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
     <div class="modal-title-row">
       <h2>${movie.title}</h2>

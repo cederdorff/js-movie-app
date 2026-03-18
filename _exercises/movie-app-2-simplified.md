@@ -36,9 +36,9 @@ Du skal have et `movie-app` projekt med:
 
 1. Gå tilbage til [DAG 1 opgaven](movie-app-1-simplified.md) og færdiggør Opgave 0
 2. Eller hent eksempel-filerne:
-   - `_exercises/examples/index-dag1.html`
-   - `_exercises/examples/app-dag1.js`
-   - `_exercises/examples/style-dag1.css`
+   - `_exercises/examples/dag1/index.html`
+   - `_exercises/examples/dag1/app.js`
+   - `_exercises/examples/dag1/style.css`
 
 ### Step 2: Opdater HTML til DAG 2 struktur
 
@@ -161,7 +161,7 @@ console.log(" Movie App - DAG 2 starter...");
 
 ** Hvorfor sletter vi DAG 1 koden?**
 
-I dag lærer vi arrays og loops - det er nyt koncept. Click counter koden kan du altid finde i `_exercises/examples/app-dag1.js` hvis du vil se den igen!
+I dag lærer vi arrays og loops - det er nyt koncept. Click counter koden kan du altid finde i `_exercises/examples/dag1/app.js` hvis du vil se den igen!
 
 ### Step 5: Test din Movie App struktur
 

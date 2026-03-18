@@ -13,7 +13,7 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 - addEventListener til at reagere på klik
 - Byg en simpel click counter
 
-**Eksempel:** Se `_exercises/examples/app-dag1.js`
+**Eksempel:** Se `_exercises/examples/dag1/app.js`
 
 ---
 
@@ -28,7 +28,7 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 - Template literals til HTML generation
 - **Bonus:** fetch introduction (valgfri)
 
-**Eksempel:** Se `_exercises/examples/app-dag2.js`
+**Eksempel:** Se `_exercises/examples/dag2/app.js`
 
 ---
 
@@ -43,7 +43,7 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 - .includes() til at checke arrays
 - ÉN genre filter-knap (ikke kombineret)
 
-**Eksempel:** Se `_exercises/examples/app-dag3.js`
+**Eksempel:** Se `_exercises/examples/dag3/app.js`
 
 ---
 
@@ -58,7 +58,7 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 - Modal med film-detaljer
 - GitHub Pages deployment
 
-**Eksempel:** Se `_exercises/examples/app-dag4.js`
+**Eksempel:** Se `_exercises/examples/dag4/app.js`
 
 ---
 
@@ -94,18 +94,18 @@ js-movie-app/
 │   ├── movie-app-3-simplified.md
 │   ├── movie-app-4-simplified.md
 │   └── examples/
-│       ├── app-dag1.js     # DAG 1 eksempel
-│       ├── index-dag1.html
-│       ├── style-dag1.css
-│       ├── app-dag2.js     # DAG 2 eksempel
-│       ├── index-dag2.html
-│       ├── style-dag2.css
-│       ├── app-dag3.js     # DAG 3 eksempel
-│       ├── index-dag3.html
-│       ├── style-dag3.css
-│       ├── app-dag4.js     # DAG 4 eksempel (komplet app!)
-│       ├── index-dag4.html
-│       └── style-dag4.css
+│       ├── dag1/app.js     # DAG 1 eksempel
+│       ├── dag1/index.html
+│       ├── dag1/style.css
+│       ├── dag2/app.js     # DAG 2 eksempel
+│       ├── dag2/index.html
+│       ├── dag2/style.css
+│       ├── dag3/app.js     # DAG 3 eksempel
+│       ├── dag3/index.html
+│       ├── dag3/style.css
+│       ├── dag4/app.js     # DAG 4 eksempel (komplet app!)
+│       ├── dag4/index.html
+│       └── dag4/style.css
 ```
 
 ---
@@ -153,7 +153,7 @@ cd js-movie-app
 
 ```bash
 # Åbn _exercises/examples/ mappen
-# Hver dag har sine egne filer (app-dag1.js, etc.)
+# Hver dag har sine egne filer (dag-mapper med app.js, index.html og style.css.)
 ```
 
 ---

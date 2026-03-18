@@ -115,9 +115,9 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 
 **Eksempel kode:**
 
-- Komplet DAG 4 eksempel: `_exercises/examples/app-dag4.js`
-- HTML: `_exercises/examples/index-dag4.html`
-- CSS: `_exercises/examples/style-dag4.css`
+- Komplet DAG 4 eksempel: `_exercises/examples/dag4/app.js`
+- HTML: `_exercises/examples/dag4/index.html`
+- CSS: `_exercises/examples/dag4/style.css`
 
 **Movie App løsning:**
 

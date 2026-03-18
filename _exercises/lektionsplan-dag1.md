@@ -114,9 +114,9 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 
 **Eksempel kode:**
 
-- Komplet DAG 1 eksempel: `_exercises/examples/app-dag1.js`
-- HTML: `_exercises/examples/index-dag1.html`
-- CSS: `_exercises/examples/style-dag1.css`
+- Komplet DAG 1 eksempel: `_exercises/examples/dag1/app.js`
+- HTML: `_exercises/examples/dag1/index.html`
+- CSS: `_exercises/examples/dag1/style.css`
 
 **Links:**
 
