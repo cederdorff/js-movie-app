@@ -1,94 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie App</title>
+    <title>Movie App - Simplified</title>
     <link rel="stylesheet" href="app.css" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
   </head>
 
   <body>
     <header>
-      <h1>Movie Database</h1>
+      <h1>Movie App</h1>
+      <p class="subtitle">Simplified: Fetch, genre-filter og title-sogning</p>
     </header>
 
     <main>
-      <!-- Filter bar med alle filtreringsmuligheder -->
-      <section class="filterbar">
-        <!-- Øverste række: Søg og genre -->
-        <div class="filter-row-main">
-          <div class="filter-group search-group">
-            <label for="search-input">Søg</label>
-            <input type="text" id="search-input" placeholder="Søg efter film..." />
-          </div>
-
-          <div class="filter-group">
-            <label for="genre-select">Genre</label>
-            <select id="genre-select">
-              <option value="all">Alle genrer</option>
-              <!-- Genrer indsættes dynamisk via JavaScript -->
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="sort-select">Sortering</label>
-            <select id="sort-select">
-              <option value="none">Ingen sortering</option>
-              <option value="title">Titel (A-Å)</option>
-              <option value="year">År (nyeste først)</option>
-              <option value="rating">Rating (højeste først)</option>
-            </select>
-          </div>
+      <section class="controls">
+        <div class="control-group grow">
+          <label for="search-input">Sog pa title</label>
+          <input type="text" id="search-input" placeholder="Fx matrix, dune eller dark" />
         </div>
 
-        <!-- Nederste række: År og Rating ranges -->
-        <div class="filter-row-ranges">
-          <!-- År range filter -->
-          <div class="filter-group range-group">
-            <label class="range-label">Udgivelsesår</label>
-            <div class="range-inputs">
-              <input type="number" id="year-from" placeholder="1990" min="1900" max="2030" />
-              <span class="range-separator">→</span>
-              <input type="number" id="year-to" placeholder="2025" min="1900" max="2030" />
-            </div>
-          </div>
+        <div class="control-group">
+          <label for="genre-select">Genre</label>
+          <select id="genre-select">
+            <option value="all">Alle genrer</option>
+          </select>
+        </div>
 
-          <!-- Rating range filter -->
-          <div class="filter-group range-group">
-            <label class="range-label">Rating</label>
-            <div class="range-inputs">
-              <input type="number" id="rating-from" placeholder="0.0" min="0" max="10" step="0.1" />
-              <span class="range-separator">→</span>
-              <input type="number" id="rating-to" placeholder="10.0" min="0" max="10" step="0.1" />
-            </div>
-          </div>
-
-          <!-- Ryd alle filtre knap -->
-          <button id="clear-filters" class="clear-btn">
-            <span class="btn-text">Ryd filtre</span>
-          </button>
+        <div class="control-group">
+          <label for="sort-select">Sortering</label>
+          <select id="sort-select">
+            <option value="none">Ingen sortering</option>
+            <option value="title">Titel (A-A)</option>
+            <option value="year">Arstal (nyeste forst)</option>
+            <option value="rating">Rating (hojeste forst)</option>
+          </select>
         </div>
       </section>
 
-      <!-- Movie grid -->
+      <section class="status-bar">
+        <p id="movie-count">Viser 0 film</p>
+      </section>
+
       <section id="movie-list" class="movie-grid">
-        <!-- Film vil blive indsat her dynamisk -->
+        <p class="loading">Loader film...</p>
       </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-      <p>© RACE - Rasmus Cederdorff</p>
+      <p>Undervisningsversion - JavaScript Movie App</p>
     </footer>
 
-    <!-- Movie Detail Modal -->
-    <dialog id="movie-dialog">
-      <form method="dialog">
-        <button id="close-dialog" aria-label="Close">✕</button>
-        <div id="dialog-content">
-          <!-- Movie details will be injected here via JavaScript -->
-        </div>
+    <dialog id="movie-modal">
+      <form method="dialog" class="modal-content">
+        <button class="close-btn" aria-label="Luk dialog" value="close">Luk</button>
+        <div id="modal-body"></div>
       </form>
     </dialog>
 

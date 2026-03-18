@@ -1,132 +1,91 @@
 "use strict";
 
-// DAG 3 - Fetch & Filter Example
-// Formål: Hent rigtig data og tilføj én simpel filter
+// DAG 3 - Fetch & Genre-filter Example
+// Formål: Hent data og filtrer på én valgt genre
 
-console.log("🎬 Movie App starter...");
+console.log("Movie App starter...");
 
-// Global variabel til alle film
+const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
 
-// Start - hent data
 start();
 
 async function start() {
-  console.log("📡 Henter film data...");
+  console.log("Henter film data...");
 
-  // Hent data fra URL
-  let response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
-
-  // Konvertér til JavaScript
+  const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
-  console.log("✅ Hentet", allMovies.length, "film!");
+  console.log("Hentet", allMovies.length, "film!");
 
-  // Vis alle film
+  populateGenreSelect();
   showMovies(allMovies);
 
-  // Setup knapperne
-  setupButtons();
+  document.querySelector("#genre-select").addEventListener("change", applyGenreFilter);
 }
 
-function setupButtons() {
-  // Find knapperne
-  let showAllBtn = document.querySelector("#show-all");
-  let showActionBtn = document.querySelector("#show-action");
-  let showDramaBtn = document.querySelector("#show-drama");
-  let showComedyBtn = document.querySelector("#show-comedy");
+function populateGenreSelect() {
+  const genreSelect = document.querySelector("#genre-select");
+  const genres = new Set();
 
-  // Vis alle
-  showAllBtn.addEventListener("click", function () {
-    console.log("Viser alle film");
-    removeActiveClass();
-    showAllBtn.classList.add("active");
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+  for (const genre of sortedGenres) {
+    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
+  }
+}
+
+function applyGenreFilter() {
+  const selectedGenre = document.querySelector("#genre-select").value;
+
+  if (selectedGenre === "all") {
     showMovies(allMovies);
+    return;
+  }
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    return movie.genre.includes(selectedGenre);
   });
 
-  // Vis Action
-  showActionBtn.addEventListener("click", function () {
-    console.log("Filtrerer til Action...");
-
-    let actionMovies = allMovies.filter(function (movie) {
-      return movie.genre.includes("Action");
-    });
-
-    console.log("Fandt", actionMovies.length, "Action film");
-    removeActiveClass();
-    showActionBtn.classList.add("active");
-    showMovies(actionMovies);
-  });
-
-  // Vis Drama
-  showDramaBtn.addEventListener("click", function () {
-    console.log("Filtrerer til Drama...");
-
-    let dramaMovies = allMovies.filter(function (movie) {
-      return movie.genre.includes("Drama");
-    });
-
-    console.log("Fandt", dramaMovies.length, "Drama film");
-    removeActiveClass();
-    showDramaBtn.classList.add("active");
-    showMovies(dramaMovies);
-  });
-
-  // Vis Comedy
-  showComedyBtn.addEventListener("click", function () {
-    console.log("Filtrerer til Comedy...");
-
-    let comedyMovies = allMovies.filter(function (movie) {
-      return movie.genre.includes("Comedy");
-    });
-
-    console.log("Fandt", comedyMovies.length, "Comedy film");
-    removeActiveClass();
-    showComedyBtn.classList.add("active");
-    showMovies(comedyMovies);
-  });
-
-  // Sæt "Vis alle" som active ved start
-  showAllBtn.classList.add("active");
-}
-
-function removeActiveClass() {
-  document.querySelectorAll(".filter-section button").forEach(function (btn) {
-    btn.classList.remove("active");
-  });
+  showMovies(filteredMovies);
 }
 
 function showMovies(movies) {
   console.log("Viser", movies.length, "film...");
 
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
   movieList.innerHTML = "";
 
   // Hvis ingen film
   if (movies.length === 0) {
-    movieList.innerHTML = '<p style="text-align: center; color: white;">Ingen film matchede filteret 😢</p>';
+    movieList.innerHTML = '<p style="text-align: center; color: white;">Ingen film matchede filteret.</p>';
+    document.querySelector("#movie-count").textContent = "Viser 0 film";
     return;
   }
 
-  // Vis counter
-  let counter = document.querySelector("#movie-count");
+  const counter = document.querySelector("#movie-count");
   counter.textContent = `Viser ${movies.length} film`;
 
   // Loop gennem film
-  for (let movie of movies) {
+  for (const movie of movies) {
     showMovie(movie);
   }
 }
 
 function showMovie(movie) {
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
 
-  let html = `
+  const html = `
     <div class="movie-card">
       <img src="${movie.image}" alt="${movie.title}">
       <h3>${movie.title}</h3>
-      <p>📅 ${movie.year}</p>
-      <p>⭐ ${movie.rating}</p>
+      <p>Ar: ${movie.year}</p>
+      <p>Rating: ${movie.rating}</p>
       <p class="genre">${movie.genre.join(", ")}</p>
     </div>
   `;
@@ -134,4 +93,4 @@ function showMovie(movie) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 
-console.log("✅ Script klar!");
+console.log("Script klar!");

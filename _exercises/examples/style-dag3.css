@@ -20,7 +20,12 @@ header h1 {
   font-size: 2.5rem;
 }
 
-.filter-section {
+.subtitle {
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.controls {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 2rem;
@@ -28,29 +33,30 @@ header h1 {
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
-.filter-section button {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 260px;
+}
+
+.control-group label {
+  font-weight: 600;
+}
+
+#genre-select {
+  background: rgba(255, 255, 255, 0.9);
   border: 2px solid white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
   font-size: 1rem;
-  cursor: pointer;
   transition: all 0.3s;
 }
 
-.filter-section button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-.filter-section button.active {
-  background: white;
-  color: #667eea;
-  font-weight: bold;
+#genre-select:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.35);
 }
 
 #movie-count {
@@ -67,15 +73,15 @@ main {
 
 #movie-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.2rem;
 }
 
 .movie-card {
   background: white;
   color: #333;
   border-radius: 15px;
-  padding: 1rem;
+  padding: 1.15rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
   cursor: pointer;
@@ -89,7 +95,7 @@ main {
 .movie-card img {
   width: 100%;
   border-radius: 10px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
 }
 
 .movie-card h3 {

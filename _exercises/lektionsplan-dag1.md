@@ -6,11 +6,18 @@ Dagens formål er at introducere jer til de allermest grundlæggende elementer i
 
 **Mål:**
 
-- Forstå variabler (`let`)
+- Forstå variabler med const-first tilgang (`const` først, `let` ved reassignment)
 - Bruge `console.log()` til debugging
 - Finde HTML elementer med `querySelector()`
 - Reagere på klik med `addEventListener()`
 - Bygge en fungerende click counter som første skridt i Movie App
+
+**Progression i simplified-forløbet:**
+
+- **DAG 1:** Click counter og JavaScript fundamentals
+- **DAG 2:** Arrays, loops og hardcoded movie data
+- **DAG 3:** Fetch + simpel genre-filtrering
+- **DAG 4:** Title-søgning + detail modal + sortering
 
 **Hvorfor starter vi med en click counter i Movie App?**
 Click counter er perfekt til at lære variable opdateringer og DOM manipulation - de samme koncepter vi bruger i morgen når vi tilføjer rigtig movie data. I dag bygger vi fundamentet!
@@ -20,13 +27,11 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 ### Før første lektion:
 
 - **[Setup Tools & Dev Environment](https://www.notion.so/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274?pvs=21)**
-
   - Følg guiden for at installere de nødvendige værktøjer
   - Du skal have: VS Code med Extensions, GitHub Desktop og Git
-  - Spring over step _8. Node.js & npm_ (ikke nødvendigt endnu)
+  - Spring over step _8. Node.js & npm_ (ikke nødvendigt i dette forløb)
 
 - **[Opret et nyt projekt med GitHub Desktop](https://www.notion.so/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed?pvs=21)**
-
   - Følg guiden - det er ok hvis der er ting du ikke forstår endnu
   - Navngiv dit projekt `movie-app`
   - Du skal have gennemgået Setup Tools først
@@ -52,12 +57,13 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 
 **9:30 - 10:15 | Variables & Console (45 min)**
 
-- Hvad er en variable? (`let`)
+- Hvad er en variable? (`const` og `let`)
+- const-first princip i praksis
 - `console.log()` - din debugging ven
 - Forskellige datatyper: strings, numbers, booleans
 - Hands-on øvelser med variables
 
-**10:15 - 10:30 | Pause ☕**
+**10:15 - 10:30 | Pause **
 
 **10:30 - 11:15 | querySelector & DOM Manipulation (45 min)**
 
@@ -74,7 +80,7 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 - Tilføj reset-knap funktionalitet
 - Test og debug sammen
 
-**12:00 - 13:00 | Frokost 🍕**
+**12:00 - 13:00 | Frokost **
 **13:00 - 13:45 | Click Counter Udfordringer (45 min)**
 
 - Udbyg din counter med flere features
@@ -93,7 +99,6 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 
 - Recap: Hvad har vi lært?
 - **Preview af DAG 2:** I morgen tilføjer vi arrays, loops og rigtig movie data til samme projekt!
-- Hjemmearbejde: Færdiggør udfordringer og eksperimentér
 - Hjemmearbejde: Færdiggør udfordringer og eksperimentér
 
 ## Materialer

@@ -1,19 +1,19 @@
 "use strict";
 
-// 🎬 MOVIE APP - DAG 1
+// MOVIE APP - DAG 1
 // I dag lærer vi JavaScript basics med en click counter
 // I morgen (DAG 2) udvider vi dette projekt med rigtige film data!
 
-console.log("🎬 Movie App - DAG 1 starter...");
+console.log("Movie App - DAG 1 starter...");
 
 // 1. Find knapperne
-let button = document.querySelector("#click-button");
-let resetButton = document.querySelector("#reset-button");
+const button = document.querySelector("#click-button");
+const resetButton = document.querySelector("#reset-button");
 
 // 2. Find tekst elementet
-let counterText = document.querySelector("#counter");
+const counterText = document.querySelector("#counter");
 
-// 3. Lav en variable til at tælle
+// 3. Lav en variabel til at tælle
 let count = 0;
 
 // 4. Tilføj event listener til click-knappen
@@ -39,4 +39,4 @@ resetButton.addEventListener("click", function () {
   console.log("Counter nulstillet!");
 });
 
-console.log("✅ Script klar - prøv at klikke!");
+console.log("Script klar - prov at klikke!");

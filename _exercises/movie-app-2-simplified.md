@@ -1,6 +1,6 @@
 # DAG 2 - Arrays, Loops & Film-lister
 
-## 🎯 Formål
+## Formål
 
 I dag skal du lære at arbejde med **flere ting på én gang** - lister af data! Vi bygger videre på dit Movie App projekt fra DAG 1.
 
@@ -15,22 +15,22 @@ I dag skal du lære at arbejde med **flere ting på én gang** - lister af data!
 
 **Progressionen:**
 
-- ✅ **DAG 1:** Movie App setup + Click counter (variabler, events)
-- 🎯 **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
-- 🌐 **DAG 3:** Fetch rigtig data + filter
-- 🔍 **DAG 4:** Søgning + modal + deployment
+- **DAG 1:** Movie App setup + Click counter (variabler, events)
+- **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
+- **DAG 3:** Fetch rigtig data + filter
+- **DAG 4:** Søgning + modal + deployment
 
 ---
 
-## Opgave 0: Forbered dit Movie App projekt fra DAG 1 🎬
+## Opgave 0: Forbered dit Movie App projekt fra DAG 1
 
 ### Step 1: Tjek at du har DAG 1 projektet
 
 Du skal have et `movie-app` projekt med:
 
-- ✅ `index.html` - med Movie App header og click counter
-- ✅ `app.js` - med click counter funktionalitet
-- ✅ `app.css` - med Movie App styling
+- `index.html` - med Movie App header og click counter
+- `app.js` - med click counter funktionalitet
+- `app.css` - med Movie App styling
 
 **Har du ikke projektet færdigt fra DAG 1?**
 
@@ -52,12 +52,12 @@ Nu skal vi ændre vores `index.html` fra click counter til en film-liste.
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎬 Movie App - DAG 2</title>
+    <title>Movie App - DAG 2</title>
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
     <header>
-      <h1>🎬 Movie App</h1>
+      <h1>Movie App</h1>
       <p>DAG 2: Arrays, Loops & Film-lister</p>
     </header>
 
@@ -154,12 +154,12 @@ main {
 ```javascript
 "use strict";
 
-console.log("🎬 Movie App - DAG 2 starter...");
+console.log(" Movie App - DAG 2 starter...");
 
 // Her skriver du din nye kode for DAG 2
 ```
 
-**💡 Hvorfor sletter vi DAG 1 koden?**
+** Hvorfor sletter vi DAG 1 koden?**
 
 I dag lærer vi arrays og loops - det er nyt koncept. Click counter koden kan du altid finde i `_exercises/examples/app-dag1.js` hvis du vil se den igen!
 
@@ -168,13 +168,13 @@ I dag lærer vi arrays og loops - det er nyt koncept. Click counter koden kan du
 1. **Gem alle filer** (Cmd+S / Ctrl+S)
 2. **Genindlæs Live Server** (eller start den hvis ikke åben)
 3. **Tjek i browseren:**
-   - Ser du "🎬 Movie App" header?
+   - Ser du " Movie App" header?
    - Står der "DAG 2: Arrays, Loops & Film-lister"?
    - Siden er tom under headeren - det er ok! Vi tilføjer indhold nu.
 
 ---
 
-## Opgave 1: Hvad er et Array? 📚
+## Opgave 1: Hvad er et Array?
 
 **Formål:** Forstå hvordan man gemmer flere ting i én variabel.
 
@@ -199,7 +199,7 @@ let movies = ["Inception", "The Matrix", "Interstellar"];
 ```javascript
 "use strict";
 
-console.log("🎬 Movie App starter...");
+console.log(" Movie App starter...");
 
 // En liste af film-titler
 let movies = ["Inception", "The Matrix", "Interstellar", "The Dark Knight"];
@@ -210,7 +210,7 @@ console.log("Anden film:", movies[1]);
 console.log("Hvor mange film?", movies.length);
 ```
 
-**💡 Vigtigt:**
+** Vigtigt:**
 
 - Arrays starter ved index 0 (ikke 1!)
 - `movies[0]` er den første
@@ -218,7 +218,7 @@ console.log("Hvor mange film?", movies.length);
 
 ---
 
-## Opgave 2: Loop gennem et Array 🔄
+## Opgave 2: Loop gennem et Array
 
 **Formål:** Lær at gå gennem hvert element i en liste.
 
@@ -269,12 +269,12 @@ for (let movie of movies) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 
-console.log("✅ Alle film vist!");
+console.log(" Alle film vist!");
 ```
 
 **Test det!** Du skulle se 4 film-kort på siden.
 
-**💡 Nyt koncept: Template strings**
+** Nyt koncept: Template strings**
 
 - Brug backticks: `` ` ``
 - Indsæt variabler med `${variabel}`
@@ -282,7 +282,7 @@ console.log("✅ Alle film vist!");
 
 ---
 
-## Opgave 3: Hvad er et Object? 📦
+## Opgave 3: Hvad er et Object?
 
 **Formål:** Lær at gemme flere informationer om én ting.
 
@@ -300,7 +300,7 @@ I stedet for bare en titel, vil vi gerne have:
 let movie = {
   title: "Inception",
   year: 2010,
-  rating: 8.8
+  rating: 8.8,
 };
 
 console.log("Titel:", movie.title);
@@ -308,7 +308,7 @@ console.log("År:", movie.year);
 console.log("Rating:", movie.rating);
 ```
 
-**💡 Vigtigt:**
+** Vigtigt:**
 
 - Objects bruger `{ }` (arrays bruger `[ ]`)
 - Data gemmes som `key: value` par
@@ -323,18 +323,18 @@ let movies = [
   {
     title: "Inception",
     year: 2010,
-    rating: 8.8
+    rating: 8.8,
   },
   {
     title: "The Matrix",
     year: 1999,
-    rating: 8.7
+    rating: 8.7,
   },
   {
     title: "Interstellar",
     year: 2014,
-    rating: 8.6
-  }
+    rating: 8.6,
+  },
 ];
 
 console.log("Første film:", movies[0]);
@@ -343,7 +343,7 @@ console.log("Dens titel:", movies[0].title);
 
 ---
 
-## Opgave 4: Vis Film-kort med Data 🎯
+## Opgave 4: Vis Film-kort med Data
 
 **Formål:** Kombinér alt du har lært - loop gennem objects og vis dem!
 
@@ -354,30 +354,30 @@ console.log("Dens titel:", movies[0].title);
 ```javascript
 "use strict";
 
-console.log("🎬 Movie App starter...");
+console.log(" Movie App starter...");
 
 // Array af film-objects (hardcoded data)
 let movies = [
   {
     title: "Inception",
     year: 2010,
-    rating: 8.8
+    rating: 8.8,
   },
   {
     title: "The Matrix",
     year: 1999,
-    rating: 8.7
+    rating: 8.7,
   },
   {
     title: "Interstellar",
     year: 2014,
-    rating: 8.6
+    rating: 8.6,
   },
   {
     title: "The Dark Knight",
     year: 2008,
-    rating: 9.0
-  }
+    rating: 9.0,
+  },
 ];
 
 // Find container
@@ -391,8 +391,8 @@ for (let movie of movies) {
   let html = `
     <div class="movie-card">
       <h3>${movie.title}</h3>
-      <p>📅 År: ${movie.year}</p>
-      <p>⭐ Rating: ${movie.rating}</p>
+      <p> År: ${movie.year}</p>
+      <p> Rating: ${movie.rating}</p>
     </div>
   `;
 
@@ -400,14 +400,14 @@ for (let movie of movies) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 
-console.log("✅ Alle", movies.length, "film vist!");
+console.log(" Alle", movies.length, "film vist!");
 ```
 
 **Test det!** Du skulle se 4 flotte film-kort med data.
 
 ---
 
-## Opgave 5: Gør det til funktioner 🔧
+## Opgave 5: Gør det til funktioner
 
 **Formål:** Lær at organisere din kode i funktioner.
 
@@ -416,14 +416,14 @@ console.log("✅ Alle", movies.length, "film vist!");
 ```javascript
 "use strict";
 
-console.log("🎬 Movie App starter...");
+console.log(" Movie App starter...");
 
 // Global data
 let movies = [
   { title: "Inception", year: 2010, rating: 8.8 },
   { title: "The Matrix", year: 1999, rating: 8.7 },
   { title: "Interstellar", year: 2014, rating: 8.6 },
-  { title: "The Dark Knight", year: 2008, rating: 9.0 }
+  { title: "The Dark Knight", year: 2008, rating: 9.0 },
 ];
 
 // Start app
@@ -440,7 +440,7 @@ function showMovies() {
     showMovie(movie);
   }
 
-  console.log("✅ Alle film vist!");
+  console.log(" Alle film vist!");
 }
 
 // Funktion til at vise én film
@@ -450,8 +450,8 @@ function showMovie(movie) {
   let html = `
     <div class="movie-card">
       <h3>${movie.title}</h3>
-      <p>📅 År: ${movie.year}</p>
-      <p>⭐ Rating: ${movie.rating}</p>
+      <p> År: ${movie.year}</p>
+      <p> Rating: ${movie.rating}</p>
     </div>
   `;
 
@@ -468,7 +468,7 @@ function showMovie(movie) {
 
 ---
 
-## 🎯 Udfordringer
+## Udfordringer
 
 ### Udfordring 1: Tilføj flere film
 
@@ -488,8 +488,8 @@ function showMovie(movie) {
   let html = `
     <div class="movie-card" style="border: 2px solid ${color}">
       <h3>${movie.title}</h3>
-      <p>📅 År: ${movie.year}</p>
-      <p>⭐ Rating: ${movie.rating}</p>
+      <p> År: ${movie.year}</p>
+      <p> Rating: ${movie.rating}</p>
     </div>
   `;
 
@@ -507,8 +507,8 @@ let movies = [
     title: "Inception",
     year: 2010,
     rating: 8.8,
-    image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg"
-  }
+    image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
+  },
   // ... resten
 ];
 ```
@@ -520,15 +520,15 @@ let html = `
   <div class="movie-card">
     <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
     <h3>${movie.title}</h3>
-    <p>📅 År: ${movie.year}</p>
-    <p>⭐ Rating: ${movie.rating}</p>
+    <p> År: ${movie.year}</p>
+    <p> Rating: ${movie.rating}</p>
   </div>
 `;
 ```
 
 ---
 
-## 🌟 BONUS: Introduktion til Fetch
+## BONUS: Introduktion til Fetch
 
 **Kun hvis du er færdig med alt ovenstående!**
 
@@ -541,13 +541,13 @@ Nu kan vi erstatte vores hardcoded data med rigtig data fra en JSON fil:
 start();
 
 async function start() {
-  console.log("🎬 Henter film data...");
+  console.log(" Henter film data...");
 
   // Hent data fra URL
-  let response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
-  let movies = await response.json();
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
+  const movies = await response.json();
 
-  console.log("📊 Hentet", movies.length, "film!");
+  console.log(" Hentet", movies.length, "film!");
 
   showMovies(movies);
 }
@@ -568,7 +568,7 @@ function showMovie(movie) {
     <div class="movie-card">
       <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px; margin-bottom: 0.5rem;">
       <h3>${movie.title} (${movie.year})</h3>
-      <p>⭐ ${movie.rating}</p>
+      <p> ${movie.rating}</p>
     </div>
   `;
 
@@ -576,22 +576,22 @@ function showMovie(movie) {
 }
 ```
 
-**💡 Dette er avanceret!** Hvis det er forvirrende, spring det over. Vi dykker ned i fetch næste gang!
+** Dette er avanceret!** Hvis det er forvirrende, spring det over. Vi dykker ned i fetch næste gang!
 
 ---
 
-## 📚 Hvad har du lært i dag?
+## Hvad har du lært i dag?
 
-✅ **Arrays** - lister med `[ ]`  
-✅ **Objects** - data med `{ key: value }`  
-✅ **For...of loops** - gå gennem et array  
-✅ **Template strings** - indsæt variabler i HTML  
-✅ **insertAdjacentHTML** - tilføj HTML til siden  
-✅ **Funktioner** - organisér din kode
+**Arrays** - lister med `[ ]`  
+ **Objects** - data med `{ key: value }`  
+ **For...of loops** - gå gennem et array  
+ **Template strings** - indsæt variabler i HTML  
+ **insertAdjacentHTML** - tilføj HTML til siden  
+ **Funktioner** - organisér din kode
 
 ---
 
-## 🏠 Forberedelse til næste gang
+## Forberedelse til næste gang
 
 Til næste gang skal vi arbejde med **filtrering**!
 
@@ -601,11 +601,11 @@ Tænk over:
 - Hvordan ville du søge efter en titel?
 - Hvordan ville du sortere efter rating?
 
-Vi ses! 🚀
+Vi ses!
 
 ---
 
-## 💡 Debugging Tips
+## Debugging Tips
 
 **Hvis noget ikke virker:**
 
@@ -618,13 +618,13 @@ Vi ses! 🚀
 **Typiske fejl:**
 
 ```javascript
-// ❌ Forkert - mangler komma
+//  Forkert - mangler komma
 let movies = [
   { title: "Inception" }
   { title: "Matrix" }  // Fejl her!
 ];
 
-// ✅ Rigtigt
+//  Rigtigt
 let movies = [
   { title: "Inception" },
   { title: "Matrix" }

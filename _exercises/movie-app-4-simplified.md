@@ -1,32 +1,33 @@
-# DAG 4 - Søgning, Details & Deployment 🚀
+# DAG 4 - Søgning, Genre, Sortering, Detaljer & Deployment
 
-## 🎯 Formål
+## Formål
 
 På den sidste dag tilføjer vi:
 
-- 🔎 **Søgefelt** (find film ved titel)
-- 📝 **Modal/details** (vis mere info når man klikker)
-- 🌐 **GitHub Pages** (gør din app offentlig!)
+- **Søgefelt** (find film ved titel)
+- **Sortering** (titel, år og rating)
+- **Modal/detaljer** (vis mere info når man klikker)
+- **GitHub Pages** (gør din app offentlig)
 
 **Hold det enkelt!** Basis funktionalitet der virker.
 
 ---
 
-## Opgave 0: Start hvor vi slap
+## Opgave 0: Start Hvor Vi Slap
 
 Din `app.js` fra DAG 3 skulle have:
 
-- ✅ `fetch()` der henter data
-- ✅ `showMovies()` der viser film
-- ✅ Filter-knapper (Action, Drama, etc.)
+- `fetch()` der henter data
+- `showMovies()` der viser film
+- Genre-filter (dropdown)
 
 **Hvis ikke - kopier fra DAG 3 først!**
 
 ---
 
-## Opgave 1: Tilføj Søgefelt 🔍
+## Opgave 1: Tilføj Søgning, Genre & Sortering
 
-**Formål:** Lad brugeren søge efter film ved titel.
+**Formål:** Lad brugeren søge på titel, filtrere på genre og sortere resultater.
 
 ### 1.1: Tilføj HTML
 
@@ -34,19 +35,31 @@ Opdatér `index.html` - tilføj søgefeltet:
 
 ```html
 <header>
-  <h1>🎬 Min Film-app</h1>
+  <h1>Min Film-app</h1>
 </header>
 
-<!-- NYT: Søgefelt -->
-<section class="search-section">
-  <input type="text" id="search-input" placeholder="Søg efter film titel..." />
-</section>
+<section class="controls">
+  <div class="control-group grow">
+    <label for="search-input">Søg på titel</label>
+    <input type="text" id="search-input" placeholder="Søg efter film titel..." />
+  </div>
 
-<!-- Eksisterende filter knapper -->
-<section class="filter-section">
-  <button id="show-all">Vis alle</button>
-  <button id="show-action">Vis Action</button>
-  <!-- ... andre knapper -->
+  <div class="control-group">
+    <label for="genre-select">Genre</label>
+    <select id="genre-select">
+      <option value="all">Alle genrer</option>
+    </select>
+  </div>
+
+  <div class="control-group">
+    <label for="sort-select">Sortering</label>
+    <select id="sort-select">
+      <option value="none">Ingen sortering</option>
+      <option value="title">Titel (A-Å)</option>
+      <option value="year">År (nyeste først)</option>
+      <option value="rating">Rating (højeste først)</option>
+    </select>
+  </div>
 </section>
 
 <main>
@@ -87,39 +100,43 @@ Tilføj i `app.css`:
 **Opdatér `app.js` - tilføj søge-logik:**
 
 ```javascript
+const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+
 async function start() {
-  let response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
+  const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
-  showMovies(allMovies);
-  setupButtons();
-  setupSearch(); // NYT!
+  setupFilters();
+  populateGenreSelect();
+  applyFilters();
 }
 
-// Ny funktion: Setup search
-function setupSearch() {
-  let searchInput = document.querySelector("#search-input");
+function setupFilters() {
+  document.querySelector("#search-input").addEventListener("input", applyFilters);
+  document.querySelector("#genre-select").addEventListener("change", applyFilters);
+  document.querySelector("#sort-select").addEventListener("change", applyFilters);
+}
 
-  searchInput.addEventListener("input", function () {
-    let searchTerm = searchInput.value.toLowerCase();
+function applyFilters() {
+  const searchTerm = document.querySelector("#search-input").value.toLowerCase();
+  const selectedGenre = document.querySelector("#genre-select").value;
+  const sortOption = document.querySelector("#sort-select").value;
 
-    console.log("Søger efter:", searchTerm);
-
-    // Hvis tom - vis alle
-    if (searchTerm === "") {
-      showMovies(allMovies);
-      return;
-    }
-
-    // Filtrer: behold kun film hvor titel inkluderer søgetekst
-    let filteredMovies = allMovies.filter(function (movie) {
-      let title = movie.title.toLowerCase();
-      return title.includes(searchTerm);
-    });
-
-    console.log("Fandt", filteredMovies.length, "film");
-    showMovies(filteredMovies);
+  let filteredMovies = allMovies.filter(function (movie) {
+    const matchesTitle = movie.title.toLowerCase().includes(searchTerm);
+    const matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    return matchesTitle && matchesGenre;
   });
+
+  if (sortOption === "title") {
+    filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortOption === "year") {
+    filteredMovies.sort((a, b) => b.year - a.year);
+  } else if (sortOption === "rating") {
+    filteredMovies.sort((a, b) => b.rating - a.rating);
+  }
+
+  showMovies(filteredMovies);
 }
 ```
 
@@ -129,18 +146,18 @@ function setupSearch() {
 - Skriv "dark" → se Dark Knight film
 - Slet tekst → se alle film igen
 
-### 1.4: Forstå søge-logikken
+### 1.4: Forstå Filter-logikken
 
 ```javascript
-let searchTerm = searchInput.value.toLowerCase();
+const searchTerm = searchInput.value.toLowerCase();
 ```
 
 - `searchInput.value` = hvad brugeren skrev
 - `.toLowerCase()` = gør til små bogstaver ("Matrix" → "matrix")
 
 ```javascript
-let filteredMovies = allMovies.filter(function (movie) {
-  let title = movie.title.toLowerCase();
+const filteredMovies = allMovies.filter(function (movie) {
+  const title = movie.title.toLowerCase();
   return title.includes(searchTerm);
 });
 ```
@@ -149,7 +166,7 @@ let filteredMovies = allMovies.filter(function (movie) {
 - Check om titlen indeholder søgeteksten
 - `"The Matrix".toLowerCase().includes("matrix")` → `true`
 
-**💡 Vigtigt:**
+**Vigtigt:**
 
 - `"input"` event = trigger hver gang der skrives
 - `.toLowerCase()` gør søgningen case-insensitive
@@ -157,7 +174,7 @@ let filteredMovies = allMovies.filter(function (movie) {
 
 ---
 
-## Opgave 2: Klik på Film → Vis Details! 📝
+## Opgave 2: Klik På Film -> Vis Detaljer
 
 **Formål:** Når man klikker en film → vis mere info i en modal.
 
@@ -175,8 +192,8 @@ function showMovie(movie) {
     <div class="movie-card" data-id="${movie.id}">
       <img src="${movie.image}" alt="${movie.title}">
       <h3>${movie.title}</h3>
-      <p>📅 ${movie.year}</p>
-      <p>⭐ ${movie.rating}</p>
+      <p>Ar: ${movie.year}</p>
+      <p>Rating: ${movie.rating}</p>
       <p style="font-size: 0.85rem; color: #999;">${movie.genre.join(", ")}</p>
     </div>
   `;
@@ -197,16 +214,16 @@ function showDetails(movie) {
   alert(`
 ${movie.title} (${movie.year})
 
-⭐ Rating: ${movie.rating}
-🎭 Genre: ${movie.genre.join(", ")}
-⏱️ Runtime: ${movie.runtime} min
+Rating: ${movie.rating}
+Genre: ${movie.genre.join(", ")}
+Instruktor: ${movie.director}
 
-📝 ${movie.plot}
+ ${movie.description}
   `);
 }
 ```
 
-**Test det!** Klik på en film → se details i alert.
+**Test det!** Klik på en film → se detaljer i alert.
 
 ### 2.2: Bedre løsning med HTML dialog
 
@@ -221,12 +238,12 @@ Tilføj EFTER `<main>`:
 
 <!-- Modal dialog -->
 <dialog id="movie-modal">
-  <div class="modal-content">
-    <button id="close-modal" class="close-btn">✕</button>
+  <form method="dialog" class="modal-content">
+    <button class="close-btn" value="close">Luk</button>
     <div id="modal-body">
-      <!-- Details vises her -->
+      <!-- Detaljer vises her -->
     </div>
-  </div>
+  </form>
 </dialog>
 ```
 
@@ -240,6 +257,8 @@ Tilføj EFTER `<main>`:
   padding: 0;
   width: 90%;
   max-width: 600px;
+  max-height: min(88vh, 900px);
+  margin: auto;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -251,26 +270,28 @@ Tilføj EFTER `<main>`:
 .modal-content {
   padding: 2rem;
   position: relative;
+  overflow-y: auto;
+  max-height: min(88vh, 900px);
 }
 
 .close-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #f44336;
+  background: #27435a;
   color: white;
   border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 1.5rem;
+  height: 38px;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .close-btn:hover {
-  background: #d32f2f;
-  transform: scale(1.1);
+  background: #1b3143;
 }
 
 #modal-body img {
@@ -289,7 +310,7 @@ Tilføj EFTER `<main>`:
 
 ```javascript
 function showDetails(movie) {
-  console.log("Viser details for:", movie.title);
+  console.log("Viser detaljer for:", movie.title);
 
   // Find modal og body
   let modal = document.querySelector("#movie-modal");
@@ -299,14 +320,13 @@ function showDetails(movie) {
   let html = `
     <img src="${movie.image}" alt="${movie.title}">
     <h2>${movie.title}</h2>
-    <p><strong>📅 År:</strong> ${movie.year}</p>
-    <p><strong>⭐ Rating:</strong> ${movie.rating} / 10</p>
-    <p><strong>🎭 Genre:</strong> ${movie.genre.join(", ")}</p>
-    <p><strong>⏱️ Varighed:</strong> ${movie.runtime} min</p>
-    <p><strong>🎬 Instruktør:</strong> ${movie.director}</p>
-    <p><strong>🎭 Skuespillere:</strong> ${movie.actors}</p>
+    <p><strong>Ar:</strong> ${movie.year}</p>
+    <p><strong>Rating:</strong> ${movie.rating} / 10</p>
+    <p><strong>Genre:</strong> ${movie.genre.join(", ")}</p>
+    <p><strong>Instruktor:</strong> ${movie.director}</p>
+    <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
     <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #ddd;">
-    <p style="line-height: 1.6;">${movie.plot}</p>
+    <p style="line-height: 1.6;">${movie.description}</p>
   `;
 
   modalBody.innerHTML = html;
@@ -314,31 +334,17 @@ function showDetails(movie) {
   // Åbn modalen
   modal.showModal();
 }
-
-// Luk modal når X klikkes
-document.querySelector("#close-modal").addEventListener("click", function () {
-  let modal = document.querySelector("#movie-modal");
-  modal.close();
-});
-
-// Luk modal når man klikker udenfor
-document.querySelector("#movie-modal").addEventListener("click", function (event) {
-  // Hvis man klikker på selve dialogen (ikke indholdet)
-  if (event.target.id === "movie-modal") {
-    this.close();
-  }
-});
 ```
 
 **Test det!**
 
 - Klik en film → se flot modal
-- Klik X eller udenfor → luk modal
+- Klik "Luk" eller tryk ESC -> luk modal
 - Prøv forskellige film
 
 ---
 
-## Opgave 3: Deploy til GitHub Pages! 🌐
+## Opgave 3: Deploy Til GitHub Pages
 
 **Formål:** Gør din app tilgængelig på internettet!
 
@@ -347,9 +353,10 @@ document.querySelector("#movie-modal").addEventListener("click", function (event
 **Check at alt virker:**
 
 1. Søgning fungerer
-2. Filter knapper fungerer
-3. Modal åbner og lukker
-4. Ingen fejl i Console
+2. Genre-filter fungerer
+3. Sortering fungerer
+4. Modal åbner og lukker
+5. Ingen fejl i Console
 
 ### 3.2: Push til GitHub
 
@@ -389,10 +396,11 @@ URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 
 Åbn URL'en i en ny tab og test:
 
-- ✅ Loader film?
-- ✅ Søgning virker?
-- ✅ Filter knapper virker?
-- ✅ Modal åbner?
+- Loader film?
+- Søgning virker?
+- Genre-filter virker?
+- Sortering virker?
+- Modal åbner?
 
 **Hvis noget ikke virker:**
 
@@ -402,96 +410,54 @@ URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 
 ---
 
-## 🎯 Udfordringer
+## Udfordringer
 
 ### Udfordring 1: Søg også i genre
 
 Lad søgningen også finde film baseret på genre:
 
 ```javascript
-function setupSearch() {
-  let searchInput = document.querySelector("#search-input");
-
-  searchInput.addEventListener("input", function () {
-    let searchTerm = searchInput.value.toLowerCase();
-
-    if (searchTerm === "") {
-      showMovies(allMovies);
-      return;
-    }
-
-    let filteredMovies = allMovies.filter(function (movie) {
-      let title = movie.title.toLowerCase();
-      let genres = movie.genre.join(" ").toLowerCase();
-
-      // Match title ELLER genre
-      return title.includes(searchTerm) || genres.includes(searchTerm);
-    });
-
-    showMovies(filteredMovies);
-  });
-}
-```
-
-### Udfordring 2: Kombiner søgning + filter
-
-Hvis brugeren både søger OG klikker filter:
-
-```javascript
-// Global variable til aktiv filter
-let activeFilter = null;
-
-function setupButtons() {
-  let showActionBtn = document.querySelector("#show-action");
-
-  showActionBtn.addEventListener("click", function () {
-    activeFilter = "Action";
-    applyFilters();
-  });
-
-  // ... andre knapper
-}
-
-function setupSearch() {
-  let searchInput = document.querySelector("#search-input");
-
-  searchInput.addEventListener("input", function () {
-    applyFilters();
-  });
-}
-
 function applyFilters() {
   let searchTerm = document.querySelector("#search-input").value.toLowerCase();
+  let selectedGenre = document.querySelector("#genre-select").value;
 
-  let filtered = allMovies;
+  let filteredMovies = allMovies.filter(function (movie) {
+    let title = movie.title.toLowerCase();
+    let genres = movie.genre.join(" ").toLowerCase();
+    let matchesSearch = title.includes(searchTerm) || genres.includes(searchTerm);
+    let matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    return matchesSearch && matchesGenre;
+  });
 
-  // Anvend genre filter
-  if (activeFilter) {
-    filtered = filtered.filter(function (movie) {
-      return movie.genre.includes(activeFilter);
-    });
-  }
-
-  // Anvend søgning
-  if (searchTerm !== "") {
-    filtered = filtered.filter(function (movie) {
-      return movie.title.toLowerCase().includes(searchTerm);
-    });
-  }
-
-  showMovies(filtered);
+  showMovies(filteredMovies);
 }
 ```
 
-### Udfordring 3: Luk modal med ESC
+### Udfordring 2: Udvid sorteringen
+
+Sortering er allerede en del af basisløsningen. Som ekstra træning kan du tilføje:
+
+- stigende/faldende retning
+- sekundær sortering (fx titel ved samme rating)
+
+Grundlogikken i `applyFilters()` er:
 
 ```javascript
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    let modal = document.querySelector("#movie-modal");
-    if (modal.open) {
-      modal.close();
-    }
+if (sortOption === "title") {
+  filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+} else if (sortOption === "year") {
+  filteredMovies.sort((a, b) => b.year - a.year);
+} else if (sortOption === "rating") {
+  filteredMovies.sort((a, b) => b.rating - a.rating);
+}
+```
+
+### Udfordring 3: Luk modal med klik på backdrop (valgfri)
+
+```javascript
+document.querySelector("#movie-modal").addEventListener("click", function (event) {
+  if (event.target.id === "movie-modal") {
+    this.close();
   }
 });
 ```
@@ -510,26 +476,27 @@ async function start() {
   allMovies = await response.json();
 
   // Skjul loading - vis film
-  showMovies(allMovies);
-  setupButtons();
-  setupSearch();
+  setupFilters();
+  populateGenreSelect();
+  applyFilters();
 }
 ```
 
 ---
 
-## 📚 Hvad har du lært i dag?
+## Hvad har du lært i dag?
 
-✅ **Søgefunktion** med `.filter()` og `.includes()`  
-✅ **Modal dialog** med `<dialog>` element  
-✅ **showModal() / close()** API  
-✅ **Event delegation** med dynamisk indhold  
-✅ **GitHub Pages** deployment  
-✅ **Kombination af funktioner** (søg + filter)
+- **Søgefunktion** med `.filter()` og `.includes()`
+- **Sortering** med `.sort()`
+- **Modal dialog** med `<dialog>` element
+- **showModal() / close()** API
+- **Event listeners** på dynamisk oprettede elementer
+- **GitHub Pages** deployment
+- **Kombination af funktioner** (søg + filter)
 
 ---
 
-## 🎉 Du har nu en komplet Movie App!
+## Du har nu en komplet Movie App!
 
 **Din app kan:**
 
@@ -537,13 +504,13 @@ async function start() {
 - Vise film med billeder
 - Filtrere på genre
 - Søge efter titel
-- Vise details i modal
+- Vise detaljer i modal
+- Sortere film efter titel, år og rating
 - Køre live på internettet!
 
 **Hvad kunne du tilføje senere?**
 
 - Favorit-funktion (localStorage)
-- Sortering (rating, år, titel)
 - Flere filtre (år-range, rating-range)
 - Pagination (vis 20 ad gangen)
 - Dark mode toggle
@@ -552,7 +519,7 @@ Men det er for avanceret lige nu. **Hold det simpelt!**
 
 ---
 
-## 💡 Debugging Tips
+## Debugging Tips
 
 ### Søgning virker ikke?
 
@@ -561,7 +528,7 @@ Men det er for avanceret lige nu. **Hold det simpelt!**
 let searchTerm = "matrix";
 console.log("Søger:", searchTerm);
 
-allMovies.forEach(movie => {
+allMovies.forEach((movie) => {
   let title = movie.title.toLowerCase();
   console.log(title, "matches?", title.includes(searchTerm));
 });
@@ -607,9 +574,9 @@ function showMovie(movie) {
 
 ---
 
-## 🏁 Tillykke!
+## Tillykke!
 
-Du har gennemført en 4-dages JavaScript kursus! 🎊
+Du har gennemført en 4-dages JavaScript kursus!
 
 Du kan nu:
 
@@ -620,6 +587,6 @@ Du kan nu:
 - Bygge interaktive web apps
 - Deploye til internettet
 
-**Del din app!** Send linket til venner og familie 🚀
+**Del din app!** Send linket til venner og familie
 
-Vi ses! 👋
+Vi ses!

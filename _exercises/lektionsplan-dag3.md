@@ -2,7 +2,7 @@
 
 ## Formål
 
-Formålet med denne lektion er at introducere jer til at hente rigtig data fra internettet og implementere én simpel filter funktion.
+Formålet med denne lektion er at introducere jer til at hente rigtig data fra projektets JSON-fil og implementere én simpel genre-filter funktion.
 
 **Mål:**
 
@@ -11,16 +11,15 @@ Formålet med denne lektion er at introducere jer til at hente rigtig data fra i
 - Konvertere JSON til JavaScript objekter
 - Forstå og bruge `Array.filter()` metoden
 - Bruge `.includes()` til array søgning
-- Implementere ÉN simpel genre filter
+- Implementere ÉN simpel genre-filter
 - Håndtere tomme filtrerede resultater
 
 **Hvorfor kun én filter?**
-Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at blive overvældet af kombinerede filtre, ranges eller sortering. Det kommer senere!
+Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at blive overvældet af kombinerede filtre og ranges. Sortering tager vi som en enkel, fast del af DAG 4.
 
 ## Forberedelse
 
 - **Færdiggør DAG 2:**
-
   - Sørg for du har arrays af objekter der virker
   - Forstå loops og template literals
   - Ha' dit hardcoded movie data klar
@@ -40,7 +39,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 **9:00 - 9:30 | Recap & Show & Tell (30 min)**
 
-- Hvem fik arrays af objekter til at virke? 🎉
+- Hvem fik arrays af objekter til at virke?
 - Show & Tell: Vis jeres movie app (5-6 studerende)
 - Quiz: Arrays, objects, loops, template literals
 - Dagens mål: Rigtig data + én simpel filter
@@ -55,7 +54,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Hands-on: Erstat hardcoded data med fetch
 - Debugging: Typiske fetch fejl
 
-**10:30 - 10:45 | Pause ☕**
+**10:30 - 10:45 | Pause **
 
 **10:45 - 11:45 | Array.filter() Deep Dive (60 min)**
 
@@ -71,7 +70,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Solution: `.includes()` checker om array indeholder værdi
 - Quick test i console
 
-**12:00 - 13:00 | Frokost 🍕**
+**12:00 - 13:00 | Frokost **
 
 **13:00 - 14:15 | Implementer ÉN Genre Filter (75 min)**
 
@@ -86,7 +85,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 **14:15 - 14:45 | Polishing & Edge Cases (30 min)**
 
 - Håndter tomme resultater: "Ingen film fundet"
-- Tilføj active state til knapper
+- Implementer genre-valg (dropdown eller enkel knap)
 - Vis counter: "Viser 23 film"
 - Test at alt virker
 
@@ -95,7 +94,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Recap: fetch, async/await, filter, includes
 - Spørgsmål: Hvad var sværest? Hvad var coolest?
 - Preview DAG 4: Søgning, modal og deployment!
-- Hjemmearbejde: Tilføj flere genre knapper
+- Hjemmearbejde: Ryd op i kode og forbered title-søgning
 
 ## Materialer
 
@@ -115,6 +114,6 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 **Links:**
 
-- Movie Data URL: https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
+- Movie Data (ekstern URL): https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
 - Movie App (færdig version): https://cederdorff.com/js-movie-app/
 - Array.filter() dokumentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter

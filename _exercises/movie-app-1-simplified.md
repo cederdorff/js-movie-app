@@ -1,6 +1,6 @@
 # DAG 1 - JavaScript Basics & Click Counter
 
-## 🎯 Formål
+## Formål
 
 I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
 
@@ -19,14 +19,14 @@ I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
 
 **Progressionen:**
 
-- 🎯 **DAG 1:** Setup + Click counter (lær basics)
-- 📝 **DAG 2:** Arrays, loops, hardcoded movie data
-- 🌐 **DAG 3:** Fetch rigtig data + filter
-- 🔍 **DAG 4:** Søgning + modal + deployment
+- **DAG 1:** Setup + Click counter (lær basics)
+- **DAG 2:** Arrays, loops, hardcoded movie data
+- **DAG 3:** Fetch rigtig data + filter
+- **DAG 4:** Søgning + modal + deployment
 
 ---
 
-## Opgave 0: Movie App Projekt Setup 🎬
+## Opgave 0: Movie App Projekt Setup
 
 ### Step 1: Opret Movie App projektet
 
@@ -47,12 +47,12 @@ Kopier dette ind i `index.html`:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎬 Movie App - DAG 1</title>
+    <title>Movie App - DAG 1</title>
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
     <header>
-      <h1>🎬 Movie App</h1>
+      <h1>Movie App</h1>
       <p>DAG 1: Lær JavaScript med Click Counter</p>
     </header>
 
@@ -61,10 +61,10 @@ Kopier dette ind i `index.html`:
         <h2>Klik Tæller</h2>
         <p class="instructions">Øv dig med klik events mens vi bygger fundamentet til vores Movie App!</p>
 
-        <div class="count-display">Antal klik: <span id="count">0</span></div>
+        <div class="count-display">Antal klik: <span id="counter">0</span></div>
 
-        <button id="click-btn">Klik mig! 🎬</button>
-        <button id="reset-btn">Nulstil</button>
+        <button id="click-button">Klik mig!</button>
+        <button id="reset-button">Nulstil</button>
       </div>
     </main>
 
@@ -142,7 +142,7 @@ main {
   margin-bottom: 2rem;
 }
 
-#count {
+#counter {
   font-size: 4rem;
   font-weight: bold;
   color: #ffd700;
@@ -172,12 +172,12 @@ button:active {
   transform: translateY(0);
 }
 
-#reset-btn {
+#reset-button {
   background: #ff6b6b;
   color: white;
 }
 
-#reset-btn:hover {
+#reset-button:hover {
   background: #ff5252;
 }
 ```
@@ -191,13 +191,13 @@ button:active {
    - Klik på "Console" fanen
    - Dette er dit vigtigste debugging værktøj!
 
-**✅ Tjek at det virker:**
+** Tjek at det virker:**
 
-- Ser du "🎬 Movie App" som overskrift?
+- Ser du " Movie App" som overskrift?
 - Ser du click counter boksen?
 - Knapperne gør ikke noget endnu - det er ok! Vi tilføjer JavaScript nu.
 
-**💡 Hvorfor hedder det "Movie App"?**
+** Hvorfor hedder det "Movie App"?**
 
 I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi bare JavaScript basics med en simpel counter!
 
@@ -211,20 +211,20 @@ I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi
 
 ---
 
-## Opgave 1: Din første variabel 📦
+## Opgave 1: Din første variabel
 
 **Formål:** Lær hvad en variabel er.
 
 ### Hvad er en variabel?
 
-En variabel er som en "boks" hvor du kan gemme data. I JavaScript laver du variabler med `let` eller `const`.
+En variabel er som en "boks" hvor du kan gemme data. Brug en const-first tilgang: start med `const`, og skift kun til `let` hvis værdien skal ændres senere.
 
 **Eksempel:**
 
 ```javascript
-let name = "Rasmus";
-let age = 25;
-let isStudent = true;
+const name = "Rasmus";
+const age = 25;
+const isStudent = true;
 ```
 
 ### 1.1: Prøv det selv
@@ -234,9 +234,9 @@ let isStudent = true;
 ```javascript
 "use strict"; // Hjælper med at fange fejl
 
-console.log("Hej fra JavaScript! 🎉");
+console.log("Hej fra JavaScript! ");
 
-let message = "JavaScript er sejt!";
+const message = "JavaScript er sejt!";
 console.log(message);
 ```
 
@@ -245,31 +245,31 @@ console.log(message);
 - Åbn Console (F12)
 - Ser du dine beskeder?
 
-**✅ Tillykke!** Du har lige skrevet din første JavaScript kode!
+** Tillykke!** Du har lige skrevet din første JavaScript kode!
 
 ### 1.2: Leg med variabler
 
 Prøv at lave flere variabler:
 
 ```javascript
-let favoritMovie = "Inception";
-let year = 2010;
-let rating = 8.8;
+const favoritMovie = "Inception";
+const year = 2010;
+const rating = 8.8;
 
 console.log("Min favorit film er:", favoritMovie);
 console.log("Den kom i:", year);
 console.log("Rating:", rating);
 ```
 
-**💡 Eksperimenter:**
+** Eksperimenter:**
 
-- Prøv at ændre værdierne og bruge console.log til at se hvad der sker. 
+- Prøv at ændre værdierne og bruge console.log til at se hvad der sker.
 - Lav dine egne variabler.
 - Se hvad der sker i Console!
 
 ---
 
-## Opgave 2: Find ting på siden 🔍
+## Opgave 2: Find ting på siden
 
 **Formål:** Lær hvordan JavaScript kan "finde" HTML elementer.
 
@@ -280,7 +280,7 @@ console.log("Rating:", rating);
 **Eksempel:**
 
 ```javascript
-let heading = document.querySelector("h1");
+const heading = document.querySelector("h1");
 console.log(heading);
 ```
 
@@ -290,28 +290,28 @@ console.log(heading);
 
 ```javascript
 // Find h1 elementet
-let heading = document.querySelector("h1");
+const heading = document.querySelector("h1");
 console.log("Jeg fandt h1:", heading);
 
 // Find count span
-let countDisplay = document.querySelector("#count");
+const countDisplay = document.querySelector("#counter");
 console.log("Jeg fandt count:", countDisplay);
 
 // Find knapperne
-let clickButton = document.querySelector("#click-btn");
-let resetButton = document.querySelector("#reset-btn");
+const clickButton = document.querySelector("#click-button");
+const resetButton = document.querySelector("#reset-button");
 console.log("Jeg fandt knapperne:", clickButton, resetButton);
 ```
 
-**💡 Vigtigt at forstå:**
+** Vigtigt at forstå:**
 
 - `"h1"` finder første `<h1>` tag
-- `"#count"` finder element med `id="count"`
+- `"#counter"` finder element med `id="counter"`
 - `".container"` ville finde element med `class="container"`
 
 ---
 
-## Opgave 3: Ændr noget på siden! ✨
+## Opgave 3: Ændr noget på siden!
 
 **Formål:** Lær hvordan man ændrer tekst og styling.
 
@@ -319,7 +319,7 @@ console.log("Jeg fandt knapperne:", clickButton, resetButton);
 
 ```javascript
 // Ændr overskriften
-heading.textContent = "Wow, jeg kan ændre tekst! 🚀";
+heading.textContent = "Wow, jeg kan ændre tekst! ";
 
 // Ændr count tallet
 countDisplay.textContent = "42";
@@ -339,7 +339,7 @@ countDisplay.style.padding = "10px";
 countDisplay.style.borderRadius = "10px";
 ```
 
-**💡 Eksperimenter:**
+** Eksperimenter:**
 
 - Prøv andre farver
 - Prøv andre CSS properties
@@ -347,7 +347,7 @@ countDisplay.style.borderRadius = "10px";
 
 ---
 
-## Opgave 4: Reagér på klik! 🖱️
+## Opgave 4: Reagér på klik! ️
 
 **Formål:** Lær hvordan man lytter efter bruger-handlinger.
 
@@ -361,11 +361,11 @@ countDisplay.style.borderRadius = "10px";
 console.log("App starter...");
 
 // Find knappen
-let clickButton = document.querySelector("#click-btn");
+let clickButton = document.querySelector("#click-button");
 
 // Lyt efter klik
 clickButton.addEventListener("click", function () {
-  console.log("Knappen blev klikket! 🎉");
+  console.log("Knappen blev klikket! ");
 });
 ```
 
@@ -379,23 +379,23 @@ clickButton.addEventListener("click", function () {
 ```javascript
 "use strict";
 
-let clickButton = document.querySelector("#click-btn");
-let heading = document.querySelector("h1");
+const clickButton = document.querySelector("#click-button");
+const heading = document.querySelector("h1");
 
 clickButton.addEventListener("click", function () {
-  console.log("Klik! 🎉");
-  heading.textContent = "Du klikkede! 🎊";
+  console.log("Klik! ");
+  heading.textContent = "Du klikkede! ";
 });
 ```
 
-**💡 Eksperimenter:**
+** Eksperimenter:**
 
 - Hvad hvis du også ændrer farven?
 - Prøv at ændre knappens tekst også!
 
 ---
 
-## Opgave 5: Lav en rigtig tæller! 🎯
+## Opgave 5: Lav en rigtig tæller!
 
 **Formål:** Kombinér alt du har lært - variabler, querySelector, events!
 
@@ -406,14 +406,14 @@ clickButton.addEventListener("click", function () {
 ```javascript
 "use strict";
 
-console.log("🎮 Klik-tæller starter...");
+console.log(" Klik-tæller starter...");
 
 // Find elementerne
-let countDisplay = document.querySelector("#count");
-let clickButton = document.querySelector("#click-btn");
-let resetButton = document.querySelector("#reset-btn");
+const countDisplay = document.querySelector("#counter");
+const clickButton = document.querySelector("#click-button");
+const resetButton = document.querySelector("#reset-button");
 
-// Lav en variabel til at holde styr på antal klik
+// Brug let kun her, fordi værdien ændrer sig
 let count = 0;
 
 // Når der klikkes på click-knappen
@@ -438,7 +438,7 @@ resetButton.addEventListener("click", function () {
   countDisplay.textContent = count;
 });
 
-console.log("✅ Tæller er klar!");
+console.log(" Tæller er klar!");
 ```
 
 **Test det:**
@@ -471,7 +471,7 @@ countDisplay.textContent = count;
 
 ---
 
-## 🎯 Udfordringer (hvis du er færdig)
+## Udfordringer (hvis du er færdig)
 
 ### Udfordring 1: Forskellige farver
 
@@ -513,26 +513,26 @@ clickButton.addEventListener("click", function () {
   countDisplay.textContent = count;
 
   if (count === 10) {
-    alert("Tillykke! Du nåede 10 klik! 🎉");
+    alert("Tillykke! Du nåede 10 klik! ");
   }
 });
 ```
 
 ---
 
-## 📚 Hvad har du lært i dag?
+## Hvad har du lært i dag?
 
-✅ **Variabler** - gemme data med `let`  
-✅ **console.log()** - skrive til Console  
-✅ **querySelector** - finde HTML elementer  
-✅ **textContent** - ændre tekst  
-✅ **style** - ændre CSS  
-✅ **addEventListener** - lytte efter klik  
-✅ **Funktioner** - kode der kører når noget sker
+**Variabler** - gemme data med `let`  
+ **console.log()** - skrive til Console  
+ **querySelector** - finde HTML elementer  
+ **textContent** - ændre tekst  
+ **style** - ændre CSS  
+ **addEventListener** - lytte efter klik  
+ **Funktioner** - kode der kører når noget sker
 
 ---
 
-## 🏠 Forberedelse til næste gang
+## Forberedelse til næste gang
 
 Til næste gang skal vi arbejde med **flere** ting på én gang - **arrays** og **loops**!
 
@@ -541,11 +541,11 @@ Prøv at tænke over:
 - Hvad nu hvis du ville tælle klik for 5 forskellige knapper?
 - Hvordan ville du gemme en liste af film-titler?
 
-Vi ses næste gang! 🚀
+Vi ses næste gang!
 
 ---
 
-## 💡 Debugging Tips
+## Debugging Tips
 
 **Hvis noget ikke virker:**
 
@@ -567,4 +567,4 @@ clickButton.addEventListener("click", function () {
 });
 ```
 
-**Husk:** Fejl er normalt! Alle programmører laver fejl hele tiden. Det vigtige er at lære at finde dem! 🐛
+**Husk:** Fejl er normalt! Alle programmører laver fejl hele tiden. Det vigtige er at lære at finde dem!

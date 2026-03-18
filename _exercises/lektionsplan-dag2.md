@@ -19,15 +19,14 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 **Progression:**
 
-- ✅ **DAG 1:** Movie App setup + Click counter (variabler, events)
-- 🎯 **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
-- 🌐 **DAG 3:** Fetch rigtig data + filter
-- 🔍 **DAG 4:** Søgning + modal + deployment
+- **DAG 1:** Movie App setup + Click counter (variabler, events)
+- **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
+- **DAG 3:** Fetch + simpel genre-filter
+- **DAG 4:** Title-søgning + modal + sortering + deployment
 
 ## Forberedelse
 
 - **Færdiggør DAG 1:**
-
   - Sørg for din click counter virker
   - Forstå variables, querySelector og addEventListener
   - Har dit `movie-app` projekt klar
@@ -47,7 +46,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 **9:00 - 9:20 | Recap & Dagens Mål (20 min)**
 
-- Hvem fik click counter til at virke? 🎉
+- Hvem fik click counter til at virke?
 - Vis jeres udfordringer (2-3 frivillige)
 - Quiz: Variables, querySelector, addEventListener
 - Dagens mål: Fra click counter til rigtig Movie App med film-lister!
@@ -68,7 +67,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Hands-on: Opret og manipuler arrays
 - Code-along: Array med film titler
 
-**10:15 - 10:30 | Pause ☕**
+**10:15 - 10:30 | Pause **
 
 **10:30 - 11:30 | Loops: Gå Gennem Lister (60 min)**
 
@@ -85,7 +84,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Dot notation: `movie.title`, `movie.year`
 - Hands-on: Lav movie objekter
 
-**12:00 - 13:00 | Frokost 🍕**
+**12:00 - 13:00 | Frokost **
 
 **13:00 - 14:00 | Arrays af Objects (60 min)**
 
@@ -107,7 +106,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 - Funktioner til at strukturere kode
 - `showMovies()` og `showMovie(movie)`
-- **Bonus introduktion:** fetch preview (ikke krav!)
+- **Bonus introduktion:** fetch preview (ikke krav i dag)
 - Hjemmearbejde: Færdiggør arrays af objekter
 
 ## Materialer

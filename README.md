@@ -1,14 +1,14 @@
-# 🎬 JavaScript Movie App - Simplified Version
+# JavaScript Movie App - Simplified Version
 
 Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studerende.
 
-## 📚 Kursus Struktur
+## Kursus Struktur
 
 ### DAG 1: Click Counter Fundamentals
 
 **Formål:** Lær absolute basics uden arrays eller objekter
 
-- Variables og console.log
+- Variables med const-first tilgang (brug let kun ved reassignment)
 - querySelector til at finde elementer
 - addEventListener til at reagere på klik
 - Byg en simpel click counter
@@ -36,7 +36,7 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 
 **Formål:** Hent rigtig data og tilføj ÉN filter
 
-- fetch() fra URL
+- fetch() fra ekstern URL
 - async/await pattern
 - JSON konvertering
 - Array.filter() basics
@@ -47,29 +47,30 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 
 ---
 
-### DAG 4: Søgning, Modal & Deployment
+### DAG 4: Søgning, Genre, Sortering & Deployment
 
-**Formål:** Komplet app med søgning og details
+**Formål:** Komplet app med fetch, title-søgning, genre-filter, sortering og modal
 
 - Søgefelt med input event
-- .filter() kombineret med .includes()
-- HTML `<dialog>` element til modal
-- showModal() / close() API
+- Simpel genre-filtrering
+- Kombineret søgning + genre
+- Simpel sortering (titel, år, rating)
+- Modal med film-detaljer
 - GitHub Pages deployment
 
 **Eksempel:** Se `_exercises/examples/app-dag4.js`
 
 ---
 
-## 🎯 Simplifications fra Original
+## Simplifications fra Original
 
 **Hvad er blevet enklere:**
 
-- ❌ Ingen kombinerede filtre (kun én ad gangen)
-- ❌ Ingen range filters (år/rating sliders)
-- ❌ Ingen sortering (rating/år/titel)
-- ❌ Ingen favorites funktion
-- ❌ Ingen avanceret modal navigation
+- Ingen kombinerede filtre (kun én ad gangen)
+- Ingen range filters (år/rating sliders)
+- Sortering er med som simpel basisfunktion i DAG 4
+- Ingen favorites funktion
+- Ingen avanceret modal navigation
 
 **Hvorfor simplificeret?**
 
@@ -80,15 +81,13 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 
 ---
 
-## 📂 Projekt Struktur
+## Projekt Struktur
 
 ```
 js-movie-app/
-├── index.html              # Hovedfil (brug dag 4 eksempel)
-├── app.js                  # Hovedscript (brug dag 4 eksempel)
-├── app.css                 # Hovedstyle (brug dag 4 eksempel)
-├── data/
-│   └── movies.json         # Film data
+├── index.html              # Root demo (simplified slutapp)
+├── app.js                  # Fetch + title-søgning + genre-filter + simpel sortering
+├── app.css                 # Root styling til simplified slutapp
 ├── _exercises/
 │   ├── movie-app-1-simplified.md
 │   ├── movie-app-2-simplified.md
@@ -111,7 +110,7 @@ js-movie-app/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### For Studerende:
 
@@ -130,6 +129,16 @@ cd movie-app
 # Fortsæt fra hvor du slap
 # Se eksempler i _exercises/examples/
 ```
+
+### Kør projektet lokalt:
+
+Projektet er ren HTML/CSS/JS (ingen `package.json`):
+
+1. Åbn `index.html` med Live Server i VS Code
+2. Eller servér mappen med en simpel statisk server
+3. Appen henter film fra ekstern URL: https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
+
+`npm run dev` virker ikke i denne repo, da der ikke er npm scripts.
 
 ### For Undervisere:
 
@@ -155,7 +164,7 @@ git checkout simplified-version
 
 ---
 
-## 🎓 Undervisnings Tips
+## Undervisnings Tips
 
 1. **Vis console.log meget!** Gør det synligt hvad der sker
 2. **Start fra ingenting** - lad dem skrive hver linje
@@ -165,7 +174,7 @@ git checkout simplified-version
 
 ---
 
-## 📊 Sammenligning: Original vs Simplified
+## Sammenligning: Original vs Simplified
 
 | Feature          | Original                          | Simplified            |
 | ---------------- | --------------------------------- | --------------------- |
@@ -173,11 +182,11 @@ git checkout simplified-version
 | **DAG 2**        | Fetch + async + JSON samtidigt    | Hardcoded data først  |
 | **DAG 3**        | Kombinerede filtre + ranges       | ÉN filter knap        |
 | **DAG 4**        | Avanceret modal + favorites       | Basic modal + søgning |
-| **Sværhedsgrad** | ⭐⭐⭐⭐⭐                        | ⭐⭐                  |
+| **Sværhedsgrad** | Høj                               | Lav                   |
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
 Deploy til GitHub Pages for at vise resultatet:
 
@@ -187,19 +196,19 @@ Se DAG 4 guide for deployment instruktioner.
 
 ---
 
-## 🤝 Bidrag
+## Bidrag
 
 Forslag til forbedringer? Åbn en issue eller pull request!
 
 ---
 
-## 📄 Licens
+## Licens
 
 MIT License - brug frit til undervisning
 
 ---
 
-## 👨‍💻 Udviklet til
+## Udviklet til
 
 **Multimediedesign studerende på EASJ**  
 4-dages JavaScript introduktion  
