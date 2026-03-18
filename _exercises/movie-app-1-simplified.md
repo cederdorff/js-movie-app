@@ -1,0 +1,570 @@
+# DAG 1 - JavaScript Basics & Click Counter
+
+## 🎯 Formål
+
+I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
+
+**Du lærer:**
+
+- Hvad er en variabel?
+- Hvordan reagerer man på et klik?
+- Hvordan ændrer man noget på siden?
+- Hvordan bruger man console.log til at debugge?
+
+**Du lærer IKKE (endnu):**
+
+- Arrays, objects, loops - det kommer DAG 2!
+- Fetch, JSON, API'er - det kommer DAG 3!
+- Funktioner med parametre - hold det simpelt i dag!
+
+**Progressionen:**
+
+- 🎯 **DAG 1:** Setup + Click counter (lær basics)
+- 📝 **DAG 2:** Arrays, loops, hardcoded movie data
+- 🌐 **DAG 3:** Fetch rigtig data + filter
+- 🔍 **DAG 4:** Søgning + modal + deployment
+
+---
+
+## Opgave 0: Movie App Projekt Setup 🎬
+
+### Step 1: Opret Movie App projektet
+
+1. Følg denne guide: [Opret et nyt projekt med GitHub Desktop](https://race.notion.site/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed)
+2. **VIGTIGT - Navngiv projektet:** `movie-app` (vi skal bruge dette navn!)
+3. Opret disse filer:
+   - `index.html`
+   - `app.js`
+   - `app.css`
+
+### Step 2: Movie App HTML struktur
+
+Kopier dette ind i `index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎬 Movie App - DAG 1</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎬 Movie App</h1>
+      <p>DAG 1: Lær JavaScript med Click Counter</p>
+    </header>
+
+    <main>
+      <div class="counter-box">
+        <h2>Klik Tæller</h2>
+        <p class="instructions">Øv dig med klik events mens vi bygger fundamentet til vores Movie App!</p>
+
+        <div class="count-display">Antal klik: <span id="count">0</span></div>
+
+        <button id="click-btn">Klik mig! 🎬</button>
+        <button id="reset-btn">Nulstil</button>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+### Step 3: Movie App CSS styling
+
+Kopier dette ind i `app.css`:
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+}
+
+.counter-box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+}
+
+.counter-box h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.instructions {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.count-display {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+#count {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #ffd700;
+  display: block;
+  margin: 1rem 0;
+}
+
+button {
+  background: white;
+  color: #667eea;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#reset-btn {
+  background: #ff6b6b;
+  color: white;
+}
+
+#reset-btn:hover {
+  background: #ff5252;
+}
+```
+
+### Step 4: Test din Movie App setup
+
+1. **Gem alle filer** (Cmd+S / Ctrl+S)
+2. **Start Live Server:**
+   - Højreklik på `index.html` → "Open with Live Server"
+3. **Åbn Developer Tools** (F12 eller Cmd+Option+I)
+   - Klik på "Console" fanen
+   - Dette er dit vigtigste debugging værktøj!
+
+**✅ Tjek at det virker:**
+
+- Ser du "🎬 Movie App" som overskrift?
+- Ser du click counter boksen?
+- Knapperne gør ikke noget endnu - det er ok! Vi tilføjer JavaScript nu.
+
+**💡 Hvorfor hedder det "Movie App"?**
+
+I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi bare JavaScript basics med en simpel counter!
+
+---
+
+### Step 5: Start Live Server (hvis ikke allerede åben)
+
+1. Gem alle filer
+2. Højreklik på `index.html` → "Open with Live Server"
+3. Åbn Developer Tools (F12) og hold Console-fanen åben!
+
+---
+
+## Opgave 1: Din første variabel 📦
+
+**Formål:** Lær hvad en variabel er.
+
+### Hvad er en variabel?
+
+En variabel er som en "boks" hvor du kan gemme data. I JavaScript laver du variabler med `let` eller `const`.
+
+**Eksempel:**
+
+```javascript
+let name = "Rasmus";
+let age = 25;
+let isStudent = true;
+```
+
+### 1.1: Prøv det selv
+
+Åbn `app.js` og skriv:
+
+```javascript
+"use strict"; // Hjælper med at fange fejl
+
+console.log("Hej fra JavaScript! 🎉");
+
+let message = "JavaScript er sejt!";
+console.log(message);
+```
+
+**Gem og tjek browseren:**
+
+- Åbn Console (F12)
+- Ser du dine beskeder?
+
+**✅ Tillykke!** Du har lige skrevet din første JavaScript kode!
+
+### 1.2: Leg med variabler
+
+Prøv at lave flere variabler:
+
+```javascript
+let favoritMovie = "Inception";
+let year = 2010;
+let rating = 8.8;
+
+console.log("Min favorit film er:", favoritMovie);
+console.log("Den kom i:", year);
+console.log("Rating:", rating);
+```
+
+**💡 Eksperimenter:**
+
+- Prøv at ændre værdierne og bruge console.log til at se hvad der sker. 
+- Lav dine egne variabler.
+- Se hvad der sker i Console!
+
+---
+
+## Opgave 2: Find ting på siden 🔍
+
+**Formål:** Lær hvordan JavaScript kan "finde" HTML elementer.
+
+### Hvad er querySelector?
+
+`document.querySelector()` finder et HTML element på din side.
+
+**Eksempel:**
+
+```javascript
+let heading = document.querySelector("h1");
+console.log(heading);
+```
+
+### 2.1: Find elementer
+
+**Tilføj dette til din `app.js`:**
+
+```javascript
+// Find h1 elementet
+let heading = document.querySelector("h1");
+console.log("Jeg fandt h1:", heading);
+
+// Find count span
+let countDisplay = document.querySelector("#count");
+console.log("Jeg fandt count:", countDisplay);
+
+// Find knapperne
+let clickButton = document.querySelector("#click-btn");
+let resetButton = document.querySelector("#reset-btn");
+console.log("Jeg fandt knapperne:", clickButton, resetButton);
+```
+
+**💡 Vigtigt at forstå:**
+
+- `"h1"` finder første `<h1>` tag
+- `"#count"` finder element med `id="count"`
+- `".container"` ville finde element med `class="container"`
+
+---
+
+## Opgave 3: Ændr noget på siden! ✨
+
+**Formål:** Lær hvordan man ændrer tekst og styling.
+
+### 3.1: Ændr tekst
+
+```javascript
+// Ændr overskriften
+heading.textContent = "Wow, jeg kan ændre tekst! 🚀";
+
+// Ændr count tallet
+countDisplay.textContent = "42";
+```
+
+**Gem og se hvad der sker!**
+
+### 3.2: Ændr farver
+
+```javascript
+// Ændr tekstfarve
+heading.style.color = "yellow";
+
+// Ændr baggrund på count
+countDisplay.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+countDisplay.style.padding = "10px";
+countDisplay.style.borderRadius = "10px";
+```
+
+**💡 Eksperimenter:**
+
+- Prøv andre farver
+- Prøv andre CSS properties
+- Hvad sker der hvis du skriver forkert?
+
+---
+
+## Opgave 4: Reagér på klik! 🖱️
+
+**Formål:** Lær hvordan man lytter efter bruger-handlinger.
+
+### 4.1: Din første event listener
+
+**Slet alt i `app.js` og start forfra med dette:**
+
+```javascript
+"use strict";
+
+console.log("App starter...");
+
+// Find knappen
+let clickButton = document.querySelector("#click-btn");
+
+// Lyt efter klik
+clickButton.addEventListener("click", function () {
+  console.log("Knappen blev klikket! 🎉");
+});
+```
+
+**Test det:**
+
+- Klik på knappen
+- Se Console - hvad sker der?
+
+### 4.2: Gør noget når der klikkes
+
+```javascript
+"use strict";
+
+let clickButton = document.querySelector("#click-btn");
+let heading = document.querySelector("h1");
+
+clickButton.addEventListener("click", function () {
+  console.log("Klik! 🎉");
+  heading.textContent = "Du klikkede! 🎊";
+});
+```
+
+**💡 Eksperimenter:**
+
+- Hvad hvis du også ændrer farven?
+- Prøv at ændre knappens tekst også!
+
+---
+
+## Opgave 5: Lav en rigtig tæller! 🎯
+
+**Formål:** Kombinér alt du har lært - variabler, querySelector, events!
+
+### 5.1: Basis tæller
+
+**Komplet kode til `app.js`:**
+
+```javascript
+"use strict";
+
+console.log("🎮 Klik-tæller starter...");
+
+// Find elementerne
+let countDisplay = document.querySelector("#count");
+let clickButton = document.querySelector("#click-btn");
+let resetButton = document.querySelector("#reset-btn");
+
+// Lav en variabel til at holde styr på antal klik
+let count = 0;
+
+// Når der klikkes på click-knappen
+clickButton.addEventListener("click", function () {
+  console.log("Klik!");
+
+  // Tilføj 1 til count
+  count = count + 1;
+
+  // Vis det nye tal på siden
+  countDisplay.textContent = count;
+});
+
+// Når der klikkes på reset-knappen
+resetButton.addEventListener("click", function () {
+  console.log("Nulstiller...");
+
+  // Sæt count tilbage til 0
+  count = 0;
+
+  // Vis 0 på siden
+  countDisplay.textContent = count;
+});
+
+console.log("✅ Tæller er klar!");
+```
+
+**Test det:**
+
+- Klik flere gange på "Klik mig!"
+- Klik på "Nulstil"
+- Virker det?
+
+### 5.2: Forklaring
+
+Lad os gennemgå hvad der sker:
+
+```javascript
+let count = 0;
+```
+
+↑ Vi laver en variabel der starter på 0
+
+```javascript
+count = count + 1;
+```
+
+↑ Vi tager den gamle værdi, lægger 1 til, og gemmer det nye resultat
+
+```javascript
+countDisplay.textContent = count;
+```
+
+↑ Vi viser det nye tal på skærmen
+
+---
+
+## 🎯 Udfordringer (hvis du er færdig)
+
+### Udfordring 1: Forskellige farver
+
+Lav så count skifter farve når den kommer over 10:
+
+```javascript
+clickButton.addEventListener("click", function () {
+  count = count + 1;
+  countDisplay.textContent = count;
+
+  // Hvis count er over 10, gør den grøn
+  if (count > 10) {
+    countDisplay.style.color = "lightgreen";
+  }
+});
+```
+
+### Udfordring 2: Tæl ned i stedet
+
+Lav en ny knap der trækker 1 fra i stedet for at lægge til:
+
+```javascript
+// Tilføj denne knap i HTML først:
+// <button id="minus-btn">Minus 1</button>
+
+let minusButton = document.querySelector("#minus-btn");
+
+minusButton.addEventListener("click", function () {
+  count = count - 1;
+  countDisplay.textContent = count;
+});
+```
+
+### Udfordring 3: Besked ved 10 klik
+
+```javascript
+clickButton.addEventListener("click", function () {
+  count = count + 1;
+  countDisplay.textContent = count;
+
+  if (count === 10) {
+    alert("Tillykke! Du nåede 10 klik! 🎉");
+  }
+});
+```
+
+---
+
+## 📚 Hvad har du lært i dag?
+
+✅ **Variabler** - gemme data med `let`  
+✅ **console.log()** - skrive til Console  
+✅ **querySelector** - finde HTML elementer  
+✅ **textContent** - ændre tekst  
+✅ **style** - ændre CSS  
+✅ **addEventListener** - lytte efter klik  
+✅ **Funktioner** - kode der kører når noget sker
+
+---
+
+## 🏠 Forberedelse til næste gang
+
+Til næste gang skal vi arbejde med **flere** ting på én gang - **arrays** og **loops**!
+
+Prøv at tænke over:
+
+- Hvad nu hvis du ville tælle klik for 5 forskellige knapper?
+- Hvordan ville du gemme en liste af film-titler?
+
+Vi ses næste gang! 🚀
+
+---
+
+## 💡 Debugging Tips
+
+**Hvis noget ikke virker:**
+
+1. **Tjek Console** - er der røde fejlbeskeder?
+2. **Tjek stavning** - `querySelector` (ikke `queryselector`)
+3. **Tjek id'er** - matcher de HTML'en? (`#count`)
+4. **Tilføj console.log** - se hvad værdierne er
+5. **Spørg en makker** - forklar problemet højt
+
+**Eksempel på debugging:**
+
+```javascript
+clickButton.addEventListener("click", function () {
+  console.log("Før:", count);
+  count = count + 1;
+  console.log("Efter:", count);
+  countDisplay.textContent = count;
+  console.log("Vist på siden:", countDisplay.textContent);
+});
+```
+
+**Husk:** Fejl er normalt! Alle programmører laver fejl hele tiden. Det vigtige er at lære at finde dem! 🐛

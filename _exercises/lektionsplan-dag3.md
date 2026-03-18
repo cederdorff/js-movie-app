@@ -1,0 +1,120 @@
+# RACE 3 - Fetch, JSON & Simpel Filtrering
+
+## Formål
+
+Formålet med denne lektion er at introducere jer til at hente rigtig data fra internettet og implementere én simpel filter funktion.
+
+**Mål:**
+
+- Forstå og anvende `fetch()` til at hente data fra URL
+- Arbejde med `async`/`await` pattern
+- Konvertere JSON til JavaScript objekter
+- Forstå og bruge `Array.filter()` metoden
+- Bruge `.includes()` til array søgning
+- Implementere ÉN simpel genre filter
+- Håndtere tomme filtrerede resultater
+
+**Hvorfor kun én filter?**
+Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at blive overvældet af kombinerede filtre, ranges eller sortering. Det kommer senere!
+
+## Forberedelse
+
+- **Færdiggør DAG 2:**
+
+  - Sørg for du har arrays af objekter der virker
+  - Forstå loops og template literals
+  - Ha' dit hardcoded movie data klar
+
+- **Læs:**
+  - [Fetch på javascript.info](https://javascript.info/fetch) (fokus på basics)
+  - [JSON på W3Schools](https://www.w3schools.com/js/js_json.asp) (quick overview)
+  - [Array.filter() på MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) (skim eksempler)
+
+### På dagen:
+
+- Åbn dit movie-app projekt fra DAG 2
+- Vær klar til at erstatte hardcoded data med fetch
+- Developer Tools åben og klar
+
+## Agenda
+
+**9:00 - 9:30 | Recap & Show & Tell (30 min)**
+
+- Hvem fik arrays af objekter til at virke? 🎉
+- Show & Tell: Vis jeres movie app (5-6 studerende)
+- Quiz: Arrays, objects, loops, template literals
+- Dagens mål: Rigtig data + én simpel filter
+
+**9:30 - 10:30 | Fetch & JSON Fundamentals (60 min)**
+
+- Hvad er fetch? Henter data fra internettet
+- Hvad er JSON? Data format der ligner JavaScript
+- Hvorfor async/await? Data tager tid at hente
+- Pizza analogi: Asynkron vs synkron programmering
+- Live demo: Fetch med async/await
+- Hands-on: Erstat hardcoded data med fetch
+- Debugging: Typiske fetch fejl
+
+**10:30 - 10:45 | Pause ☕**
+
+**10:45 - 11:45 | Array.filter() Deep Dive (60 min)**
+
+- Hvad er `.filter()`? Udvælg specifikke elementer
+- Filter function returnerer `true` (behold) eller `false` (drop)
+- Live demo: Simple filter eksempler med numbers
+- Hands-on: Filtrer film baseret på år og rating
+- Code review: Forklar hvad `return` gør
+
+**11:45 - 12:00 | .includes() for Arrays (15 min)**
+
+- Problem: Genre er et array `["Action", "Sci-Fi"]`
+- Solution: `.includes()` checker om array indeholder værdi
+- Quick test i console
+
+**12:00 - 13:00 | Frokost 🍕**
+
+**13:00 - 14:15 | Implementer ÉN Genre Filter (75 min)**
+
+- Planlæg: HTML knapper, CSS styling, JavaScript logik
+- Code-along step-by-step:
+  - HTML: Filter knapper
+  - CSS: Button styling og hover effects
+  - JavaScript: Filter logik med `.filter()` og `.includes()`
+- Hands-on: Implementer "Vis alle" og "Vis Action"
+- Tilføj flere genre knapper (Drama, Comedy, Sci-Fi)
+
+**14:15 - 14:45 | Polishing & Edge Cases (30 min)**
+
+- Håndter tomme resultater: "Ingen film fundet"
+- Tilføj active state til knapper
+- Vis counter: "Viser 23 film"
+- Test at alt virker
+
+**14:45 - 15:00 | Wrap-up & Preview (15 min)**
+
+- Recap: fetch, async/await, filter, includes
+- Spørgsmål: Hvad var sværest? Hvad var coolest?
+- Preview DAG 4: Søgning, modal og deployment!
+- Hjemmearbejde: Tilføj flere genre knapper
+
+## Materialer
+
+**Slides:**
+
+- [JavaScript - 1. semester](https://cederdorff.com/race/slides/javascript-1-semester.pdf)
+
+**Opgaver:**
+
+- [Movie App - DAG 3 Simplified](https://github.com/cederdorff/js-movie-app/blob/simplified-version/_exercises/movie-app-3-simplified.md)
+
+**Eksempel kode:**
+
+- Komplet DAG 3 eksempel: `_exercises/examples/app-dag3.js`
+- HTML: `_exercises/examples/index-dag3.html`
+- CSS: `_exercises/examples/style-dag3.css`
+
+**Links:**
+
+- Movie Data URL: https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
+- Movie App (færdig version): https://cederdorff.com/js-movie-app/
+- Array.filter() dokumentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
