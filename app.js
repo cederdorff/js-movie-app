@@ -25,7 +25,7 @@ async function getMovies() {
 
 function populateGenreSelect() {
   const genreSelect = document.querySelector("#genre-select");
-  const genres = new Set();
+  const genres = new Set(); // Set bruges til at sikre unikke genrer
 
   for (const movie of allMovies) {
     for (const genre of movie.genre) {
@@ -33,9 +33,7 @@ function populateGenreSelect() {
     }
   }
 
-  genreSelect.innerHTML = '<option value="all">Alle genrer</option>';
-
-  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b)); // Sorter genrer alfabetisk
   for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
   }
@@ -57,17 +55,15 @@ function applyFilters() {
 }
 
 function sortMovies(movies, sortOption) {
-  const sortedMovies = [...movies];
-
   if (sortOption === "title") {
-    sortedMovies.sort((a, b) => a.title.localeCompare(b.title));
+    movies.sort((a, b) => a.title.localeCompare(b.title));
   } else if (sortOption === "year") {
-    sortedMovies.sort((a, b) => b.year - a.year);
+    movies.sort((a, b) => b.year - a.year);
   } else if (sortOption === "rating") {
-    sortedMovies.sort((a, b) => b.rating - a.rating);
+    movies.sort((a, b) => b.rating - a.rating);
   }
 
-  return sortedMovies;
+  return movies;
 }
 
 function showMovies(movies) {
@@ -75,7 +71,7 @@ function showMovies(movies) {
   const movieCount = document.querySelector("#movie-count");
 
   movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   if (movies.length === 0) {
     movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
