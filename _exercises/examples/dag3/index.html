@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAG 3 - Fetch & Genre-filter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Movie App</h1>
+      <p class="subtitle">DAG 3: Fetch & Filter</p>
+    </header>
+
+    <section class="controls">
+      <div class="control-group">
+        <label for="genre-select">Genre</label>
+        <select id="genre-select">
+          <option value="all">Alle genrer</option>
+        </select>
+      </div>
+      <p id="movie-count"></p>
+    </section>
+
+    <main>
+      <section id="movie-list" aria-label="Filmliste">
+        <!-- Film vises her -->
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -14,7 +14,7 @@ Nu skal du overføre det du har lært fra Movie App til en ny kontekst. Dette er
 - Gennemtænk hvilke funktioner der giver mening for spil
 - Tilpas din eksisterende Movie App kode til games data
 
-**Dette er IKKE en step-by-step guide!**  
+**Dette er IKKE en trin-for-trin guide!**  
 Du skal selv tænke over hvordan du implementerer funktionerne. Guiden her hjælper dig med at **identificere forskelle** og **undgå faldgruber**.
 
 ---
@@ -165,7 +165,7 @@ let allGames = []; // Hvorfor har vi brug for den her variabel?
 
 // ===== INITIALISERING =====
 function initApp() {
-  // Start app - initApp kaldes når DOMen er loaded // HTML siden er klar 
+  // Start app - initApp kaldes når DOMen er loaded // HTML siden er klar
   // Hvad skal der så ske?
   // Hent data? Sæt event listeners?
 }
@@ -199,9 +199,9 @@ function filterGames() {
   // OBS: game.genre skal sammenlignes med === (ikke .includes())
 }
 
-// ===== MODAL =====
-function showGameModal(game) {
-  // Vis (alle) game detaljer i modal
+// ===== DIALOG =====
+function showGameDialog(game) {
+  // Vis (alle) game detaljer i dialog
   // Hvilke felter har et game? (Se JSON strukturen)
 }
 ```
@@ -227,8 +227,8 @@ movie.actors.join(", "); // ✅ Virker
 
 // Games: players er OBJECT
 game.players.min; // ✅ Få minimum spillere
-game.players.max // ✅ Få maximum spillere
-
+game.players
+  .max // ✅ Få maximum spillere
 `${game.players.min}-${game.players.max} spillere`; // ✅ Formatering
 ```
 

@@ -6,7 +6,7 @@ Dette dokument giver et samlet overblik over alle emner der er gennemgået i Mov
 
 ---
 
-## Session 1: JavaScript Fundamentals + DOM-manipulation
+## Session 1: JavaScript-grundprincipper + DOM-manipulation
 
 ### 🎯 Formål
 
@@ -14,12 +14,12 @@ Lær grundlæggende JavaScript-syntax og DOM-manipulation ved at arbejde med sta
 
 ### 📖 Emner
 
-#### 1. Projekt Setup
+#### 1. Projektopsætning
 
 - Oprettelse af projekt med GitHub Desktop
 - Mappestruktur: `index.html`, `app.js`, `app.css`
 - Linking af JavaScript og CSS filer
-- Developer Tools (Console + Elements fane)
+- Udviklerværktøjer (Console + Elements-fanen)
 
 #### 2. HTML Struktur
 
@@ -27,20 +27,20 @@ Lær grundlæggende JavaScript-syntax og DOM-manipulation ved at arbejde med sta
 - Data attributter (`data-id`, `data-genre`)
 - Tilgængelighed (alt-tags, semantic tags)
 
-#### 3. JavaScript Basics
+#### 3. JavaScript-grundlæggende
 
-- **Variables**: `const`, `let`
-- **Data types**: String, Number, Boolean, Array, Object
-- **Console output**: `console.log()`
+- **Variabler**: `const`, `let`
+- **Datatyper**: String, Number, Boolean, Array, Object
+- **Output i konsol**: `console.log()`
 - **"use strict"**: Strict mode for fejlhåndtering
 
-#### 4. DOM Selection
+#### 4. DOM-udvælgelse
 
 - `document.querySelector()` - Find ét element
 - `document.querySelectorAll()` - Find alle matchende elementer
 - CSS selectors i JavaScript (`#id`, `.class`, `tag`)
 
-#### 5. DOM Manipulation
+#### 5. DOM-manipulation
 
 - **Læse data**: `.textContent`, `.innerHTML`
 - **Ændre data**: Assignment (`element.textContent = "ny værdi"`)
@@ -53,23 +53,23 @@ Lær grundlæggende JavaScript-syntax og DOM-manipulation ved at arbejde med sta
 - **Array iteration**: `for...of` loop
 - **Object properties**: Accessing data med `.` og `[]`
 
-#### 7. Functions
+#### 7. Funktioner
 
-- Function declaration
-- Function parameters
-- Return values
-- Function calls
+- Funktionsdeklaration
+- Funktionsparametre
+- Returværdier
+- Funktionskald
 
-#### 8. Event Handling
+#### 8. Eventhåndtering
 
 - `addEventListener()` - Tilføj event listeners
-- Click events
-- Event handler functions
+- Klik-events
+- Eventhandler-funktioner
 - Callback functions
 
 ---
 
-## Session 2: Dynamisk Data + Asynkron Programmering
+## Session 2: Dynamisk data + asynkron programmering
 
 ### 🎯 Formål
 
@@ -77,10 +77,10 @@ Arbejd med eksterne data fra JSON API og generer dynamisk HTML.
 
 ### 📖 Emner
 
-#### 1. Projekt Setup fra Template
+#### 1. Projektopsætning fra template
 
 - GitHub template repositories
-- Clone repository med GitHub Desktop
+- Klon repository med GitHub Desktop
 - Commit og push workflow
 
 #### 2. Asynkron JavaScript
@@ -90,7 +90,7 @@ Arbejd med eksterne data fra JSON API og generer dynamisk HTML.
 - **fetch()**: HTTP requests til JSON data
 - **response.json()**: Parse JSON til JavaScript objects
 
-#### 3. Dynamisk HTML Generering
+#### 3. Dynamisk HTML-generering
 
 - **Template literals**: Backticks og `${variable}`
 - **Multi-line strings**: HTML struktur i JavaScript
@@ -104,34 +104,34 @@ Arbejd med eksterne data fra JSON API og generer dynamisk HTML.
 - **Array.map()**: Transform array elements
 - **Array.join()**: Konverter array til string
 
-#### 5. DOM Lifecycle
+#### 5. DOM-livscyklus
 
 - **DOMContentLoaded**: Vent på DOM er klar
 - Document ready state
 - Script loading timing
 
-#### 6. Working with JSON
+#### 6. Arbejde med JSON
 
 - JSON struktur (objects + arrays)
 - Accessing nested data
 - Array af objects iteration
 - Object destructuring (intro)
 
-#### 7. Global Variables
+#### 7. Globale variabler
 
 - Scope i JavaScript
 - Global vs. lokal scope
 - Best practices for global state
 
-#### 8. Code Organization
+#### 8. Kodeorganisering
 
 - Funktions-baseret struktur
 - Separation of concerns
-- Comments og dokumentation
+- Kommentarer og dokumentation
 
 ---
 
-## Session 3: Filtrering, Søgning & Sortering
+## Session 3: Filtrering, søgning og sortering
 
 ### 🎯 Formål
 
@@ -157,7 +157,7 @@ Implementér avanceret filtrering, søgning og sortering af data med array metho
 - **String.includes()**: Substring matching
 - **String.localeCompare()**: Locale-aware string comparison (danske bogstaver)
 
-#### 3. Form Input Handling
+#### 3. Håndtering af form-input
 
 - Reading input values: `.value`
 - Input events: `input`, `change`
@@ -171,61 +171,61 @@ Implementér avanceret filtrering, søgning og sortering af data med array metho
   - `.add()` method
   - Spread operator til array konvertering: `[...set]`
 
-#### 5. Conditional Logic
+#### 5. Betinget logik
 
 - `if` statements i filters
 - Multiple conditions med `&&` (AND)
 - Optional filtering (check for empty values)
 - Ternary operators (intro)
 
-#### 6. Dynamic Dropdown Population
+#### 6. Dynamisk udfyldning af dropdown
 
 - Extracting unique values fra data
 - Sorting dropdown options
 - Nested loops (genre arrays)
 - Building `<option>` elements dynamically
 
-#### 7. Number Conversion
+#### 7. Tal-konvertering
 
 - **Number()**: String til number conversion
 - **Logical OR `||`**: Fallback values
   - `Number(value) || 0`
   - Default values for empty inputs
 
-#### 8. Filter Combination
+#### 8. Kombinerede filtre
 
 - Multi-filter pipeline
 - Applying filters sequentially
-- Combining search, genre, range filters
+- Kombinering af søgning, genre og range-filtre
 - Clear filters functionality
 
 ---
 
-## Session 4: Modal Dialog & Advanced UI
+## Session 4: Dialog og avanceret UI
 
 ### 🎯 Formål
 
-Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
+Implementér dialog for detaljeret visning og udvid filtrering med ranges.
 
 ### 📖 Emner
 
 #### 1. HTML5 Dialog Element
 
-- **`<dialog>` tag**: Native modal functionality
-- **`.showModal()`**: Åbn modal
-- **`.close()`**: Luk modal
+- **`<dialog>` tag**: Indbygget dialog-funktionalitet
+- **`.showModal()`**: Åbn dialog
+- **`.close()`**: Luk dialog
 - Dialog backdrop styling
-- ESC key automatic close
+- ESC-lukning automatisk
 
-#### 2. Modal Implementation
+#### 2. Dialog-implementering
 
-- Modal struktur i HTML
-- Modal styling med CSS
-- Opening modal med JavaScript
-- Closing modal (button + ESC)
-- Backdrop click handling (optional)
+- Dialog struktur i HTML
+- Dialog styling med CSS
+- Åbn dialog med JavaScript
+- Luk dialog (knap + ESC)
+- Backdrop-klikhåndtering (valgfri)
 
-#### 3. Range Filtering
+#### 3. Range-filtrering
 
 - Number range inputs
 - Min/max filtering logic
@@ -233,13 +233,13 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 - Rating ranges
 - Range validation
 
-#### 4. Event Delegation
+#### 4. Event-delegering
 
 - Understanding event bubbling
 - Efficient event handling
 - Single listener for multiple elements
 
-#### 5. Advanced Event Handling
+#### 5. Avanceret eventhåndtering
 
 - **event.preventDefault()**: Stop default behavior
 - **event.key**: Keyboard events
@@ -257,15 +257,15 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 - **ARIA labels**: Screen reader support (intro)
 - Keyboard support for interactive elements
 
-#### 7. CSS Advanced
+#### 7. Avanceret CSS
 
-- **Dialog styling**: Custom modal appearance
+- **Dialog styling**: Custom dialog appearance
   - `::backdrop` pseudo-element
 - **Focus styles**: Visual feedback
-- **Responsive design**: Modal på mobile
-- **Flexbox/Grid**: Modal layout
+- **Responsive design**: Dialog på mobile
+- **Flexbox/Grid**: Dialog layout
 
-#### 8. Code Refactoring
+#### 8. Refaktorering af kode
 
 - Extract helper functions
 - **getFilterValues()**: Separate data collection
@@ -275,9 +275,9 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 
 ---
 
-## 🔧 Tekniske Færdigheder (Samlet)
+## 🔧 Tekniske færdigheder (samlet)
 
-### JavaScript Core Concepts
+### JavaScript-kernekoncepter
 
 - ✅ Variables og data types
 - ✅ Functions og parameters
@@ -320,7 +320,7 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 ### Events
 
 - ✅ addEventListener()
-- ✅ Click events
+- ✅ Klik-events
 - ✅ Input/change events
 - ✅ Keyboard events
 - ✅ event.preventDefault()
@@ -333,7 +333,7 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 - ✅ Set (unique values)
 - ✅ JSON
 
-### Modern JavaScript Features
+### Moderne JavaScript-funktioner
 
 - ✅ Template literals
 - ✅ Arrow functions
@@ -350,7 +350,7 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 - ✅ CSS selectors
 - ✅ Pseudo-classes/elements
 
-### Tools & Workflow
+### Værktøjer og arbejdsgang
 
 - ✅ VS Code
 - ✅ Developer Tools (Console, Elements)
@@ -358,7 +358,7 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 - ✅ Git (commit, push)
 - ✅ Live Server
 
-### Best Practices
+### Bedste praksis
 
 - ✅ Code organization
 - ✅ Function naming
@@ -372,15 +372,15 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 
 ## 📊 Progressionsmatrix
 
-| Emne                 | Session 1      | Session 2          | Session 3              | Session 4              |
-| -------------------- | -------------- | ------------------ | ---------------------- | ---------------------- |
-| **DOM Manipulation** | Basics         | Dynamisk HTML      | -                      | Modal dialog           |
-| **Arrays**           | Basics + loops | forEach, map, join | filter, sort, includes | -                      |
-| **Functions**        | Basics         | async/await        | Advanced callbacks     | Refactoring            |
-| **Events**           | Click          | DOMContentLoaded   | Input/change           | Keyboard               |
-| **Data**             | Statisk (HTML) | JSON/fetch         | Filtrering             | Ranges                 |
-| **Strings**          | Basics         | Template literals  | toLowerCase, includes  | localeCompare          |
-| **UI**               | Statisk layout | Dynamiske cards    | Filtre + søgning       | Modal + tilgængelighed |
+| Emne                 | Session 1      | Session 2          | Session 3              | Session 4               |
+| -------------------- | -------------- | ------------------ | ---------------------- | ----------------------- |
+| **DOM Manipulation** | Basics         | Dynamisk HTML      | -                      | Dialog                  |
+| **Arrays**           | Basics + loops | forEach, map, join | filter, sort, includes | -                       |
+| **Functions**        | Basics         | async/await        | Advanced callbacks     | Refactoring             |
+| **Events**           | Click          | DOMContentLoaded   | Input/change           | Keyboard                |
+| **Data**             | Statisk (HTML) | JSON/fetch         | Filtrering             | Ranges                  |
+| **Strings**          | Basics         | Template literals  | toLowerCase, includes  | localeCompare           |
+| **UI**               | Statisk layout | Dynamiske cards    | Filtre + søgning       | Dialog + tilgængelighed |
 
 ---
 
@@ -393,7 +393,7 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 - Forstå hver linje
 - Eksperimentér med værdier
 
-### Niveau 2 - Mellem
+### Niveau 2 - Øvet
 
 - Se kodeeksempel
 - Luk fil og skriv selv
