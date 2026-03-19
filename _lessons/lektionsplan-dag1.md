@@ -119,7 +119,7 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 
 **Eksempel kode:**
 
-- Komplet DAG 1 løsning: `_exercises/examples/dag1/app.js` (matcher Opgave 5 struktur)
+- Komplet DAG 1 løsning: `_solutions/dag1/app.js` (matcher Opgave 5 struktur)
 
 **Links:**
 

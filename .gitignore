@@ -363,3 +363,5 @@ MigrationBackup/
 .DS_Store
 
 .obsidian
+
+.vscode/*

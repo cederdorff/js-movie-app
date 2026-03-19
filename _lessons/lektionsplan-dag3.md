@@ -110,9 +110,9 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 **Eksempel kode:**
 
-- Komplet DAG 3 eksempel: `_exercises/examples/dag3/app.js`
-- HTML: `_exercises/examples/dag3/index.html`
-- CSS: `_exercises/examples/dag3/style.css`
+- Komplet DAG 3 eksempel: `_solutions/dag3/app.js`
+- HTML: `_solutions/dag3/index.html`
+- CSS: `_solutions/dag3/style.css`
 
 **Links:**
 

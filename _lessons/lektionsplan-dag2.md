@@ -124,9 +124,9 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 **Eksempel kode:**
 
-- Komplet DAG 2 eksempel: `_exercises/examples/dag2/app.js`
-- HTML: `_exercises/examples/dag2/index.html`
-- CSS: `_exercises/examples/dag2/style.css`
+- Komplet DAG 2 eksempel: `_solutions/dag2/app.js`
+- HTML: `_solutions/dag2/index.html`
+- CSS: `_solutions/dag2/style.css`
 
 **Links:**
 

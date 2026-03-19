@@ -13,7 +13,7 @@ Et 4-dages JavaScript-kursus for begyndere - bygget til multimediedesignstuderen
 - addEventListener til at reagere på klik
 - Byg en simpel klik-tæller
 
-**Eksempel:** Se `_exercises/examples/dag1/app.js`
+**Eksempel:** Se `_solutions/dag1/app.js`
 
 ---
 
@@ -28,7 +28,7 @@ Et 4-dages JavaScript-kursus for begyndere - bygget til multimediedesignstuderen
 - Template literals til HTML-generering
 - **Bonus:** Introduktion til fetch (valgfri)
 
-**Eksempel:** Se `_exercises/examples/dag2/app.js`
+**Eksempel:** Se `_solutions/dag2/app.js`
 
 ---
 
@@ -43,7 +43,7 @@ Et 4-dages JavaScript-kursus for begyndere - bygget til multimediedesignstuderen
 - .includes() til at checke arrays
 - ÉN genre-filter-knap (ikke kombineret)
 
-**Eksempel:** Se `_exercises/examples/dag3/app.js`
+**Eksempel:** Se `_solutions/dag3/app.js`
 
 ---
 
@@ -58,7 +58,7 @@ Et 4-dages JavaScript-kursus for begyndere - bygget til multimediedesignstuderen
 - Dialog med film-detaljer
 - Udgivelse med GitHub Pages
 
-**Eksempel:** Se `_exercises/examples/dag4/app.js`
+**Eksempel:** Se `_solutions/dag4/app.js`
 
 ---
 
@@ -127,7 +127,7 @@ cd movie-app
 
 ```bash
 # Fortsæt fra hvor du slap
-# Se eksempler i _exercises/examples/
+# Se eksempler i _solutions/
 ```
 
 ### Kør projektet lokalt:
@@ -152,7 +152,7 @@ cd js-movie-app
 **Åbn eksempler:**
 
 ```bash
-# Åbn _exercises/examples/ mappen
+# Åbn _solutions/ mappen
 # Hver dag har sine egne filer (dag-mapper med app.js, index.html og style.css.)
 ```
 
