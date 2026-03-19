@@ -2,7 +2,7 @@
 
 ## Formål
 
-I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
+I dag begynder vi Movie App projektet og lærer det mest basale JavaScript!
 
 **Du lærer:**
 
