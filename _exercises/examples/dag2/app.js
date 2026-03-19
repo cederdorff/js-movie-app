@@ -1,7 +1,7 @@
 "use strict";
 
 // MOVIE APP - DAG 2
-// I går (DAG 1): Lærte variables, querySelector, addEventListener med click counter
+// I går (DAG 1): Lærte variables, querySelector, addEventListener med klik-tæller
 // I dag (DAG 2): Lærer arrays, loops, objects med hardcoded movie data
 // I morgen (DAG 3): Tilføjer fetch for at hente rigtig data!
 

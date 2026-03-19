@@ -36,7 +36,7 @@ Opdatér `index.html` - tilføj søgefeltet:
 ```html
 <header>
   <h1>Movie Database</h1>
-  <p class="subtitle">Search, genre og sortering</p>
+  <p class="subtitle">Søgning, genre og sortering</p>
 </header>
 
 <section class="controls">
@@ -241,7 +241,7 @@ function showMovies(movies) {
   movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   if (movies.length === 0) {
-    movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
+    movieList.innerHTML = '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
     return;
   }
 

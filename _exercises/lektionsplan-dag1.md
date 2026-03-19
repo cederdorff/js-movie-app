@@ -10,17 +10,17 @@ Dagens formål er at introducere jer til de allermest grundlæggende elementer i
 - Bruge `console.log()` til debugging
 - Finde HTML elementer med `querySelector()`
 - Reagere på klik med `addEventListener()`
-- Bygge en fungerende click counter som første skridt i Movie App
+- Bygge en fungerende klik-tæller som første skridt i Movie App
 
 **Progression i forløbet:**
 
-- **DAG 1:** Click counter og JavaScript fundamentals
+- **DAG 1:** Klik-tæller og JavaScript fundamentals
 - **DAG 2:** Arrays, loops og hardcoded movie data
-- **DAG 3:** Fetch + simpel genre-filtrering
-- **DAG 4:** Title-søgning + detail modal + sortering
+- **DAG 3:** Fetch + simpel genre-filter
+- **DAG 4:** Titel-søgning + detail modal + sortering
 
-**Hvorfor starter vi med en click counter i Movie App?**
-Click counter er perfekt til at lære variable opdateringer og DOM manipulation - de samme koncepter vi bruger i morgen når vi tilføjer rigtig movie data. I dag bygger vi fundamentet!
+**Hvorfor starter vi med en klik-tæller i Movie App?**
+Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation - de samme koncepter vi bruger i morgen når vi tilføjer rigtig movie data. I dag bygger vi fundamentet!
 
 ## Forberedelse
 
@@ -61,7 +61,7 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 - const-first princip i praksis
 - `console.log()` - din debugging ven
 - Forskellige datatyper: strings, numbers, booleans
-- Hands-on øvelser med variables
+- Praktisk øvelse med variabler
 
 **10:15 - 10:30 | Pause **
 
@@ -70,35 +70,35 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 - Hvad er DOM? (Document Object Model)
 - `querySelector()` - find elementer på siden
 - `.textContent` og `.style` - ændr indhold og udseende
-- Hands-on: Find og ændr elementer
+- Praktisk øvelse: Find og ændr elementer
 
-**11:15 - 12:00 | Events & Click Counter (45 min)**
+**11:15 - 12:00 | Events & Klik-tæller (45 min)**
 
 - Hvad er et event?
 - `addEventListener("click", function)`
-- Byg Movie App click counter trin-for-trin
+- Byg Movie App klik-tæller trin-for-trin
 - Tilføj reset-knap funktionalitet
 - Test og debug sammen
 
 **12:00 - 13:00 | Frokost **
-**13:00 - 13:45 | Click Counter Udfordringer (45 min)**
+**13:00 - 13:45 | Klik-tæller Udfordringer (45 min)**
 
 - Udbyg din counter med flere features
 - Ændr styling baseret på count
 - Eksperimenter med forskellige button funktioner
 - Hjælp hinanden (pair programming)
 
-**13:45 - 14:30 | Debugging & Problem Solving (45 min)**
+**13:45 - 14:30 | Fejlfinding & Problemløsning (45 min)**
 
 - Typiske fejl og hvordan man finder dem
 - Læs error messages i Console
 - Fix bugs i hinandens kode
 - Eksperimentér med nye features
 
-**14:30 - 15:00 | Wrap-up & Preview (30 min)**
+**14:30 - 15:00 | Afrunding & Forhåndsblik (30 min)**
 
 - Recap: Hvad har vi lært?
-- **Preview af DAG 2:** I morgen tilføjer vi arrays, loops og rigtig movie data til samme projekt!
+- **Forhåndsblik på DAG 2:** I morgen tilføjer vi arrays, loops og rigtig movie data til samme projekt!
 - Hjemmearbejde: Færdiggør udfordringer og eksperimentér
 
 ## Materialer

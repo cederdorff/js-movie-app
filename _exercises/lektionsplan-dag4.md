@@ -2,12 +2,12 @@
 
 ## Formål
 
-Formålet med dagens lektion er at færdiggøre jeres Movie App med title-søgning, genre-filter, detail modal og deployment, så I kan dele den med venner og familie.
+Formålet med dagens lektion er at færdiggøre jeres Movie App med titel-søgning, genre-filter, detail modal og deployment, så I kan dele den med venner og familie.
 
 **Mål:**
 
 - Implementere søgefunktion med input event
-- Kombinere title-søgning og genre-filter
+- Kombinere titel-søgning og genre-filter
 - Oprette og style HTML `<dialog>` element
 - Bruge `showModal()` og `close()` API
 - Håndtere click events på dynamisk genereret indhold
@@ -15,14 +15,14 @@ Formålet med dagens lektion er at færdiggøre jeres Movie App med title-søgni
 - Deploye deres app til GitHub Pages
 - Fejre en færdig Movie App!
 
-**The Grand Finale:**
+**Den store finale:**
 I dag bliver jeres app færdig og offentlig. Om få timer har I en live website på internettet som I kan vise frem!
 
 ## Forberedelse
 
 - **Færdiggør DAG 3:**
   - Sørg for fetch virker og henter rigtig data
-  - Ha' mindst én fungerende genre filter
+  - Ha' mindst én fungerende genre-filter
   - Test at din app virker i browseren
 
 - **Læs:**
@@ -38,10 +38,10 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 
 ## Agenda
 
-**9:00 - 9:30 | Recap & Final Day Preview (30 min)**
+**9:00 - 9:30 | Opsamling & Overblik over sidste dag (30 min)**
 
 - Hvem har fungerende fetch og filter?
-- Show & Tell: Vis jeres genre filters
+- Vis og fortæl: Vis jeres genre-filtre
 - Quiz: fetch, filter, includes
 - Dagens mål: Søgning + Modal + Live på internettet!
 - Motivation: "I dag bliver jeres app færdig og offentlig!"
@@ -52,11 +52,11 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 - Genre-filter fra DAG 3 videreføres
 - Input event trigger når der skrives
 - `.toLowerCase()` og `.includes()` for case-insensitive search
-- Code-along trin-for-trin:
+- Kod med trin-for-trin:
   - HTML: Search input field
   - CSS: Styled search bar + controls
   - JavaScript: Search + genre i samme filter-funktion
-- Hands-on: Implementer og test søgning
+- Praktisk øvelse: Implementer og test søgning
 - Håndter "Ingen resultater"
 
 **10:30 - 10:45 | Pause **
@@ -66,13 +66,13 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 - Hvad er en modal? Popup vindue over siden
 - HTML `<dialog>` element vs `alert()`
 - API methods: `showModal()` og `close()`
-- Hands-on Del 1: HTML struktur og CSS styling
-- Hands-on Del 2: JavaScript click events og showDetails function
+- Praktisk øvelse del 1: HTML struktur og CSS styling
+- Praktisk øvelse del 2: JavaScript click events og showDetails function
 - Close modal: indbygget Luk-knap (form method="dialog") og ESC
 
 **12:00 - 13:00 | Frokost **
 
-**13:00 - 13:30 | Polish & Final Touches (30 min)**
+**13:00 - 13:30 | Finpudsning & Sidste Detaljer (30 min)**
 
 - Code quality check: Fjern unødvendige console.logs
 - Hold modal-koden enkel med indbygget luk-funktionalitet
@@ -93,13 +93,13 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
   - Fejlfinding hvis nødvendigt
 - Alle skal have deres app live!
 
-**14:30 - 15:00 | Celebration & Wrap-up (30 min) **
+**14:30 - 15:00 | Fejring & Afrunding (30 min) **
 
-- Share & Celebrate: Del jeres live links!
-- Show & tell: 5-6 studerende viser deres live app
-- Course wrap-up: Hvad har vi lært i 4 dage?
+- Del og fejr: Del jeres live links!
+- Vis og fortæl: 5-6 studerende viser deres live app
+- Opsamling på forløbet: Hvad har vi lært i 4 dage?
 - Feedback runde
-- Next steps og ressourcer
+- Næste skridt og ressourcer
 - Tillykke - I er nu web developers!
 
 ## Materialer

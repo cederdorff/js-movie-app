@@ -15,7 +15,7 @@ I dag skal du lære at arbejde med **flere ting på én gang** - lister af data!
 
 **Progressionen:**
 
-- **DAG 1:** Movie App setup + Click counter (variabler, events)
+- **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
 - **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
 - **DAG 3:** Fetch rigtig data + filter
 - **DAG 4:** Søgning + modal + deployment
@@ -28,8 +28,8 @@ I dag skal du lære at arbejde med **flere ting på én gang** - lister af data!
 
 Du skal have et `movie-app` projekt med:
 
-- `index.html` - med Movie App header og click counter
-- `app.js` - med click counter funktionalitet
+- `index.html` - med Movie App header og klik-tæller
+- `app.js` - med klik-tæller funktionalitet
 - `app.css` - med Movie App styling
 
 **Har du ikke projektet færdigt fra DAG 1?**
@@ -42,7 +42,7 @@ Du skal have et `movie-app` projekt med:
 
 ### Trin 2: Opdater HTML til DAG 2 struktur
 
-Nu skal vi ændre vores `index.html` fra click counter til en film-liste.
+Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
 
 **Åbn `index.html` og erstat `<main>` sektionen:**
 
@@ -161,7 +161,7 @@ console.log("Movie App - DAG 2 starter...");
 
 **Hvorfor sletter vi DAG 1 koden?**
 
-I dag lærer vi arrays og loops - det er nyt koncept. Click counter koden kan du altid finde i `_exercises/examples/dag1/app.js` hvis du vil se den igen!
+I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du altid finde i `_exercises/examples/dag1/app.js` hvis du vil se den igen!
 
 ### Trin 5: Test din Movie App struktur
 

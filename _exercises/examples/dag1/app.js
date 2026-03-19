@@ -1,7 +1,7 @@
 "use strict";
 
 // MOVIE APP - DAG 1
-// I dag lærer vi JavaScript basics med en click counter
+// I dag lærer vi JavaScript basics med en klik-tæller
 // I morgen (DAG 2) udvider vi dette projekt med rigtige film data!
 
 console.log("Movie App - DAG 1 starter...");
@@ -39,4 +39,4 @@ resetButton.addEventListener("click", function () {
   console.log("Counter nulstillet!");
 });
 
-console.log("Script klar - prov at klikke!");
+console.log("Script klar - prøv at klikke!");

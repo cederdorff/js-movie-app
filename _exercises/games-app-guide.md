@@ -14,7 +14,7 @@ Nu skal du overføre det du har lært fra Movie App til en ny kontekst. Dette er
 - Gennemtænk hvilke funktioner der giver mening for spil
 - Tilpas din eksisterende Movie App kode til games data
 
-**Dette er IKKE en step-by-step guide!**  
+**Dette er IKKE en trin-for-trin guide!**  
 Du skal selv tænke over hvordan du implementerer funktionerne. Guiden her hjælper dig med at **identificere forskelle** og **undgå faldgruber**.
 
 ---

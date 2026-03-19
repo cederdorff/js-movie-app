@@ -1,4 +1,4 @@
-# DAG 1 - JavaScript Basics & Click Counter
+# DAG 1 - JavaScript Basics & Klik-tæller
 
 ## Formål
 
@@ -19,7 +19,7 @@ I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
 
 **Progressionen:**
 
-- **DAG 1:** Setup + Click counter (lær basics)
+- **DAG 1:** Setup + Klik-tæller (lær basics)
 - **DAG 2:** Arrays, loops, hardcoded movie data
 - **DAG 3:** Fetch rigtig data + filter
 - **DAG 4:** Søgning + modal + deployment
@@ -53,7 +53,7 @@ Kopier dette ind i `index.html`:
   <body>
     <header>
       <h1>Movie App</h1>
-      <p>DAG 1: Lær JavaScript med Click Counter</p>
+      <p>DAG 1: Lær JavaScript med Klik-tæller</p>
     </header>
 
     <main>
@@ -194,7 +194,7 @@ button:active {
 **Tjek at det virker:**
 
 - Ser du "Movie App" som overskrift?
-- Ser du click counter boksen?
+- Ser du klik-tæller boksen?
 - Knapperne gør ikke noget endnu - det er ok! Vi tilføjer JavaScript nu.
 
 **Hvorfor hedder det "Movie App"?**

@@ -1,6 +1,6 @@
 "use strict";
 
-// DAG 3 - Fetch & Genre-filter Example
+// DAG 3 - Fetch & Genre-filter eksempel
 // Formål: Hent data og filtrer på én valgt genre
 
 console.log("Movie App starter...");

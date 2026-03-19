@@ -37,10 +37,10 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 ## Agenda
 
-**9:00 - 9:30 | Recap & Show & Tell (30 min)**
+**9:00 - 9:30 | Opsamling & Vis og fortæl (30 min)**
 
 - Hvem fik arrays af objekter til at virke?
-- Show & Tell: Vis jeres movie app (5-6 studerende)
+- Vis og fortæl: Vis jeres movie app (5-6 studerende)
 - Quiz: Arrays, objects, loops, template literals
 - Dagens mål: Rigtig data + én simpel filter
 
@@ -51,7 +51,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Hvorfor async/await? Data tager tid at hente
 - Pizza analogi: Asynkron vs synkron programmering
 - Live demo: Fetch med async/await
-- Hands-on: Erstat hardcoded data med fetch
+- Praktisk øvelse: Erstat hardcoded data med fetch
 - Debugging: Typiske fetch fejl
 
 **10:30 - 10:45 | Pause **
@@ -61,7 +61,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Hvad er `.filter()`? Udvælg specifikke elementer
 - Filter function returnerer `true` (behold) eller `false` (drop)
 - Live demo: Simple filter eksempler med numbers
-- Hands-on: Filtrer film baseret på år og rating
+- Praktisk øvelse: Filtrer film baseret på år og rating
 - Code review: Forklar hvad `return` gør
 
 **11:45 - 12:00 | .includes() for Arrays (15 min)**
@@ -72,14 +72,14 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 **12:00 - 13:00 | Frokost **
 
-**13:00 - 14:15 | Implementer ÉN Genre Filter (75 min)**
+**13:00 - 14:15 | Implementer ÉN Genre-filter (75 min)**
 
 - Planlæg: HTML knapper, CSS styling, JavaScript logik
-- Code-along trin-for-trin:
+- Kod med trin-for-trin:
   - HTML: Filter knapper
   - CSS: Button styling og hover effects
   - JavaScript: Filter logik med `.filter()` og `.includes()`
-- Hands-on: Implementer "Vis alle" og "Vis Action"
+- Praktisk øvelse: Implementer "Vis alle" og "Vis Action"
 - Tilføj flere genre knapper (Drama, Comedy, Sci-Fi)
 
 **14:15 - 14:45 | Polishing & Edge Cases (30 min)**
@@ -89,12 +89,12 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Vis counter: "Viser 23 film"
 - Test at alt virker
 
-**14:45 - 15:00 | Wrap-up & Preview (15 min)**
+**14:45 - 15:00 | Afrunding & Forhåndsblik (15 min)**
 
 - Recap: fetch, async/await, filter, includes
 - Spørgsmål: Hvad var sværest? Hvad var coolest?
-- Preview DAG 4: Søgning, modal og deployment!
-- Hjemmearbejde: Ryd op i kode og forbered title-søgning
+- Forhåndsblik på DAG 4: Søgning, modal og deployment!
+- Hjemmearbejde: Ryd op i kode og forbered titel-søgning
 
 ## Materialer
 

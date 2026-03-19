@@ -19,15 +19,15 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 **Progression:**
 
-- **DAG 1:** Movie App setup + Click counter (variabler, events)
+- **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
 - **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
 - **DAG 3:** Fetch + simpel genre-filter
-- **DAG 4:** Title-søgning + modal + sortering + deployment
+- **DAG 4:** Titel-søgning + modal + sortering + deployment
 
 ## Forberedelse
 
 - **Færdiggør DAG 1:**
-  - Sørg for din click counter virker
+  - Sørg for din klik-tæller virker
   - Forstå variables, querySelector og addEventListener
   - Har dit `movie-app` projekt klar
 
@@ -46,10 +46,10 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 **9:00 - 9:20 | Recap & Dagens Mål (20 min)**
 
-- Hvem fik click counter til at virke?
+- Hvem fik klik-tæller til at virke?
 - Vis jeres udfordringer (2-3 frivillige)
 - Quiz: Variables, querySelector, addEventListener
-- Dagens mål: Fra click counter til rigtig Movie App med film-lister!
+- Dagens mål: Fra klik-tæller til rigtig Movie App med film-lister!
 
 **9:20 - 9:40 | Opdater Projekt til DAG 2 (20 min)**
 
@@ -57,15 +57,15 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Opdater HTML struktur: Fra counter-box til movie-list
 - Opdater CSS: Fra counter styling til movie card grid
 - Ryd op i app.js - vi starter frisk med ny kode
-- Code-along så alle er synkroniseret
+- Kod med, så alle er synkroniseret
 
 **9:40 - 10:15 | Arrays Fundamentals (35 min)**
 
 - Hvad er et array? En liste/samling af værdier
 - Syntax: `let films = ["Inception", "Matrix"]`
 - Array index og `.length` property
-- Hands-on: Opret og manipuler arrays
-- Code-along: Array med film titler
+- Praktisk øvelse: Opret og manipuler arrays
+- Kod med: Array med filmtitler
 
 **10:15 - 10:30 | Pause **
 
@@ -74,7 +74,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Hvorfor loops? (Ellers skal vi skrive samme kode 100 gange!)
 - `for...of` loop: Den letteste loop
 - Sammenlign med manuel index
-- Hands-on: Loop gennem film array
+- Praktisk øvelse: Loop gennem film-array
 - Debugging øvelse: Fix common loop errors
 
 **11:30 - 12:00 | Objects Introduction (30 min)**
@@ -82,7 +82,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Hvad er et objekt? Data med labels (key-value)
 - Fra `let title = "Inception"` til `let movie = { title: "Inception", year: 2010 }`
 - Dot notation: `movie.title`, `movie.year`
-- Hands-on: Lav movie objekter
+- Praktisk øvelse: Lav movie-objekter
 
 **12:00 - 13:00 | Frokost **
 
@@ -91,8 +91,8 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Kombiner arrays + objects = super kraftfuldt!
 - Array med movie objekter
 - Loop gennem og access properties
-- Code-along: Byg movies array med 5 film
-- Hands-on: Lav dit eget movies array
+- Kod med: Byg et movie-array med 5 film
+- Praktisk øvelse: Lav dit eget movie-array
 
 **14:00 - 14:45 | Template Literals & HTML Generation (45 min)**
 
@@ -100,13 +100,13 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Solution: Template literals med backticks
 - `${}` - indsæt JavaScript expressions
 - `insertAdjacentHTML` - tilføj til DOM
-- Hands-on: Generer movie cards
+- Praktisk øvelse: Generer movie-cards
 
-**14:45 - 15:00 | Functions & Wrap-up (15 min)**
+**14:45 - 15:00 | Funktioner & Afrunding (15 min)**
 
 - Funktioner til at strukturere kode
 - `showMovies()` og `showMovie(movie)`
-- **Bonus introduktion:** fetch preview (ikke krav i dag)
+- **Bonus introduktion:** forhåndsblik på fetch (ikke krav i dag)
 - Hjemmearbejde: Færdiggør arrays af objekter
 
 ## Materialer

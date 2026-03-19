@@ -73,7 +73,7 @@ function showMovies(movies) {
   movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   if (movies.length === 0) {
-    movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
+    movieList.innerHTML = '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
     return;
   }
 
