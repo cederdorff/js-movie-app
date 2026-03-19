@@ -73,6 +73,7 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 - Hvem er RACE, og hvad skal vi lave?
 - Intro til Movie App projektet - progressionen over 4 dage
 - Projekt setup: Opret `movie-app` mappe med `index.html`, `app.js`, `app.css`
+- Brug semantiske tags fra start: `header`, `main`, `section`
 - Test Live Server extension
 
 **Variables, Datatyper & Console**

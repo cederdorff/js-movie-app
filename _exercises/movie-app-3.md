@@ -123,12 +123,12 @@ function showMovie(movie) {
   const movieList = document.querySelector("#movie-list");
 
   const html = `
-    <div class="movie-card">
+    <article class="movie-card">
       <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px; margin-bottom: 0.5rem;">
       <h3>${movie.title}</h3>
       <p>År: ${movie.year}</p>
       <p>Rating: ${movie.rating}</p>
-    </div>
+    </article>
   `;
 
   movieList.insertAdjacentHTML("beforeend", html);

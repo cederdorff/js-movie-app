@@ -54,7 +54,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 **9:20 - 9:40 | Opdater Projekt til DAG 2 (20 min)**
 
 - Åbn dit `movie-app` projekt fra DAG 1
-- Opdater HTML struktur: Fra counter-box til movie-list
+- Opdater HTML struktur: Fra counter-box til semantisk `section#movie-list`
 - Opdater CSS: Fra counter styling til movie card grid
 - Indsæt 2-3 hardcoded film-kort i HTML som bro-øvelse
 - Kort refleksion: "Hvorfor bliver dette tungt i hånden?"
@@ -102,7 +102,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Solution: Template literals med backticks
 - `${}` - indsæt JavaScript expressions
 - `insertAdjacentHTML` - tilføj til DOM
-- Praktisk øvelse: Generer movie-cards
+- Praktisk øvelse: Generer semantiske movie-cards som `<article>`
 
 **14:45 - 15:00 | Funktioner & Afrunding (15 min)**
 

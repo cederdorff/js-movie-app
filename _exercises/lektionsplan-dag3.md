@@ -77,8 +77,10 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 - Planlæg: HTML knapper, CSS styling, JavaScript logik
 - Kod med trin-for-trin:
   - HTML: Filter knapper
+  - HTML: Behold semantisk struktur (`section.controls`, `section#movie-list`)
   - CSS: Button styling og hover effects
   - JavaScript: Filter logik med `.filter()` og `.includes()`
+  - JavaScript: Render film-kort som semantiske `<article>` elementer
 - Praktisk øvelse: Implementer "Vis alle" og "Vis Action"
 - Tilføj flere genre knapper (Drama, Comedy, Sci-Fi)
 

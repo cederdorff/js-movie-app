@@ -61,15 +61,15 @@ Kopier dette ind i `index.html`:
     </header>
 
     <main>
-      <div class="counter-box">
-        <h2>Klik Tæller</h2>
+      <section class="counter-box" aria-labelledby="counter-title">
+        <h2 id="counter-title">Klik Tæller</h2>
         <p class="instructions">Øv dig med klik events mens vi bygger fundamentet til vores Movie App!</p>
 
         <div class="count-display">Antal klik: <span id="counter">0</span></div>
 
         <button id="click-button">Klik mig!</button>
         <button id="reset-button">Nulstil</button>
-      </div>
+      </section>
     </main>
 
     <script src="app.js"></script>
@@ -238,7 +238,7 @@ const isStudent = true;
 
 ### 1.1: Prøv det selv
 
-Åbn `app.js` og skriv:
+Åbn `app.js` og skriv (ja skriv det - lad vær med at copy/paste):
 
 ```javascript
 "use strict"; // Hjælper med at fange fejl
@@ -253,8 +253,6 @@ console.log(message);
 
 - Åbn Console (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
 - Ser du dine beskeder?
-
-**Tillykke!** Du har lige skrevet din første JavaScript kode!
 
 Her bruger vi `const`, fordi værdien ikke ændrer sig.
 
@@ -326,6 +324,30 @@ console.log("Efter ændring:", points);
 
 **Mini-øvelse:**
 
+Tag udgangspunkt i dine egne variabler fra 1.3.
+
+1. Vælg 1-2 variabler, hvor værdien skal kunne ændre sig (fx `city`, `hobby` eller `favoriteMovie`).
+2. Skift dem fra `const` til `let`.
+3. Opdatér værdien bagefter og log både før/efter i konsollen.
+
+**Eksempel (bygget videre på 1.3):**
+
+```javascript
+let favoriteMovie = "Inception";
+let city = "Aarhus";
+
+console.log("Før:", favoriteMovie, city);
+
+favoriteMovie = "Interstellar";
+city = "København";
+
+console.log("Efter:", favoriteMovie, city);
+```
+
+Hvis en variabel ikke skal ændres, skal den stadig være `const`.
+
+**Ekstra tjek:** Prøv med vilje at ændre en `const` variabel og se fejlen i Console. Skift den derefter til `let` og se forskellen.
+
 Prøv selv at lave en variabel med `let` om dig selv:
 
 ```javascript
@@ -341,6 +363,18 @@ console.log("Efter:", mood);
 ## Opgave 2: Find ting på siden
 
 **Formål:** Lær hvordan JavaScript kan "finde" HTML elementer.
+
+### Hvorfor er `querySelector` smart?
+
+JavaScript kan ikke ændre noget på siden, før det ved **hvilket element** du vil arbejde med.
+
+`querySelector()` er smart, fordi den gør det muligt at:
+
+- pege præcist på det element du vil ændre
+- genbruge samme element i flere linjer kode
+- lave interaktive features (klik, tekstændringer, styling)
+
+Uden `querySelector()` ville din JavaScript kode ikke kunne kobles til knapper, tekstfelter og overskrifter i HTML.
 
 ### Hvad er querySelector?
 
@@ -420,6 +454,16 @@ countDisplay.style.borderRadius = "10px";
 
 **Formål:** Lær hvordan man lytter efter bruger-handlinger.
 
+### Hvad er et event - og hvorfor bruger vi det?
+
+Et **event** er noget der sker på siden, fx at en bruger klikker på en knap, skriver i et input eller bevæger musen.
+
+En **event listener** er kode, der "lytter" efter et bestemt event og kører en funktion, når det sker.
+
+Det er smart, fordi det gør din side interaktiv: JavaScript reagerer først, når brugeren gør noget.
+
+I dag arbejder vi med klik-eventet (`click`) på en knap.
+
 ### 4.1: Din første event listener
 
 **Slet alt i `app.js` og start forfra med dette:**
@@ -462,6 +506,20 @@ clickButton.addEventListener("click", function () {
 - Hvad hvis du også ændrer farven?
 - Prøv at ændre knappens tekst også!
 
+**Prøv selv:**
+
+- Skift overskriftens tekst til noget du selv finder på.
+- Skift farven på overskriften, når der klikkes.
+- Ændr teksten på knappen efter første klik.
+- Giv knappen en ny baggrundsfarve eller border-radius ved klik.
+- Prøv at ændre både tekst og styling i samme klik.
+
+**Tip til fremgangsmåde:**
+
+- Byg én ting ad gangen.
+- Test i browseren efter hver lille ændring.
+- Brug `console.log()` aktivt til at se om din kode kører som forventet.
+
 ---
 
 ## Opgave 5: Lav en rigtig tæller!
@@ -470,103 +528,178 @@ clickButton.addEventListener("click", function () {
 
 ### 5.1: Basis tæller
 
-**Komplet kode til `app.js`:**
+I denne opgave bygger du tælleren selv i små trin.
+
+Start med en tom `app.js` og byg videre trin for trin.
+
+### 5.2: Trin 1 - Startkode
+
+Skriv strict mode og en kort `console.log()`, så du kan se at filen kører.
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
 
 ```javascript
 "use strict";
-
 console.log("Klik-tæller starter...");
+```
 
-// Find elementerne
+</details>
+
+### 5.3: Trin 2 - Find elementer i HTML
+
+Find disse elementer med `querySelector()` og gem den i variabler:
+
+- `#counter`
+- `#click-button`
+- `#reset-button`
+
+Test med `console.log()` at de faktisk bliver fundet.
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
+
+```javascript
 const countDisplay = document.querySelector("#counter");
 const clickButton = document.querySelector("#click-button");
 const resetButton = document.querySelector("#reset-button");
-
-// Brug let kun her, fordi værdien ændrer sig
-let count = 0;
-
-// Når der klikkes på click-knappen
-clickButton.addEventListener("click", function () {
-  console.log("Klik!");
-
-  // Tilføj 1 til count
-  count = count + 1;
-
-  // Vis det nye tal på siden
-  countDisplay.textContent = count;
-});
-
-// Når der klikkes på reset-knappen
-resetButton.addEventListener("click", function () {
-  console.log("Nulstiller...");
-
-  // Sæt count tilbage til 0
-  count = 0;
-
-  // Vis 0 på siden
-  countDisplay.textContent = count;
-});
-
-console.log("Tæller er klar!");
 ```
 
-**Test det:**
+</details>
+
+### 5.4: Trin 3 - Lav selve tæller-variablen
+
+Lav en variabel til tælleren, der starter på 0.
+
+Tænk selv: Skal det være `const` eller `let` her, og hvorfor?
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
+
+```javascript
+let count = 0;
+```
+
+</details>
+
+### 5.5: Trin 4 - Klik skal tælle op
+
+Tilføj en event listener på klik-knappen. Du kan bruge din definerede variabel for knappen.
+
+Når der klikkes:
+
+- læg 1 til `count`
+- opdatér teksten i `#counter`
+
+Prøv også at logge værdien i Console efter hvert klik.
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
+
+```javascript
+clickButton.addEventListener("click", function () {
+  count = count + 1;
+  countDisplay.textContent = count;
+});
+```
+
+</details>
+
+### 5.6: Trin 5 - Nulstil knappen
+
+Tilføj en event listener på reset-knappen.
+
+Når der klikkes:
+
+- sæt `count` tilbage til 0
+- vis 0 i `#counter`
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
+
+```javascript
+resetButton.addEventListener("click", function () {
+  count = 0;
+  countDisplay.textContent = count;
+});
+```
+
+</details>
+
+### 5.7: Test din løsning
 
 - Klik flere gange på "Klik mig!"
 - Klik på "Nulstil"
-- Virker det?
+- Tæller den korrekt op og tilbage til 0?
 
-### 5.2: Forklaring
+### 5.8: Ekstra refleksion
 
-Lad os gennemgå hvad der sker:
-
-```javascript
-let count = 0;
-```
-
-↑ Vi laver en variabel der starter på 0
-
-```javascript
-count = count + 1;
-```
-
-↑ Vi tager den gamle værdi, lægger 1 til, og gemmer det nye resultat
-
-```javascript
-countDisplay.textContent = count;
-```
-
-↑ Vi viser det nye tal på skærmen
+- Hvad sker der, hvis du glemmer at opdatere `textContent`?
+- Hvad sker der, hvis `count` var lavet med `const`? Du kan evt. prøve det af!
+- Hvorfor er event listeners nødvendige her?
+- **Ekstra:** Bliver dine event listeners lange når der er meget kode? Hvis ja, se Udfordring 6.4 for en bedre måde at strukturere det på!
 
 ---
 
-## Udfordringer (hvis du er færdig)
+## Opgave 6: Udfordringer (hvis du er færdig)
 
-### Udfordring 1: Forskellige farver
+### 6.1: Forskellige farver
 
-Lav så count skifter farve når den kommer over 10:
+Mål: Få tælleren til at skifte farve, når den bliver høj nok.
+
+**Trin 1:** Vælg en grænseværdi (fx 10).
+
+**Trin 2:** Inde i klik-listeneren tjekker du, om `count` er over grænsen.
+
+**Trin 3:** Hvis betingelsen er opfyldt, ændrer du farven på `countDisplay`.
+
+**Tænk selv:**
+
+- Hvad skal der ske med farven, hvis count går under grænsen igen?
+- Vil du have to farver (normal + highlight)?
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
 
 ```javascript
 clickButton.addEventListener("click", function () {
   count = count + 1;
   countDisplay.textContent = count;
 
-  // Hvis count er over 10, gør den grøn
   if (count > 10) {
     countDisplay.style.color = "lightgreen";
   }
 });
 ```
 
-### Udfordring 2: Tæl ned i stedet
+</details>
 
-Lav en ny knap der trækker 1 fra i stedet for at lægge til:
+### 6.2: Tæl ned i stedet
+
+Mål: Tilføj en ekstra knap, der tæller ned.
+
+**Trin 1:** Tilføj en minus-knap i HTML.
+
+**Trin 2:** Find knappen med `querySelector()`.
+
+**Trin 3:** Lav en event listener på minus-knappen, der trækker 1 fra `count`.
+
+**Trin 4:** Opdatér visningen i `countDisplay`.
+
+**Tænk selv:**
+
+- Skal tælleren kunne gå under 0?
+- Hvis ikke, hvor vil du placere tjekket?
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
+
+```html
+<button id="minus-btn">Minus 1</button>
+```
 
 ```javascript
-// Tilføj denne knap i HTML først:
-// <button id="minus-btn">Minus 1</button>
-
-let minusButton = document.querySelector("#minus-btn");
+const minusButton = document.querySelector("#minus-btn");
 
 minusButton.addEventListener("click", function () {
   count = count - 1;
@@ -574,7 +707,25 @@ minusButton.addEventListener("click", function () {
 });
 ```
 
-### Udfordring 3: Besked ved 10 klik
+</details>
+
+### 6.3: Besked ved 10 klik
+
+Mål: Vis en besked, når brugeren rammer et bestemt mål.
+
+**Trin 1:** Vælg en mål-værdi (fx 10).
+
+**Trin 2:** I klik-listeneren tjekker du, om `count` er præcis lig med målet.
+
+**Trin 3:** Vis en besked i browseren eller i Console, når målet nås.
+
+**Tænk selv:**
+
+- Skal beskeden kun vises én gang?
+- Hvad sker der, hvis brugeren klikker videre efter målet?
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
 
 ```javascript
 clickButton.addEventListener("click", function () {
@@ -582,22 +733,91 @@ clickButton.addEventListener("click", function () {
   countDisplay.textContent = count;
 
   if (count === 10) {
-    alert("Tillykke! Du nåede 10 klik! ");
+    alert("Tillykke! Du nåede 10 klik!");
   }
 });
 ```
+
+</details>
+
+### 6.4: Opdel i funktioner
+
+**Tag din løsning fra Opgave 5 og refaktorér den!**
+
+Frem for store event listeners med inline `function() { }`, er det smartere at udtrække logikken til navngivne funktioner.
+
+Lav din kode mere overskuelig ved at flytte logik ud i funktioner.
+
+Målet er:
+
+- Event listener på klik-knappen kalder en funktion (fx `increaseCount()`)
+- Event listener på minus-knappen kalder en funktion (fx `decreaseCount()`)
+- Event listener på reset-knappen kalder en funktion (fx `resetCount()`)
+- Funktionerne står for at opdatere både variablen og visningen på siden
+
+Hvis du ikke allerede lavede den i Udfordring 2, så tilføj også en minus-knap i HTML:
+
+```html
+<button id="minus-btn">Minus 1</button>
+```
+
+Tænk selv over:
+
+- Hvilken kode går igen flere steder?
+- Hvad bør ligge i en funktion fremfor direkte inde i event listeneren?
+
+**Trin 1:** Lav funktioner til op, ned og reset.
+
+**Trin 2:** Flyt logikken ud af event listeners og ind i funktionerne.
+
+**Trin 3:** Lad event listeners kalde funktionerne ved navn.
+
+<details>
+<summary>Kodehint (hvis du sidder fast)</summary>
+
+```javascript
+const minusButton = document.querySelector("#minus-btn");
+
+function increaseCount() {
+  count = count + 1;
+  countDisplay.textContent = count;
+}
+
+function decreaseCount() {
+  count = count - 1;
+  countDisplay.textContent = count;
+}
+
+function resetCount() {
+  count = 0;
+  countDisplay.textContent = count;
+}
+
+clickButton.addEventListener("click", increaseCount);
+minusButton.addEventListener("click", decreaseCount);
+resetButton.addEventListener("click", resetCount);
+```
+
+</details>
+
+**Kort opsamling: Hvorfor er det smart?**
+
+- Din kode bliver lettere at læse, fordi hver funktion har ét tydeligt ansvar.
+- Du undgår gentagelser, når op/ned/reset følger samme mønster.
+- Det bliver nemmere at fejlfinde, fordi du kan teste én funktion ad gangen.
+- Du er tættere på den struktur, vi bruger i større apps senere i forløbet.
 
 ---
 
 ## Hvad har du lært i dag?
 
-**Variabler** - gemme data med `let`  
-**console.log()** - skrive til Console  
-**querySelector** - finde HTML elementer  
-**textContent** - ændre tekst  
-**style** - ændre CSS  
-**addEventListener** - lytte efter klik  
-**Funktioner** - kode der kører når noget sker
+**Variabler & const/let** - Hvornår skal du bruge const (fast værdi) vs let (værdi der ændrer sig)?  
+**console.log()** - Dit vigtigste debugging værktøj  
+**querySelector()** - Hvorfor det er smart: find præcis det element du skal arbejde med  
+**Tekstændring** - `.textContent` ændrer på siden  
+**Styling med JavaScript** - `.style` giver dig magt over CSS fra koden  
+**Events og event listeners** - Hvordan JavaScript reagerer på brugerhandlinger (klik, input osv.)  
+**Funktioner med klart ansvar** - Hvorfor det er smart at få event listeners til at kalde funktioner i stedet for store blokke af kode
 
 ---
 
@@ -605,12 +825,18 @@ clickButton.addEventListener("click", function () {
 
 Til næste gang skal vi arbejde med **flere** ting på én gang - **arrays** og **loops**!
 
-Prøv at tænke over:
+**Tænk selv over:**
 
-- Hvad nu hvis du ville tælle klik for 5 forskellige knapper?
-- Hvordan ville du gemme en liste af film-titler?
+- Hvad nu hvis du skulle håndtere 10 film i stedet for bare en tæller?
+- Hvordan ville du gemme en liste af filmtitler uden at lave 100 variabler?
+- Kan man på samme måde lave 5 klik-knapper uden at gentage samme kode 5 gange?
 
-Vi ses næste gang!
+**Prøv selv (bonus før næste gang):**
+
+- Hvis du glemmer event listener på en knap, hvad sker der? Prøv og se.
+- Kan du lave en knap der ikke gør noget smart, men som viser at querySelector finder den korrekt?
+
+Vi ses næste gang - I dag har I bygget fundamentet!
 
 ---
 
@@ -618,22 +844,25 @@ Vi ses næste gang!
 
 **Hvis noget ikke virker:**
 
-1. **Tjek Console** - er der røde fejlbeskeder?
-2. **Tjek stavning** - `querySelector` (ikke `queryselector`)
-3. **Tjek id'er** - matcher de HTML'en? (`#count`)
-4. **Tilføj console.log** - se hvad værdierne er
-5. **Spørg en makker** - forklar problemet højt
+1. **Tjek Console først** - er der røde fejlbeskeder? Læs beskeden nøje!
+2. **Tjek stavning** - `querySelector` (ikke `queryselector`), `addEventListener` (ikke `addEventListner`)
+3. **Tjek id'er/selektorer** - gør HTML'en og JavaScript stemmer overens? (`#counter`, `#click-button` osv.)
+4. **Log aggressivt** - tilføj `console.log()` på mange steder for at følge værdier
+5. **Test én ting ad gangen** - prøv at teste hver funktion/event separat
+6. **Spørg en makker** - forklar problemet højt, ofte løser du det selv ved at forklare!
 
-**Eksempel på debugging:**
+**Eksempel på debugging med funktioner:**
 
 ```javascript
-clickButton.addEventListener("click", function () {
+function increaseCount() {
   console.log("Før:", count);
   count = count + 1;
   console.log("Efter:", count);
   countDisplay.textContent = count;
   console.log("Vist på siden:", countDisplay.textContent);
-});
+}
+
+clickButton.addEventListener("click", increaseCount);
 ```
 
-**Husk:** Fejl er normalt! Alle programmører laver fejl hele tiden. Det vigtige er at lære at finde dem!
+**Husk:** Fejl er normalt! Alle programmører laver fejl hele tiden. Det vigtige er at blive god til at finde dem!

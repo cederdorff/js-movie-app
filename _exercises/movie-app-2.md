@@ -62,9 +62,9 @@ Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
     </header>
 
     <main>
-      <div id="movie-list">
+      <section id="movie-list" aria-label="Filmliste">
         <!-- Film vises her med JavaScript -->
-      </div>
+      </section>
     </main>
 
     <script src="app.js"></script>
@@ -180,20 +180,20 @@ Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**. Så blive
 **Indsæt midlertidigt dette i `index.html` inde i `#movie-list`:**
 
 ```html
-<div id="movie-list">
-  <div class="movie-card">
+<section id="movie-list" aria-label="Filmliste">
+  <article class="movie-card">
     <h3>Inception</h3>
     <p>År: 2010</p>
-  </div>
-  <div class="movie-card">
+  </article>
+  <article class="movie-card">
     <h3>The Matrix</h3>
     <p>År: 1999</p>
-  </div>
-  <div class="movie-card">
+  </article>
+  <article class="movie-card">
     <h3>Interstellar</h3>
     <p>År: 2014</p>
-  </div>
-</div>
+  </article>
+</section>
 ```
 
 **Reflektér kort:**
@@ -292,9 +292,9 @@ for (let movie of movies) {
 
   // Lav HTML for denne film
   let html = `
-    <div class="movie-card">
+    <article class="movie-card">
       <h3>${movie}</h3>
-    </div>
+    </article>
   `;
 
   // Tilføj til siden
@@ -421,11 +421,11 @@ for (let movie of movies) {
 
   // Lav HTML for denne film
   let html = `
-    <div class="movie-card">
+    <article class="movie-card">
       <h3>${movie.title}</h3>
       <p> År: ${movie.year}</p>
       <p> Rating: ${movie.rating}</p>
-    </div>
+    </article>
   `;
 
   // Tilføj til siden
@@ -480,11 +480,11 @@ function showMovie(movie) {
   let movieList = document.querySelector("#movie-list");
 
   let html = `
-    <div class="movie-card">
+    <article class="movie-card">
       <h3>${movie.title}</h3>
       <p> År: ${movie.year}</p>
       <p> Rating: ${movie.rating}</p>
-    </div>
+    </article>
   `;
 
   movieList.insertAdjacentHTML("beforeend", html);
@@ -518,11 +518,11 @@ function showMovie(movie) {
   let color = movie.rating >= 8.5 ? "gold" : "white";
 
   let html = `
-    <div class="movie-card" style="border: 2px solid ${color}">
+    <article class="movie-card" style="border: 2px solid ${color}">
       <h3>${movie.title}</h3>
       <p> År: ${movie.year}</p>
       <p> Rating: ${movie.rating}</p>
-    </div>
+    </article>
   `;
 
   movieList.insertAdjacentHTML("beforeend", html);
@@ -549,12 +549,12 @@ Vis billedet i dit card:
 
 ```javascript
 let html = `
-  <div class="movie-card">
+  <article class="movie-card">
     <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
     <h3>${movie.title}</h3>
     <p> År: ${movie.year}</p>
     <p> Rating: ${movie.rating}</p>
-  </div>
+  </article>
 `;
 ```
 
@@ -597,11 +597,11 @@ function showMovie(movie) {
   let movieList = document.querySelector("#movie-list");
 
   let html = `
-    <div class="movie-card">
+    <article class="movie-card">
       <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px; margin-bottom: 0.5rem;">
       <h3>${movie.title} (${movie.year})</h3>
       <p> ${movie.rating}</p>
-    </div>
+    </article>
   `;
 
   movieList.insertAdjacentHTML("beforeend", html);

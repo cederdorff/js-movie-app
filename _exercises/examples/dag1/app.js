@@ -6,37 +6,34 @@
 
 console.log("Movie App - DAG 1 starter...");
 
-// 1. Find knapperne
-const button = document.querySelector("#click-button");
+// Find HTML elementerne (som i Opgave 5, trin 2)
+const countDisplay = document.querySelector("#counter");
+const clickButton = document.querySelector("#click-button");
 const resetButton = document.querySelector("#reset-button");
 
-// 2. Find tekst elementet
-const counterText = document.querySelector("#counter");
-
-// 3. Lav en variabel til at tælle
+// Lav tæller-variablen (som i Opgave 5, trin 3)
 let count = 0;
 
-// 4. Tilføj event listener til click-knappen
-button.addEventListener("click", function () {
-  console.log("Knap klikket!");
+// Event listener på klik-knappen (som i Opgave 5, trin 4)
+clickButton.addEventListener("click", function () {
+  console.log("Klik!");
 
   // Tæl op
   count = count + 1;
 
   // Vis det nye tal
-  counterText.textContent = count;
-
-  console.log("Count er nu:", count);
+  countDisplay.textContent = count;
 });
 
-// 5. Tilføj event listener til reset-knappen
+// Event listener på reset-knappen (som i Opgave 5, trin 5)
 resetButton.addEventListener("click", function () {
-  console.log("Nulstiller counter...");
+  console.log("Nulstiller...");
 
+  // Sæt count tilbage til 0
   count = 0;
-  counterText.textContent = count;
 
-  console.log("Counter nulstillet!");
+  // Vis 0 på siden
+  countDisplay.textContent = count;
 });
 
-console.log("Script klar - prøv at klikke!");
+console.log("Tæller er klar!");
