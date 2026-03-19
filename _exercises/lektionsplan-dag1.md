@@ -70,47 +70,41 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 
 **Introduktion og Movie App setup**
 
-- Hvem er RACE, og hvad skal vi lave?
-- Intro til Movie App projektet - progressionen over 4 dage
-- Projekt setup: Opret `movie-app` mappe med `index.html`, `app.js`, `app.css`
+- Hvem er RACE? Hvad bygger vi i 4 dage?
+- Projekt setup: `movie-app` med `index.html`, `app.js`, `app.css`
 - Brug semantiske tags fra start: `header`, `main`, `section`
-- Test Live Server extension
+- Test Live Server
 
 **Variables, Datatyper & Console**
 
-- Hvad er en variable? (`const` og `let`)
+- Hvad er en variable? (`const` og `let`) (Opgave 1)
 - const-first princip i praksis
 - `console.log()` - din debugging ven
-- Forskellige datatyper: strings, numbers, booleans
-- Praktisk øvelse med variabler
 
 **querySelector & DOM Manipulation**
 
-- Hvad er DOM? (Document Object Model)
-- `querySelector()` - find elementer på siden
+- **Hvorfor `querySelector()` er smart:** find præcis det element du skal arbejde med
 - `.textContent` og `.style` - ændr indhold og udseende
-- Praktisk øvelse: Find og ændr elementer
+- Praktisk øvelse: Find og ændr elementer (Opgave 2 & 3)
 
 **Events & Klik-tæller**
 
-- Hvad er et event?
-- `addEventListener("click", function)`
-- Byg Movie App klik-tæller trin-for-trin
-- Tilføj reset-knap funktionalitet
-- Test og debug sammen
+- Hvad er et event - og hvorfor bruger vi det? (Opgave 4 intro)
+- Bygge Movie App klik-tæller trin-for-trin (Opgave 5)
+- Tilføj reset-knap og test sammen
+
+**Udfordringer & Refactoring**
+
+- Hvis du er færdig: Opgave 6 udfordringer (6.1-6.3)
+- **6.4: Refactor til funktioner** - Split event listeners i navngivne funktioner
 
 **Fejlfinding & Problemløsning**
 
-- Typiske fejl og hvordan man finder dem
-- Læs error messages i Console
-- Fix bugs i hinandens kode
-- Eksperimentér med nye features
-
-**Afrunding**
-
-- Recap: Hvad har vi lært?
-- **Forhåndsblik på DAG 2:** I morgen tilføjer vi arrays, loops og rigtig movie data til samme projekt!
-- Hjemmearbejde: Færdiggør udfordringer og eksperimentér
+- Console fejlbeskeder og `console.log()` aggressivt
+- Test én variabel/event ad gangen
+- Typiske stavefejl: `querySelector` vs `queryselector`
+- Arbejd sammen: forklar problemet højt til makker
+- Se Debugging Tips i Opgave 1
 
 ## Materialer
 
@@ -120,8 +114,12 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 
 **Opgaver:**
 
-- [Movie App - DAG 1](movie-app-1.md)
+- [Movie App - DAG 1](movie-app-1.md) - 6 opgaver fra setup til klikt-tæller og udfordringer
 - [Hello JavaScript](https://www.notion.so/Hello-JavaScript-6ca283a288bd4fafbcea2a11b2c9806e?pvs=21) (ekstra øvelse)
+
+**Eksempel kode:**
+
+- Komplet DAG 1 løsning: `_exercises/examples/dag1/app.js` (matcher Opgave 5 struktur)
 
 **Links:**
 
