@@ -30,6 +30,8 @@ I dag begynder vi Movie App projektet og lærer det mest basale JavaScript!
 
 ### Trin 1: Opret Movie App projektet
 
+Hvis du allerede har gjort det, kan du gå til trin 2.
+
 1. Følg denne guide: [Opret et nyt projekt med GitHub Desktop](https://race.notion.site/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed)
 2. **VIGTIGT - Navngiv projektet:** `movie-app` (vi skal bruge dette navn!)
 3. Opret disse filer:
@@ -38,6 +40,8 @@ I dag begynder vi Movie App projektet og lærer det mest basale JavaScript!
    - `app.css`
 
 ### Trin 2: Movie App HTML struktur
+
+**Note:** Det er helt ok, hvis du ikke forstår alt i HTML/CSS endnu. I dette forløb er hovedfokus JavaScript, og vi bruger HTML/CSS som en ramme at arbejde i.
 
 Kopier dette ind i `index.html`:
 
@@ -74,6 +78,8 @@ Kopier dette ind i `index.html`:
 ```
 
 ### Trin 3: Movie App CSS styling
+
+**Vigtigt:** Du behøver ikke forstå al CSS-koden i dag. Kopier den som den er, så vi har et godt visuelt udgangspunkt, mens vi fokuserer på JavaScript.
 
 Kopier dette ind i `app.css`:
 
@@ -215,6 +221,9 @@ I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi
 
 **Formål:** Lær hvad en variabel er.
 
+**Hvorfor er det vigtigt?**
+Variabler er fundamentet for al JavaScript og programmering generelt. De bruges overalt: når du gemmer værdier, opdaterer data, sammenligner input, filtrerer lister eller bygger funktioner. I dette forløb starter vi simpelt med en tæller, men præcis det samme princip går igen i alle de næste opgaver.
+
 ### Hvad er en variabel?
 
 En variabel er som en "boks" hvor du kan gemme data. Brug en const-first tilgang: start med `const`, og skift kun til `let` hvis værdien skal ændres senere.
@@ -247,6 +256,8 @@ console.log(message);
 
 **Tillykke!** Du har lige skrevet din første JavaScript kode!
 
+Her bruger vi `const`, fordi værdien ikke ændrer sig.
+
 ### 1.2: Leg med variabler
 
 Prøv at lave flere variabler:
@@ -266,6 +277,64 @@ console.log("Rating:", rating);
 - Prøv at ændre værdierne og bruge console.log til at se hvad der sker.
 - Lav dine egne variabler.
 - Se hvad der sker i Console!
+
+### 1.3: Definér dig selv med variabler
+
+Nu skal du bruge variabler til at beskrive dig selv.
+
+**Skriv fx dette i `app.js`:**
+
+```javascript
+const firstName = "Skriv dit navn her";
+const age = 22;
+const isStudent = true;
+const favoriteMovie = "Skriv din yndlingsfilm her";
+
+console.log("Navn:", firstName);
+console.log("Alder:", age);
+console.log("Er studerende:", isStudent);
+console.log("Yndlingsfilm:", favoriteMovie);
+```
+
+**Prøv selv:**
+
+- Erstat værdierne med oplysninger om dig selv.
+- Tilføj 2-3 ekstra variabler, fx `favoriteColor`, `city` eller `hobby`.
+- Brug `console.log()` til at vise dem i konsollen.
+
+Indtil nu har alle variabler været værdier, der bare skal gemmes. Nu kommer næste skridt: variabler der kan ændre sig.
+
+### 1.4: Hvornår bruger man `let`?
+
+Brug `const` som udgangspunkt. Brug kun `let`, når værdien skal ændres senere.
+
+**Eksempel med `let`:**
+
+```javascript
+let points = 0;
+console.log("Start:", points);
+
+points = 1;
+console.log("Efter ændring:", points);
+```
+
+**Hvorfor er det smart?**
+
+- `const` beskytter værdier der ikke skal ændres.
+- `let` bruges til data der udvikler sig over tid.
+- Senere i dag bruger du `let` til tælleren, fordi tallet ændrer sig når man klikker.
+
+**Mini-øvelse:**
+
+Prøv selv at lave en variabel med `let` om dig selv:
+
+```javascript
+let mood = "træt";
+console.log("Før:", mood);
+
+mood = "klar til JavaScript";
+console.log("Efter:", mood);
+```
 
 ---
 
