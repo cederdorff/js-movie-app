@@ -184,10 +184,10 @@ button:active {
 
 ### Trin 4: Test din Movie App setup
 
-1. **Gem alle filer** (Cmd+S / Ctrl+S)
+1. **Gem alle filer** (Windows/PC: Ctrl+S, Mac: Cmd+S)
 2. **Start Live Server:**
    - Højreklik på `index.html` → "Open with Live Server"
-3. **Åbn Developer Tools** (F12 eller Cmd+Option+I)
+3. **Åbn Developer Tools** (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
    - Klik på "Console" fanen
    - Dette er dit vigtigste debugging værktøj!
 
@@ -207,7 +207,7 @@ I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi
 
 1. Gem alle filer
 2. Højreklik på `index.html` → "Open with Live Server"
-3. Åbn Developer Tools (F12) og hold Console-fanen åben!
+3. Åbn Developer Tools (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I) og hold Console-fanen åben!
 
 ---
 
@@ -242,7 +242,7 @@ console.log(message);
 
 **Gem og tjek browseren:**
 
-- Åbn Console (F12)
+- Åbn Console (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
 - Ser du dine beskeder?
 
 **Tillykke!** Du har lige skrevet din første JavaScript kode!

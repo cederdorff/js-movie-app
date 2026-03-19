@@ -165,7 +165,7 @@ I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du 
 
 ### Trin 5: Test din Movie App struktur
 
-1. **Gem alle filer** (Cmd+S / Ctrl+S)
+1. **Gem alle filer** (Windows/PC: Ctrl+S, Mac: Cmd+S)
 2. **Genindlæs Live Server** (eller start den hvis ikke åben)
 3. **Tjek i browseren:**
 

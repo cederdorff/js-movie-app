@@ -43,7 +43,7 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
 ### På dagen:
 
 - Åbn VS Code og vær klar til at kode fra scratch
-- Åbn Developer Tools i din browser (F12)
+- Åbn Developer Tools i din browser (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
 - Ha' din GitHub Desktop app klar
 
 ## Agenda

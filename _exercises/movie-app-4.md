@@ -418,9 +418,9 @@ URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 
 **Hvis noget ikke virker:**
 
-- Tjek konsollen for fejl (F12)
+- Tjek konsollen for fejl (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
 - Tjek at alle filer er pushet
-- Prøv hård genindlæsning (Cmd+Shift+R / Ctrl+Shift+R)
+- Prøv hård genindlæsning (Windows/PC: Ctrl+Shift+R, Mac: Cmd+Shift+R)
 
 ---
 
@@ -588,7 +588,7 @@ function showMovies(movies) {
 2. **Tjek URL**: Korrekt `username.github.io/repo-name`?
 3. **Vent**: Tag en kop kaffe - det kan tage 5 min første gang
 4. **Tjek konsollen**: Fejl? CORS-problemer? (normalt ikke med GitHub Pages)
-5. **Hård genindlæsning**: Cmd+Shift+R / Ctrl+Shift+R
+5. **Hård genindlæsning**: Windows/PC: Ctrl+Shift+R, Mac: Cmd+Shift+R
 
 ---
 
