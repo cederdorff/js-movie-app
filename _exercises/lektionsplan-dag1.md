@@ -24,6 +24,14 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
 
 ## Forberedelse
 
+For at øvelsen på DAG 1 giver mening, skal denne rækkefølge følges:
+
+1. Installer værktøjer
+2. Opret projektet `movie-app` (hvis det ikke allerede er gjort)
+3. Åbn projektet i VS Code og kod videre i de samme filer
+
+Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så skal det gøres først, inden man starter selve øvelsen.
+
 ### Før første lektion:
 
 - **[Setup Tools & Dev Environment](https://www.notion.so/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274?pvs=21)**
@@ -35,27 +43,40 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
   - Følg guiden - det er ok hvis der er ting du ikke forstår endnu
   - Navngiv dit projekt `movie-app`
   - Du skal have gennemgået Setup Tools først
+  - Hvis projektet allerede er oprettet, kan dette trin springes over
+  - Hvis projektet ikke er oprettet, skal dette trin gennemføres før DAG 1-opgaven
 
-- **Læs [An Introduction to JavaScript](https://javascript.info/intro)**
-  - Skim artiklen og prøv at forstå hovedpointerne
-  - Det er helt fint hvis du ikke forstår alt - vi gennemgår det i dag
+- **Læs hele afsnittet om [JavaScript Basics](https://thevalleyofcode.com/lesson/js-basics/)**
+  - The fundamentals of JavaScript
+  - 0: Introduction
+  - 1: Literals, identifiers and variables
+  - 2: Comments
+  - 3: The difference between let, const and var
+  - 4: Types
+  - 5: Operators and expressions
+  - 6: Let's start with arithmetic operators
+  - 7: The assignment operator
+  - 8: Operator precedence
+  - 9: Strings
+  - 10: Numbers
+  - 11: Semicolons, white space and sensitivity
 
 ### På dagen:
 
-- Åbn VS Code og vær klar til at kode fra scratch
+- Åbn dit `movie-app` projekt i VS Code og vær klar til at kode videre i `index.html`, `app.js` og `app.css`
 - Åbn Developer Tools i din browser (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
 - Ha' din GitHub Desktop app klar
 
 ## Agenda
 
-**9:00 - 9:30 | Introduktion og Movie App setup (30 min)**
+**Introduktion og Movie App setup**
 
 - Hvem er RACE, og hvad skal vi lave?
 - Intro til Movie App projektet - progressionen over 4 dage
 - Projekt setup: Opret `movie-app` mappe med `index.html`, `app.js`, `app.css`
 - Test Live Server extension
 
-**9:30 - 10:15 | Variables & Console (45 min)**
+**Variables & Console**
 
 - Hvad er en variable? (`const` og `let`)
 - const-first princip i praksis
@@ -63,16 +84,14 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
 - Forskellige datatyper: strings, numbers, booleans
 - Praktisk øvelse med variabler
 
-**10:15 - 10:30 | Pause **
-
-**10:30 - 11:15 | querySelector & DOM Manipulation (45 min)**
+**querySelector & DOM Manipulation**
 
 - Hvad er DOM? (Document Object Model)
 - `querySelector()` - find elementer på siden
 - `.textContent` og `.style` - ændr indhold og udseende
 - Praktisk øvelse: Find og ændr elementer
 
-**11:15 - 12:00 | Events & Klik-tæller (45 min)**
+**Events & Klik-tæller**
 
 - Hvad er et event?
 - `addEventListener("click", function)`
@@ -80,22 +99,21 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
 - Tilføj reset-knap funktionalitet
 - Test og debug sammen
 
-**12:00 - 13:00 | Frokost **
-**13:00 - 13:45 | Klik-tæller Udfordringer (45 min)**
+**Klik-tæller Udfordringer**
 
 - Udbyg din counter med flere features
 - Ændr styling baseret på count
 - Eksperimenter med forskellige button funktioner
 - Hjælp hinanden (pair programming)
 
-**13:45 - 14:30 | Fejlfinding & Problemløsning (45 min)**
+**Fejlfinding & Problemløsning**
 
 - Typiske fejl og hvordan man finder dem
 - Læs error messages i Console
 - Fix bugs i hinandens kode
 - Eksperimentér med nye features
 
-**14:30 - 15:00 | Afrunding & Forhåndsblik (30 min)**
+**Afrunding & Forhåndsblik**
 
 - Recap: Hvad har vi lært?
 - **Forhåndsblik på DAG 2:** I morgen tilføjer vi arrays, loops og rigtig movie data til samme projekt!
@@ -112,13 +130,8 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
 - [Movie App - DAG 1](movie-app-1.md)
 - [Hello JavaScript](https://www.notion.so/Hello-JavaScript-6ca283a288bd4fafbcea2a11b2c9806e?pvs=21) (ekstra øvelse)
 
-**Eksempel kode:**
-
-- Komplet DAG 1 eksempel: `_exercises/examples/dag1/app.js`
-- HTML: `_exercises/examples/dag1/index.html`
-- CSS: `_exercises/examples/dag1/style.css`
-
 **Links:**
 
 - Movie App (færdig version): https://cederdorff.com/js-movie-app/
 - JavaScript dokumentation: https://javascript.info
+- The Valley of Code: https://thevalleyofcode.com/ (stærk opslagssamling om webudvikling)
