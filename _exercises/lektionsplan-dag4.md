@@ -52,7 +52,7 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 - Genre-filter fra DAG 3 videreføres
 - Input event trigger når der skrives
 - `.toLowerCase()` og `.includes()` for case-insensitive search
-- Code-along step-by-step:
+- Code-along trin-for-trin:
   - HTML: Search input field
   - CSS: Styled search bar + controls
   - JavaScript: Search + genre i samme filter-funktion
@@ -85,7 +85,7 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 
 - Hvad er GitHub Pages? Gratis hosting!
 - URL format: `https://[username].github.io/movie-app/`
-- Step-by-step deployment:
+- Trin-for-trin deployment:
   - Commit alle ændringer
   - Push til GitHub
   - Enable GitHub Pages i settings

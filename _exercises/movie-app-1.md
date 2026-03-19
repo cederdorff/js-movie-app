@@ -28,7 +28,7 @@ I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
 
 ## Opgave 0: Movie App Projekt Setup
 
-### Step 1: Opret Movie App projektet
+### Trin 1: Opret Movie App projektet
 
 1. Følg denne guide: [Opret et nyt projekt med GitHub Desktop](https://race.notion.site/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed)
 2. **VIGTIGT - Navngiv projektet:** `movie-app` (vi skal bruge dette navn!)
@@ -37,7 +37,7 @@ I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
    - `app.js`
    - `app.css`
 
-### Step 2: Movie App HTML struktur
+### Trin 2: Movie App HTML struktur
 
 Kopier dette ind i `index.html`:
 
@@ -73,7 +73,7 @@ Kopier dette ind i `index.html`:
 </html>
 ```
 
-### Step 3: Movie App CSS styling
+### Trin 3: Movie App CSS styling
 
 Kopier dette ind i `app.css`:
 
@@ -182,7 +182,7 @@ button:active {
 }
 ```
 
-### Step 4: Test din Movie App setup
+### Trin 4: Test din Movie App setup
 
 1. **Gem alle filer** (Cmd+S / Ctrl+S)
 2. **Start Live Server:**
@@ -191,19 +191,19 @@ button:active {
    - Klik på "Console" fanen
    - Dette er dit vigtigste debugging værktøj!
 
-** Tjek at det virker:**
+**Tjek at det virker:**
 
-- Ser du " Movie App" som overskrift?
+- Ser du "Movie App" som overskrift?
 - Ser du click counter boksen?
 - Knapperne gør ikke noget endnu - det er ok! Vi tilføjer JavaScript nu.
 
-** Hvorfor hedder det "Movie App"?**
+**Hvorfor hedder det "Movie App"?**
 
 I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi bare JavaScript basics med en simpel counter!
 
 ---
 
-### Step 5: Start Live Server (hvis ikke allerede åben)
+### Trin 5: Start Live Server (hvis ikke allerede åben)
 
 1. Gem alle filer
 2. Højreklik på `index.html` → "Open with Live Server"
@@ -245,7 +245,7 @@ console.log(message);
 - Åbn Console (F12)
 - Ser du dine beskeder?
 
-** Tillykke!** Du har lige skrevet din første JavaScript kode!
+**Tillykke!** Du har lige skrevet din første JavaScript kode!
 
 ### 1.2: Leg med variabler
 
@@ -261,7 +261,7 @@ console.log("Den kom i:", year);
 console.log("Rating:", rating);
 ```
 
-** Eksperimenter:**
+**Eksperimenter:**
 
 - Prøv at ændre værdierne og bruge console.log til at se hvad der sker.
 - Lav dine egne variabler.
@@ -303,7 +303,7 @@ const resetButton = document.querySelector("#reset-button");
 console.log("Jeg fandt knapperne:", clickButton, resetButton);
 ```
 
-** Vigtigt at forstå:**
+**Vigtigt at forstå:**
 
 - `"h1"` finder første `<h1>` tag
 - `"#counter"` finder element med `id="counter"`
@@ -339,7 +339,7 @@ countDisplay.style.padding = "10px";
 countDisplay.style.borderRadius = "10px";
 ```
 
-** Eksperimenter:**
+**Eksperimenter:**
 
 - Prøv andre farver
 - Prøv andre CSS properties
@@ -347,7 +347,7 @@ countDisplay.style.borderRadius = "10px";
 
 ---
 
-## Opgave 4: Reagér på klik! ️
+## Opgave 4: Reagér på klik!
 
 **Formål:** Lær hvordan man lytter efter bruger-handlinger.
 
@@ -388,7 +388,7 @@ clickButton.addEventListener("click", function () {
 });
 ```
 
-** Eksperimenter:**
+**Eksperimenter:**
 
 - Hvad hvis du også ændrer farven?
 - Prøv at ændre knappens tekst også!
@@ -406,7 +406,7 @@ clickButton.addEventListener("click", function () {
 ```javascript
 "use strict";
 
-console.log(" Klik-tæller starter...");
+console.log("Klik-tæller starter...");
 
 // Find elementerne
 const countDisplay = document.querySelector("#counter");
@@ -438,7 +438,7 @@ resetButton.addEventListener("click", function () {
   countDisplay.textContent = count;
 });
 
-console.log(" Tæller er klar!");
+console.log("Tæller er klar!");
 ```
 
 **Test det:**
@@ -523,12 +523,12 @@ clickButton.addEventListener("click", function () {
 ## Hvad har du lært i dag?
 
 **Variabler** - gemme data med `let`  
- **console.log()** - skrive til Console  
- **querySelector** - finde HTML elementer  
- **textContent** - ændre tekst  
- **style** - ændre CSS  
- **addEventListener** - lytte efter klik  
- **Funktioner** - kode der kører når noget sker
+**console.log()** - skrive til Console  
+**querySelector** - finde HTML elementer  
+**textContent** - ændre tekst  
+**style** - ændre CSS  
+**addEventListener** - lytte efter klik  
+**Funktioner** - kode der kører når noget sker
 
 ---
 

@@ -27,7 +27,7 @@ Vi bruger const-first: start med `const`, og skift kun til `let` hvis en variabe
 
 ## Opgave 0: Start Hvor Vi Slap
 
-### Step 1: Åbn dit projekt fra sidst
+### Trin 1: Åbn dit projekt fra sidst
 
 Åbn din `movie-app` fra DAG 2.
 
@@ -95,16 +95,16 @@ start();
 async function start() {
   console.log("Henter film data...");
 
-  // Step 1: Hent data fra ekstern URL
+  // Trin 1: Hent data fra ekstern URL
   const response = await fetch(MOVIES_URL);
 
-  // Step 2: Konvertér til JavaScript
+  // Trin 2: Konvertér til JavaScript
   allMovies = await response.json();
 
   console.log("Hentet", allMovies.length, "film!");
   console.log("Første film:", allMovies[0]);
 
-  // Step 3: Vis filmene
+  // Trin 3: Vis filmene
   showMovies(allMovies);
 }
 
@@ -126,8 +126,8 @@ function showMovie(movie) {
     <div class="movie-card">
       <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px; margin-bottom: 0.5rem;">
       <h3>${movie.title}</h3>
-      <p> ${movie.year}</p>
-      <p> ${movie.rating}</p>
+      <p>År: ${movie.year}</p>
+      <p>Rating: ${movie.rating}</p>
     </div>
   `;
 
@@ -152,7 +152,7 @@ async function start() {
 - `await` betyder "vent her indtil det er færdigt"
 - Uden `await` ville koden fortsætte før data er hentet!
 
-** Vigtigt:**
+**Vigtigt:**
 
 - `fetch()` returnerer et "promise" (løfte om data)
 - `await` venter på at løftet opfyldes

@@ -21,8 +21,8 @@ async function getMovies() {
 }
 
 function populateGenreSelect() {
-  const genreSelect = document.querySelector("#genre-select");
-  const genres = new Set();
+  const genreSelect = document.querySelector("#genre-select"); // Find genre select element i HTML'en
+  const genres = new Set(); // Set bruges til at sikre unikke genrer
 
   for (const movie of allMovies) {
     for (const genre of movie.genre) {
@@ -30,21 +30,21 @@ function populateGenreSelect() {
     }
   }
 
-  genreSelect.innerHTML = '<option value="all">Alle genrer</option>';
+  const genreArray = Array.from(genres); // Konverter Set til Array for at kunne sortere
 
-  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
-  for (const genre of sortedGenres) {
-    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
+  genreArray.sort((movieA, movieB) => movieA.localeCompare(movieB)); // Sorter genrer alfabetisk
+  for (const genre of genreArray) {
+    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`); // Tilføj genrer som options i select elementet
   }
 }
 
 function applyFilters() {
-  const searchTerm = document.querySelector("#search-input").value.trim().toLowerCase();
-  const selectedGenre = document.querySelector("#genre-select").value;
-  const sortOption = document.querySelector("#sort-select").value;
+  const searchValue = document.querySelector("#search-input").value.trim().toLowerCase(); // Hent søgeinput, fjern whitespace og konverter til lowercase
+  const selectedGenre = document.querySelector("#genre-select").value; // Hent den valgte genre fra select elementet
+  const sortOption = document.querySelector("#sort-select").value; // Hent den valgte sorteringsmulighed
 
   let filteredMovies = allMovies.filter(function (movie) {
-    const matchesTitle = movie.title.toLowerCase().includes(searchTerm);
+    const matchesTitle = movie.title.toLowerCase().includes(searchValue);
     const matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
     return matchesTitle && matchesGenre;
   });
@@ -54,17 +54,15 @@ function applyFilters() {
 }
 
 function sortMovies(movies, sortOption) {
-  const sortedMovies = [...movies];
-
   if (sortOption === "title") {
-    sortedMovies.sort((a, b) => a.title.localeCompare(b.title));
+    movies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
   } else if (sortOption === "year") {
-    sortedMovies.sort((a, b) => b.year - a.year);
+    movies.sort((movieA, movieB) => movieB.year - movieA.year);
   } else if (sortOption === "rating") {
-    sortedMovies.sort((a, b) => b.rating - a.rating);
+    movies.sort((movieA, movieB) => movieB.rating - movieA.rating);
   }
 
-  return sortedMovies;
+  return movies;
 }
 
 function showMovies(movies) {
@@ -72,7 +70,7 @@ function showMovies(movies) {
   const movieCount = document.querySelector("#movie-count");
 
   movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   if (movies.length === 0) {
     movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
@@ -80,7 +78,7 @@ function showMovies(movies) {
   }
 
   for (const movie of movies) {
-    const movieCard = `
+    const movieCard = /*html*/ `
       <article class="movie-card" tabindex="0">
         <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
         <div class="movie-info">
@@ -101,12 +99,6 @@ function showMovies(movies) {
     newCard.addEventListener("click", function () {
       showDetails(movie);
     });
-    newCard.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        showDetails(movie);
-      }
-    });
   }
 }
 
@@ -114,7 +106,7 @@ function showDetails(movie) {
   const modal = document.querySelector("#movie-modal");
   const modalBody = document.querySelector("#modal-body");
 
-  modalBody.innerHTML = `
+  modalBody.innerHTML = /*html*/ `
     <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
     <div class="modal-title-row">
       <h2>${movie.title}</h2>

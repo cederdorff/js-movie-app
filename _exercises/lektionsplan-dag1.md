@@ -29,7 +29,7 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 - **[Setup Tools & Dev Environment](https://www.notion.so/Dev-Setup-Guide-VS-Code-Git-Browser-DevTools-Node-js-7a55f70a02834132a11da6f253ba3274?pvs=21)**
   - Følg guiden for at installere de nødvendige værktøjer
   - Du skal have: VS Code med Extensions, GitHub Desktop og Git
-  - Spring over step _8. Node.js & npm_ (ikke nødvendigt i dette forløb)
+  - Spring over trin _8. Node.js & npm_ (ikke nødvendigt i dette forløb)
 
 - **[Opret et nyt projekt med GitHub Desktop](https://www.notion.so/Opret-et-nyt-projekt-med-GitHub-Desktop-92de71d56c544e52aa87cd58a7b0a1ed?pvs=21)**
   - Følg guiden - det er ok hvis der er ting du ikke forstår endnu
@@ -76,7 +76,7 @@ Click counter er perfekt til at lære variable opdateringer og DOM manipulation 
 
 - Hvad er et event?
 - `addEventListener("click", function)`
-- Byg Movie App click counter step-by-step
+- Byg Movie App click counter trin-for-trin
 - Tilføj reset-knap funktionalitet
 - Test og debug sammen
 

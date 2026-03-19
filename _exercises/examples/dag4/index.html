@@ -3,56 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DAG 4 - Søgning, Genre, Sortering & Modal</title>
+    <title>Movie App</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon" />
   </head>
+
   <body>
     <header>
       <h1>Movie Database</h1>
       <p class="subtitle">Search, genre og sortering</p>
     </header>
 
-    <section class="controls">
-      <div class="control-group grow">
-        <label for="search-input">Søg på titel</label>
-        <input type="text" id="search-input" placeholder="Søg efter film titel..." />
-      </div>
-
-      <div class="control-group">
-        <label for="genre-select">Genre</label>
-        <select id="genre-select">
-          <option value="all">Alle genrer</option>
-        </select>
-      </div>
-
-      <div class="control-group">
-        <label for="sort-select">Sortering</label>
-        <select id="sort-select">
-          <option value="none">Ingen sortering</option>
-          <option value="title">Titel (A-Å)</option>
-          <option value="year">År (nyeste først)</option>
-          <option value="rating">Rating (højeste først)</option>
-        </select>
-      </div>
-    </section>
-
-    <section class="status-bar">
-      <p id="movie-count"></p>
-    </section>
-
     <main>
-      <div id="movie-list">
-        <!-- Film vises her -->
-      </div>
+      <section class="controls">
+        <div class="control-group grow">
+          <label for="search-input">Søg på titel</label>
+          <input type="text" id="search-input" placeholder="Fx matrix, dune eller dark" />
+        </div>
+
+        <div class="control-group">
+          <label for="genre-select">Genre</label>
+          <select id="genre-select">
+            <option value="all">Alle genrer</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="sort-select">Sortering</label>
+          <select id="sort-select">
+            <option value="none">Ingen sortering</option>
+            <option value="title">Titel (A-Å)</option>
+            <option value="year">Årstal (nyeste først)</option>
+            <option value="rating">Rating (højeste først)</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="status-bar">
+        <p id="movie-count">Viser 0 film</p>
+      </section>
+
+      <section id="movie-list" class="movie-grid">
+        <p class="loading">Loader film...</p>
+      </section>
     </main>
 
-    <!-- Modal -->
+    <footer>
+      <p>RACE - JavaScript Movie App</p>
+    </footer>
+
     <dialog id="movie-modal">
       <form method="dialog" class="modal-content">
-        <button class="close-btn" value="close">Luk</button>
-        <div id="modal-body">
-          <!-- Details vises her -->
-        </div>
+        <button class="close-btn" aria-label="Luk dialog" value="close">Luk</button>
+        <div id="modal-body"></div>
       </form>
     </dialog>
 

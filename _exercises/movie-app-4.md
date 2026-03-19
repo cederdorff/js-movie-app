@@ -42,7 +42,7 @@ Opdatér `index.html` - tilføj søgefeltet:
 <section class="controls">
   <div class="control-group grow">
     <label for="search-input">Søg på titel</label>
-    <input type="text" id="search-input" placeholder="Søg efter film titel..." />
+    <input type="text" id="search-input" placeholder="Fx matrix, dune eller dark" />
   </div>
 
   <div class="control-group">
@@ -57,14 +57,20 @@ Opdatér `index.html` - tilføj søgefeltet:
     <select id="sort-select">
       <option value="none">Ingen sortering</option>
       <option value="title">Titel (A-Å)</option>
-      <option value="year">År (nyeste først)</option>
+      <option value="year">Årstal (nyeste først)</option>
       <option value="rating">Rating (højeste først)</option>
     </select>
   </div>
 </section>
 
+<section class="status-bar">
+  <p id="movie-count">Viser 0 film</p>
+</section>
+
 <main>
-  <div id="movie-list"></div>
+  <section id="movie-list" class="movie-grid">
+    <p class="loading">Loader film...</p>
+  </section>
 </main>
 ```
 
@@ -75,9 +81,20 @@ Tilføj i `app.css`:
 ```css
 .movie-card {
   background: linear-gradient(180deg, #434b54 0%, #3f464e 100%);
-  border: 1px solid rgba(143, 178, 199, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  border-color: #69c8f0;
 }
 
 .title-row {
@@ -107,14 +124,15 @@ Tilføj i `app.css`:
 
 #modal-body {
   display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: 1rem;
+  grid-template-columns: minmax(300px, 1fr) 2fr;
+  gap: 2rem;
 }
 
 .modal-description {
-  padding-left: 0.72rem;
-  border-left: 3px solid rgba(168, 208, 232, 0.75);
+  padding: 1rem;
+  border-left: 4px solid #69c8f0;
   font-style: italic;
+  background: rgba(105, 200, 240, 0.08);
 }
 ```
 
@@ -160,17 +178,15 @@ function applyFilters() {
 }
 
 function sortMovies(movies, sortOption) {
-  const sortedMovies = [...movies];
-
   if (sortOption === "title") {
-    sortedMovies.sort((a, b) => a.title.localeCompare(b.title));
+    movies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
   } else if (sortOption === "year") {
-    sortedMovies.sort((a, b) => b.year - a.year);
+    movies.sort((movieA, movieB) => movieB.year - movieA.year);
   } else if (sortOption === "rating") {
-    sortedMovies.sort((a, b) => b.rating - a.rating);
+    movies.sort((movieA, movieB) => movieB.rating - movieA.rating);
   }
 
-  return sortedMovies;
+  return movies;
 }
 ```
 
@@ -222,7 +238,12 @@ function showMovies(movies) {
   const movieCount = document.querySelector("#movie-count");
 
   movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
+
+  if (movies.length === 0) {
+    movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
+    return;
+  }
 
   for (const movie of movies) {
     const movieCard = `
@@ -256,7 +277,7 @@ function showMovies(movies) {
 
 **Mere professionelt - brug en modal:**
 
-#### Step 1: Tilføj dialog i HTML
+#### Trin 1: Tilføj dialog i HTML
 
 Tilføj EFTER `<main>`:
 
@@ -274,7 +295,7 @@ Tilføj EFTER `<main>`:
 </dialog>
 ```
 
-#### Step 2: Tilføj CSS
+#### Trin 2: Tilføj CSS
 
 ```css
 #movie-modal {
@@ -285,8 +306,8 @@ Tilføj EFTER `<main>`:
 
 #modal-body {
   display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: 1rem;
+  grid-template-columns: minmax(300px, 1fr) 2fr;
+  gap: 2rem;
 }
 
 .modal-title-row {
@@ -296,13 +317,14 @@ Tilføj EFTER `<main>`:
 }
 
 .modal-description {
-  padding-left: 0.72rem;
-  border-left: 3px solid rgba(168, 208, 232, 0.75);
+  padding: 1rem;
+  border-left: 4px solid #69c8f0;
   font-style: italic;
+  background: rgba(105, 200, 240, 0.08);
 }
 ```
 
-#### Step 3: Opdatér JavaScript
+#### Trin 3: Opdatér JavaScript
 
 ```javascript
 function showDetails(movie) {
@@ -350,19 +372,19 @@ function showDetails(movie) {
 
 ### 3.2: Push til GitHub
 
-**Step 1: Stage alle filer**
+**Trin 1: Stage alle filer**
 
 ```bash
 git add .
 ```
 
-**Step 2: Commit**
+**Trin 2: Commit**
 
 ```bash
 git commit -m "Færdig movie app med søgning og modal"
 ```
 
-**Step 3: Push**
+**Trin 3: Push**
 
 ```bash
 git push origin main

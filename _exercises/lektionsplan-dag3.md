@@ -75,7 +75,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 **13:00 - 14:15 | Implementer ÉN Genre Filter (75 min)**
 
 - Planlæg: HTML knapper, CSS styling, JavaScript logik
-- Code-along step-by-step:
+- Code-along trin-for-trin:
   - HTML: Filter knapper
   - CSS: Button styling og hover effects
   - JavaScript: Filter logik med `.filter()` og `.includes()`

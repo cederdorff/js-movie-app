@@ -1,7 +1,4 @@
 "use strict";
-// Root version: slutapp til undervisning
-// Fokus: fetch + genre-filter + title-sogning
-// Sortering er en del af DAG 4-løsningen
 
 document.addEventListener("DOMContentLoaded", initApp);
 
@@ -24,7 +21,7 @@ async function getMovies() {
 }
 
 function populateGenreSelect() {
-  const genreSelect = document.querySelector("#genre-select");
+  const genreSelect = document.querySelector("#genre-select"); // Find genre select element i HTML'en
   const genres = new Set(); // Set bruges til at sikre unikke genrer
 
   for (const movie of allMovies) {
@@ -33,19 +30,21 @@ function populateGenreSelect() {
     }
   }
 
-  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b)); // Sorter genrer alfabetisk
-  for (const genre of sortedGenres) {
-    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
+  const genreArray = Array.from(genres); // Konverter Set til Array for at kunne sortere
+
+  genreArray.sort((movieA, movieB) => movieA.localeCompare(movieB)); // Sorter genrer alfabetisk
+  for (const genre of genreArray) {
+    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`); // Tilføj genrer som options i select elementet
   }
 }
 
 function applyFilters() {
-  const searchTerm = document.querySelector("#search-input").value.trim().toLowerCase();
-  const selectedGenre = document.querySelector("#genre-select").value;
-  const sortOption = document.querySelector("#sort-select").value;
+  const searchValue = document.querySelector("#search-input").value.trim().toLowerCase(); // Hent søgeinput, fjern whitespace og konverter til lowercase
+  const selectedGenre = document.querySelector("#genre-select").value; // Hent den valgte genre fra select elementet
+  const sortOption = document.querySelector("#sort-select").value; // Hent den valgte sorteringsmulighed
 
   let filteredMovies = allMovies.filter(function (movie) {
-    const matchesTitle = movie.title.toLowerCase().includes(searchTerm);
+    const matchesTitle = movie.title.toLowerCase().includes(searchValue);
     const matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
     return matchesTitle && matchesGenre;
   });
@@ -56,11 +55,11 @@ function applyFilters() {
 
 function sortMovies(movies, sortOption) {
   if (sortOption === "title") {
-    movies.sort((a, b) => a.title.localeCompare(b.title));
+    movies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
   } else if (sortOption === "year") {
-    movies.sort((a, b) => b.year - a.year);
+    movies.sort((movieA, movieB) => movieB.year - movieA.year);
   } else if (sortOption === "rating") {
-    movies.sort((a, b) => b.rating - a.rating);
+    movies.sort((movieA, movieB) => movieB.rating - movieA.rating);
   }
 
   return movies;
@@ -99,12 +98,6 @@ function showMovies(movies) {
     const newCard = movieList.lastElementChild;
     newCard.addEventListener("click", function () {
       showDetails(movie);
-    });
-    newCard.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        showDetails(movie);
-      }
     });
   }
 }
