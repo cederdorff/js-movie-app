@@ -41,7 +41,7 @@ Hvis du allerede har gjort det, kan du gå til trin 2.
 
 ### Trin 2: Movie App HTML struktur
 
-**Note:** Det er helt ok, hvis du ikke forstår alt i HTML/CSS endnu. I dette forløb er hovedfokus JavaScript, og vi bruger HTML/CSS som en ramme at arbejde i. Men prøv så vidt muligt at danne dig et oevrblik over hvilke HTML-elementer, der er.
+**Note:** Det er helt ok, hvis du ikke forstår alt i HTML/CSS endnu. I dette forløb er hovedfokus JavaScript, og vi bruger HTML/CSS som en ramme at arbejde i. Men prøv så vidt muligt at danne dig et overblik over hvilke HTML-elementer, der er.
 
 Kopier dette ind i `index.html`:
 
