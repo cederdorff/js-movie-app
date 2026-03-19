@@ -63,7 +63,7 @@ Lær grundlæggende JavaScript-syntax og DOM-manipulation ved at arbejde med sta
 #### 8. Event Handling
 
 - `addEventListener()` - Tilføj event listeners
-- Click events
+- Klik-events
 - Event handler functions
 - Callback functions
 
@@ -196,34 +196,34 @@ Implementér avanceret filtrering, søgning og sortering af data med array metho
 
 - Multi-filter pipeline
 - Applying filters sequentially
-- Combining search, genre, range filters
+- Kombinering af søgning, genre og range-filtre
 - Clear filters functionality
 
 ---
 
-## Session 4: Modal Dialog & Advanced UI
+## Session 4: Dialog & Advanced UI
 
 ### 🎯 Formål
 
-Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
+Implementér dialog for detaljeret visning og udvid filtrering med ranges.
 
 ### 📖 Emner
 
 #### 1. HTML5 Dialog Element
 
-- **`<dialog>` tag**: Native modal functionality
-- **`.showModal()`**: Åbn modal
-- **`.close()`**: Luk modal
+- **`<dialog>` tag**: Indbygget dialog-funktionalitet
+- **`.showModal()`**: Åbn dialog
+- **`.close()`**: Luk dialog
 - Dialog backdrop styling
-- ESC key automatic close
+- ESC-lukning automatisk
 
-#### 2. Modal Implementation
+#### 2. Dialog-implementering
 
-- Modal struktur i HTML
-- Modal styling med CSS
-- Opening modal med JavaScript
-- Closing modal (button + ESC)
-- Backdrop click handling (optional)
+- Dialog struktur i HTML
+- Dialog styling med CSS
+- Åbn dialog med JavaScript
+- Luk dialog (knap + ESC)
+- Backdrop-klikhåndtering (valgfri)
 
 #### 3. Range Filtering
 
@@ -259,11 +259,11 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 
 #### 7. CSS Advanced
 
-- **Dialog styling**: Custom modal appearance
+- **Dialog styling**: Custom dialog appearance
   - `::backdrop` pseudo-element
 - **Focus styles**: Visual feedback
-- **Responsive design**: Modal på mobile
-- **Flexbox/Grid**: Modal layout
+- **Responsive design**: Dialog på mobile
+- **Flexbox/Grid**: Dialog layout
 
 #### 8. Code Refactoring
 
@@ -320,7 +320,7 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 ### Events
 
 - ✅ addEventListener()
-- ✅ Click events
+- ✅ Klik-events
 - ✅ Input/change events
 - ✅ Keyboard events
 - ✅ event.preventDefault()
@@ -372,15 +372,15 @@ Implementér modal dialog for detaljeret visning og udvid filtrering med ranges.
 
 ## 📊 Progressionsmatrix
 
-| Emne                 | Session 1      | Session 2          | Session 3              | Session 4              |
-| -------------------- | -------------- | ------------------ | ---------------------- | ---------------------- |
-| **DOM Manipulation** | Basics         | Dynamisk HTML      | -                      | Modal dialog           |
-| **Arrays**           | Basics + loops | forEach, map, join | filter, sort, includes | -                      |
-| **Functions**        | Basics         | async/await        | Advanced callbacks     | Refactoring            |
-| **Events**           | Click          | DOMContentLoaded   | Input/change           | Keyboard               |
-| **Data**             | Statisk (HTML) | JSON/fetch         | Filtrering             | Ranges                 |
-| **Strings**          | Basics         | Template literals  | toLowerCase, includes  | localeCompare          |
-| **UI**               | Statisk layout | Dynamiske cards    | Filtre + søgning       | Modal + tilgængelighed |
+| Emne                 | Session 1      | Session 2          | Session 3              | Session 4               |
+| -------------------- | -------------- | ------------------ | ---------------------- | ----------------------- |
+| **DOM Manipulation** | Basics         | Dynamisk HTML      | -                      | Dialog                  |
+| **Arrays**           | Basics + loops | forEach, map, join | filter, sort, includes | -                       |
+| **Functions**        | Basics         | async/await        | Advanced callbacks     | Refactoring             |
+| **Events**           | Click          | DOMContentLoaded   | Input/change           | Keyboard                |
+| **Data**             | Statisk (HTML) | JSON/fetch         | Filtrering             | Ranges                  |
+| **Strings**          | Basics         | Template literals  | toLowerCase, includes  | localeCompare           |
+| **UI**               | Statisk layout | Dynamiske cards    | Filtre + søgning       | Dialog + tilgængelighed |
 
 ---
 

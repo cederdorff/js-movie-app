@@ -93,7 +93,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 - Recap: fetch, async/await, filter, includes
 - Spørgsmål: Hvad var sværest? Hvad var coolest?
-- Forhåndsblik på DAG 4: Søgning, modal og deployment!
+- Forhåndsblik på DAG 4: Søgning, dialog og deployment!
 - Hjemmearbejde: Ryd op i kode og forbered titel-søgning
 
 ## Materialer

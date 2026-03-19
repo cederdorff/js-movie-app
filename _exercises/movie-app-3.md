@@ -393,7 +393,7 @@ Til næste gang skal vi tilføje:
 
 - Søgefelt (find film ved titel)
 - Sortering (titel, år og rating)
-- Modal dialog (vis detaljer når man klikker)
+- Dialog (vis detaljer når man klikker)
 - Deploy til GitHub Pages (gør din app offentlig!)
 
 Hold det simpelt! Vi bygger videre på det du har nu.

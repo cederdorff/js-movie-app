@@ -6,7 +6,7 @@ På den sidste dag tilføjer vi:
 
 - **Søgefelt** (find film ved titel)
 - **Sortering** (titel, år og rating)
-- **Modal/detaljer** (vis mere info når man klikker)
+- **Dialog/detaljer** (vis mere info når man klikker)
 - **GitHub Pages** (gør din app offentlig)
 
 **Hold det enkelt!** Basis funktionalitet der virker.
@@ -112,23 +112,24 @@ Tilføj i `app.css`:
   padding: 0.38rem 0.45rem;
 }
 
-.rating-row {
+.movie-rating {
   margin-top: 0.52rem;
-  color: #e8f2fa;
+  color: #ffcf4d;
+  font-weight: 700;
 }
 
-#movie-modal {
+#movie-dialog {
   width: min(92vw, 920px);
   background: #454b53;
 }
 
-#modal-body {
+#dialog-content {
   display: grid;
   grid-template-columns: minmax(300px, 1fr) 2fr;
   gap: 2rem;
 }
 
-.modal-description {
+.dialog-description {
   padding: 1rem;
   border-left: 4px solid #69c8f0;
   font-style: italic;
@@ -146,9 +147,9 @@ const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads
 document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
-  document.querySelector("#search-input").addEventListener("input", applyFilters);
-  document.querySelector("#genre-select").addEventListener("change", applyFilters);
-  document.querySelector("#sort-select").addEventListener("change", applyFilters);
+  document.querySelector("#search-input").addEventListener("input", applyFiltersAndSort);
+  document.querySelector("#genre-select").addEventListener("change", applyFiltersAndSort);
+  document.querySelector("#sort-select").addEventListener("change", applyFiltersAndSort);
 
   getMovies();
 }
@@ -158,10 +159,10 @@ async function getMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  applyFilters();
+  applyFiltersAndSort();
 }
 
-function applyFilters() {
+function applyFiltersAndSort() {
   const searchTerm = document.querySelector("#search-input").value.trim().toLowerCase();
   const selectedGenre = document.querySelector("#genre-select").value;
   const sortOption = document.querySelector("#sort-select").value;
@@ -172,21 +173,15 @@ function applyFilters() {
     return matchesTitle && matchesGenre;
   });
 
-  filteredMovies = sortMovies(filteredMovies, sortOption);
-
-  showMovies(filteredMovies);
-}
-
-function sortMovies(movies, sortOption) {
   if (sortOption === "title") {
-    movies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
+    filteredMovies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
   } else if (sortOption === "year") {
-    movies.sort((movieA, movieB) => movieB.year - movieA.year);
+    filteredMovies.sort((movieA, movieB) => movieB.year - movieA.year);
   } else if (sortOption === "rating") {
-    movies.sort((movieA, movieB) => movieB.rating - movieA.rating);
+    filteredMovies.sort((movieA, movieB) => movieB.rating - movieA.rating);
   }
 
-  return movies;
+  showMovies(filteredMovies);
 }
 ```
 
@@ -226,7 +221,7 @@ const filteredMovies = allMovies.filter(function (movie) {
 
 ## Opgave 2: Klik På Film -> Vis Detaljer
 
-**Formål:** Når man klikker en film → vis mere info i en modal.
+**Formål:** Når man klikker en film → vis mere info i en dialog.
 
 ### 2.1: Cardvisning der matcher løsningen
 
@@ -246,36 +241,42 @@ function showMovies(movies) {
   }
 
   for (const movie of movies) {
-    const movieCard = `
-      <article class="movie-card" tabindex="0">
-        <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
-        <div class="movie-info">
-          <div class="title-row">
-            <h2>${movie.title}</h2>
-            <span class="year-badge">(${movie.year})</span>
-          </div>
-          <p class="genre">${movie.genre.join(", ")}</p>
-          <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
-          <p class="director-line"><strong>Director:</strong> ${movie.director}</p>
-        </div>
-      </article>
-    `;
-
-    movieList.insertAdjacentHTML("beforeend", movieCard);
-
-    const newCard = movieList.lastElementChild;
-    newCard.addEventListener("click", function () {
-      showDetails(movie);
-    });
+    showMovie(movie);
   }
+}
+
+function showMovie(movie) {
+  const movieList = document.querySelector("#movie-list");
+
+  const movieCard = `
+    <article class="movie-card" tabindex="0">
+      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <div class="movie-info">
+        <div class="title-row">
+          <h2>${movie.title}</h2>
+          <span class="year-badge">(${movie.year})</span>
+        </div>
+        <p class="genre">${movie.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p class="director-line"><strong>Instruktør:</strong> ${movie.director}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", movieCard);
+
+  const newCard = movieList.lastElementChild;
+  newCard.addEventListener("click", function () {
+    showMovieDialog(movie);
+  });
 }
 ```
 
-**Test det!** Du skal nu have cards med badge, genre, rating og director-linje.
+**Test det!** Du skal nu have cards med badge, genre, rating og instruktør-linje.
 
 ### 2.2: Bedre løsning med HTML dialog
 
-**Mere professionelt - brug en modal:**
+**Mere professionelt - brug en dialog:**
 
 #### Trin 1: Tilføj dialog i HTML
 
@@ -284,11 +285,11 @@ Tilføj EFTER `<main>`:
 ```html
 </main>
 
-<!-- Modal dialog -->
-<dialog id="movie-modal">
-  <form method="dialog" class="modal-content">
-    <button class="close-btn" value="close">Luk</button>
-    <div id="modal-body">
+<!-- Dialog -->
+<dialog id="movie-dialog">
+  <form method="dialog">
+    <button id="close-dialog" aria-label="Luk">✕</button>
+    <div id="dialog-content">
       <!-- Detaljer vises her -->
     </div>
   </form>
@@ -298,25 +299,25 @@ Tilføj EFTER `<main>`:
 #### Trin 2: Tilføj CSS
 
 ```css
-#movie-modal {
+#movie-dialog {
   border-radius: 16px;
   width: min(92vw, 920px);
   background: #454b53;
 }
 
-#modal-body {
+#dialog-content {
   display: grid;
   grid-template-columns: minmax(300px, 1fr) 2fr;
   gap: 2rem;
 }
 
-.modal-title-row {
+.dialog-details {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.modal-description {
+.dialog-description {
   padding: 1rem;
   border-left: 4px solid #69c8f0;
   font-style: italic;
@@ -327,31 +328,30 @@ Tilføj EFTER `<main>`:
 #### Trin 3: Opdatér JavaScript
 
 ```javascript
-function showDetails(movie) {
-  const modal = document.querySelector("#movie-modal");
-  const modalBody = document.querySelector("#modal-body");
+function showMovieDialog(movie) {
+  const dialog = document.querySelector("#movie-dialog");
+  const dialogContent = document.querySelector("#dialog-content");
 
-  modalBody.innerHTML = `
-    <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
-    <div class="modal-title-row">
-      <h2>${movie.title}</h2>
-      <span class="year-badge">(${movie.year})</span>
+  dialogContent.innerHTML = `
+    <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
+    <div class="dialog-details">
+      <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
+      <p class="movie-genre">${movie.genre.join(", ")}</p>
+      <p class="movie-rating">⭐ ${movie.rating}</p>
+      <p><strong>Instruktør:</strong> ${movie.director}</p>
+      <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
+      <p class="movie-description">${movie.description}</p>
     </div>
-    <p class="genre">${movie.genre.join(", ")}</p>
-    <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
-    <p><strong>Director:</strong> ${movie.director}</p>
-    <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
-    <p class="modal-description">${movie.description}</p>
   `;
 
-  modal.showModal();
+  dialog.showModal();
 }
 ```
 
 **Test det!**
 
-- Klik en film → se flot modal
-- Klik "Luk" eller tryk ESC -> luk modal
+- Klik en film → se flot dialog
+- Klik "Luk" eller tryk ESC -> luk dialog
 - Prøv forskellige film
 
 ---
@@ -367,7 +367,7 @@ function showDetails(movie) {
 1. Søgning fungerer
 2. Genre-filter fungerer
 3. Sortering fungerer
-4. Modal åbner og lukker
+4. Dialog åbner og lukker
 5. Ingen fejl i Console
 
 ### 3.2: Push til GitHub
@@ -381,7 +381,7 @@ git add .
 **Trin 2: Commit**
 
 ```bash
-git commit -m "Færdig movie app med søgning og modal"
+git commit -m "Færdig movie app med søgning og dialog"
 ```
 
 **Trin 3: Push**
@@ -414,7 +414,7 @@ URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 - Søgning virker?
 - Genre-filter virker?
 - Sortering virker?
-- Modal åbner?
+- Dialog åbner?
 
 **Hvis noget ikke virker:**
 
@@ -431,7 +431,7 @@ URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 Lad søgningen også finde film baseret på genre:
 
 ```javascript
-function applyFilters() {
+function applyFiltersAndSort() {
   let searchTerm = document.querySelector("#search-input").value.toLowerCase();
   let selectedGenre = document.querySelector("#genre-select").value;
 
@@ -454,7 +454,7 @@ Sortering er allerede en del af basisløsningen. Som ekstra træning kan du tilf
 - stigende/faldende retning
 - sekundær sortering (fx titel ved samme rating)
 
-Grundlogikken i `applyFilters()` er:
+Grundlogikken i `applyFiltersAndSort()` er:
 
 ```javascript
 if (sortOption === "title") {
@@ -466,11 +466,11 @@ if (sortOption === "title") {
 }
 ```
 
-### Udfordring 3: Luk modal med klik på backdrop (valgfri)
+### Udfordring 3: Luk dialog med klik på backdrop (valgfri)
 
 ```javascript
-document.querySelector("#movie-modal").addEventListener("click", function (event) {
-  if (event.target.id === "movie-modal") {
+document.querySelector("#movie-dialog").addEventListener("click", function (event) {
+  if (event.target.id === "movie-dialog") {
     this.close();
   }
 });
@@ -492,7 +492,7 @@ async function start() {
   // Skjul loading - vis film
   setupFilters();
   populateGenreSelect();
-  applyFilters();
+  applyFiltersAndSort();
 }
 ```
 
@@ -502,7 +502,7 @@ async function start() {
 
 - **Søgefunktion** med `.filter()` og `.includes()`
 - **Sortering** med `.sort()`
-- **Modal dialog** med `<dialog>` element
+- **Dialog** med `<dialog>` element
 - **showModal() / close()** API
 - **Event listeners** på dynamisk oprettede elementer
 - **GitHub Pages** deployment
@@ -518,7 +518,7 @@ async function start() {
 - Vise film med billeder
 - Filtrere på genre
 - Søge efter titel
-- Vise detaljer i modal
+- Vise detaljer i dialog
 - Sortere film efter titel, år og rating
 - Køre live på internettet!
 
@@ -548,18 +548,18 @@ allMovies.forEach((movie) => {
 });
 ```
 
-### Modal åbner ikke?
+### Dialog åbner ikke?
 
 ```javascript
-// Check om modal findes
-let modal = document.querySelector("#movie-modal");
-console.log("Modal element:", modal);
+// Check om dialog findes
+let dialog = document.querySelector("#movie-dialog");
+console.log("Dialog element:", dialog);
 
 // Check om showModal() er en funktion
-console.log("showModal() findes?", typeof modal.showModal);
+console.log("showModal() findes?", typeof dialog.showModal);
 
 // Prøv at åbne den manuelt
-modal.showModal();
+dialog.showModal();
 ```
 
 ### Click event virker ikke?
@@ -576,7 +576,7 @@ function showMovies(movies) {
 
     card.addEventListener("click", function () {
       console.log("Clicked!", movie.title);
-      showDetails(movie);
+      showMovieDialog(movie);
     });
   }
 }

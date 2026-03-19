@@ -17,7 +17,7 @@ Dagens formål er at introducere jer til de allermest grundlæggende elementer i
 - **DAG 1:** Klik-tæller og JavaScript fundamentals
 - **DAG 2:** Arrays, loops og hardcoded movie data
 - **DAG 3:** Fetch + simpel genre-filter
-- **DAG 4:** Titel-søgning + detail modal + sortering
+- **DAG 4:** Titel-søgning + detail dialog + sortering
 
 **Hvorfor starter vi med en klik-tæller i Movie App?**
 Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation - de samme koncepter vi bruger i morgen når vi tilføjer rigtig movie data. I dag bygger vi fundamentet!

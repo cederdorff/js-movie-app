@@ -1,8 +1,8 @@
-# RACE 4 - Søgning, Modal, Sortering & Deployment
+# RACE 4 - Søgning, Dialog, Sortering & Deployment
 
 ## Formål
 
-Formålet med dagens lektion er at færdiggøre jeres Movie App med titel-søgning, genre-filter, detail modal og deployment, så I kan dele den med venner og familie.
+Formålet med dagens lektion er at færdiggøre jeres Movie App med titel-søgning, genre-filter, detail dialog og deployment, så I kan dele den med venner og familie.
 
 **Mål:**
 
@@ -10,7 +10,7 @@ Formålet med dagens lektion er at færdiggøre jeres Movie App med titel-søgni
 - Kombinere titel-søgning og genre-filter
 - Oprette og style HTML `<dialog>` element
 - Bruge `showModal()` og `close()` API
-- Håndtere click events på dynamisk genereret indhold
+- Håndtere klik-events på dynamisk genereret indhold
 - Tilføje simpel sortering (titel, år, rating)
 - Deploye deres app til GitHub Pages
 - Fejre en færdig Movie App!
@@ -27,13 +27,13 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 
 - **Læs:**
   - [Dialog element på MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) (skim hvordan det virker)
-  - [GitHub Pages dokumentation](https://docs.github.com/en/pages/getting-started-with-github-pages) (quick overview)
+  - [GitHub Pages dokumentation](https://docs.github.com/en/pages/getting-started-with-github-pages) (kort overblik)
 
 ### På dagen:
 
 - Åbn dit movie-app projekt fra DAG 3
 - Tjek at alt virker før vi bygger videre
-- Developer Tools åben
+- DevTools åben
 - GitHub Desktop klar til deployment
 
 ## Agenda
@@ -43,7 +43,7 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 - Hvem har fungerende fetch og filter?
 - Vis og fortæl: Vis jeres genre-filtre
 - Quiz: fetch, filter, includes
-- Dagens mål: Søgning + Modal + Live på internettet!
+- Dagens mål: Søgning + Dialog + Live på internettet!
 - Motivation: "I dag bliver jeres app færdig og offentlig!"
 
 **9:30 - 10:30 | Søgefunktion + Genre (60 min)**
@@ -51,35 +51,39 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I en live website 
 - Hvorfor søgning? Brugere ved hvad de leder efter
 - Genre-filter fra DAG 3 videreføres
 - Input event trigger når der skrives
-- `.toLowerCase()` og `.includes()` for case-insensitive search
+- `.toLowerCase()` og `.includes()` for søgning uden forskel på store/små bogstaver
 - Kod med trin-for-trin:
-  - HTML: Search input field
-  - CSS: Styled search bar + controls
-  - JavaScript: Search + genre i samme filter-funktion
+  - HTML: Søgefelt
+  - CSS: Stylet søgefelt + kontroller
+  - JavaScript: Samlet flow i `applyFiltersAndSort()`
+  - JavaScript: Sortering direkte i samme flow-funktion
+  - JavaScript: `showMovies()` styrer listevisning og tom-tilstand
 - Praktisk øvelse: Implementer og test søgning
 - Håndter "Ingen resultater"
 
 **10:30 - 10:45 | Pause **
 
-**10:45 - 12:00 | Modal Dialog Implementation (75 min)**
+**10:45 - 12:00 | Dialog-implementering (75 min)**
 
-- Hvad er en modal? Popup vindue over siden
+- Hvad er en dialog? Popup vindue over siden
 - HTML `<dialog>` element vs `alert()`
-- API methods: `showModal()` og `close()`
+- API-metoder: `showModal()` og `close()`
 - Praktisk øvelse del 1: HTML struktur og CSS styling
-- Praktisk øvelse del 2: JavaScript click events og showDetails function
-- Close modal: indbygget Luk-knap (form method="dialog") og ESC
+- Praktisk øvelse del 2: JavaScript klik-events med `showMovie(movie)` og `showMovieDialog(movie)`
+- Ensret rating-visning i cards og dialog (`movie-rating`)
+- Luk dialog: indbygget Luk-knap (form method="dialog") og ESC
 
 **12:00 - 13:00 | Frokost **
 
 **13:00 - 13:30 | Finpudsning & Sidste Detaljer (30 min)**
 
-- Code quality check: Fjern unødvendige console.logs
-- Hold modal-koden enkel med indbygget luk-funktionalitet
-- Loading state mens data hentes
-- Tilføj sortering dropdown
-- Smooth animations og transitions
-- Final CSS polishing
+- Kodekvalitetstjek: Fjern unødvendige console.logs
+- Hold dialog-koden enkel med indbygget luk-funktionalitet
+- Tjek rød tråd i funktionerne: `applyFiltersAndSort()` → `showMovies()` → `showMovie()` → `showMovieDialog()`
+- Loading-state mens data hentes
+- Tilføj sortering i dropdown
+- Bløde animationer og transitions
+- Sidste CSS-finpudsning
 
 **13:30 - 14:30 | GitHub Pages Deployment (60 min)**
 

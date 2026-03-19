@@ -2,92 +2,92 @@
 
 Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studerende.
 
-## Kursus Struktur
+## Kursusstruktur
 
-### DAG 1: Click Counter Fundamentals
+### DAG 1: Klik-tæller og grundprincipper
 
-**Formål:** Lær absolute basics uden arrays eller objekter
+**Formål:** Lær de helt grundlæggende ting uden arrays eller objekter
 
-- Variables med const-first tilgang (brug let kun ved reassignment)
+- Variabler med const-first tilgang (brug let kun ved reassignment)
 - querySelector til at finde elementer
 - addEventListener til at reagere på klik
-- Byg en simpel click counter
+- Byg en simpel klik-tæller
 
 **Eksempel:** Se `_exercises/examples/dag1/app.js`
 
 ---
 
-### DAG 2: Arrays, Loops & Objects
+### DAG 2: Arrays, Loops & Objekter
 
-**Formål:** Introducer data strukturer med hardcoded data
+**Formål:** Introducer datastrukturer med forhåndsdefineret data
 
 - Arrays med strings
 - for...of loops
-- Objects introduction
-- Array af objects (hardcoded film data)
-- Template literals til HTML generation
-- **Bonus:** fetch introduction (valgfri)
+- Introduktion til objekter
+- Array af objekter (forhåndsdefineret filmdata)
+- Template literals til HTML-generering
+- **Bonus:** Introduktion til fetch (valgfri)
 
 **Eksempel:** Se `_exercises/examples/dag2/app.js`
 
 ---
 
-### DAG 3: Fetch, JSON & Simpel Filter
+### DAG 3: Fetch, JSON & Simpelt Filter
 
-**Formål:** Hent rigtig data og tilføj ÉN filter
+**Formål:** Hent rigtig data og tilføj ÉT filter
 
 - fetch() fra ekstern URL
-- async/await pattern
+- async/await mønster
 - JSON konvertering
-- Array.filter() basics
+- Array.filter() grundlæggende
 - .includes() til at checke arrays
-- ÉN genre filter-knap (ikke kombineret)
+- ÉN genre-filter-knap (ikke kombineret)
 
 **Eksempel:** Se `_exercises/examples/dag3/app.js`
 
 ---
 
-### DAG 4: Søgning, Genre, Sortering & Deployment
+### DAG 4: Søgning, Genre, Sortering & Udgivelse
 
-**Formål:** Komplet app med fetch, title-søgning, genre-filter, sortering og modal
+**Formål:** Komplet app med fetch, titel-søgning, genre-filter, sortering og dialog
 
-- Søgefelt med input event
+- Søgefelt med input-event
 - Simpel genre-filtrering
 - Kombineret søgning + genre
 - Simpel sortering (titel, år, rating)
-- Modal med film-detaljer
-- GitHub Pages deployment
+- Dialog med film-detaljer
+- Udgivelse med GitHub Pages
 
 **Eksempel:** Se `_exercises/examples/dag4/app.js`
 
 ---
 
-## Simplifications fra Original
+## Simplificeringer fra originalen
 
 **Hvad er blevet enklere:**
 
 - Ingen kombinerede filtre (kun én ad gangen)
-- Ingen range filters (år/rating sliders)
+- Ingen range-filtre (år/rating-sliders)
 - Sortering er med som simpel basisfunktion i DAG 4
-- Ingen favorites funktion
-- Ingen avanceret modal navigation
+- Ingen favorit-funktion
+- Ingen avanceret dialog-navigation
 
 **Hvorfor simplificeret?**
 
-- Fokus på fundamentals først
+- Fokus på grundprincipper først
 - Ét koncept ad gangen
 - Mindre frustrerende for begyndere
-- Mere tid til at øve basics
+- Mere tid til at øve grundprincipper
 
 ---
 
-## Projekt Struktur
+## Projektstruktur
 
 ```
 js-movie-app/
-├── index.html              # Root demo (slutapp)
-├── app.js                  # Fetch + title-søgning + genre-filter + simpel sortering
-├── app.css                 # Root styling til slutapp
+├── index.html              # Root-demo (slutapp)
+├── app.js                  # Fetch + titel-søgning + genre-filter + simpel sortering
+├── app.css                 # Root-styling til slutapp
 ├── _exercises/
 │   ├── movie-app-1.md
 │   ├── movie-app-2.md
@@ -110,7 +110,7 @@ js-movie-app/
 
 ---
 
-## Quick Start
+## Kom i gang
 
 ### For Studerende:
 
@@ -142,7 +142,7 @@ Projektet er ren HTML/CSS/JS (ingen `package.json`):
 
 ### For Undervisere:
 
-**Clone repo:**
+**Klon repo:**
 
 ```bash
 git clone https://github.com/cederdorff/js-movie-app.git
@@ -158,47 +158,47 @@ cd js-movie-app
 
 ---
 
-## Undervisnings Tips
+## Undervisningstips
 
 1. **Vis console.log meget!** Gør det synligt hvad der sker
 2. **Start fra ingenting** - lad dem skrive hver linje
 3. **Test efter hver ændring** - hvis noget virker, byg videre
-4. **Brug debugging sections** - i hver exercise fil
+4. **Brug debugging-sektioner** - i hver opgavefil
 5. **Hold det simpelt** - modstå fristelsen til at tilføje mere
 
 ---
 
-## App funktioner efter dag
+## App-funktioner efter dag
 
-| Feature   | DAG 1-2                     | DAG 3-4                  |
-| --------- | --------------------------- | ------------------------ |
-| **DAG 1** | Click counter               | Counter basics           |
-| **DAG 2** | Arrays & loops              | Liste med hardcoded data |
-| **DAG 3** | Fetch & genre filter        | ÉN filter knap           |
-| **DAG 4** | Søgning + sortering + modal | Komplet app              |
-| **Fokus** | Grundlæggende JavaScript    | API + DOM manipulation   |
+| Funktion  | DAG 1-2                      | DAG 3-4                          |
+| --------- | ---------------------------- | -------------------------------- |
+| **DAG 1** | Klik-tæller                  | Grundprincipper                  |
+| **DAG 2** | Arrays & loops               | Liste med forhåndsdefineret data |
+| **DAG 3** | Fetch & genre-filter         | ÉN filter-knap                   |
+| **DAG 4** | Søgning + sortering + dialog | Komplet app                      |
+| **Fokus** | Grundlæggende JavaScript     | API + DOM-manipulation           |
 
 ---
 
-## Live Demo
+## Live-demo
 
-Deploy til GitHub Pages for at vise resultatet:
+Udgiv til GitHub Pages for at vise resultatet:
 
 **URL format:** `https://[username].github.io/js-movie-app/`
 
-Se DAG 4 guide for deployment instruktioner.
+Se DAG 4-guiden for udgivelsesinstruktioner.
 
 ---
 
 ## Bidrag
 
-Forslag til forbedringer? Åbn en issue eller pull request!
+Forslag til forbedringer? Åbn en issue eller pull request.
 
 ---
 
 ## Licens
 
-MIT License - brug frit til undervisning
+MIT-licens - brug frit til undervisning
 
 ---
 
@@ -206,6 +206,6 @@ MIT License - brug frit til undervisning
 
 **Multimediedesign studerende på EASJ**  
 4-dages JavaScript introduktion  
-Fokus: Fundamentals først, kompleksitet senere
+Fokus: Grundprincipper først, kompleksitet senere
 
 **Feedback?** Skriv til race@eaaa.dk

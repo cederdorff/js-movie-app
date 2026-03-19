@@ -22,7 +22,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
 - **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
 - **DAG 3:** Fetch + simpel genre-filter
-- **DAG 4:** Titel-søgning + modal + sortering + deployment
+- **DAG 4:** Titel-søgning + dialog + sortering + deployment
 
 ## Forberedelse
 

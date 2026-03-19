@@ -18,7 +18,7 @@ I dag skal du lære at arbejde med **flere ting på én gang** - lister af data!
 - **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
 - **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
 - **DAG 3:** Fetch rigtig data + filter
-- **DAG 4:** Søgning + modal + deployment
+- **DAG 4:** Søgning + dialog + deployment
 
 ---
 

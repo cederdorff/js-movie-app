@@ -6,18 +6,18 @@ const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads
 let allMovies = [];
 
 function initApp() {
-  document.querySelector("#search-input").addEventListener("input", applyFilters);
-  document.querySelector("#genre-select").addEventListener("change", applyFilters);
-  document.querySelector("#sort-select").addEventListener("change", applyFilters);
+  document.querySelector("#search-input").addEventListener("input", applyFiltersAndSort);
+  document.querySelector("#genre-select").addEventListener("change", applyFiltersAndSort);
+  document.querySelector("#sort-select").addEventListener("change", applyFiltersAndSort);
 
   getMovies();
 }
 
 async function getMovies() {
-  const response = await fetch(MOVIES_URL);
-  allMovies = await response.json();
-  populateGenreSelect();
-  applyFilters();
+  const response = await fetch(MOVIES_URL); // Hent data fra URL'en
+  allMovies = await response.json(); // Konverter data til JavaScript array og gem i allMovies variablen
+  populateGenreSelect(); // Udfyld genre dropdown baseret på de hentede film
+  applyFiltersAndSort(); // Anvend filtre og sortering for at vise filmene
 }
 
 function populateGenreSelect() {
@@ -38,31 +38,28 @@ function populateGenreSelect() {
   }
 }
 
-function applyFilters() {
+function applyFiltersAndSort() {
   const searchValue = document.querySelector("#search-input").value.trim().toLowerCase(); // Hent søgeinput, fjern whitespace og konverter til lowercase
   const selectedGenre = document.querySelector("#genre-select").value; // Hent den valgte genre fra select elementet
   const sortOption = document.querySelector("#sort-select").value; // Hent den valgte sorteringsmulighed
 
+  // Filtrer film baseret på søgeinput og valgt genre
   let filteredMovies = allMovies.filter(function (movie) {
     const matchesTitle = movie.title.toLowerCase().includes(searchValue);
     const matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
     return matchesTitle && matchesGenre;
   });
 
-  filteredMovies = sortMovies(filteredMovies, sortOption);
-  showMovies(filteredMovies);
-}
-
-function sortMovies(movies, sortOption) {
+  // Sorter de filtrerede film baseret på den valgte sorteringsmulighed
   if (sortOption === "title") {
-    movies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
+    filteredMovies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
   } else if (sortOption === "year") {
-    movies.sort((movieA, movieB) => movieB.year - movieA.year);
+    filteredMovies.sort((movieA, movieB) => movieB.year - movieA.year);
   } else if (sortOption === "rating") {
-    movies.sort((movieA, movieB) => movieB.rating - movieA.rating);
+    filteredMovies.sort((movieA, movieB) => movieB.rating - movieA.rating);
   }
 
-  return movies;
+  showMovies(filteredMovies);
 }
 
 function showMovies(movies) {
@@ -73,12 +70,17 @@ function showMovies(movies) {
   movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   if (movies.length === 0) {
-    movieList.innerHTML = '<p class="empty">Ingen film matcher din sogning eller genre.</p>';
+    movieList.innerHTML = '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
     return;
   }
 
   for (const movie of movies) {
-    const movieCard = /*html*/ `
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const movieCard = /*html*/ `
       <article class="movie-card" tabindex="0">
         <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
         <div class="movie-info">
@@ -87,37 +89,37 @@ function showMovies(movies) {
             <span class="year-badge">(${movie.year})</span>
           </div>
           <p class="genre">${movie.genre.join(", ")}</p>
-          <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
-          <p class="director-line"><strong>Director:</strong> ${movie.director}</p>
+          <p class="movie-rating">⭐ ${movie.rating}</p>
+          <p class="director-line"><strong>Instruktør:</strong> ${movie.director}</p>
         </div>
       </article>
     `;
 
-    movieList.insertAdjacentHTML("beforeend", movieCard);
+  const movieList = document.querySelector("#movie-list");
+  movieList.insertAdjacentHTML("beforeend", movieCard);
 
-    const newCard = movieList.lastElementChild;
-    newCard.addEventListener("click", function () {
-      showDetails(movie);
-    });
-  }
+  const newCard = movieList.lastElementChild;
+  newCard.addEventListener("click", function () {
+    showMovieDialog(movie);
+  });
 }
 
-function showDetails(movie) {
-  const modal = document.querySelector("#movie-modal");
-  const modalBody = document.querySelector("#modal-body");
+function showMovieDialog(movie) {
+  const dialog = document.querySelector("#movie-dialog");
+  const dialogContent = document.querySelector("#dialog-content");
 
-  modalBody.innerHTML = /*html*/ `
-    <img src="${movie.image}" alt="Poster af ${movie.title}" class="modal-poster" />
-    <div class="modal-title-row">
-      <h2>${movie.title}</h2>
-      <span class="year-badge">(${movie.year})</span>
+  dialogContent.innerHTML = /*html*/ `
+    <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
+    <div class="dialog-details">
+      <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
+      <p class="movie-genre">${movie.genre.join(", ")}</p>
+      <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p><strong>Instruktør:</strong> ${movie.director}</p>
+        <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
+      <p class="movie-description">${movie.description}</p>
     </div>
-    <p class="genre">${movie.genre.join(", ")}</p>
-    <p class="rating-row"><span class="rating-star">★</span> <strong>${movie.rating}</strong></p>
-    <p><strong>Director:</strong> ${movie.director}</p>
-    <p><strong>Actors:</strong> ${movie.actors.join(", ")}</p>
-    <p class="modal-description">${movie.description}</p>
   `;
 
-  modal.showModal();
+  // Åbn dialogen - showModal() er en built-in browser funktion
+  dialog.showModal();
 }

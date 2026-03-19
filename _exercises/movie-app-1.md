@@ -22,7 +22,7 @@ I dag starter vi jeres Movie App projekt og lærer det mest basale JavaScript!
 - **DAG 1:** Setup + Klik-tæller (lær basics)
 - **DAG 2:** Arrays, loops, hardcoded movie data
 - **DAG 3:** Fetch rigtig data + filter
-- **DAG 4:** Søgning + modal + deployment
+- **DAG 4:** Søgning + dialog + deployment
 
 ---
 
