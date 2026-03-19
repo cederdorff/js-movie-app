@@ -1,4 +1,4 @@
-# DAG 4 - Søgning, Genre, Sortering, Detaljer & Deployment
+# DAG 4 - Søgning, Genre, Sortering, Detaljer & Udgivelse
 
 ## Formål
 
@@ -358,17 +358,17 @@ function showMovieDialog(movie) {
 
 ## Opgave 3: Deploy Til GitHub Pages
 
-**Formål:** Gør din app tilgængelig på internettet!
+**Formål:** Gør din app tilgængelig på internettet.
 
 ### 3.1: Forbered dit projekt
 
-**Check at alt virker:**
+**Tjek at alt virker:**
 
 1. Søgning fungerer
 2. Genre-filter fungerer
 3. Sortering fungerer
 4. Dialog åbner og lukker
-5. Ingen fejl i Console
+5. Ingen fejl i konsollen
 
 ### 3.2: Push til GitHub
 
@@ -390,7 +390,7 @@ git commit -m "Færdig movie app med søgning og dialog"
 git push origin main
 ```
 
-### 3.3: Aktiver GitHub Pages
+### 3.3: Aktivér GitHub Pages
 
 1. Gå til dit repo på GitHub.com
 2. Klik **Settings** (øverst)
@@ -402,13 +402,13 @@ git push origin main
 
 5. Klik **Save**
 
-**Vent 1-2 minutter** → Din side er live!
+**Vent 1-2 minutter** → Din side er live.
 
 URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 
-### 3.4: Test din live site
+### 3.4: Test dit live-site
 
-Åbn URL'en i en ny tab og test:
+Åbn URL'en i en ny fane og test:
 
 - Loader film?
 - Søgning virker?
@@ -418,9 +418,9 @@ URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
 
 **Hvis noget ikke virker:**
 
-- Check Console for fejl (F12)
-- Check at alle filer er pushed
-- Prøv hard refresh (Cmd+Shift+R / Ctrl+Shift+R)
+- Tjek konsollen for fejl (F12)
+- Tjek at alle filer er pushet
+- Prøv hård genindlæsning (Cmd+Shift+R / Ctrl+Shift+R)
 
 ---
 
@@ -476,7 +476,7 @@ document.querySelector("#movie-dialog").addEventListener("click", function (even
 });
 ```
 
-### Udfordring 4: Tilføj loading state
+### Udfordring 4: Tilføj indlæsnings-tilstand
 
 Vis "Loading..." mens data hentes:
 
@@ -533,12 +533,12 @@ Men det er for avanceret lige nu. **Hold det simpelt!**
 
 ---
 
-## Debugging Tips
+## Fejlfindingstips
 
 ### Søgning virker ikke?
 
 ```javascript
-// Test i Console:
+// Test i konsollen:
 let searchTerm = "matrix";
 console.log("Søger:", searchTerm);
 
@@ -551,18 +551,18 @@ allMovies.forEach((movie) => {
 ### Dialog åbner ikke?
 
 ```javascript
-// Check om dialog findes
+// Tjek om dialog findes
 let dialog = document.querySelector("#movie-dialog");
 console.log("Dialog element:", dialog);
 
-// Check om showModal() er en funktion
+// Tjek om showModal() er en funktion
 console.log("showModal() findes?", typeof dialog.showModal);
 
 // Prøv at åbne den manuelt
 dialog.showModal();
 ```
 
-### Click event virker ikke?
+### Klik-event virker ikke?
 
 ```javascript
 function showMovies(movies) {
@@ -584,11 +584,11 @@ function showMovies(movies) {
 
 ### GitHub Pages viser ikke siden?
 
-1. **Check branch**: Er "main" valgt?
-2. **Check URL**: Korrekt `username.github.io/repo-name`?
-3. **Wait**: Tag en kop kaffe - det kan tage 5 min første gang
-4. **Check Console**: Fejl? CORS issues? (normalt ikke med GitHub Pages)
-5. **Hard refresh**: Cmd+Shift+R / Ctrl+Shift+R
+1. **Tjek branch**: Er "main" valgt?
+2. **Tjek URL**: Korrekt `username.github.io/repo-name`?
+3. **Vent**: Tag en kop kaffe - det kan tage 5 min første gang
+4. **Tjek konsollen**: Fejl? CORS-problemer? (normalt ikke med GitHub Pages)
+5. **Hård genindlæsning**: Cmd+Shift+R / Ctrl+Shift+R
 
 ---
 
@@ -603,7 +603,7 @@ Du kan nu:
 - Hente data fra API'er
 - Filtrere og søge i data
 - Bygge interaktive web apps
-- Deploye til internettet
+- Udgive på internettet
 
 **Del din app!** Send linket til venner og familie
 

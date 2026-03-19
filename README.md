@@ -1,6 +1,6 @@
 # JavaScript Movie App
 
-Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studerende.
+Et 4-dages JavaScript-kursus for begyndere - bygget til multimediedesignstuderende.
 
 ## Kursusstruktur
 
@@ -21,7 +21,7 @@ Et 4-dages JavaScript kursus for begyndere - bygget til multimediedesign studere
 
 **Formål:** Introducer datastrukturer med forhåndsdefineret data
 
-- Arrays med strings
+- Arrays med strenge
 - for...of loops
 - Introduktion til objekter
 - Array af objekter (forhåndsdefineret filmdata)
@@ -184,7 +184,7 @@ cd js-movie-app
 
 Udgiv til GitHub Pages for at vise resultatet:
 
-**URL format:** `https://[username].github.io/js-movie-app/`
+**URL-format:** `https://[username].github.io/js-movie-app/`
 
 Se DAG 4-guiden for udgivelsesinstruktioner.
 
@@ -192,7 +192,7 @@ Se DAG 4-guiden for udgivelsesinstruktioner.
 
 ## Bidrag
 
-Forslag til forbedringer? Åbn en issue eller pull request.
+Forslag til forbedringer? Åbn en issue eller en pull request.
 
 ---
 
