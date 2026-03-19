@@ -173,6 +173,37 @@ I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du 
 - Står der "DAG 2: Arrays, Loops & Film-lister"?
 - Siden er tom under headeren - det er ok! Vi tilføjer indhold nu.
 
+### Trin 6: Indsæt 3 hardcoded film-kort i HTML (bro-øvelse)
+
+Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**. Så bliver det tydeligt, hvorfor arrays + loops er smart.
+
+**Indsæt midlertidigt dette i `index.html` inde i `#movie-list`:**
+
+```html
+<div id="movie-list">
+  <div class="movie-card">
+    <h3>Inception</h3>
+    <p>År: 2010</p>
+  </div>
+  <div class="movie-card">
+    <h3>The Matrix</h3>
+    <p>År: 1999</p>
+  </div>
+  <div class="movie-card">
+    <h3>Interstellar</h3>
+    <p>År: 2014</p>
+  </div>
+</div>
+```
+
+**Reflektér kort:**
+
+- Hvordan ville det se ud med 20 film?
+- Hvad hvis titlen eller årstal skal ændres mange steder?
+- Hvor meget kopi-arbejde bliver der?
+
+Når du har set det i browseren, går vi videre til Opgave 1, hvor vi genererer kortene med JavaScript i stedet.
+
 ---
 
 ## Opgave 1: Hvad er et Array?

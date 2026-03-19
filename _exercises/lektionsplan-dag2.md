@@ -56,6 +56,8 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Åbn dit `movie-app` projekt fra DAG 1
 - Opdater HTML struktur: Fra counter-box til movie-list
 - Opdater CSS: Fra counter styling til movie card grid
+- Indsæt 2-3 hardcoded film-kort i HTML som bro-øvelse
+- Kort refleksion: "Hvorfor bliver dette tungt i hånden?"
 - Ryd op i app.js - vi starter frisk med ny kode
 - Kod med, så alle er synkroniseret
 
