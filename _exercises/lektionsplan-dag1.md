@@ -65,7 +65,6 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 
 - Åbn dit `movie-app` projekt i VS Code og vær klar til at kode videre i `index.html`, `app.js` og `app.css`
 - Åbn Developer Tools i din browser (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
-- Ha' din GitHub Desktop app klar
 
 ## Agenda
 
@@ -76,7 +75,7 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 - Projekt setup: Opret `movie-app` mappe med `index.html`, `app.js`, `app.css`
 - Test Live Server extension
 
-**Variables & Console**
+**Variables, Datatyper & Console**
 
 - Hvad er en variable? (`const` og `let`)
 - const-first princip i praksis
@@ -99,13 +98,6 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 - Tilføj reset-knap funktionalitet
 - Test og debug sammen
 
-**Klik-tæller Udfordringer**
-
-- Udbyg din counter med flere features
-- Ændr styling baseret på count
-- Eksperimenter med forskellige button funktioner
-- Hjælp hinanden (pair programming)
-
 **Fejlfinding & Problemløsning**
 
 - Typiske fejl og hvordan man finder dem
@@ -113,7 +105,7 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 - Fix bugs i hinandens kode
 - Eksperimentér med nye features
 
-**Afrunding & Forhåndsblik**
+**Afrunding**
 
 - Recap: Hvad har vi lært?
 - **Forhåndsblik på DAG 2:** I morgen tilføjer vi arrays, loops og rigtig movie data til samme projekt!
