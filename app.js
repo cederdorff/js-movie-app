@@ -66,7 +66,7 @@ function showMovies(movies) {
   const movieList = document.querySelector("#movie-list");
   const movieCount = document.querySelector("#movie-count");
 
-  movieList.innerHTML = "";
+  movieList.innerHTML = ""; // Nulstil film listen før vi tilføjer de filtrerede og sorterede film
   movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   if (movies.length === 0) {
