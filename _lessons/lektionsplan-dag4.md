@@ -114,7 +114,7 @@ I dag bliver jeres app færdig og offentlig. Om få timer har I et live websted 
 
 **Opgaver:**
 
-- [Movie App - DAG 4](movie-app-4.md)
+- [Movie App - DAG 4](../_exercises/movie-app-4.md)
 - [Deploy dit website til GitHub Pages](https://www.notion.so/Deploy-dit-website-til-GitHub-Pages-2cba6f1413dc474883b58fdd4eba57bb?pvs=21)
 
 **Eksempel kode:**

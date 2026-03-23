@@ -106,7 +106,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 **Opgaver:**
 
-- [Movie App - DAG 3](movie-app-3.md)
+- [Movie App - DAG 3](../_exercises/movie-app-3.md)
 
 **Eksempel kode:**
 

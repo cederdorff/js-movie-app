@@ -114,12 +114,8 @@ Hvis man **ikke** har gennemført "Opret et nyt projekt med GitHub Desktop", så
 
 **Opgaver:**
 
-- [Movie App - DAG 1](movie-app-1.md) - 6 opgaver fra setup til klikt-tæller og udfordringer
+- [Movie App - DAG 1](../_exercises/movie-app-1.md) - 6 opgaver fra setup til klikt-tæller og udfordringer
 - [Hello JavaScript](https://www.notion.so/Hello-JavaScript-6ca283a288bd4fafbcea2a11b2c9806e?pvs=21) (ekstra øvelse)
-
-**Eksempel kode:**
-
-- Komplet DAG 1 løsning: `_solutions/dag1/app.js` (matcher Opgave 5 struktur)
 
 **Links:**
 

@@ -119,7 +119,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 **Opgaver:**
 
-- [Movie App - DAG 2](movie-app-2.md)
+- [Movie App - DAG 2](../_exercises/movie-app-2.md)
 - [DOM Manipulation - Simple To Do List](https://www.notion.so/DOM-Manipulation-Simple-To-Do-List-adb24737446a4a72aa829ada27440e0f?pvs=21) (ekstra)
 
 **Eksempel kode:**
