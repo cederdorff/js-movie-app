@@ -71,10 +71,29 @@ main {
   padding: 2rem;
 }
 
-#movie-list {
+.movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2.2rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+@media (min-width: 600px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1400px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .movie-card {

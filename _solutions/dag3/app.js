@@ -83,10 +83,12 @@ function showMovie(movie) {
   const html = `
     <article class="movie-card">
       <img src="${movie.image}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-      <p>År: ${movie.year}</p>
-      <p>Rating: ${movie.rating}</p>
-      <p class="genre">${movie.genre.join(", ")}</p>
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
+      </div>
     </article>
   `;
 

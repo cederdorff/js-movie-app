@@ -124,10 +124,12 @@ function showMovie(movie) {
 
   const html = `
     <article class="movie-card">
-      <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px; margin-bottom: 0.5rem;">
-      <h3>${movie.title}</h3>
-      <p>År: ${movie.year}</p>
-      <p>Rating: ${movie.rating}</p>
+      <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+      </div>
     </article>
   `;
 
