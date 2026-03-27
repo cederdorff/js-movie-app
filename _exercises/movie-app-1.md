@@ -28,7 +28,7 @@ I dag begynder vi Movie App projektet og lærer det mest basale JavaScript!
 
 ## Opgave 0: Movie App Projekt Setup
 
-### Trin 1: Opret Movie App projektet
+### 0.1: Opret Movie App projektet
 
 Hvis du allerede har gjort det, kan du gå til trin 2.
 
@@ -39,7 +39,7 @@ Hvis du allerede har gjort det, kan du gå til trin 2.
    - `app.js`
    - `app.css`
 
-### Trin 2: Movie App HTML struktur
+### 0.2: Movie App HTML struktur
 
 **Note:** Det er helt ok, hvis du ikke forstår alt i HTML/CSS endnu. I dette forløb er hovedfokus JavaScript, og vi bruger HTML/CSS som en ramme at arbejde i. Men prøv så vidt muligt at danne dig et overblik over hvilke HTML-elementer, der er.
 
@@ -77,7 +77,7 @@ Kopier dette ind i `index.html`:
 </html>
 ```
 
-### Trin 3: Movie App CSS styling
+### 0.3: Movie App CSS styling
 
 **Vigtigt:** Du behøver ikke forstå al CSS-koden i dag. Kopier den som den er, så vi har et godt visuelt udgangspunkt, mens vi fokuserer på JavaScript.
 
@@ -188,7 +188,7 @@ button:active {
 }
 ```
 
-### Trin 4: Test din Movie App setup
+### 0.4: Test din Movie App setup
 
 1. **Gem alle filer** (Windows/PC: Ctrl+S, Mac: Cmd+S)
 2. **Start Live Server:**
@@ -206,14 +206,6 @@ button:active {
 **Hvorfor hedder det "Movie App"?**
 
 I morgen (DAG 2) udvider vi dette projekt med rigtige film data. I dag lærer vi bare JavaScript basics med en simpel counter!
-
----
-
-### Trin 5: Start Live Server (hvis ikke allerede åben)
-
-1. Gem alle filer
-2. Højreklik på `index.html` → "Open with Live Server"
-3. Åbn Developer Tools (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I) og hold Console-fanen åben!
 
 ---
 
