@@ -19,8 +19,7 @@ Dagens formål er at introducere jer til grundlæggende elementer i JavaScript p
 - **DAG 3:** Fetch + simpel genre-filter
 - **DAG 4:** Titel-søgning + detail dialog + sortering
 
-**Hvorfor starter vi med en klik-tæller i Movie App?**
-Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation - de samme koncepter vi bruger i morgen når vi tilføjer rigtig movie data. I dag bygger vi fundamentet!
+Vi starter med en klik-tæller fordi det er den korteste vej ind i variable, DOM og events — de samme koncepter vi bygger videre på resten af forløbet.
 
 ## Forberedelse
 
