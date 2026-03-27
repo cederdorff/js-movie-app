@@ -34,85 +34,60 @@ Du skal have et `movie-app` projekt med:
 
 **Har du ikke projektet færdigt fra DAG 1?**
 
-1. Gå tilbage til [DAG 1 opgaven](movie-app-1.md) og færdiggør Opgave 0
-2. Eller hent eksempel-filerne:
-   - `_solutions/dag1/index.html`
-   - `_solutions/dag1/app.js`
-   - `_solutions/dag1/style.css`
+Gå tilbage til [DAG 1 opgaven](movie-app-1.md) og færdiggør Opgave 0 først.
+
+**Commit dit udgangspunkt:**
+
+Inden du begynder at ændre noget, lav en commit i GitHub Desktop:
+
+1. Åbn GitHub Desktop
+2. Skriv en besked, f.eks. `DAG 2 start - klik-tæller fra DAG 1`
+3. Klik **Commit to main**
+4. Klik **Fetch origin** (eller **Push origin**) for at synkronisere med GitHub
+
+Nu har du et sikkert udgangspunkt du kan vende tilbage til!
 
 ### 0.2: Opdater HTML til DAG 2 struktur
 
 Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
 
-**Åbn `index.html` og erstat `<main>` sektionen:**
+**Åbn `index.html` og lav disse to ændringer:**
+
+1. **Opdater `<title>`** til `Movie App - DAG 2`
+
+2. **Erstat `<p>` i `<header>`** med teksten `DAG 2: Arrays, Loops & Film-lister`
+
+3. **Erstat alt indhold i `<main>`** med en tom section til film:
 
 ```html
-<!DOCTYPE html>
-<html lang="da">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie App - DAG 2</title>
-    <link rel="stylesheet" href="app.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Movie App</h1>
-      <p>DAG 2: Arrays, Loops & Film-lister</p>
-    </header>
-
-    <main>
-      <section id="movie-list" class="movie-grid" aria-label="Filmliste">
-        <!-- Film vises her med JavaScript -->
-      </section>
-    </main>
-
-    <script src="app.js"></script>
-  </body>
-</html>
+<section id="movie-list" class="movie-grid" aria-label="Filmliste">
+  <!-- Film vises her med JavaScript -->
+</section>
 ```
+
+Klik-tæller knappen og counter-boxen forsvinder — det er meningen!
 
 ### 0.3: Opdater CSS til film-liste styling
 
-**Åbn `app.css` og erstat hele indholdet med:**
+**Åbn `app.css` og lav disse ændringer:**
+
+**1. Slet al counter-CSS** — find og slet blokkene for `.counter-container`, `.info`, `#counter`, `button` og `button:hover`. Vi bruger dem ikke mere.
+
+**2. Erstat `main`-blokken** med en version der passer til et grid-layout:
 
 ```css
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: white;
-}
-
-header {
-  text-align: center;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-header h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
+```
 
+**3. Tilføj disse nye klasser** for film-grid og film-kort nederst i filen:
+
+> **CSS Grid** lader dig arrangere elementer i rækker og kolonner. `grid-template-columns: 1fr 1fr` betyder to kolonner der deler pladsen ligeligt. Med `@media` skifter vi layout afhængigt af skærmbredde — det kalder man responsivt design.
+
+```css
 .movie-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -179,7 +154,7 @@ console.log("Movie App - DAG 2 starter...");
 
 **Hvorfor sletter vi DAG 1 koden?**
 
-I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du altid finde i `_solutions/dag1/app.js` hvis du vil se den igen!
+I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden har du commitet i GitHub i 0.1, så du kan altid gå tilbage og finde den igen!
 
 ### 0.5: Test din Movie App struktur
 
@@ -193,7 +168,18 @@ I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du 
 
 ### 0.6: Indsæt 3 hardcoded film-kort i HTML (bro-øvelse)
 
-Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**. Så bliver det tydeligt, hvorfor arrays + loops er smart.
+Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**.
+
+Det kalder man **hardcoded indhold**: du skriver hvert film-kort direkte i koden, ét ad gangen.
+
+Det er vigtigt at prøve først, fordi du så kan mærke problemet med hænderne:
+
+- Det virker fint med 3 film
+- Det bliver hurtigt tungt med 10 eller 20 film
+- Du skal kopiere den samme struktur igen og igen
+- Små ændringer skal laves mange steder
+
+Det er præcis derfor vi bagefter bruger **arrays + loops + JavaScript**: så computeren kan lave det gentagne arbejde for os.
 
 **Indsæt midlertidigt dette i `index.html` inde i `#movie-list`:**
 
@@ -226,7 +212,7 @@ Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**. Så blive
 - Hvad hvis titlen eller årstal skal ændres mange steder?
 - Hvor meget kopi-arbejde bliver der?
 
-Når du har set det i browseren, går vi videre til Opgave 1, hvor vi genererer kortene med JavaScript i stedet.
+Når du har set det i browseren, går vi videre til Opgave 1, hvor vi genererer Movie Cards med JavaScript i stedet.
 
 ---
 
