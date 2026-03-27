@@ -34,56 +34,58 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
   - Navngiv dit projekt `movie-app`
   - Du skal have gennemgået Setup Tools først
 
-- **Læs hele afsnittet om [JavaScript Basics](https://thevalleyofcode.com/lesson/js-basics/)** (meget korte artikler)
-  - The fundamentals of JavaScript
-  - 0: Introduction
-  - 1: Literals, identifiers and variables
-  - 2: Comments
-  - 3: The difference between let, const and var
-  - 4: Types
-  - 5: Operators and expressions
-  - 6: Let's start with arithmetic operators
-  - 7: The assignment operator
-  - 8: Operator precedence
-  - 9: Strings
-  - 10: Numbers
-  - 11: Semicolons, white space and sensitivity
+- **Læs [JavaScript Basics](https://thevalleyofcode.com/lesson/js-basics/)** — afsnit 0–11 (meget korte artikler om variabler, typer, operators og strings)
 
 ## Agenda
 
-**1. Introduktion og Movie App setup**
+<details>
+<summary><strong>1. Introduktion og Movie App setup</strong></summary>
 
 - Hvem er RACE? Hvad bygger vi på 4 dage?
 - Projekt setup: `movie-app` med `index.html`, `app.js`, `app.css`
 - Brug semantiske tags fra start: `header`, `main`, `section`
 - Test Live Server
 
-**2. Client-Server modellen & Webudvikling**
+</details>
+
+<details>
+<summary><strong>2. Client-Server modellen & Webudvikling</strong></summary>
 
 - Hvad sker der når du besøger en hjemmeside?
 - Client (browser) vs. Server - hvem gør hvad?
 - HTML, CSS og JavaScript - hver deres rolle
 - Hvor passer vores Movie App ind?
 
-**3. Variables, Datatyper & Console**
+</details>
+
+<details>
+<summary><strong>3. Variables, Datatyper & Console</strong></summary>
 
 - Hvad er en variable? (`const` og `let`) (Opgave 1)
 - const-first princip i praksis
 - `console.log()` - din debugging ven
 
-**4. querySelector & DOM Manipulation**
+</details>
+
+<details>
+<summary><strong>4. querySelector & DOM Manipulation</strong></summary>
 
 - **Hvorfor `querySelector()` er smart:** find præcis det element du skal arbejde med
 - `.textContent` og `.style` - ændr indhold og udseende
 - Praktisk øvelse: Find og ændr elementer (Opgave 2 & 3)
 
-**5. Events & Klik-tæller**
+</details>
+
+<details>
+<summary><strong>5. Events & Klik-tæller</strong></summary>
 
 - Hvad er et event - og hvorfor bruger vi det? (Opgave 4 intro)
 - Bygge Movie App klik-tæller trin-for-trin (Opgave 5)
 - Tilføj reset-knap og test sammen
 - Hvis du er færdig: Opgave 6 udfordringer (6.1-6.3)
 - **6.4: Refactor til funktioner** - Split event listeners i navngivne funktioner
+
+</details>
 
 ## Materialer
 
@@ -93,7 +95,7 @@ Klik-tæller er perfekt til at lære variable opdateringer og DOM manipulation -
 
 **Opgaver:**
 
-- [Movie App - DAG 1](../_exercises/movie-app-1.md) - 6 opgaver fra setup til klikt-tæller og udfordringer
+- [Movie App - DAG 1](../_exercises/movie-app-1.md) - 6 opgaver fra setup til klik-tæller og udfordringer
 - [Hello JavaScript](https://www.notion.so/Hello-JavaScript-6ca283a288bd4fafbcea2a11b2c9806e?pvs=21) (ekstra øvelse)
 
 **Links:**
