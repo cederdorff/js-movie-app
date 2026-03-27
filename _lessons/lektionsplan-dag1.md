@@ -41,7 +41,7 @@ Vi starter med en klik-tæller fordi det er den korteste vej ind i variable, DOM
 <summary><strong>1. Introduktion og Movie App setup</strong></summary>
 
 - Hvem er RACE? Hvad bygger vi på 4 dage?
-- Projekt setup: `movie-app` med `index.html`, `app.js`, `app.css`
+- Projekt setup: `movie-app` med `index.html`, `app.js`, `app.css` (Opgave 0)
 - Brug semantiske tags fra start: `header`, `main`, `section`
 - Test Live Server
 
