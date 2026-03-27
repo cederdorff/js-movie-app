@@ -62,7 +62,7 @@ Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
     </header>
 
     <main>
-      <section id="movie-list" aria-label="Filmliste">
+      <section id="movie-list" class="movie-grid" aria-label="Filmliste">
         <!-- Film vises her med JavaScript -->
       </section>
     </main>
@@ -113,11 +113,29 @@ main {
   padding: 2rem;
 }
 
-#movie-list {
+.movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+@media (min-width: 600px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1400px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .movie-card {
@@ -180,18 +198,24 @@ Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**. Så blive
 **Indsæt midlertidigt dette i `index.html` inde i `#movie-list`:**
 
 ```html
-<section id="movie-list" aria-label="Filmliste">
+<section id="movie-list" class="movie-grid" aria-label="Filmliste">
   <article class="movie-card">
-    <h3>Inception</h3>
-    <p>År: 2010</p>
+    <div class="movie-info">
+      <h3>Inception</h3>
+      <p>År: 2010</p>
+    </div>
   </article>
   <article class="movie-card">
-    <h3>The Matrix</h3>
-    <p>År: 1999</p>
+    <div class="movie-info">
+      <h3>The Matrix</h3>
+      <p>År: 1999</p>
+    </div>
   </article>
   <article class="movie-card">
-    <h3>Interstellar</h3>
-    <p>År: 2014</p>
+    <div class="movie-info">
+      <h3>Interstellar</h3>
+      <p>År: 2014</p>
+    </div>
   </article>
 </section>
 ```
@@ -293,7 +317,9 @@ for (let movie of movies) {
   // Lav HTML for denne film
   let html = `
     <article class="movie-card">
-      <h3>${movie}</h3>
+      <div class="movie-info">
+        <h3>${movie}</h3>
+      </div>
     </article>
   `;
 
@@ -422,9 +448,11 @@ for (let movie of movies) {
   // Lav HTML for denne film
   let html = `
     <article class="movie-card">
-      <h3>${movie.title}</h3>
-      <p> År: ${movie.year}</p>
-      <p> Rating: ${movie.rating}</p>
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p> År: ${movie.year}</p>
+        <p> Rating: ${movie.rating}</p>
+      </div>
     </article>
   `;
 
@@ -481,9 +509,11 @@ function showMovie(movie) {
 
   let html = `
     <article class="movie-card">
-      <h3>${movie.title}</h3>
-      <p> År: ${movie.year}</p>
-      <p> Rating: ${movie.rating}</p>
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p> År: ${movie.year}</p>
+        <p> Rating: ${movie.rating}</p>
+      </div>
     </article>
   `;
 
@@ -519,9 +549,11 @@ function showMovie(movie) {
 
   let html = `
     <article class="movie-card" style="border: 2px solid ${color}">
-      <h3>${movie.title}</h3>
-      <p> År: ${movie.year}</p>
-      <p> Rating: ${movie.rating}</p>
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p> År: ${movie.year}</p>
+        <p> Rating: ${movie.rating}</p>
+      </div>
     </article>
   `;
 
@@ -551,9 +583,11 @@ Vis billedet i dit card:
 let html = `
   <article class="movie-card">
     <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
-    <h3>${movie.title}</h3>
-    <p> År: ${movie.year}</p>
-    <p> Rating: ${movie.rating}</p>
+    <div class="movie-info">
+      <h3>${movie.title}</h3>
+      <p> År: ${movie.year}</p>
+      <p> Rating: ${movie.rating}</p>
+    </div>
   </article>
 `;
 ```
@@ -598,9 +632,11 @@ function showMovie(movie) {
 
   let html = `
     <article class="movie-card">
-      <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px; margin-bottom: 0.5rem;">
-      <h3>${movie.title} (${movie.year})</h3>
-      <p> ${movie.rating}</p>
+      <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
+      <div class="movie-info">
+        <h3>${movie.title} (${movie.year})</h3>
+        <p> ${movie.rating}</p>
+      </div>
     </article>
   `;
 
@@ -645,7 +681,7 @@ Vi ses!
 2. **Tjek kommaer** - mangler der `,` mellem objects?
 3. **Tjek quotes** - matcher `"` og `"` ?
 4. **Log hver film** - `console.log(movie)` i loopet
-5. **Tjek HTML** - er `#movie-list` der?
+5. **Tjek HTML** - er `#movie-list` og `class="movie-grid"` der?
 
 **Typiske fejl:**
 
