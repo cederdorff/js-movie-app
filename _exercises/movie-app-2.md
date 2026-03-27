@@ -9,9 +9,9 @@ I dag skal du lære at arbejde med **flere ting på én gang** - lister af data!
 - Hvad er et array?
 - Hvordan looper man gennem et array?
 - Hvordan viser man data på siden?
-- Hvad er et object? (basic intro)
+- Hvad er et objekt?
 
-**Vi bruger IKKE fetch endnu!** Vi starter med hardcoded data for at fokusere på loops.
+**Vi starter med data direkte i koden** — det gør det nemmere at fokusere på arrays og loops uden distraktioner.
 
 **Progressionen:**
 
@@ -24,7 +24,7 @@ I dag skal du lære at arbejde med **flere ting på én gang** - lister af data!
 
 ## Opgave 0: Forbered dit Movie App projekt fra DAG 1
 
-### Trin 1: Tjek at du har DAG 1 projektet
+### 0.1: Tjek at du har DAG 1 projektet
 
 Du skal have et `movie-app` projekt med:
 
@@ -40,7 +40,7 @@ Du skal have et `movie-app` projekt med:
    - `_solutions/dag1/app.js`
    - `_solutions/dag1/style.css`
 
-### Trin 2: Opdater HTML til DAG 2 struktur
+### 0.2: Opdater HTML til DAG 2 struktur
 
 Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
 
@@ -72,7 +72,7 @@ Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
 </html>
 ```
 
-### Trin 3: Opdater CSS til film-liste styling
+### 0.3: Opdater CSS til film-liste styling
 
 **Åbn `app.css` og erstat hele indholdet med:**
 
@@ -147,7 +147,7 @@ main {
 }
 ```
 
-### Trin 4: Ryd op i app.js
+### 0.4: Ryd op i app.js
 
 **Åbn `app.js` og slet alt indhold** - vi starter med en frisk begyndelse til DAG 2:
 
@@ -163,7 +163,7 @@ console.log("Movie App - DAG 2 starter...");
 
 I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du altid finde i `_solutions/dag1/app.js` hvis du vil se den igen!
 
-### Trin 5: Test din Movie App struktur
+### 0.5: Test din Movie App struktur
 
 1. **Gem alle filer** (Windows/PC: Ctrl+S, Mac: Cmd+S)
 2. **Genindlæs Live Server** (eller start den hvis ikke åben)
@@ -173,7 +173,7 @@ I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden kan du 
 - Står der "DAG 2: Arrays, Loops & Film-lister"?
 - Siden er tom under headeren - det er ok! Vi tilføjer indhold nu.
 
-### Trin 6: Indsæt 3 hardcoded film-kort i HTML (bro-øvelse)
+### 0.6: Indsæt 3 hardcoded film-kort i HTML (bro-øvelse)
 
 Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**. Så bliver det tydeligt, hvorfor arrays + loops er smart.
 
@@ -500,13 +500,13 @@ function showMovie(movie) {
 
 ---
 
-## Udfordringer
+## Opgave 6: Udfordringer (hvis du er færdig)
 
-### Udfordring 1: Tilføj flere film
+### 6.1: Tilføj flere film
 
 Tilføj 3 flere film til dit array. Find selv data online!
 
-### Udfordring 2: Farve baseret på rating
+### 6.2: Farve baseret på rating
 
 Gør så film med rating over 8.5 får en guldfarve:
 
@@ -529,7 +529,7 @@ function showMovie(movie) {
 }
 ```
 
-### Udfordring 3: Tilføj billeder
+### 6.3: Tilføj billeder
 
 Udvid dine movie objects med en `image` property:
 
