@@ -148,8 +148,6 @@ main {
 "use strict";
 
 console.log("Movie App - DAG 2 starter...");
-
-// Her skriver du din nye kode for DAG 2
 ```
 
 **Hvorfor sletter vi DAG 1 koden?**
@@ -212,7 +210,7 @@ Det er præcis derfor vi bagefter bruger **arrays + loops + JavaScript**: så co
 - Hvad hvis titlen eller årstal skal ændres mange steder?
 - Hvor meget kopi-arbejde bliver der?
 
-Når du har set det i browseren, går vi videre til Opgave 1, hvor vi genererer Movie Cards med JavaScript i stedet.
+Når du har set det i browseren, går vi videre til Opgave 1 og 2, hvor vi genererer Movie Cards med JavaScript i stedet.
 
 ---
 
@@ -220,43 +218,67 @@ Når du har set det i browseren, går vi videre til Opgave 1, hvor vi genererer 
 
 **Formål:** Forstå hvordan man gemmer flere ting i én variabel.
 
-### 1.1: Din første liste
+### 1.1: Opret dit første array
 
-Arrays er som en liste eller en boks med flere ting i. I stedet for:
-
-```javascript
-let movie1 = "Inception";
-let movie2 = "The Matrix";
-let movie3 = "Interstellar";
-```
-
-Kan du skrive:
+Et array er en liste af ting. I stedet for én variabel per film:
 
 ```javascript
-let movies = ["Inception", "The Matrix", "Interstellar"];
+const movie1 = "Inception";
+const movie2 = "The Matrix";
+const movie3 = "Interstellar";
 ```
 
-**Prøv det i `app.js`:**
+...kan vi samle dem i ét array:
+
+```javascript
+const movies = ["Inception", "The Matrix", "Interstellar"];
+```
+
+**Skriv dette i `app.js`** (skriv det, copy/paste ikke):
 
 ```javascript
 "use strict";
 
 console.log("Movie App starter...");
 
-// En liste af film-titler
-let movies = ["Inception", "The Matrix", "Interstellar", "The Dark Knight"];
+const movies = ["Inception", "The Matrix", "Interstellar", "The Dark Knight"];
 
 console.log("Alle film:", movies);
-console.log("Første film:", movies[0]);
-console.log("Anden film:", movies[1]);
-console.log("Hvor mange film?", movies.length);
 ```
 
-**Vigtigt:**
+Åbn konsollen i browseren. Ser du alle 4 film?
 
-- Arrays starter ved index 0 (ikke 1!)
-- `movies[0]` er den første
-- `.length` fortæller hvor mange der er
+### 1.2: Hent én bestemt film
+
+Arrays er nummererede fra 0. Den første film er `movies[0]`, den anden er `movies[1]` osv.
+
+**Tilføj disse linjer** til din `app.js`:
+
+```javascript
+console.log("Første film:", movies[0]);
+console.log("Anden film:", movies[1]);
+console.log("Sidste film:", movies[3]);
+```
+
+Hvad sker der hvis du prøver `movies[10]`? Prøv det!
+
+### 1.3: Tæl dit array
+
+`.length` fortæller hvor mange elementer arrayet indeholder.
+
+**Tilføj:**
+
+```javascript
+console.log("Antal film:", movies.length);
+```
+
+Tilføj en ekstra film til arrayet ved at tilføje en ny streng med komma:
+
+```javascript
+const movies = ["Inception", "The Matrix", "Interstellar", "The Dark Knight", "Pulp Fiction"];
+```
+
+Kør siden igen. Opdaterer `.length` sig automatisk?
 
 ---
 
@@ -264,44 +286,68 @@ console.log("Hvor mange film?", movies.length);
 
 **Formål:** Lær at gå gennem hvert element i en liste.
 
-### 2.1: For...of loop (den nemme måde)
+### 2.1: Dit første loop
+
+I stedet for at skrive `console.log` tre gange:
 
 ```javascript
-"use strict";
-
-let movies = ["Inception", "The Matrix", "Interstellar"];
-
-console.log("--- Vi looper gennem filmene ---");
-
-for (let movie of movies) {
-  console.log("Film:", movie);
-}
-
-console.log("--- Loop færdig ---");
+console.log(movies[0]);
+console.log(movies[1]);
+console.log(movies[2]);
 ```
 
-**Hvad sker der?**
+...kan et loop gøre det for os:
 
-- Loopet går gennem arrayet én ad gangen
-- `movie` bliver skiftevis "Inception", "The Matrix", "Interstellar"
-- Koden indeni `{ }` køres 3 gange
-
-### 2.2: Loop og vis på siden
+**Tilføj dette til din `app.js`** (brug det samme array fra Opgave 1):
 
 ```javascript
-"use strict";
+for (const movie of movies) {
+  console.log("Film:", movie);
+}
+```
 
-let movies = ["Inception", "The Matrix", "Interstellar", "The Dark Knight"];
+Åbn konsollen. Ser du alle film udskrevet én ad gangen?
 
-// Find container
-let movieList = document.querySelector("#movie-list");
+Prøv at tilføje en film til arrayet. Kører loopet en gang mere automatisk?
 
-// Loop gennem alle film
-for (let movie of movies) {
-  console.log("Tilføjer film:", movie);
+### 2.2: Gør noget med hver film
 
-  // Lav HTML for denne film
-  let html = `
+Loopet kører koden indeni `{ }` én gang per film. Vi kan gøre hvad som helst med `movie` inde i loopet.
+
+**Prøv at udskrive en sætning per film:**
+
+```javascript
+for (const movie of movies) {
+  console.log("Nu viser vi:", movie);
+}
+```
+
+Ændr teksten inde i loopet. Ser du ændringen for alle film på én gang?
+
+### 2.3: Find containeren med querySelector
+
+Før vi kan tilføje film til siden, skal JavaScript vide hvor de skal sættes ind. Vi bruger `querySelector` til at finde vores `#movie-list` section.
+
+**Tilføj denne linje** til din `app.js` (udenfor loopet):
+
+```javascript
+const movieList = document.querySelector("#movie-list");
+console.log(movieList);
+```
+
+Ser du elementet i konsollen? Det er den section vi skal fylde med film-kort.
+
+### 2.4: Byg HTML med en template string
+
+I stedet for at skrive HTML direkte i filen, kan vi bygge det som en streng i JavaScript.
+
+> **Template strings** bruger backticks (`` ` ``) i stedet for anførselstegn. Med `${}` kan du sætte en variabels værdi direkte ind i teksten.
+
+**Tilføj inde i loopet:**
+
+```javascript
+for (const movie of movies) {
+  const html = /* html */ `
     <article class="movie-card">
       <div class="movie-info">
         <h3>${movie}</h3>
@@ -309,39 +355,56 @@ for (let movie of movies) {
     </article>
   `;
 
-  // Tilføj til siden
-  movieList.insertAdjacentHTML("beforeend", html);
+  console.log(html);
 }
-
-console.log("Alle film vist!");
 ```
 
-**Test det!** Du skulle se 4 film-kort på siden.
+Ser du HTML-strengen i konsollen for hver film?
 
-**Nyt koncept: Template strings**
+### 2.5: Tilføj HTML til siden
 
-- Brug backticks: `` ` ``
-- Indsæt variabler med `${variabel}`
-- Kan skrives over flere linjer
+Nu bruger vi `insertAdjacentHTML` til faktisk at sætte HTML'en ind på siden.
+
+**Tilføj den sidste linje inde i loopet:**
+
+```javascript
+for (const movie of movies) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <div class="movie-info">
+        <h3>${movie}</h3>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+Du skulle nu se 4 film-kort på siden! Tilføj en film til arrayet og tjek at kortet dukker op automatisk.
+
+> **Stop op og reflektér:** Sammenlign hvad du har nu med Opgave 0.6, hvor du hardcodede 3 film-kort i HTML.
+>
+> - I 0.6 skulle du copy/paste det samme HTML-kort for hver film
+> - Nu skriver du arrayet én gang og siden opdaterer sig selv
+> - Det er ligegyldigt om der er 4 film eller 400 — koden er den samme
+>
+> Det er præcis den forskel arrays + loops gør: **du beskriver hvad der skal ske med én film, og computeren gør det for alle**.
 
 ---
 
 ## Opgave 3: Hvad er et Object?
 
-**Formål:** Lær at gemme flere informationer om én ting.
+**Formål:** Forstå hvordan man kan gemme flere informationer om én ting – og hvordan man arbejder med arrays af objects.
 
-### 3.1: Fra string til object
+### 3.1: Opret et object for én film
 
-I stedet for bare en titel, vil vi gerne have:
+> **Slet alt i din app.js** (eller kommentér det ud), så du starter med en tom fil til dette trin.
 
-- Titel
-- År
-- Rating
-
-**Med objects kan vi det:**
+Et object samler flere informationer om én ting:
 
 ```javascript
-let movie = {
+const movie = {
   title: "Inception",
   year: 2010,
   rating: 8.8,
@@ -352,18 +415,25 @@ console.log("År:", movie.year);
 console.log("Rating:", movie.rating);
 ```
 
+> **Eksperiment:**
+>
+> - Prøv at ændre værdien af `movie.rating` og log igen.
+> - Tilføj en ny property, fx `genre: "Sci-fi"`, og log den.
+
 **Vigtigt:**
 
 - Objects bruger `{ }` (arrays bruger `[ ]`)
 - Data gemmes som `key: value` par
 - Få adgang med `.` (dot notation)
 
-### 3.2: Array af objects
+### 3.2: Lav et array af objects
 
-Nu kombinerer vi! Array med flere film-objects:
+> **Slet eller kommentér koden fra 3.1** i din app.js, og indsæt dette array i stedet.
+
+Nu kan vi samle flere film-objects i et array:
 
 ```javascript
-let movies = [
+const movies = [
   {
     title: "Inception",
     year: 2010,
@@ -374,34 +444,66 @@ let movies = [
     year: 1999,
     rating: 8.7,
   },
-  {
-    title: "Interstellar",
-    year: 2014,
-    rating: 8.6,
-  },
 ];
 
 console.log("Første film:", movies[0]);
-console.log("Dens titel:", movies[0].title);
+console.log("Anden film:", movies[1]);
 ```
+
+> **Eksperiment:**
+>
+> - Tilføj en tredje film til arrayet.
+> - Prøv at logge `movies.length`.
+
+### 3.3: Loop gennem arrayet af objects
+
+> **Tilføj dette loop nedenunder arrayet fra 3.2** i din app.js.
+
+Nu kan vi bruge et loop til at arbejde med alle film på én gang:
+
+```javascript
+for (const movie of movies) {
+  console.log("Titel:", movie.title);
+}
+```
+
+> **Eksperiment:**
+>
+> - Udskriv også år og rating for hver film.
+> - Prøv at ændre en property på én af filmene og se effekten i loopet.
+
+> **Refleksion:**
+>
+> Hvorfor er det smartere med objects end bare et array af strenge?
+>
+> - Du kan nu vise både titel, år og rating – ikke kun titlen
+> - Du kan nemt udvide med flere informationer (fx genre, billede, instruktør)
+> - Du kan bruge de samme loops og metoder, men få meget mere fleksibilitet
+> - Hvis du kun havde et array af strenge, kunne du ikke vise år/rating uden at lave flere separate arrays eller "pakke" informationen sammen i én streng
+>
+> **Kort sagt:** Objects gør det muligt at arbejde med "rigtige data" – ikke bare tekst, men struktureret information, som computeren kan bruge på mange måder.
 
 ---
 
 ## Opgave 4: Vis Film-kort med Data
 
-**Formål:** Kombinér alt du har lært - loop gennem objects og vis dem!
+**Formål:** Kombinér alt du har lært – loop gennem array af objects og vis alle informationer på siden.
 
-### 4.1: Komplet løsning
+### 4.1: Start med en frisk app.js
 
-**Erstat alt i `app.js` med:**
+> **Slet alt i din app.js** (eller kommentér det ud), så du starter forfra.
+
+Indsæt dette i toppen af filen:
 
 ```javascript
 "use strict";
-
 console.log("Movie App starter...");
+```
 
-// Array af film-objects (hardcoded data)
-let movies = [
+Indsæt derefter dette array af film-objects (formateret for læsbarhed):
+
+```javascript
+const movies = [
   {
     title: "Inception",
     year: 2010,
@@ -424,32 +526,61 @@ let movies = [
   },
 ];
 
-// Find container
-let movieList = document.querySelector("#movie-list");
+console.log("Alle film:", movies);
+```
 
-// Loop gennem alle film
-for (let movie of movies) {
-  console.log("Viser film:", movie.title);
+> **Tjek i konsollen:** Ser du alle film-objects?
 
-  // Lav HTML for denne film
-  let html = `
+### 4.2: Find containeren i DOM'en
+
+Tilføj nedenunder:
+
+```javascript
+const movieList = document.querySelector("#movie-list");
+console.log(movieList);
+```
+
+> **Tjek i konsollen:** Ser du DOM-elementet?
+
+### 4.3: Loop og byg HTML for hver film
+
+Tilføj nedenunder:
+
+```javascript
+for (const movie of movies) {
+  const html = /* html */ `
     <article class="movie-card">
       <div class="movie-info">
         <h3>${movie.title}</h3>
-        <p> År: ${movie.year}</p>
-        <p> Rating: ${movie.rating}</p>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
       </div>
     </article>
   `;
-
-  // Tilføj til siden
-  movieList.insertAdjacentHTML("beforeend", html);
+  console.log(html);
 }
-
-console.log("Alle", movies.length, "film vist!");
 ```
 
-**Test det!** Du skulle se 4 flotte film-kort med data.
+> **Tjek i konsollen:** Ser du HTML-strengen for hver film?
+
+### 4.4: Indsæt HTML på siden
+
+Udskift `console.log(html);` med:
+
+```javascript
+movieList.insertAdjacentHTML("beforeend", html);
+```
+
+Nu vises alle film på siden!
+
+### 4.5: Eksperimentér
+
+- Tilføj en ny film til arrayet – dukker den op på siden?
+- Prøv at ændre en property (fx rating eller år) – opdateres det på siden?
+- Tilføj en ny property til et object og vis den i HTML'en
+
+> **Refleksion:**
+> Hvor meget lettere er det nu at vise mange informationer for mange film – sammenlignet med hardcoded HTML eller arrays af strenge?
 
 ---
 
@@ -465,7 +596,7 @@ console.log("Alle", movies.length, "film vist!");
 console.log("Movie App starter...");
 
 // Global data
-let movies = [
+const movies = [
   { title: "Inception", year: 2010, rating: 8.8 },
   { title: "The Matrix", year: 1999, rating: 8.7 },
   { title: "Interstellar", year: 2014, rating: 8.6 },
@@ -479,10 +610,10 @@ showMovies();
 function showMovies() {
   console.log("Viser", movies.length, "film...");
 
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
   movieList.innerHTML = ""; // Ryd først
 
-  for (let movie of movies) {
+  for (const movie of movies) {
     showMovie(movie);
   }
 
@@ -491,9 +622,9 @@ function showMovies() {
 
 // Funktion til at vise én film
 function showMovie(movie) {
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
 
-  let html = `
+  const html = /* html */ `
     <article class="movie-card">
       <div class="movie-info">
         <h3>${movie.title}</h3>
@@ -528,12 +659,12 @@ Gør så film med rating over 8.5 får en guldfarve:
 
 ```javascript
 function showMovie(movie) {
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
 
   // Vælg farve baseret på rating
-  let color = movie.rating >= 8.5 ? "gold" : "white";
+  const color = movie.rating >= 8.5 ? "gold" : "white";
 
-  let html = `
+  const html = /* html */ `
     <article class="movie-card" style="border: 2px solid ${color}">
       <div class="movie-info">
         <h3>${movie.title}</h3>
@@ -552,7 +683,7 @@ function showMovie(movie) {
 Udvid dine movie objects med en `image` property:
 
 ```javascript
-let movies = [
+const movies = [
   {
     title: "Inception",
     year: 2010,
@@ -566,7 +697,7 @@ let movies = [
 Vis billedet i dit card:
 
 ```javascript
-let html = `
+const html = /* html */ `
   <article class="movie-card">
     <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
     <div class="movie-info">
@@ -605,18 +736,18 @@ async function start() {
 }
 
 function showMovies(movies) {
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
   movieList.innerHTML = "";
 
-  for (let movie of movies) {
+  for (const movie of movies) {
     showMovie(movie);
   }
 }
 
 function showMovie(movie) {
-  let movieList = document.querySelector("#movie-list");
+  const movieList = document.querySelector("#movie-list");
 
-  let html = `
+  const html = /* html */ `
     <article class="movie-card">
       <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
       <div class="movie-info">
