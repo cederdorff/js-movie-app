@@ -530,6 +530,13 @@ console.log("Alle film:", movies);
 ```
 
 > **Tjek i konsollen:** Ser du alle film-objects?
+>
+> **Hvis du ikke ser det forventede resultat:**
+>
+> - Tjek at du har gemt filen
+> - Tjek at du har skrevet alt korrekt
+> - Genindlæs browseren
+> - Se efter fejl i konsollen
 
 ### 4.2: Find containeren i DOM'en
 
@@ -541,6 +548,12 @@ console.log(movieList);
 ```
 
 > **Tjek i konsollen:** Ser du DOM-elementet?
+>
+> **Hvis du ikke ser det forventede resultat:**
+>
+> - Tjek at id'et matcher HTML'en
+> - Genindlæs browseren
+> - Se efter fejl i konsollen
 
 ### 4.3: Loop og byg HTML for hver film
 
@@ -562,6 +575,11 @@ for (const movie of movies) {
 ```
 
 > **Tjek i konsollen:** Ser du HTML-strengen for hver film?
+>
+> **Hvis du ikke ser det forventede resultat:**
+>
+> - Tjek at loopet er skrevet korrekt
+> - Tjek at movies-arrayet stadig findes
 
 ### 4.4: Indsæt HTML på siden
 
@@ -573,11 +591,23 @@ movieList.insertAdjacentHTML("beforeend", html);
 
 Nu vises alle film på siden!
 
+> **Hvis du ikke ser film på siden:**
+>
+> - Tjek at du har gemt filen
+> - Tjek at movieList ikke er null
+> - Tjek at HTML-strukturen matcher det forventede
+
 ### 4.5: Eksperimentér
 
 - Tilføj en ny film til arrayet – dukker den op på siden?
 - Prøv at ændre en property (fx rating eller år) – opdateres det på siden?
 - Tilføj en ny property til et object og vis den i HTML'en
+- Prøv at ændre HTML-strukturen (fx tilføj et <span> eller en ekstra klasse)
+
+> **Quiz:**
+>
+> - Hvad sker der hvis du ændrer rækkefølgen på properties i arrayet?
+> - Kan du vise kun film med rating over 8.7? Hvordan?
 
 > **Refleksion:**
 > Hvor meget lettere er det nu at vise mange informationer for mange film – sammenlignet med hardcoded HTML eller arrays af strenge?
