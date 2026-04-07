@@ -52,8 +52,10 @@ function showMovies() {
 }
 
 function showMovie(movie) {
+  const highlightClass = movie.rating >= 8.5 ? "movie-card--highlight" : "";
+
   const html = /* html */ `
-    <article class="movie-card">
+    <article class="movie-card ${highlightClass}">
       <img class="movie-image" src="${movie.image}" alt="${movie.title}">
       <div class="movie-info">
         <h3>${movie.title}</h3>

@@ -92,3 +92,7 @@ main {
   display: block;
   margin-bottom: 0.5rem;
 }
+
+.movie-card--highlight {
+  border: 2px solid gold;
+}

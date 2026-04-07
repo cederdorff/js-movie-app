@@ -70,9 +70,9 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 <summary><strong>3. Arrays Fundamentals</strong></summary>
 
 - Hvad er et array? En liste/samling af værdier
-- Syntax: `let films = ["Inception", "Matrix"]`
+- Syntax: `const movies = ["Inception", "Matrix"]`
 - Array index og `.length` property
-- Praktisk øvelse: Opret og manipuler arrays (Opgave 1 & 2)
+- Praktisk øvelse: Opret og manipuler arrays (Opgave 1)
 
 </details>
 
@@ -81,7 +81,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 - Hvorfor loops? (Ellers skal vi skrive samme kode 100 gange!)
 - `for...of` loop: Den letteste loop
-- Praktisk øvelse: Loop gennem film-array (Opgave 3)
+- Praktisk øvelse: Loop gennem film-array + første DOM-rendering (Opgave 2)
 - Debugging øvelse: Fix common loop errors
 
 </details>
@@ -92,7 +92,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Hvad er et objekt? Data med labels (key-value)
 - Fra `let title = "Inception"` til `let movie = { title: "Inception", year: 2010 }`
 - Dot notation: `movie.title`, `movie.year`
-- Praktisk øvelse: Lav movie-objekter (Opgave 4)
+- Praktisk øvelse: Lav movie-objekter (Opgave 3)
 
 </details>
 
@@ -100,10 +100,11 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 <summary><strong>6. Arrays af Objects & Template Literals</strong></summary>
 
 - Kombiner arrays + objects = super kraftfuldt!
-- Loop gennem og access properties (Opgave 4 & 5)
+- Loop gennem og access properties (Opgave 4)
 - Problem: At bygge HTML med `+` er grimt!
 - Template literals med backticks og `${}`
 - `insertAdjacentHTML` - tilføj til DOM
+- Fokus på god praksis: Struktur i JS/HTML, styling i CSS (ingen inline styles)
 
 </details>
 
@@ -112,6 +113,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 - Funktioner til at strukturere kode
 - `showMovies()` og `showMovie(movie)` (Opgave 5)
+- Udfordringer: billeder, flere film, rating-highlight (Opgave 6)
 - **Bonus introduktion:** forhåndsblik på fetch (ikke krav i dag)
 - Hjemmearbejde: Færdiggør arrays af objekter
 
@@ -127,12 +129,6 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 - [Movie App - DAG 2](../_exercises/movie-app-2.md)
 - [DOM Manipulation - Simple To Do List](https://www.notion.so/DOM-Manipulation-Simple-To-Do-List-adb24737446a4a72aa829ada27440e0f?pvs=21) (ekstra)
-
-**Eksempel kode:**
-
-- Komplet DAG 2 eksempel: `_solutions/dag2/app.js`
-- HTML: `_solutions/dag2/index.html`
-- CSS: `_solutions/dag2/style.css`
 
 **Links:**
 
