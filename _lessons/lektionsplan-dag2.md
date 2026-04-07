@@ -45,77 +45,58 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 ## Agenda
 
 <details>
-<summary><strong>1. Recap & Dagens Mål</strong></summary>
+<summary><strong>1. Recap & Projektopsætning</strong></summary>
 
-- Hvem fik klik-tæller til at virke?
-- Vis jeres udfordringer (2-3 frivillige)
-- Quiz: Variables, querySelector, addEventListener
-- Dagens mål: Fra klik-tæller til rigtig Movie App med film-lister!
-
-</details>
-
-<details>
-<summary><strong>2. Opdater Projekt til DAG 2</strong></summary>
-
-- Åbn dit `movie-app` projekt fra DAG 1
-- Opdater HTML struktur: Fra counter-box til semantisk `section#movie-list`
-- Opdater CSS: Fra counter styling til movie card grid
-- Indsæt 2-3 hardcoded film-kort i HTML som bro-øvelse (Opgave 0.6)
-- Kort refleksion: "Hvorfor bliver dette tungt i hånden?"
-- Ryd op i app.js - vi starter frisk med ny kode
+- Hvem fik klik-tæller til at virke? Vis udfordringer (2-3 frivillige)
+- Dagens mål: Fra klik-tæller til Movie App med rigtige film-lister
+- Opdater HTML + CSS til DAG 2 struktur (`section#movie-list`, movie card grid)
+- Indsæt 2-3 hardcoded film-kort som bro-øvelse — refleksion: "Hvorfor er dette tungt i hånden?"
+- Kobling til opgaven: Opgave 0.1-0.6
 
 </details>
 
 <details>
-<summary><strong>3. Arrays Fundamentals</strong></summary>
+<summary><strong>2. Arrays & Loops</strong></summary>
 
-- Hvad er et array? En liste/samling af værdier
-- Syntax: `const movies = ["Inception", "Matrix"]`
-- Array index og `.length` property
-- Praktisk øvelse: Opret og manipuler arrays (Opgave 1)
-
-</details>
-
-<details>
-<summary><strong>4. Loops: Gå Gennem Lister</strong></summary>
-
-- Hvorfor loops? (Ellers skal vi skrive samme kode 100 gange!)
-- `for...of` loop: Den letteste loop
-- Praktisk øvelse: Loop gennem film-array + første DOM-rendering (Opgave 2)
-- Debugging øvelse: Fix common loop errors
+- Hvad er et array? `const movies = ["Inception", "Matrix"]`
+- Loop med `for...of`: Hvorfor? (Ellers skal vi skrive samme kode 100 gange!)
+- Praktisk øvelse: Loop gennem film-array + første DOM-rendering
+- Kobling til opgaven: Opgave 1.1-1.3 + Opgave 2.1-2.5
 
 </details>
 
 <details>
-<summary><strong>5. Objects Introduction</strong></summary>
+<summary><strong>3. Objects</strong></summary>
 
 - Hvad er et objekt? Data med labels (key-value)
 - Fra `let title = "Inception"` til `let movie = { title: "Inception", year: 2010 }`
 - Dot notation: `movie.title`, `movie.year`
-- Praktisk øvelse: Lav movie-objekter (Opgave 3)
+- Praktisk øvelse: Lav movie-objekter
+- Kobling til opgaven: Opgave 3.1-3.3
 
 </details>
 
 <details>
-<summary><strong>6. Arrays af Objects & Template Literals</strong></summary>
+<summary><strong>4. Arrays af Objects & Template Literals</strong></summary>
 
-- Kombiner arrays + objects = super kraftfuldt!
-- Loop gennem og access properties (Opgave 4)
-- Problem: At bygge HTML med `+` er grimt!
+- Kombiner arrays + objects = super kraftfuldt
+- Loop gennem objects og access properties
 - Template literals med backticks og `${}`
 - `insertAdjacentHTML` - tilføj til DOM
 - Fokus på god praksis: Struktur i JS/HTML, styling i CSS (ingen inline styles)
+- Kobling til opgaven: Opgave 4.1-4.5
 
 </details>
 
 <details>
-<summary><strong>7. Funktioner & Afrunding</strong></summary>
+<summary><strong>5. Funktioner & Afrunding</strong></summary>
 
 - Funktioner til at strukturere kode
-- `showMovies()` og `showMovie(movie)` (Opgave 5)
-- Udfordringer: billeder, flere film, rating-highlight (Opgave 6)
+- `showMovies()` og `showMovie(movie)`
+- Udfordringer: billeder, flere film, rating-highlight
 - **Bonus introduktion:** forhåndsblik på fetch (ikke krav i dag)
 - Hjemmearbejde: Færdiggør arrays af objekter
+- Kobling til opgaven: Opgave 5 + Opgave 6 + BONUS
 
 </details>
 
