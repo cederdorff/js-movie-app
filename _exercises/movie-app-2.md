@@ -1061,51 +1061,45 @@ function showMovie(movie) {
 
 **Kun hvis du er færdig med alt ovenstående!**
 
-Nu kan vi erstatte vores hardcoded data med rigtig data fra en JSON fil:
+I BONUS skal du **ikke skrive alt om**. Du skal kun lave disse ændringer i din nuværende løsning:
+
+### BONUS 1: Erstat hardcoded `movies` med en tom liste
+
+Find din nuværende `const movies = [...]` og erstat den med:
 
 ```javascript
-"use strict";
+let movies = [];
+```
 
-// Start app når siden er loaded
+> Vi bruger `let` her, fordi variablen får ny værdi efter fetch.
+
+### BONUS 2: Tilføj `start()` og hent data
+
+Tilføj dette under din `movieList`-linje:
+
+```javascript
 start();
 
 async function start() {
   console.log("Henter film data...");
 
-  // Hent data fra URL
-  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
-  const movies = await response.json();
+  const response = await fetch("./data/movies.json");
+  movies = await response.json();
 
   console.log("Hentet", movies.length, "film!");
-
-  showMovies(movies);
-}
-
-function showMovies(movies) {
-  const movieList = document.querySelector("#movie-list");
-  movieList.innerHTML = "";
-
-  for (const movie of movies) {
-    showMovie(movie);
-  }
-}
-
-function showMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
-
-  const html = /* html */ `
-    <article class="movie-card">
-      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
-      <div class="movie-info">
-        <h3>${movie.title} (${movie.year})</h3>
-        <p> ${movie.rating}</p>
-      </div>
-    </article>
-  `;
-
-  movieList.insertAdjacentHTML("beforeend", html);
+  showMovies();
 }
 ```
+
+### BONUS 3: Brug eksisterende funktioner
+
+Din eksisterende `showMovies()` og `showMovie(movie)` fra Opgave 6 kan blive som de er. De skal bare bruge data, der nu kommer fra fetch i stedet for hardcoded array.
+
+> **Tjek:**
+>
+> - Ser du “Hentet X film!” i konsollen?
+> - Vises filmene stadig i gridet?
+> - Har filmene billeder, år og rating?
 
 **Dette er avanceret!** Hvis det er forvirrende, spring det over. Vi dykker ned i fetch næste gang!
 
@@ -1119,20 +1113,6 @@ function showMovie(movie) {
 **Template strings** - indsæt variabler i HTML  
 **insertAdjacentHTML** - tilføj HTML til siden  
 **Funktioner** - organisér din kode
-
----
-
-## Forberedelse til næste gang
-
-Til næste gang skal vi arbejde med **filtrering**!
-
-Tænk over:
-
-- Hvordan ville du vise kun film fra 2010?
-- Hvordan ville du søge efter en titel?
-- Hvordan ville du sortere efter rating?
-
-Vi ses!
 
 ---
 
