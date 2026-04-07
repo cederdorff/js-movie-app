@@ -670,50 +670,158 @@ for (const movie of movies) {
 
 ## Opgave 5: Gør det til funktioner
 
-**Formål:** Lær at organisere din kode i funktioner.
+**Formål:** Lær at bruge funktioner til bedre struktur og genbrug.
 
-### 5.1: Opdel i funktioner
+> **Udgangspunkt:** Brug din færdige kode fra Opgave 4. Du starter ikke forfra.
+
+### 5.1: Pak din eksisterende rendering ind i `showMovies()`
+
+> **Behold koden fra Opgave 4.**
+>
+> **Tilføj denne funktion nederst i filen:**
+
+```javascript
+function showMovies() {
+  movieList.innerHTML = "";
+
+  for (const movie of movies) {
+    const html = /* html */ `
+      <article class="movie-card">
+        <div class="movie-info">
+          <h3>${movie.title}</h3>
+          <p>År: ${movie.year}</p>
+          <p>Rating: ${movie.rating}</p>
+        </div>
+      </article>
+    `;
+
+    movieList.insertAdjacentHTML("beforeend", html);
+  }
+}
+```
+
+> **Vigtigt:** Indholdet i `showMovies()` er den samme kode, du allerede skrev i Opgave 4, bare samlet i en funktion.
+>
+> **Erstat derefter hele dit nuværende for-loop med:**
+
+```javascript
+showMovies();
+```
+
+> **Tjek:** Virker siden stadig som før?
+
+### 5.2: Del op i to funktioner (`showMovies` og `showMovie`)
+
+> **Trin A:** Gå ind i `showMovies()` og erstat loopets indhold med:
+
+```javascript
+for (const movie of movies) {
+  showMovie(movie);
+}
+```
+
+> **Trin B:** Tilføj denne funktion lige under `showMovies()`:
+
+```javascript
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+> **Forskel på funktionerne:**
+>
+> - `showMovies()` styrer hele listen (loop gennem alle film)
+> - `showMovie(movie)` viser én film ad gangen
+
+> **Tjek:** Virker appen stadig helt som i Opgave 4?
+
+### 5.3: Test genbrug
+
+> **Slet ikke noget. Tilføj dette nederst i filen:**
+
+```javascript
+movies.push({
+  title: "Pulp Fiction",
+  year: 1994,
+  rating: 8.9,
+});
+
+showMovies();
+```
+
+> **Refleksion:**
+>
+> - Hvad bliver lettere med denne struktur?
+> - Hvor vil søgning/filter passe bedst ind senere?
+
+**Hvorfor funktioner?**
+
+- Bedre struktur: én funktion, ét ansvar
+- Genbrug: samme funktion kan kaldes igen
+- Lettere vedligeholdelse og udvidelse
+
+---
+
+<details>
+<summary><strong>Løsning: Opgave 5 (samlet app.js)</strong></summary>
 
 ```javascript
 "use strict";
 
 console.log("Movie App starter...");
 
-// Global data
 const movies = [
-  { title: "Inception", year: 2010, rating: 8.8 },
-  { title: "The Matrix", year: 1999, rating: 8.7 },
-  { title: "Interstellar", year: 2014, rating: 8.6 },
-  { title: "The Dark Knight", year: 2008, rating: 9.0 },
+  {
+    title: "Inception",
+    year: 2010,
+    rating: 8.8,
+  },
+  {
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7,
+  },
+  {
+    title: "Interstellar",
+    year: 2014,
+    rating: 8.6,
+  },
+  {
+    title: "The Dark Knight",
+    year: 2008,
+    rating: 9.0,
+  },
 ];
 
-// Start app
+const movieList = document.querySelector("#movie-list");
+
 showMovies();
 
-// Funktion til at vise alle film
 function showMovies() {
-  console.log("Viser", movies.length, "film...");
-
-  const movieList = document.querySelector("#movie-list");
-  movieList.innerHTML = ""; // Ryd først
+  movieList.innerHTML = "";
 
   for (const movie of movies) {
     showMovie(movie);
   }
-
-  console.log("Alle film vist!");
 }
 
-// Funktion til at vise én film
 function showMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
-
   const html = /* html */ `
     <article class="movie-card">
       <div class="movie-info">
         <h3>${movie.title}</h3>
-        <p> År: ${movie.year}</p>
-        <p> Rating: ${movie.rating}</p>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
       </div>
     </article>
   `;
@@ -722,49 +830,19 @@ function showMovie(movie) {
 }
 ```
 
-**Hvorfor funktioner?**
-
-- Lettere at læse
-- Lettere at ændre
-- Kan genbruges
-- Professionel kode-struktur
+</details>
 
 ---
 
 ## Opgave 6: Udfordringer (hvis du er færdig)
 
-### 6.1: Tilføj flere film
+### 6.1: Tilføj billeder
 
-Tilføj 3 flere film til dit array. Find selv data online!
+> **Behold din kode fra Opgave 5.**
+>
+> **Trin A: Udvid alle film i `movies` med en `image` property.**
 
-### 6.2: Farve baseret på rating
-
-Gør så film med rating over 8.5 får en guldfarve:
-
-```javascript
-function showMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
-
-  // Vælg farve baseret på rating
-  const color = movie.rating >= 8.5 ? "gold" : "white";
-
-  const html = /* html */ `
-    <article class="movie-card" style="border: 2px solid ${color}">
-      <div class="movie-info">
-        <h3>${movie.title}</h3>
-        <p> År: ${movie.year}</p>
-        <p> Rating: ${movie.rating}</p>
-      </div>
-    </article>
-  `;
-
-  movieList.insertAdjacentHTML("beforeend", html);
-}
-```
-
-### 6.3: Tilføj billeder
-
-Udvid dine movie objects med en `image` property:
+> **Tip til billed-URL:** Find et billede på nettet, højreklik på billedet og vælg fx **"Kopiér billedadresse"** / **"Copy image address"**. Indsæt den URL i `image`.
 
 ```javascript
 const movies = [
@@ -778,20 +856,204 @@ const movies = [
 ];
 ```
 
-Vis billedet i dit card:
+> **Trin B: Tilføj billed-styling i `app.css`.**
+
+Tilføj også denne CSS i `app.css`:
+
+```css
+.movie-image {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+```
+
+> **Trin C: Opdatér kun HTML-delen i `showMovie(movie)`**, så billedet vises over teksten:
 
 ```javascript
 const html = /* html */ `
   <article class="movie-card">
-    <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
+    <img class="movie-image" src="${movie.image}" alt="${movie.title}">
     <div class="movie-info">
       <h3>${movie.title}</h3>
-      <p> År: ${movie.year}</p>
-      <p> Rating: ${movie.rating}</p>
+      <p>År: ${movie.year}</p>
+      <p>Rating: ${movie.rating}</p>
     </div>
   </article>
 `;
 ```
+
+> **Tjek:**
+>
+> - Ser du billeder på alle film-kort?
+> - Virker layout stadig (kort, spacing, tekst)?
+
+> **Refleksion:**
+>
+> Hvorfor er denne måde smart?
+>
+> - **Objects:** Hver film samler data ét sted (`title`, `year`, `rating`, `image`)
+> - **Lister (arrays):** Du kan have mange film uden at ændre strukturen i koden
+> - **Funktioner:** `showMovie(movie)` bruger samme skabelon til alle film, så du undgår copy/paste
+>
+> Når du tilføjer en ny property (fx `image`), kan du vise den for alle film ved at ændre ét sted i funktionen.
+
+### 6.2: Tilføj flere film
+
+Tilføj **minimum 3 film-objects** til dit `movies` array. Find selv data online, inkl. billede-URL.
+
+> **Tjek:**
+>
+> - Genindlæs siden og tjek at alle nye film vises
+> - Tjek at hver ny film har både `title`, `year`, `rating` og `image`
+
+### 6.3: Farve baseret på rating
+
+> **Behold alt fra 6.1 og 6.2.**
+>
+> Målet er: film med rating over 8.5 skal fremhæves med en gul kant.
+
+> **Trin A: Tilføj denne CSS i `app.css`:**
+
+```css
+.movie-card--highlight {
+  border: 2px solid gold;
+}
+```
+
+> **Trin B: Opdatér `showMovie(movie)` så den giver en ekstra klasse ved høj rating:**
+
+```javascript
+function showMovie(movie) {
+  const highlightClass = movie.rating >= 8.5 ? "movie-card--highlight" : "";
+
+  const html = /* html */ `
+    <article class="movie-card ${highlightClass}">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+> **Bemærk:** Brug den `movieList` du allerede har defineret tidligere i din kode (som i Opgave 5), i stedet for at lave en ny `querySelector` inde i funktionen.
+
+> **Hvad sker der her?**
+>
+> - `highlightClass` bliver enten `"movie-card--highlight"` eller tom tekst `""`
+> - Klassen sættes direkte på `<article class="movie-card ${highlightClass}">`
+> - CSS bestemmer så udseendet (ikke inline styling)
+
+> **Tjek:**
+>
+> - Har film over 8.5 en gul kant?
+> - Har film under 8.5 stadig standard-styling?
+> - Hvad sker der hvis du ændrer en films rating og genindlæser?
+
+---
+
+<details>
+<summary><strong>Løsning: Opgave 6 (samlet app.js + app.css tilføjelser)</strong></summary>
+
+```javascript
+"use strict";
+
+console.log("Movie App starter...");
+
+const movies = [
+  {
+    title: "Inception",
+    year: 2010,
+    rating: 8.8,
+    image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
+  },
+  {
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7,
+    image: "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
+  },
+  {
+    title: "Interstellar",
+    year: 2014,
+    rating: 8.6,
+    image: "https://m.media-amazon.com/images/I/71n58Y6XHSL._AC_SL1024_.jpg",
+  },
+  {
+    title: "The Dark Knight",
+    year: 2008,
+    rating: 9.0,
+    image: "https://m.media-amazon.com/images/I/71pV4vnt4BL._AC_SL1178_.jpg",
+  },
+  {
+    title: "Pulp Fiction",
+    year: 1994,
+    rating: 8.9,
+    image: "https://m.media-amazon.com/images/I/81UTs3sMJNL._AC_SL1500_.jpg",
+  },
+  {
+    title: "Whiplash",
+    year: 2014,
+    rating: 8.5,
+    image: "https://m.media-amazon.com/images/I/91P9AMxGzCL._AC_SL1500_.jpg",
+  },
+  {
+    title: "Arrival",
+    year: 2016,
+    rating: 7.9,
+    image: "https://m.media-amazon.com/images/I/71w7Nf6T6BL._AC_SL1111_.jpg",
+  },
+];
+
+const movieList = document.querySelector("#movie-list");
+
+showMovies();
+
+function showMovies() {
+  movieList.innerHTML = "";
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const highlightClass = movie.rating >= 8.5 ? "movie-card--highlight" : "";
+
+  const html = /* html */ `
+    <article class="movie-card ${highlightClass}">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+```css
+.movie-image {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.movie-card--highlight {
+  border: 2px solid gold;
+}
+```
+
+</details>
 
 ---
 
@@ -833,7 +1095,7 @@ function showMovie(movie) {
 
   const html = /* html */ `
     <article class="movie-card">
-      <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
       <div class="movie-info">
         <h3>${movie.title} (${movie.year})</h3>
         <p> ${movie.rating}</p>
