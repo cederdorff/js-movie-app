@@ -298,7 +298,9 @@ console.log(movies[2]);
 
 ...kan et loop gøre det for os:
 
-**Tilføj dette til din `app.js`** (brug det samme array fra Opgave 1):
+> **Behold koden fra Opgave 1.**
+>
+> **Tilføj dette nedenunder dit `movies` array** i `app.js`:
 
 ```javascript
 for (const movie of movies) {
@@ -314,7 +316,7 @@ Prøv at tilføje en film til arrayet. Kører loopet en gang mere automatisk?
 
 Loopet kører koden indeni `{ }` én gang per film. Vi kan gøre hvad som helst med `movie` inde i loopet.
 
-**Prøv at udskrive en sætning per film:**
+> **Slet ikke noget nyt i filen. Erstat kun loopet fra 2.1 med dette loop:**
 
 ```javascript
 for (const movie of movies) {
@@ -326,9 +328,11 @@ for (const movie of movies) {
 
 ### 2.3: Find containeren med querySelector
 
-Før vi kan tilføje film til siden, skal JavaScript vide hvor de skal sættes ind. Vi bruger `querySelector` til at finde vores `#movie-list` section.
+Før vi kan tilføje film til siden, skal JavaScript vide hvor de skal sættes ind. Vi bruger `querySelector` til at finde vores `#movie-list` section i HTML'en.
 
-**Tilføj denne linje** til din `app.js` (udenfor loopet):
+> **Behold loopet fra 2.2.**
+>
+> **Tilføj denne linje over loopet** i `app.js` (altså udenfor loopet):
 
 ```javascript
 const movieList = document.querySelector("#movie-list");
@@ -343,7 +347,7 @@ I stedet for at skrive HTML direkte i filen, kan vi bygge det som en streng i Ja
 
 > **Template strings** bruger backticks (`` ` ``) i stedet for anførselstegn. Med `${}` kan du sætte en variabels værdi direkte ind i teksten.
 
-**Tilføj inde i loopet:**
+> **Erstat loopet fra 2.2 med dette loop** (behold `movieList` fra 2.3):
 
 ```javascript
 for (const movie of movies) {
@@ -365,7 +369,13 @@ Ser du HTML-strengen i konsollen for hver film?
 
 Nu bruger vi `insertAdjacentHTML` til faktisk at sætte HTML'en ind på siden.
 
-**Tilføj den sidste linje inde i loopet:**
+> **Behold loopet fra 2.4, men erstat kun `console.log(html);` med linjen herunder:**
+
+```javascript
+movieList.insertAdjacentHTML("beforeend", html);
+```
+
+Dit loop skal nu se sådan ud:
 
 ```javascript
 for (const movie of movies) {
@@ -487,22 +497,19 @@ for (const movie of movies) {
 
 ## Opgave 4: Vis Film-kort med Data
 
-**Formål:** Kombinér alt du har lært – loop gennem array af objects og vis alle informationer på siden.
+**Formål:** Byg en komplet film-visning fra data til UI med en tydelig, rolig arbejdsgang.
 
-### 4.1: Start med en frisk app.js
+> **Arbejdsregel i Opgave 4:**
+> Start med en frisk `app.js` i 4.1. Derefter bygger du kun videre trin for trin. Slet kun noget, når et trin siger "erstat".
 
-> **Slet alt i din app.js** (eller kommentér det ud), så du starter forfra.
+### 4.1: Start med data i en frisk app.js
 
-Indsæt dette i toppen af filen:
+> **Slet alt i `app.js`**, og indsæt dette som dit nye udgangspunkt:
 
 ```javascript
 "use strict";
 console.log("Movie App starter...");
-```
 
-Indsæt derefter dette array af film-objects (formateret for læsbarhed):
-
-```javascript
 const movies = [
   {
     title: "Inception",
@@ -529,35 +536,22 @@ const movies = [
 console.log("Alle film:", movies);
 ```
 
-> **Tjek i konsollen:** Ser du alle film-objects?
->
-> **Hvis du ikke ser det forventede resultat:**
->
-> - Tjek at du har gemt filen
-> - Tjek at du har skrevet alt korrekt
-> - Genindlæs browseren
-> - Se efter fejl i konsollen
+> **Tjek:** Ser du alle film i konsollen?
 
-### 4.2: Find containeren i DOM'en
+### 4.2: Find stedet i HTML hvor film skal vises
 
-Tilføj nedenunder:
+> **Behold alt fra 4.1. Tilføj kun dette nederst i filen:**
 
 ```javascript
 const movieList = document.querySelector("#movie-list");
 console.log(movieList);
 ```
 
-> **Tjek i konsollen:** Ser du DOM-elementet?
->
-> **Hvis du ikke ser det forventede resultat:**
->
-> - Tjek at id'et matcher HTML'en
-> - Genindlæs browseren
-> - Se efter fejl i konsollen
+> **Tjek:** Ser du et DOM-element i konsollen?
 
-### 4.3: Loop og byg HTML for hver film
+### 4.3: Loop gennem data og byg HTML som tekst
 
-Tilføj nedenunder:
+> **Behold alt fra 4.1 og 4.2. Tilføj kun dette nederst i filen:**
 
 ```javascript
 for (const movie of movies) {
@@ -570,47 +564,107 @@ for (const movie of movies) {
       </div>
     </article>
   `;
+
   console.log(html);
 }
 ```
 
-> **Tjek i konsollen:** Ser du HTML-strengen for hver film?
+> **Hvorfor dette trin?**
+> Du tester først at loop + template string virker korrekt, før du prøver at vise noget på siden.
 >
-> **Hvis du ikke ser det forventede resultat:**
+> **Tjek:**
 >
-> - Tjek at loopet er skrevet korrekt
-> - Tjek at movies-arrayet stadig findes
+> - Ser du én HTML-streng pr. film?
+> - Matcher antal logs antallet i `movies`?
 
-### 4.4: Indsæt HTML på siden
+### 4.4: Vis film-kortene på siden
 
-Udskift `console.log(html);` med:
+> **Behold samme loop fra 4.3. Erstat kun linjen `console.log(html);` med:**
 
 ```javascript
 movieList.insertAdjacentHTML("beforeend", html);
 ```
 
-Nu vises alle film på siden!
+> **Vigtigt:** Linjen skal stå **inde i loopet** (samme placering som `console.log(html);` stod før).
 
-> **Hvis du ikke ser film på siden:**
+Nu skal film-kortene blive vist i browseren.
+
+> **Hvad sker der her?**
 >
-> - Tjek at du har gemt filen
-> - Tjek at movieList ikke er null
-> - Tjek at HTML-strukturen matcher det forventede
-
-### 4.5: Eksperimentér
-
-- Tilføj en ny film til arrayet – dukker den op på siden?
-- Prøv at ændre en property (fx rating eller år) – opdateres det på siden?
-- Tilføj en ny property til et object og vis den i HTML'en
-- Prøv at ændre HTML-strukturen (fx tilføj et <span> eller en ekstra klasse)
-
-> **Quiz:**
+> - `html` er en tekststreng med HTML for én film
+> - `insertAdjacentHTML("beforeend", html)` indsætter den tekst som rigtig HTML i `#movie-list`
+> - Fordi det ligger inde i loopet, sker det én gang per film i arrayet
 >
-> - Hvad sker der hvis du ændrer rækkefølgen på properties i arrayet?
-> - Kan du vise kun film med rating over 8.7? Hvordan?
+> **Mini-refleksion:**
+> Du har ikke ændret din HTML-fil manuelt med 4 kort. I stedet beskriver du én skabelon, og JavaScript gentager den for alle film.
+
+> **Tjek:**
+>
+> - Ser du samme antal kort som film i `movies`?
+> - Hvis du tilføjer én film i arrayet, kommer der så automatisk ét kort mere?
+
+### 4.5: Tilpas og afprøv
+
+> **Slet ikke noget. Byg videre på koden fra 4.4.**
+
+- Tilføj en ny film i `movies` og tjek at den vises automatisk
+- Ændr `year` eller `rating` for en film og tjek at visningen opdateres
+- Tilføj en ny property (fx `genre`) og vis den i kortet
 
 > **Refleksion:**
-> Hvor meget lettere er det nu at vise mange informationer for mange film – sammenlignet med hardcoded HTML eller arrays af strenge?
+> Hvad er fordelen ved denne løsning i forhold til hardcoded HTML?
+
+---
+
+<details>
+<summary><strong>Løsning: Opgave 4 (samlet app.js)</strong></summary>
+
+```javascript
+"use strict";
+
+console.log("Movie App starter...");
+
+const movies = [
+  {
+    title: "Inception",
+    year: 2010,
+    rating: 8.8,
+  },
+  {
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7,
+  },
+  {
+    title: "Interstellar",
+    year: 2014,
+    rating: 8.6,
+  },
+  {
+    title: "The Dark Knight",
+    year: 2008,
+    rating: 9.0,
+  },
+];
+
+const movieList = document.querySelector("#movie-list");
+
+for (const movie of movies) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+</details>
 
 ---
 
