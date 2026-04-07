@@ -60,7 +60,16 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 </details>
 
 <details>
-<summary><strong>2. Arrays og Loops</strong></summary>
+<summary><strong>2. CSS Grid</strong></summary>
+
+- Hvorfor grid passer godt til movie cards
+- `display: grid`, `grid-template-columns` og `gap`
+- Kort styling-øvelse: byg et simpelt, responsivt card-grid (Opgave 0)
+
+</details>
+
+<details>
+<summary><strong>3. Arrays og Loops</strong></summary>
 
 - Hvad er et array? `const movies = ["Inception", "Matrix"]`
 - Loop med `for...of`: Hvorfor? (Ellers skal vi skrive samme kode 100 gange!)
@@ -69,7 +78,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 </details>
 
 <details>
-<summary><strong>3. Objects</strong></summary>
+<summary><strong>4. Objects</strong></summary>
 
 - Hvad er et objekt? Data med labels (key-value)
 - Fra `let title = "Inception"` til `let movie = { title: "Inception", year: 2010 }`
@@ -79,7 +88,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 </details>
 
 <details>
-<summary><strong>4. Arrays af Objects og Template Literals</strong></summary>
+<summary><strong>5. Arrays af Objects og Template Literals</strong></summary>
 
 - Kombiner arrays + objects = super kraftfuldt
 - Loop gennem objects og access properties
@@ -90,7 +99,7 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 </details>
 
 <details>
-<summary><strong>5. Funktioner og Afrunding</strong></summary>
+<summary><strong>6. Funktioner og Afrunding</strong></summary>
 
 - Funktioner til at strukturere kode: `showMovies()` og `showMovie(movie)` (Opgave 5)
 - Udfordringer: billeder, flere film, rating-highlight (Opgave 6)
