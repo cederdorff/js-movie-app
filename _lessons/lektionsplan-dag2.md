@@ -12,12 +12,11 @@ Formålet med denne lektion er at bygge videre på jeres Movie App projekt fra D
 - Kombinere arrays og objekter til movie data
 - Bruge template literals til dynamisk HTML
 - Strukturere kode med funktioner
-- **Bonus:** Introduktion til fetch (valgfri)
 
 **Hvorfor hardcoded data først?**
 Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og objekter uden at skulle håndtere kompleksiteten af asynkrone kald. Fetch kommer som bonus, men er ikke et krav i dag.
 
-**Progression:**
+**Progression i forløbet:**
 
 - **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
 - **DAG 2:** Arrays, loops, hardcoded movie data ← DU ER HER
@@ -27,41 +26,45 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 ## Forberedelse
 
 - **Færdiggør DAG 1:**
+  - Se opgaven her: [Movie App - DAG 1](../_exercises/movie-app-1.md)
   - Sørg for din klik-tæller virker
   - Forstå variables, querySelector og addEventListener
-  - Har dit `movie-app` projekt klar
 
-- **Læs:**
-  - [Arrays på javascript.info](https://javascript.info/array) (skim - fokus på basics)
-  - [Objects på javascript.info](https://javascript.info/object) (skim - basics)
-  - [Loops på javascript.info](https://javascript.info/while-for) (fokus på `for...of`)
-
-### På dagen:
-
-- Åbn dit `movie-app` projekt fra DAG 1
-- Vær klar til at udvide samme projekt med arrays og loops
-- Developer Tools åben
+- **Læs (små korte artikler):**
+  - **Arrays:**
+    - [Arrays](https://thevalleyofcode.com/lesson/js-arrays/)
+    - [Number of items in an array](https://thevalleyofcode.com/lesson/js-arrays/number-of-items-in-an-array/)
+    - [Adding an item to an existing array](https://thevalleyofcode.com/lesson/js-arrays/adding-an-item-to-an-existing-array/)
+  - **Loops:**
+    - [Loops](https://thevalleyofcode.com/lesson/js-loops/)
+    - [The for...of loop](https://thevalleyofcode.com/lesson/js-loops/the-for-of-loop/)
+  - **Objects:**
+    - [Objects](https://thevalleyofcode.com/lesson/js-objects/)
+    - [How to create an object](https://thevalleyofcode.com/lesson/js-objects/how-to-create-an-object/)
+    - [Object properties](https://thevalleyofcode.com/lesson/js-objects/object-properties/)
+  - **Functions:**
+    - [Functions](https://thevalleyofcode.com/lesson/js-functions/)
+    - [Function parameters](https://thevalleyofcode.com/lesson/js-functions/function-parameters/)
+    - [Returning values from a function](https://thevalleyofcode.com/lesson/js-functions/returning-values-from-a-function/)
 
 ## Agenda
 
 <details>
-<summary><strong>1. Recap & Projektopsætning</strong></summary>
+<summary><strong>1. Recap og Projektopsætning</strong></summary>
 
 - Hvem fik klik-tæller til at virke? Vis udfordringer (2-3 frivillige)
 - Dagens mål: Fra klik-tæller til Movie App med rigtige film-lister
 - Opdater HTML + CSS til DAG 2 struktur (`section#movie-list`, movie card grid)
-- Indsæt 2-3 hardcoded film-kort som bro-øvelse — refleksion: "Hvorfor er dette tungt i hånden?"
-- Kobling til opgaven: Opgave 0.1-0.6
+- Indsæt 2-3 hardcoded film-kort som bro-øvelse — refleksion: "Hvorfor er dette tungt i hånden?" (Opgave 0.1-0.6)
 
 </details>
 
 <details>
-<summary><strong>2. Arrays & Loops</strong></summary>
+<summary><strong>2. Arrays og Loops</strong></summary>
 
 - Hvad er et array? `const movies = ["Inception", "Matrix"]`
 - Loop med `for...of`: Hvorfor? (Ellers skal vi skrive samme kode 100 gange!)
-- Praktisk øvelse: Loop gennem film-array + første DOM-rendering
-- Kobling til opgaven: Opgave 1.1-1.3 + Opgave 2.1-2.5
+- Praktisk øvelse: Loop gennem film-array + første DOM-rendering (Opgave 1 & 2)
 
 </details>
 
@@ -71,32 +74,28 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 - Hvad er et objekt? Data med labels (key-value)
 - Fra `let title = "Inception"` til `let movie = { title: "Inception", year: 2010 }`
 - Dot notation: `movie.title`, `movie.year`
-- Praktisk øvelse: Lav movie-objekter
-- Kobling til opgaven: Opgave 3.1-3.3
+- Praktisk øvelse: Lav movie-objekter (Opgave 3)
 
 </details>
 
 <details>
-<summary><strong>4. Arrays af Objects & Template Literals</strong></summary>
+<summary><strong>4. Arrays af Objects og Template Literals</strong></summary>
 
 - Kombiner arrays + objects = super kraftfuldt
 - Loop gennem objects og access properties
 - Template literals med backticks og `${}`
 - `insertAdjacentHTML` - tilføj til DOM
-- Fokus på god praksis: Struktur i JS/HTML, styling i CSS (ingen inline styles)
-- Kobling til opgaven: Opgave 4.1-4.5
+- Fokus på god praksis: Struktur i JS/HTML, styling i CSS (ingen inline styles) (Opgave 4)
 
 </details>
 
 <details>
-<summary><strong>5. Funktioner & Afrunding</strong></summary>
+<summary><strong>5. Funktioner og Afrunding</strong></summary>
 
-- Funktioner til at strukturere kode
-- `showMovies()` og `showMovie(movie)`
-- Udfordringer: billeder, flere film, rating-highlight
-- **Bonus introduktion:** forhåndsblik på fetch (ikke krav i dag)
+- Funktioner til at strukturere kode: `showMovies()` og `showMovie(movie)` (Opgave 5)
+- Udfordringer: billeder, flere film, rating-highlight (Opgave 6)
+- **Bonus introduktion:** forhåndsblik på fetch, ikke et krav i dag (BONUS)
 - Hjemmearbejde: Færdiggør arrays af objekter
-- Kobling til opgaven: Opgave 5 + Opgave 6 + BONUS
 
 </details>
 
