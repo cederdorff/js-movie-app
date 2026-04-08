@@ -90,7 +90,7 @@ Vi starter med en klik-tæller fordi det er den korteste vej ind i variable, DOM
 
 **Slides:**
 
-- [JavaScript - 1. semester](https://cederdorff.com/race/slides/javascript-1-semester.pdf)
+- [JavaScript - 1. semester: uddrag anvendes af slide 1-78](https://cederdorff.com/race/slides/javascript-1-semester.pdf)
 
 **Opgaver:**
 
