@@ -466,7 +466,7 @@ I dag arbejder vi med klik-eventet (`click`) på en knap.
 console.log("App starter...");
 
 // Find knappen
-let clickButton = document.querySelector("#click-button");
+const clickButton = document.querySelector("#click-button");
 
 // Lyt efter klik
 clickButton.addEventListener("click", function () {
@@ -555,6 +555,10 @@ Test med `console.log()` at de faktisk bliver fundet.
 const countDisplay = document.querySelector("#counter");
 const clickButton = document.querySelector("#click-button");
 const resetButton = document.querySelector("#reset-button");
+
+console.log(countDisplay);
+console.log(clickButton);
+console.log(resetButton);
 ```
 
 </details>
