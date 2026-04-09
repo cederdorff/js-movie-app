@@ -51,7 +51,7 @@ Nu har du et sikkert udgangspunkt du kan vende tilbage til!
 
 Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
 
-**Åbn `index.html` og lav disse to ændringer:**
+**Åbn `index.html` og lav disse tre ændringer:**
 
 1. **Opdater `<title>`** til `Movie App - DAG 2`
 
@@ -526,7 +526,7 @@ for (const movie of movies) {
 
 ---
 
-## Opgave 4: Vis Movie Card med data
+## Opgave 4: Vis movie-cards med data
 
 **Formål:** Byg en komplet film-visning fra data til UI med en tydelig, rolig arbejdsgang.
 
@@ -782,14 +782,6 @@ function showMovie(movie) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
-
-movies.push({
-  title: "Pulp Fiction",
-  year: 1994,
-  rating: 8.9,
-});
-
-showMovies();
 ```
 
 > **Forskel på funktionerne:**
@@ -884,6 +876,14 @@ function showMovie(movie) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
+
+movies.push({
+  title: "Pulp Fiction",
+  year: 1994,
+  rating: 8.9,
+});
+
+showMovies();
 ```
 
 </details>
@@ -1295,7 +1295,7 @@ let movies = [];
 
 Tilføj dette under din `movieList`-linje:
 
-> Vi bruger fetch kort her i BONUS, men vi gennemgår fetch grundigt næste gang.
+> Vi bruger fetch kort her i ekstraopgaven, men vi gennemgår fetch grundigt næste gang.
 
 ```javascript
 start();
