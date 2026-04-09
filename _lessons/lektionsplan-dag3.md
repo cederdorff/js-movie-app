@@ -2,101 +2,98 @@
 
 ## Formål
 
-Formålet med denne lektion er at introducere jer til at hente rigtig data fra projektets JSON-fil og implementere én simpel genre-filter funktion.
+Formålet med denne lektion er at introducere jer til at hente rigtig data fra projektets JSON-fil og implementere ét simpelt genre-filter med dropdown.
 
 **Mål:**
 
-- Forstå og anvende `fetch()` til at hente data fra URL
+- Forstå og anvende `fetch()` til at hente data fra en URL
 - Arbejde med `async`/`await` pattern
 - Konvertere JSON til JavaScript objekter
 - Forstå og bruge `Array.filter()` metoden
 - Bruge `.includes()` til array søgning
-- Implementere ÉN simpel genre-filter
-- Håndtere tomme filtrerede resultater
+- Implementere ét simpelt genre-filter med dropdown
+- Håndtere tomme filtrerede resultater med en besked
 
-**Hvorfor kun én filter?**
-Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at blive overvældet af kombinerede filtre og ranges. Sortering tager vi som en enkel, fast del af DAG 4.
+**Hvorfor kun ét filter?**
+Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at blive overvældet af kombinerede filtre og ranges. Sortering tager vi som en enkel, fast del af DAG 4.
+
+**Progression i forløbet:**
+
+- **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
+- **DAG 2:** Arrays, loops, hardcoded movie data
+- **DAG 3:** Fetch + simpel genre-filter ← DU ER HER
+- **DAG 4:** Titel-søgning + dialog + sortering + deployment
 
 ## Forberedelse
 
 - **Færdiggør DAG 2:**
-  - Sørg for du har arrays af objekter der virker
-  - Forstå loops og template literals
-  - Ha' dit hardcoded movie data klar
+  - Se opgaven her: [Movie App - DAG 2](../_exercises/movie-app-2.md)
+  - Sørg for `showMovies()` og `showMovie(movie)` virker
+  - Du skal kunne vise movie cards
 
-- **Læs:**
-  - [Fetch på javascript.info](https://javascript.info/fetch) (fokus på basics)
-  - [JSON på W3Schools](https://www.w3schools.com/js/js_json.asp) (quick overview)
-  - [Array.filter() på MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) (skim eksempler)
-
-### På dagen:
-
-- Åbn dit movie-app projekt fra DAG 2
-- Vær klar til at erstatte hardcoded data med fetch
-- Developer Tools åben og klar
+- **Læs (små korte artikler):**
+  - **Fetch:**
+    - [Fetch](https://thevalleyofcode.com/lesson/fetch/)
+    - [Introduction to Fetch](https://thevalleyofcode.com/lesson/fetch/introduction/)
+    - [Async Fetch på W3Schools](https://www.w3schools.com/js/js_async_fetch.asp)
+  - **JSON:**
+    - [JSON](https://thevalleyofcode.com/lesson/js-built-in-objects/json/)
+    - [JSON på W3Schools](https://www.w3schools.com/js/js_json.asp)
+  - **Filter:**
+    - [Array filter()](https://thevalleyofcode.com/lesson/js-array-functions/filter/)
+    - [Array filter() på W3Schools](https://www.w3schools.com/jsref/jsref_filter.asp)
 
 ## Agenda
 
-**9:00 - 9:30 | Opsamling & Vis og fortæl (30 min)**
+<details>
+<summary><strong>1. Recap og opsamling</strong></summary>
 
-- Hvem fik arrays af objekter til at virke?
-- Vis og fortæl: Vis jeres movie app (5-6 studerende)
+- Hvem fik arrays af objekter til at virke? Vis og fortæl (2-3 frivillige)
 - Quiz: Arrays, objects, loops, template literals
-- Dagens mål: Rigtig data + én simpel filter
+- Dagens mål: Rigtig data fra fetch + ét simpelt genre-filter (Opgave 0)
 
-**9:30 - 10:30 | Fetch & JSON Fundamentals (60 min)**
+</details>
+
+<details>
+<summary><strong>2. Fetch og JSON</strong></summary>
 
 - Hvad er fetch? Henter data fra internettet
-- Hvad er JSON? Data format der ligner JavaScript
-- Hvorfor async/await? Data tager tid at hente
-- Pizza analogi: Asynkron vs synkron programmering
+- Hvad er JSON? Dataformat der ligner JavaScript
+- Hvorfor async/await? Data tager tid at hente — pizza-analogien
 - Live demo: Fetch med async/await
-- Praktisk øvelse: Erstat hardcoded data med fetch
-- Debugging: Typiske fetch fejl
+- Praktisk øvelse: Erstat hardcoded data med fetch (Opgave 1)
 
-**10:30 - 10:45 | Pause **
+</details>
 
-**10:45 - 11:45 | Array.filter() Deep Dive (60 min)**
+<details>
+<summary><strong>3. Array.filter() og .includes()</strong></summary>
 
 - Hvad er `.filter()`? Udvælg specifikke elementer
-- Filter function returnerer `true` (behold) eller `false` (drop)
-- Live demo: Simple filter eksempler med numbers
-- Praktisk øvelse: Filtrer film baseret på år og rating
-- Code review: Forklar hvad `return` gør
+- Filterfunktionen returnerer `true` (behold) eller `false` (drop)
+- Live demo: Simpelt filter-eksempel med tal
+- Problem: Genre er et array `["Action", "Sci-Fi"]` — løsning: `.includes()`
+- Praktisk øvelse: Filtrer film baseret på genre (Opgave 2)
 
-**11:45 - 12:00 | .includes() for Arrays (15 min)**
+</details>
 
-- Problem: Genre er et array `["Action", "Sci-Fi"]`
-- Solution: `.includes()` checker om array indeholder værdi
-- Quick test i console
+<details>
+<summary><strong>4. Genre-filter med dropdown</strong></summary>
 
-**12:00 - 13:00 | Frokost **
-
-**13:00 - 14:15 | Implementer ÉN Genre-filter (75 min)**
-
-- Planlæg: HTML knapper, CSS styling, JavaScript logik
-- Kod med trin-for-trin:
-  - HTML: Filter knapper
-  - HTML: Behold semantisk struktur (`section.controls`, `section#movie-list`)
-  - CSS: Button styling og hover effects
-  - JavaScript: Filter logik med `.filter()` og `.includes()`
-  - JavaScript: Render film-kort som semantiske `<article>` elementer
-- Praktisk øvelse: Implementer "Vis alle" og "Vis Action"
-- Tilføj flere genre knapper (Drama, Comedy, Sci-Fi)
-
-**14:15 - 14:45 | Polishing & Edge Cases (30 min)**
-
+- Planlæg: HTML dropdown, JavaScript logik
+- Trin-for-trin: `populateGenreSelect()`, `applyGenreFilter()`, `showMovies(filteredMovies)` (Opgave 3)
 - Håndter tomme resultater: "Ingen film fundet"
-- Implementer genre-valg (dropdown eller enkel knap)
-- Vis counter: "Viser 23 film"
-- Test at alt virker
+- Vis filmtæller: "Viser 23 film"
 
-**14:45 - 15:00 | Afrunding & Forhåndsblik (15 min)**
+</details>
+
+<details>
+<summary><strong>5. Afrunding og forhåndsblik</strong></summary>
 
 - Recap: fetch, async/await, filter, includes
-- Spørgsmål: Hvad var sværest? Hvad var coolest?
-- Forhåndsblik på DAG 4: Søgning, dialog og deployment!
-- Hjemmearbejde: Ryd op i kode og forbered titel-søgning
+- Hjemmearbejde: Ryd op i kode
+- Forhåndsblik på DAG 4: Titel-søgning, dialog og deployment
+
+</details>
 
 ## Materialer
 
@@ -108,14 +105,7 @@ Ved at fokusere på én filter ad gangen lærer I konceptet ordentligt uden at b
 
 - [Movie App - DAG 3](../_exercises/movie-app-3.md)
 
-**Eksempel kode:**
-
-- Komplet DAG 3 eksempel: `_solutions/dag3/app.js`
-- HTML: `_solutions/dag3/index.html`
-- CSS: `_solutions/dag3/style.css`
-
 **Links:**
 
 - Movie Data (ekstern URL): https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
 - Movie App (færdig version): https://cederdorff.com/js-movie-app/
-- Array.filter() dokumentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter

@@ -73,16 +73,14 @@ function showMovies(movies) {
 
   // Loop gennem film
   for (const movie of movies) {
-    showMovie(movie);
+    showMovie(movie, movieList);
   }
 }
 
-function showMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
-
-  const html = `
+function showMovie(movie, movieList) {
+  const html = /* html */ `
     <article class="movie-card">
-      <img src="${movie.image}" alt="${movie.title}">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
       <div class="movie-info">
         <h3>${movie.title}</h3>
         <p>År: ${movie.year}</p>

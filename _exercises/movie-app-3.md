@@ -60,6 +60,36 @@ function showMovie(movie) {
 
 **Hvis ikke - kopier fra DAG 2 guiden først!**
 
+### Trin 2: To ting ændrer sig i dag
+
+Før du går i gang er der to forskelle fra DAG 2 du skal kende til:
+
+**1. `showMovies()` får nu en parameter**
+
+I DAG 2 brugte vi `showMovies()` uden parameter — den kendte altid `movies`-variablen direkte.
+
+I DAG 3 sender vi listen med som argument: `showMovies(allMovies)` eller `showMovies(filteredMovies)`.
+
+Det betyder funktionen kan vise _hvilken som helst_ liste af film — ikke kun den globale. Det er det der gør filtrering mulig.
+
+```javascript
+// DAG 2
+function showMovies() {
+  for (const movie of movies) { ... } // bruger den globale variabel
+}
+
+// DAG 3
+function showMovies(movies) {
+  for (const movie of movies) { ... } // bruger den modtagne liste
+}
+```
+
+**2. `const movieList` flyttes ind i `showMovies()`**
+
+I DAG 2 stod `const movieList = document.querySelector("#movie-list")` øverst i filen som en global variabel.
+
+I DAG 3 er den stadig global — men i løsningskoden du ser frem over, er den slået op inde i `showMovies()`. Det er ikke nogen stor forskel i praksis, men notér det så du ikke bliver overrasket.
+
 ---
 
 ## Opgave 1: Fetch - Hent Rigtig Data
@@ -122,9 +152,9 @@ function showMovies(movies) {
 function showMovie(movie) {
   const movieList = document.querySelector("#movie-list");
 
-  const html = `
+  const html = /* html */ `
     <article class="movie-card">
-      <img src="${movie.image}" alt="${movie.title}" style="width: 100%; border-radius: 10px;">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
       <div class="movie-info">
         <h3>${movie.title}</h3>
         <p>År: ${movie.year}</p>
