@@ -1275,6 +1275,16 @@ Se tilbage på hele flowet fra 8.1 til 8.3:
 
 ---
 
+> **Checkpoint — gem dit arbejde med Git**
+>
+> Inden du går videre til ekstraopgaven, så gem din nuværende løsning med en commit:
+>
+> 1. Åbn **GitHub Desktop**
+> 2. Skriv en beskrivelse, fx `Dag 2 færdig – arrays, loops, objekter og funktioner`
+> 3. Klik **Commit to main**
+
+---
+
 ## Opgave 9: Ekstraopgave - Introduktion til Fetch
 
 **Kun hvis du er færdig med alt ovenstående!**
