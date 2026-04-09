@@ -60,9 +60,11 @@ Nu skal vi ændre vores `index.html` fra klik-tæller til en film-liste.
 3. **Erstat alt indhold i `<main>`** med en tom section til film:
 
 ```html
-<section id="movie-list" class="movie-grid" aria-label="Filmliste">
-  <!-- Film vises her med JavaScript -->
-</section>
+<main>
+  <section id="movie-list" class="movie-grid" aria-label="Filmliste">
+    <!-- Film vises her med JavaScript -->
+  </section>
+</main>
 ```
 
 Klik-tæller knappen og counter-boxen forsvinder — det er meningen!
@@ -71,7 +73,7 @@ Klik-tæller knappen og counter-boxen forsvinder — det er meningen!
 
 **Åbn `app.css` og lav disse ændringer:**
 
-**1. Slet al counter-CSS** — find og slet blokkene for `.counter-container`, `.info`, `#counter`, `button` og `button:hover`. Vi bruger dem ikke mere.
+**1. Slet al counter-CSS**: find og slet blokkene for `.counter-container`, `.info`, `#counter`, `button` og `button:hover`. Vi skal ikke bruge dem mere.
 
 **2. Erstat `main`-blokken** med en version der passer til et grid-layout:
 
@@ -83,7 +85,7 @@ main {
 }
 ```
 
-**3. Tilføj disse nye klasser** for film-grid og film-kort nederst i filen:
+**3. Tilføj disse nye klasser** for movie-grid og movie-card nederst i CSS-filen:
 
 > **CSS Grid** lader dig arrangere elementer i rækker og kolonner. `grid-template-columns: 1fr 1fr` betyder to kolonner der deler pladsen ligeligt. Med `@media` skifter vi layout afhængigt af skærmbredde — det kalder man responsivt design.
 
@@ -142,7 +144,7 @@ main {
 
 ### 0.4: Ryd op i app.js
 
-**Åbn `app.js` og slet alt indhold** - vi starter med en frisk begyndelse til DAG 2:
+**Åbn `app.js` og slet alt indhold** - vi starter med en frisk begyndelse til DAG 2. Indsæt i stedet følgende:
 
 ```javascript
 "use strict";
@@ -166,9 +168,9 @@ I dag lærer vi arrays og loops - det er nyt koncept. Klik-tæller koden har du 
 
 ### 0.6: Indsæt 3 hardcoded film-kort i HTML (bro-øvelse)
 
-Før vi bruger JavaScript, laver vi **samme resultat manuelt i HTML**.
+Før vi bruger JavaScript til at generere movie-cards, laver vi **samme resultat manuelt i HTML**.
 
-Det kalder man **hardcoded indhold**: du skriver hvert film-kort direkte i koden, ét ad gangen.
+Det kalder man **hardcoded indhold**: du skriver hvert film-kort direkte i koden (HTML'en), ét ad gangen.
 
 Det er vigtigt at prøve først, fordi du så kan mærke problemet med hænderne:
 
@@ -326,28 +328,13 @@ for (const movie of movies) {
 
 Ændr teksten inde i loopet. Ser du ændringen for alle film på én gang?
 
-### 2.3: Find containeren med querySelector
-
-Før vi kan tilføje film til siden, skal JavaScript vide hvor de skal sættes ind. Vi bruger `querySelector` til at finde vores `#movie-list` section i HTML'en.
-
-> **Behold loopet fra 2.2.**
->
-> **Tilføj denne linje over loopet** i `app.js` (altså udenfor loopet):
-
-```javascript
-const movieList = document.querySelector("#movie-list");
-console.log(movieList);
-```
-
-Ser du elementet i konsollen? Det er den section vi skal fylde med film-kort.
-
-### 2.4: Byg HTML med en template string
+### 2.3: Byg HTML med en template string
 
 I stedet for at skrive HTML direkte i filen, kan vi bygge det som en streng i JavaScript.
 
 > **Template strings** bruger backticks (`` ` ``) i stedet for anførselstegn. Med `${}` kan du sætte en variabels værdi direkte ind i teksten.
 
-> **Erstat loopet fra 2.2 med dette loop** (behold `movieList` fra 2.3):
+> **Tilpas loopet fra 2.2 med dette loop, hvor vi genererer en HTML-tekst-streng for hver movie:**
 
 ```javascript
 for (const movie of movies) {
@@ -363,19 +350,46 @@ for (const movie of movies) {
 }
 ```
 
-Ser du HTML-strengen i konsollen for hver film?
+Ser du HTML-strengen i konsollen for hver film? Og forstår du, hvad der sker? Vi kan endnu ikke se ændringer på siden.
+
+### 2.4: Find containeren med querySelector
+
+Nu skal JavaScript vide hvor filmene skal indsættes. Vi bruger `querySelector` til at finde vores `#movie-list` section i HTML'en.
+
+> **Behold loopet fra 2.3 og tilføj denne linje over loopet** i `app.js` (altså udenfor loopet):
+
+```javascript
+const movieList = document.querySelector("#movie-list");
+console.log(movieList);
+```
+
+Ser du elementet i konsollen? Det er den section vi skal fylde med movie cards om lidt.
 
 ### 2.5: Tilføj HTML til siden
 
 Nu bruger vi `insertAdjacentHTML` til faktisk at sætte HTML'en ind på siden.
 
-> **Behold loopet fra 2.4, men erstat kun `console.log(html);` med linjen herunder:**
+**Trin 1: Ryd den midlertidige hardcoded HTML i `index.html`**
+
+Fjern de 3 hardcodede movie cards fra Opgave 0.6, så `#movie-list` igen ser sådan ud:
+
+```html
+<section id="movie-list" class="movie-grid" aria-label="Filmliste">
+  <!-- Film vises her med JavaScript -->
+</section>
+```
+
+Kontroller at du ikke ser film på siden længere.
+
+**Trin 2: Opdatér JavaScript-loopet**
+
+Behold loopet fra 2.3 (og `movieList` fra 2.4), men erstat kun `console.log(html);` med:
 
 ```javascript
 movieList.insertAdjacentHTML("beforeend", html);
 ```
 
-Dit loop skal nu se sådan ud:
+Dit loop skal nu være:
 
 ```javascript
 for (const movie of movies) {
@@ -391,7 +405,15 @@ for (const movie of movies) {
 }
 ```
 
-Du skulle nu se 4 film-kort på siden! Tilføj en film til arrayet og tjek at kortet dukker op automatisk.
+**Trin 3: Tjek resultatet i browseren**
+
+Du skulle nu se 4 film-kort på siden.
+
+- Tilføj en film til arrayet
+- Genindlæs siden
+- Bekræft at der automatisk kommer ét kort mere
+
+> **Note:** Lige nu indeholder hvert kort kun titel. Det er med vilje, så du kan fokusere på loop + template + indsætning i DOM. I de næste opgaver bygger vi kortene ud med flere datafelter (fx år, rating, genre og billede).
 
 > **Stop op og reflektér:** Sammenlign hvad du har nu med Opgave 0.6, hvor du hardcodede 3 film-kort i HTML.
 >
@@ -401,17 +423,25 @@ Du skulle nu se 4 film-kort på siden! Tilføj en film til arrayet og tjek at ko
 >
 > Det er præcis den forskel arrays + loops gør: **du beskriver hvad der skal ske med én film, og computeren gør det for alle**.
 
+### Checkpoint: Commit før Opgave 3
+
+Inden du går videre til objects (hvor vi nulstiller `app.js`), lav en commit så du altid kan gå tilbage til din færdige array + loop version.
+
+Forslag til commit-besked:
+
+`DAG 2 - færdig med Opgave 2 (arrays og loops)`
+
 ---
 
 ## Opgave 3: Hvad er et Object?
 
-**Formål:** Forstå hvordan man kan gemme flere informationer om én ting – og hvordan man arbejder med arrays af objects.
+**Formål:** Forstå hvordan man kan gemme flere informationer om én ting (movie) – og hvordan man arbejder med arrays af objects.
 
 ### 3.1: Opret et object for én film
 
 > **Slet alt i din app.js** (eller kommentér det ud), så du starter med en tom fil til dette trin.
 
-Et object samler flere informationer om én ting:
+Et object samler flere informationer om én ting - prøv det af i app.js:
 
 ```javascript
 const movie = {
@@ -463,13 +493,14 @@ console.log("Anden film:", movies[1]);
 > **Eksperiment:**
 >
 > - Tilføj en tredje film til arrayet.
+> - Hvordan logger du det?
 > - Prøv at logge `movies.length`.
 
 ### 3.3: Loop gennem arrayet af objects
 
 > **Tilføj dette loop nedenunder arrayet fra 3.2** i din app.js.
 
-Nu kan vi bruge et loop til at arbejde med alle film på én gang:
+Nu kan vi bruge et loop til at arbejde med alle film-objekterne på én gang:
 
 ```javascript
 for (const movie of movies) {
@@ -495,7 +526,7 @@ for (const movie of movies) {
 
 ---
 
-## Opgave 4: Vis Film-kort med Data
+## Opgave 4: Vis Movie Card med data
 
 **Formål:** Byg en komplet film-visning fra data til UI med en tydelig, rolig arbejdsgang.
 
@@ -536,7 +567,7 @@ const movies = [
 console.log("Alle film:", movies);
 ```
 
-> **Tjek:** Ser du alle film i konsollen?
+> **Tjek:** Ser du alle film i konsollen? Kan du også logge antallet af film?
 
 ### 4.2: Find stedet i HTML hvor film skal vises
 
@@ -574,7 +605,7 @@ for (const movie of movies) {
 >
 > **Tjek:**
 >
-> - Ser du én HTML-streng pr. film?
+> - Ser du én HTML-streng pr. film i konsollen?
 > - Matcher antal logs antallet i `movies`?
 
 ### 4.4: Vis film-kortene på siden
@@ -595,7 +626,7 @@ Nu skal film-kortene blive vist i browseren.
 > - `insertAdjacentHTML("beforeend", html)` indsætter den tekst som rigtig HTML i `#movie-list`
 > - Fordi det ligger inde i loopet, sker det én gang per film i arrayet
 >
-> **Mini-refleksion:**
+> **Refleksion:**
 > Du har ikke ændret din HTML-fil manuelt med 4 kort. I stedet beskriver du én skabelon, og JavaScript gentager den for alle film.
 
 > **Tjek:**
@@ -609,7 +640,6 @@ Nu skal film-kortene blive vist i browseren.
 
 - Tilføj en ny film i `movies` og tjek at den vises automatisk
 - Ændr `year` eller `rating` for en film og tjek at visningen opdateres
-- Tilføj en ny property (fx `genre`) og vis den i kortet
 
 > **Refleksion:**
 > Hvad er fordelen ved denne løsning i forhold til hardcoded HTML?
@@ -676,9 +706,16 @@ for (const movie of movies) {
 
 ### 5.1: Pak din eksisterende rendering ind i `showMovies()`
 
-> **Behold koden fra Opgave 4.**
->
-> **Tilføj denne funktion nederst i filen:**
+> **Behold koden fra Opgave 4. Du skal refaktorere den eksisterende kode (ikke copy/paste den samme kode to steder).**
+
+Gør det i denne rækkefølge:
+
+1. Opret funktionen `showMovies()` over dit nuværende for-loop.
+2. Klip det eksisterende for-loop ud og indsæt det inde i `showMovies()`.
+3. Tilføj `movieList.innerHTML = "";` øverst i funktionen.
+4. Kald til sidst funktionen med `showMovies();` der hvor loopet stod før.
+
+Sådan kan det se ud:
 
 ```javascript
 function showMovies() {
@@ -698,25 +735,34 @@ function showMovies() {
     movieList.insertAdjacentHTML("beforeend", html);
   }
 }
-```
 
-> **Vigtigt:** Indholdet i `showMovies()` er den samme kode, du allerede skrev i Opgave 4, bare samlet i en funktion.
->
-> **Erstat derefter hele dit nuværende for-loop med:**
-
-```javascript
 showMovies();
 ```
+
+> **Vigtigt:** Målet er at flytte den kode du allerede har, ikke at have dobbeltkode midlertidigt.
 
 > **Tjek:** Virker siden stadig som før?
 
 ### 5.2: Del op i to funktioner (`showMovies` og `showMovie`)
 
-> **Trin A:** Gå ind i `showMovies()` og erstat loopets indhold med:
+**Hvad skal der ske i dette trin?**
+
+Nu deler vi ansvaret op i to funktioner:
+
+- `showMovies()` styrer listen (nulstiller + loop)
+- `showMovie(movie)` bygger og indsætter ét card
+
+Målet er, at koden bliver lettere at læse, genbruge og udvide.
+
+> **Trin A:** Opdatér `showMovies()` så den ser sådan ud:
 
 ```javascript
-for (const movie of movies) {
-  showMovie(movie);
+function showMovies() {
+  movieList.innerHTML = "";
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
 }
 ```
 
@@ -736,12 +782,20 @@ function showMovie(movie) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
+
+movies.push({
+  title: "Pulp Fiction",
+  year: 1994,
+  rating: 8.9,
+});
+
+showMovies();
 ```
 
 > **Forskel på funktionerne:**
 >
-> - `showMovies()` styrer hele listen (loop gennem alle film)
-> - `showMovie(movie)` viser én film ad gangen
+> - `showMovies()` nulstiller listen og styrer hele flowet (loop gennem alle film)
+> - `showMovie(movie)` renderer ét movie-card ad gangen
 
 > **Tjek:** Virker appen stadig helt som i Opgave 4?
 
@@ -761,8 +815,10 @@ showMovies();
 
 > **Refleksion:**
 >
-> - Hvad bliver lettere med denne struktur?
-> - Hvor vil søgning/filter passe bedst ind senere?
+> - Hvad skulle du ændre for at vise en ny film: data, HTML-skabelon eller begge dele?
+> - Hvor mange steder ændrede du kode for at få "Pulp Fiction" vist?
+> - Hvad er fordelen ved at kalde `showMovies()` efter en ændring i `movies`?
+> - Hvis du senere laver søgning/filter, hvor vil det være smartest at kalde `showMovies()`?
 
 **Hvorfor funktioner?**
 
@@ -925,7 +981,7 @@ Tilføj **minimum 3 film-objects** til dit `movies` array. Find selv data online
 
 ```javascript
 function showMovie(movie) {
-  const highlightClass = movie.rating >= 8.5 ? "movie-card--highlight" : "";
+  const highlightClass = movie.rating > 8.5 ? "movie-card--highlight" : "";
 
   const html = /* html */ `
     <article class="movie-card ${highlightClass}">
@@ -941,8 +997,6 @@ function showMovie(movie) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 ```
-
-> **Bemærk:** Brug den `movieList` du allerede har defineret tidligere i din kode (som i Opgave 5), i stedet for at lave en ny `querySelector` inde i funktionen.
 
 > **Hvad sker der her?**
 >
@@ -979,36 +1033,7 @@ const movies = [
     rating: 8.7,
     image: "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
   },
-  {
-    title: "Interstellar",
-    year: 2014,
-    rating: 8.6,
-    image: "https://m.media-amazon.com/images/I/71n58Y6XHSL._AC_SL1024_.jpg",
-  },
-  {
-    title: "The Dark Knight",
-    year: 2008,
-    rating: 9.0,
-    image: "https://m.media-amazon.com/images/I/71pV4vnt4BL._AC_SL1178_.jpg",
-  },
-  {
-    title: "Pulp Fiction",
-    year: 1994,
-    rating: 8.9,
-    image: "https://m.media-amazon.com/images/I/81UTs3sMJNL._AC_SL1500_.jpg",
-  },
-  {
-    title: "Whiplash",
-    year: 2014,
-    rating: 8.5,
-    image: "https://m.media-amazon.com/images/I/91P9AMxGzCL._AC_SL1500_.jpg",
-  },
-  {
-    title: "Arrival",
-    year: 2016,
-    rating: 7.9,
-    image: "https://m.media-amazon.com/images/I/71w7Nf6T6BL._AC_SL1111_.jpg",
-  },
+  // Og resten af dine film-objekter...
 ];
 
 const movieList = document.querySelector("#movie-list");
@@ -1024,7 +1049,7 @@ function showMovies() {
 }
 
 function showMovie(movie) {
-  const highlightClass = movie.rating >= 8.5 ? "movie-card--highlight" : "";
+  const highlightClass = movie.rating > 8.5 ? "movie-card--highlight" : "";
 
   const html = /* html */ `
     <article class="movie-card ${highlightClass}">
@@ -1057,13 +1082,176 @@ function showMovie(movie) {
 
 ---
 
-## BONUS: Introduktion til Fetch
+## Opgave 7: Ekstraopgaver (byg videre på Opgave 6)
+
+Brug disse opgaver i rækkefølge. De går fra layout-forståelse til layout-robusthed.
+
+### 7.1: Grid-forståelse i praksis
+
+**Formål:** Forstå hvordan kolonner, gap og breakpoints påvirker layout.
+
+> **Behold din nuværende kode i `app.css`.**
+>
+> **Eksperimentér med én ændring ad gangen**, gem og genindlæs efter hver.
+
+1. Skift `gap` i `.movie-grid` fra `2rem` til `1rem`.
+2. Skift derefter `gap` til `3rem`.
+3. Skift breakpoint ved `@media (min-width: 600px)` til `700px`.
+4. Skift breakpoint ved `@media (min-width: 992px)` til `1100px`.
+
+> **Tjek i browseren:**
+>
+> - Hvornår går siden fra 1 til 2 kolonner?
+> - Hvornår går siden fra 2 til 3 kolonner?
+> - Hvordan ændrer luft mellem kortene oplevelsen?
+
+**Kort refleksion:**
+
+- Hvilke breakpoints passer bedst til din skærm?
+- Hvorfor er responsive kolonner bedre end en fast bredde på kortene?
+
+### 7.2: Styr korthøjder med Grid
+
+**Formål:** Se hvordan Grid håndterer kort med forskellig mængde tekst.
+
+1. Tilføj en `description` property til mindst 2 film i dit `movies` array.
+2. Vis beskrivelsen i `showMovie(movie)` med en ekstra `<p>`.
+3. Tilføj denne CSS nederst i `app.css`:
+
+```css
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+```
+
+> **Tjek:**
+>
+> - Ser layoutet stadig stabilt ud, selv når kort har forskellig tekstmængde?
+> - Er der kort der ser "klemt" ud?
+
+---
+
+## Opgave 8: Uddybningsopgaver - Fra HTML til JavaScript
+
+Arbejd i denne rækkefølge: 8.1 forstå -> 8.2 bygge -> 8.3 udvide.
+
+### 8.1: Trin 1 - Forstå flowet (data -> loop -> HTML)
+
+**Formål:** Gør progressionen tydelig, før du koder.
+
+Skriv korte svar (1-2 linjer pr. spørgsmål):
+
+1. Hvilken del af koden ejer **data**? (hvor ligger film-informationen?)
+2. Hvilken del af koden ejer **skabelonen**? (hvor bestemmes HTML-strukturen?)
+3. Hvilken del af koden gentager skabelonen for alle film?
+4. Hvis du vil vise en ny property (fx `genre`), hvad skal ændres i:
+   - data?
+   - skabelon?
+
+**Hjælp:**
+
+- `movies` = data
+- `showMovie(movie)` = skabelon for ét kort
+- `showMovies()` = loop over alle film
+
+> Når du kan forklare flowet med dine egne ord, går du videre til 8.2.
+
+### 8.2: Trin 2 - Én skabelon, mange data
+
+**Formål:** Test din forklaring fra 8.1 i praksis.
+
+1. Tilføj `genre` til alle film i `movies`-arrayet.
+2. Brug mindst 3 forskellige genrer i alt.
+
+Eksempel på genre-fordeling (brug gerne disse eller find dine egne):
+
+- `Inception` -> `Sci-fi`
+- `The Matrix` -> `Action`
+- `Interstellar` -> `Drama`
+- `The Dark Knight` -> `Krimi`
+
+Eksempel på data med genre:
+
+```javascript
+{
+  title: "Inception",
+  year: 2010,
+  rating: 8.8,
+  genre: "Sci-fi",
+}
+```
+
+3. Tilføj genre-linjen i `showMovie(movie)`:
+
+```javascript
+<p>Genre: ${movie.genre}</p>
+```
+
+4. Kør siden igen.
+
+> **Tjek:**
+>
+> - Skulle du ændre HTML-skabelonen ét sted eller mange steder?
+> - Kom genre automatisk frem på alle film-kort?
+
+**Opsamling (tænk tilbage):**
+
+- Hvis du havde hardcoded alle film-kort direkte i HTML, hvor mange steder skulle du så ændre koden for at tilføje genre?
+- Hvad ville være den største risiko: tidsforbrug eller at overse et kort?
+- Forestil dig at kunden vil bytte rækkefølgen på kortet, så fx `rating` vises før `titel` og `år`.
+- Hvor mange steder skulle du ændre rækkefølgen i hardcoded HTML vs. i en JavaScript-template?
+
+### 8.3: Trin 3 - Gør flowet genbrugeligt med funktioner
+
+**Formål:** Udvid løsningen uden at røre HTML manuelt.
+
+1. Lav en ny funktion i din `app.js`:
+
+```javascript
+function addMovie(movie) {
+  movies.push(movie);
+  showMovies();
+}
+```
+
+2. Kald funktionen nederst i filen med en ny film, der også har `genre`:
+
+```javascript
+addMovie({
+  title: "Blade Runner 2049",
+  year: 2017,
+  rating: 8.0,
+  image: "https://m.media-amazon.com/images/I/91z+H6z7A2L._AC_SL1500_.jpg",
+  genre: "Sci-fi",
+});
+```
+
+3. Bekræft at filmen vises korrekt uden at du skriver et nyt kort i HTML.
+
+**Afsluttende refleksion (kobling 8.1 -> 8.2 -> 8.3):**
+
+- Hvad ændrede du i data?
+- Hvad ændrede du i skabelonen?
+- Hvilken funktion gjorde, at alle film blev opdateret?
+- Hvorfor er denne struktur stærk, når du senere skal lave filter/søgning?
+
+---
+
+## Opgave 9 (BONUS): Introduktion til Fetch
 
 **Kun hvis du er færdig med alt ovenstående!**
 
-I BONUS skal du **ikke skrive alt om**. Du skal kun lave disse ændringer i din nuværende løsning:
+I Opgave 9 skal du **ikke skrive alt om**. Du skal kun lave disse ændringer i din nuværende løsning:
 
-### BONUS 1: Erstat hardcoded `movies` med en tom liste
+### 9.1: Erstat hardcoded `movies` med en tom liste
 
 Find din nuværende `const movies = [...]` og erstat den med:
 
@@ -1073,9 +1261,11 @@ let movies = [];
 
 > Vi bruger `let` her, fordi variablen får ny værdi efter fetch.
 
-### BONUS 2: Tilføj `start()` og hent data
+### 9.2: Tilføj `start()` og hent data
 
 Tilføj dette under din `movieList`-linje:
+
+> Vi bruger fetch kort her i BONUS, men vi gennemgår fetch grundigt næste gang.
 
 ```javascript
 start();
@@ -1083,7 +1273,7 @@ start();
 async function start() {
   console.log("Henter film data...");
 
-  const response = await fetch("./data/movies.json");
+  const response = await fetch("https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json");
   movies = await response.json();
 
   console.log("Hentet", movies.length, "film!");
@@ -1091,7 +1281,7 @@ async function start() {
 }
 ```
 
-### BONUS 3: Brug eksisterende funktioner
+### 9.3: Brug eksisterende funktioner
 
 Din eksisterende `showMovies()` og `showMovie(movie)` fra Opgave 6 kan blive som de er. De skal bare bruge data, der nu kommer fra fetch i stedet for hardcoded array.
 
