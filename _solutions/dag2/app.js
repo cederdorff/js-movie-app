@@ -7,35 +7,38 @@ const movies = [
     title: "Inception",
     year: 2010,
     rating: 8.8,
-    image: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+    image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
   },
   {
     title: "The Matrix",
     year: 1999,
-    rating: 7.7,
-    image:
-      "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+    rating: 8.7,
+    image: "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
   },
   {
     title: "The Dark Knight",
     year: 2008,
     rating: 9.0,
-
-    image: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+    image: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
   },
   {
-    title: "Pulp Fiction",
+    title: "The Shawshank Redemption",
     year: 1994,
-    rating: 8.9,
-    image:
-      "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+    rating: 9.3,
+    image: "https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg",
   },
   {
-    title: "Forrest Gump",
-    year: 1994,
-    rating: 6.8,
+    title: "Oppenheimer",
+    year: 2023,
+    rating: 8.4,
     image:
-      "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_.jpg",
+  },
+  {
+    title: "Dune",
+    year: 2021,
+    rating: 8.0,
+    image: "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg",
   },
 ];
 
@@ -52,7 +55,7 @@ function showMovies() {
 }
 
 function showMovie(movie) {
-  const highlightClass = movie.rating >= 8.5 ? "movie-card--highlight" : "";
+  const highlightClass = movie.rating > 8.5 ? "movie-card--highlight" : "";
 
   const html = /* html */ `
     <article class="movie-card ${highlightClass}">
