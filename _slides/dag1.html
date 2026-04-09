@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RACE 1 - JavaScript Fundamentals & Movie App Setup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css"
+    />
+    <style>
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6 {
+        text-transform: none;
+      }
+      .reveal pre {
+        width: 100%;
+        font-size: 0.55em;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .reveal code {
+        padding: 2px 6px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+      }
+      .reveal ul li {
+        margin: 12px 0;
+      }
+      .race-accent {
+        color: #42affa;
+      }
+      .slide-number {
+        display: none;
+      }
+      .case-shot {
+        width: 100%;
+        max-height: 520px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
+      }
+      .case-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .case-item {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .case-item img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .case-item p {
+        font-size: 0.55em;
+        color: #c6d7e4;
+        margin: 8px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Slide 1: Title -->
+        <section>
+          <h1><span class="race-accent">RACE</span> 1</h1>
+          <h3>JavaScript Fundamentals & Movie App Setup</h3>
+          <p style="margin-top: 80px; font-size: 0.8em; color: #888">08-04-2026</p>
+        </section>
+
+        <!-- Slide 2: Dagsorden -->
+        <section>
+          <h2>Dagens Dagsorden</h2>
+          <ol style="font-size: 1.3em; line-height: 1.8">
+            <li>Introduktion og Movie App setup</li>
+            <li>Client-Server modellen & Webudvikling</li>
+            <li>Variables, Datatyper & Console</li>
+            <li>querySelector & DOM Manipulation</li>
+            <li>Events & Klik-tæller</li>
+          </ol>
+        </section>
+
+        <!-- Slide: Dagens mål -->
+        <section>
+          <h2>Dagens mål</h2>
+          <ul style="font-size: 1.05em; line-height: 1.7">
+            <li>Forstå variabler med <code>const</code>-først tilgang</li>
+            <li>Bruge <code>console.log()</code> til debugging</li>
+            <li>Finde HTML-elementer med <code>querySelector()</code></li>
+            <li>Reagere på klik med <code>addEventListener()</code></li>
+            <li>Bygge en fungerende klik-tæller</li>
+          </ul>
+        </section>
+
+        <!-- Slide 3: Case flow -->
+        <section>
+          <h2>Movie App</h2>
+          <p style="font-size: 0.95em; margin-bottom: 22px; color: #c6d7e4">
+            Vi bygger en simpel Movie App trin-for-trin.
+          </p>
+          <div class="case-grid">
+            <div class="case-item">
+              <a href="https://cederdorff.com/js-movie-app/" target="_blank" rel="noopener noreferrer">
+                <img src="img/movie-app-overview.png" alt="Overblik over Movie App" />
+              </a>
+              <p>1) Overblik: film-grid med søgning, genre og sortering.</p>
+            </div>
+            <div class="case-item">
+              <a href="https://cederdorff.com/js-movie-app/" target="_blank" rel="noopener noreferrer">
+                <img src="img/movie-app-modal.png" alt="Detaljevisning i modal" />
+              </a>
+              <p>2) Klik på film: åbner detaljer i modal.</p>
+            </div>
+            <div class="case-item">
+              <a href="https://cederdorff.com/js-movie-app/" target="_blank" rel="noopener noreferrer">
+                <img src="img/movie-app-text-search.png" alt="Søgning efter film" />
+              </a>
+              <p>3) Søgning: fx "dune" filtrerer visningen.</p>
+            </div>
+            <div class="case-item">
+              <a href="https://cederdorff.com/js-movie-app/" target="_blank" rel="noopener noreferrer">
+                <img src="img/movie-app-filter-and-sort.png" alt="Filtrering og sortering" />
+              </a>
+              <p>4) Filtrering/sortering: genre + titel giver hurtig navigation.</p>
+            </div>
+          </div>
+          <p style="font-size: 0.52em; color: #9fb4c3; margin-top: 10px">
+            Klik på et billede for at åbne den færdige løsning.
+          </p>
+        </section>
+
+        <!-- Slide 2C: What to notice -->
+        <section>
+          <h2>Hvad skal I lægge mærke til?</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: center">
+            <ul style="font-size: 0.95em">
+              <li>Layout med grid og cards</li>
+              <li>Data: film vises dynamisk fra JavaScript</li>
+              <li>DOM: vi opdaterer indhold med JS</li>
+              <li>Progression: i dag bygger vi fundamentet</li>
+            </ul>
+            <a href="https://cederdorff.com/js-movie-app/" target="_blank" rel="noopener noreferrer">
+              <img class="case-shot" src="img/movie-app-overview.png" alt="Zoom af movie cards i løsningen" />
+            </a>
+          </div>
+        </section>
+        <!-- Slide: Progression i forløbet -->
+        <section>
+          <h2>Progression i forløbet</h2>
+          <ul style="font-size: 1.2em">
+            <li><strong>DAG 1:</strong> Klik-tæller og JavaScript fundamentals</li>
+            <li><strong>DAG 2:</strong> Arrays, loops og hardcoded movie data</li>
+            <li><strong>DAG 3:</strong> Fetch + simpelt genre-filter</li>
+            <li><strong>DAG 4:</strong> Titel-søgning, dialog, sortering og deployment</li>
+          </ul>
+          <p style="margin-top: 60px; font-size: 0.9em; color: #888">
+            Vi bygger videre på den samme Movie App hele vejen.
+          </p>
+        </section>
+
+        <!-- Slide 4: Setup -->
+        <section>
+          <h2>Project Setup</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 30px">
+            <div>
+              <pre><code class="language-plaintext">movie-app/
+├── index.html
+├── app.js
+└── app.css</code></pre>
+              <p style="margin-top: 24px; font-size: 0.9em"><strong>Semantiske tags fra starten:</strong></p>
+              <p style="font-size: 0.9em">
+                <code>&lt;header&gt;</code> • <code>&lt;main&gt;</code> • <code>&lt;section&gt;</code>
+              </p>
+            </div>
+            <table style="font-size: 0.95em; width: 100%">
+              <tr style="border-bottom: 1px solid #555">
+                <td style="padding: 14px"><strong>HTML</strong></td>
+                <td style="padding: 14px">Struktur</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #555">
+                <td style="padding: 14px"><strong>CSS</strong></td>
+                <td style="padding: 14px">Udseende</td>
+              </tr>
+              <tr>
+                <td style="padding: 14px"><strong>JavaScript</strong></td>
+                <td style="padding: 14px"><span class="race-accent">Interaktion</span></td>
+              </tr>
+            </table>
+          </div>
+        </section>
+
+        <!-- Slide: Hvem er RACE -->
+        <section>
+          <h2>Hvem er RACE?</h2>
+          <div style="display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: center">
+            <div style="text-align: left">
+              <p style="font-size: 1em; margin-bottom: 16px">
+                <strong>Rasmus Cederdorff</strong>
+                <br />Lektor & Web App Udvikler
+              </p>
+              <ul style="font-size: 0.88em; line-height: 1.7">
+                <li>Webudvikling, JavaScript, React, Node.js & BaaS</li>
+                <li>Programmering med øje for UI og UX</li>
+                <li>Hjemmesider, webshops, web-apps og mobile-apps</li>
+                <li><em>"Jeg taler JavaScript"</em></li>
+              </ul>
+            </div>
+            <img
+              src="img/race_2024.webp"
+              alt="Rasmus Cederdorff"
+              style="width: 100%; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.18)"
+            />
+          </div>
+        </section>
+
+        <!-- Slide: Karriere Timeline -->
+        <section>
+          <h2>Min baggrund (kort)</h2>
+          <img src="img/race-timeline.png" alt="Min karriere timeline" class="case-shot" />
+        </section>
+
+        <!-- Slide: Privat -->
+        <section>
+          <h2>Lidt om mig</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; height: 100%; gap: 0">
+            <img src="img/hvem-er-race.png" alt="Rasmus Cederdorff" class="case-shot" />
+            <div
+              style="display: flex; flex-direction: column; justify-content: center; padding: 40px; text-align: left"
+            >
+              <p style="font-size: 1em; font-weight: bold; margin-bottom: 20px">Rasmus Vase Cederdorff</p>
+              <ul style="font-size: 0.88em; line-height: 1.9">
+                <li>Bor i Holstebro</li>
+                <li>Gift med Matias</li>
+                <li>Døtre: Alicia & Ida</li>
+              </ul>
+              <ul style="font-size: 0.88em; line-height: 1.9; margin-top: 20px">
+                <li>Sport & Fitness <em>(prøver i hvert fald)</em></li>
+                <li>Elsker gadgets, fotografering & indretning</li>
+              </ul>
+              <p style="font-size: 0.88em; margin-top: 24px; color: #c6d7e4">
+                <em>Hvad er der galt med min arm? 💪</em>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide: Nybyggerne -->
+        <section>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: 100%">
+            <video
+              src="img/nybyggerne.mp4"
+              controls
+              style="width: 100%; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2)"
+            ></video>
+            <div
+              style="display: flex; flex-direction: column; justify-content: center; padding: 40px; text-align: left"
+            >
+              <h2 style="font-size: 2em; font-weight: 900; margin-bottom: 20px">Nååh ja</h2>
+              <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 24px">
+                Mig og min mand var med i<br /><strong>Nybyggerne 2025</strong>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide: Client-Server -->
+        <section>
+          <h2>Client-Server Modellen</h2>
+          <p style="font-size: 1.1em; margin: 40px 0"><strong>Hvad sker der når du besøger en hjemmeside?</strong></p>
+          <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 60px">
+            <div>Browser (Client)</div>
+            <div style="font-size: 2em">→</div>
+            <div>Request</div>
+            <div style="font-size: 2em">→</div>
+            <div>Server</div>
+          </div>
+          <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px">
+            <div>Viser siden</div>
+            <div style="font-size: 2em">←</div>
+            <div>Response</div>
+            <div style="font-size: 2em">←</div>
+            <div></div>
+          </div>
+        </section>
+
+        <!-- Slide: Variabler -->
+        <section>
+          <h2>Hvad er en variabel?</h2>
+          <p style="font-size: 1.1em; margin-bottom: 40px">En "beholder" til lagring af data.</p>
+          <pre><code class="language-javascript">const count = 0;
+let name = "Rasmus";
+var age = 28;  // undgå denne</code></pre>
+          <p style="margin-top: 40px; font-size: 0.95em">
+            <strong><span class="race-accent">const først</span></strong> — kun brug <code>let</code> hvis du skal ændre
+            værdien.
+          </p>
+        </section>
+
+        <!-- Slide 9: Datatyper -->
+        <section>
+          <h2>Datatyper</h2>
+          <pre style="margin-top: 40px"><code class="language-javascript">const number = 42;              // Number
+const text = "Hello";            // String
+const flag = true;               // Boolean
+const empty = null;              // Null
+const nothing = undefined;       // Undefined</code></pre>
+        </section>
+
+        <!-- Slide 10: console.log -->
+        <section>
+          <h2>console.log() — Din Debugging Ven</h2>
+          <pre style="margin-top: 40px"><code class="language-javascript">console.log("Hej verden!");
+console.log(myVariable);
+console.log(count, name);</code></pre>
+          <p style="margin-top: 50px; font-size: 1em"><strong>Sådan ser du outputtet:</strong></p>
+          <p style="font-size: 0.95em">Tryk <code>F12</code> → Inspector → <strong>Console</strong> tab</p>
+        </section>
+
+        <!-- Slide 11: querySelector -->
+        <section>
+          <h2>querySelector() — Find HTML Elementer</h2>
+          <pre
+            style="margin-top: 40px"
+          ><code class="language-javascript">const button = document.querySelector("button");
+const box = document.querySelector("#my-box");
+const items = document.querySelector(".item");</code></pre>
+          <p style="margin-top: 50px; font-size: 0.95em"><strong>Regl:</strong> CSS-selector → første match</p>
+        </section>
+
+        <!-- Slide: Ændr indhold og style -->
+        <section>
+          <h2>Ændr indhold og style</h2>
+          <pre style="margin-top: 40px"><code class="language-javascript">const heading = document.querySelector("h1");
+
+heading.textContent = "Ny tekst";
+heading.style.color = "red";
+heading.style.fontSize = "24px";</code></pre>
+        </section>
+
+        <!-- Slide 13: Event -->
+        <section>
+          <h2>Hvad er et Event?</h2>
+          <p style="font-size: 1.1em; margin: 50px 0"><strong>Brugeren gør noget...</strong></p>
+          <ul style="font-size: 1.2em">
+            <li>Klik på en knap</li>
+            <li>Skriver i et tekstfelt</li>
+            <li>Ruller siden</li>
+          </ul>
+          <p style="margin-top: 50px; font-size: 1.1em"><strong>Vi reagerer på det med JavaScript</strong></p>
+        </section>
+
+        <!-- Slide 14: addEventListener -->
+        <section>
+          <h2>addEventListener()</h2>
+          <pre style="margin-top: 40px"><code class="language-javascript">button.addEventListener("click", function() {
+  console.log("Knappen blev klikket!");
+});</code></pre>
+          <p style="margin-top: 50px; font-size: 0.95em">Når brugeren klikker, kører koden i funktionen.</p>
+        </section>
+
+        <!-- Slide 15: Klik-tæller Pseudokode -->
+        <section>
+          <h2>Klik-tæller — Plan</h2>
+          <ol style="font-size: 1.1em; line-height: 2">
+            <li>Hent knap-element</li>
+            <li>Hent display-element</li>
+            <li>Opret variabel: <code>count = 0</code></li>
+            <li>
+              Når knap klikkes:
+              <ul style="margin-top: 10px; font-size: 0.9em">
+                <li>Øg count med 1</li>
+                <li>Opdater display</li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Slide 16: Klik-tæller Kode -->
+        <section>
+          <h2>Klik-tæller — Kode</h2>
+          <pre
+            style="margin-top: 40px"
+          ><code class="language-javascript">const button = document.querySelector("button");
+const display = document.querySelector(".count");
+let count = 0;
+
+button.addEventListener("click", function() {
+  count = count + 1;
+  display.textContent = count;
+});</code></pre>
+        </section>
+
+        <!-- Slide 17: Reset-knap -->
+        <section>
+          <h2>Reset-knap</h2>
+          <pre
+            style="margin-top: 40px"
+          ><code class="language-javascript">resetButton.addEventListener("click", function() {
+  count = 0;
+  display.textContent = count;
+});</code></pre>
+          <p style="margin-top: 50px; font-size: 0.95em"><strong>Samme princip</strong>, anden handling.</p>
+        </section>
+
+        <!-- Slide 18: Refactor -->
+        <section>
+          <h2>Refactor til Funktioner</h2>
+          <pre style="margin-top: 30px; font-size: 0.5em"><code class="language-javascript">function updateDisplay() {
+  display.textContent = count;
+}
+
+function increment() {
+  count = count + 1;
+  updateDisplay();
+}
+
+button.addEventListener("click", increment);</code></pre>
+          <p style="margin-top: 30px; font-size: 0.9em">Samme kode, men <strong>renere struktur</strong>.</p>
+        </section>
+
+        <!-- Slide 19: Opgaver -->
+        <section>
+          <h2>Opgaver i Dag</h2>
+          <ul style="font-size: 1.1em; line-height: 1.8">
+            <li><strong>Opgave 0:</strong> Setup</li>
+            <li><strong>Opgave 1:</strong> Variabler</li>
+            <li><strong>Opgave 2–3:</strong> querySelector & DOM</li>
+            <li><strong>Opgave 4–5:</strong> Klik-tæller</li>
+            <li><strong>Opgave 6:</strong> Udfordringer + refactor</li>
+          </ul>
+          <p style="margin-top: 50px; font-size: 0.9em; color: #888">→ Du styrer hastigheden</p>
+        </section>
+
+        <!-- Slide 20: Links -->
+        <section>
+          <h2>Vigtige Links & Ressourcer</h2>
+          <ul style="font-size: 0.95em; line-height: 1.8">
+            <li><strong>Console:</strong> <code>F12</code> → Inspector</li>
+            <li>
+              <strong>Opgaver:</strong>
+              <a href="https://github.com/cederdorff/js-movie-app" style="color: #42affa">Movie App DAG 1</a>
+            </li>
+            <li>
+              <strong>Færdig løsning:</strong>
+              <a href="https://cederdorff.com/js-movie-app/" style="color: #42affa">cederdorff.com/js-movie-app</a>
+            </li>
+            <li><strong>Hjælp:</strong> Teams / <code>race@eaaa.dk</code></li>
+            <li>
+              <strong>Kode Ref:</strong> <a href="https://javascript.info" style="color: #42affa">javascript.info</a>
+            </li>
+            <li>
+              <strong>Valley of Code:</strong>
+              <a href="https://thevalleyofcode.com" style="color: #42affa">thevalleyofcode.com</a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Slide 21: Closing -->
+        <section>
+          <h2>Hovedpunkter i Dag</h2>
+          <div style="background: rgba(66, 175, 250, 0.1); padding: 40px; border-radius: 5px; margin-top: 50px">
+            <p style="font-size: 1.1em; line-height: 1.8">
+              ✓ Variabler<br />
+              ✓ DOM elementer<br />
+              ✓ Events & Event listeners<br />
+              ✓ Klik-tæller
+            </p>
+          </div>
+          <p style="margin-top: 60px; font-size: 0.95em"><strong>Næste gang:</strong> Arrays & Loops</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        width: "90%",
+        height: "100%",
+        margin: 0.1,
+        navigationMode: "default",
+      });
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
