@@ -962,6 +962,7 @@ Tilføj **minimum 3 film-objects** til dit `movies` array. Find selv data online
 >
 > - Genindlæs siden og tjek at alle nye film vises
 > - Tjek at hver ny film har både `title`, `year`, `rating` og `image`
+> - Du bør nu have mindst 5 film i alt i dit `movies` array
 
 ### 6.3: Farve baseret på rating
 
@@ -1009,6 +1010,7 @@ function showMovie(movie) {
 > - Har film over 8.5 en gul kant?
 > - Har film under 8.5 stadig standard-styling?
 > - Hvad sker der hvis du ændrer en films rating og genindlæser?
+> - Sørg for at du har mindst én film over 8.5 og mindst én film under 8.5, så du tester begge cases
 
 ---
 
@@ -1082,11 +1084,43 @@ function showMovie(movie) {
 
 ---
 
-## Opgave 7: Ekstraopgaver
+## Opgave 7: Layout-lab med Grid
 
-Brug disse opgaver i rækkefølge. De går fra layout-forståelse til layout-robusthed.
+Før du går i gang, er det vigtigt at skelne mellem to roller i CSS Grid:
 
-### 7.1: Grid-forståelse i praksis
+- **Grid-containeren** styrer selve layoutet: antal kolonner, afstand mellem elementer og hvordan tingene fordeles på siden
+- **Grid-itemet** styrer udseendet på hvert enkelt element inde i gridet
+
+I din Movie App betyder det:
+
+- `.movie-grid` er grid-containeren
+- `.movie-card` er grid-itemet
+
+Med andre ord: `movie-grid` bestemmer **hvordan kortene placeres**, mens `movie-card` bestemmer **hvordan hvert kort ser ud**.
+
+Brug disse opgaver i rækkefølge. De går fra grundlæggende grid-forståelse til eksperimenter med layout.
+
+### 7.1: Prøv container og item hver for sig
+
+**Formål:** Mærk forskellen på hvad `movie-grid` gør, og hvad `movie-card` gør.
+
+Lav kun én ændring ad gangen, gem og kig i browseren efter hver ændring.
+
+1. Gå til `.movie-grid` og ændr `gap` fra `2rem` til `4rem`.
+2. Kig på siden: Hvad ændrede sig?
+3. Gå derefter til `.movie-card` og ændr `padding` fra `1rem` til `2rem`.
+4. Kig på siden igen: Hvad ændrede sig nu?
+
+**Tænk over forskellen:**
+
+- Når du ændrer i `.movie-grid`, ændrer du så placeringen mellem kortene eller indholdet inde i hvert kort?
+- Når du ændrer i `.movie-card`, ændrer du så hele layoutet eller kun det enkelte kort?
+
+> **Målet her er ikke det pæneste design. Målet er at forstå hvad der styrer hvad.**
+>
+> Når du er færdig med at eksperimentere, så sæt værdierne tilbage igen, så layoutet ser pænt ud før 7.2.
+
+### 7.2: Grid-forståelse i praksis
 
 **Formål:** Forstå hvordan kolonner, gap og breakpoints påvirker layout.
 
@@ -1110,42 +1144,28 @@ Brug disse opgaver i rækkefølge. De går fra layout-forståelse til layout-rob
 - Hvilke breakpoints passer bedst til din skærm?
 - Hvorfor er responsive kolonner bedre end en fast bredde på kortene?
 
-### 7.2: Styr korthøjder med Grid
-
-**Formål:** Se hvordan Grid håndterer kort med forskellig mængde tekst.
-
-1. Tilføj en `description` property til mindst 2 film i dit `movies` array.
-2. Vis beskrivelsen i `showMovie(movie)` med en ekstra `<p>`.
-3. Tilføj denne CSS nederst i `app.css`:
-
-```css
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.movie-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-```
-
-> **Tjek:**
->
-> - Ser layoutet stadig stabilt ud, selv når kort har forskellig tekstmængde?
-> - Er der kort der ser "klemt" ud?
-
 ---
 
-## Opgave 8: Uddybningsopgaver - Fra HTML til JavaScript
+## Opgave 8: Fra Data til UI med JavaScript
 
-Arbejd i denne rækkefølge: 8.1 forstå -> 8.2 bygge -> 8.3 udvide.
+I denne opgave samler vi det vigtigste fra dagen:
+
+- data i et array
+- en skabelon i JavaScript
+- et loop der gentager skabelonen
+- funktioner der gør løsningen lettere at genbruge
+
+Arbejd i denne rækkefølge:
+
+1. 8.1: Forstå flowet
+2. 8.2: Brug flowet i praksis
+3. 8.3: Gør løsningen lettere at genbruge
 
 ### 8.1: Trin 1 - Forstå flowet (data -> loop -> HTML)
 
-**Formål:** Gør progressionen tydelig, før du koder.
+**Formål:** Få styr på hvad der styrer hvad, før du ændrer mere kode.
+
+Før du bygger videre, skal du kunne sætte ord på hvordan løsningen hænger sammen.
 
 Skriv korte svar (1-2 linjer pr. spørgsmål):
 
@@ -1162,11 +1182,13 @@ Skriv korte svar (1-2 linjer pr. spørgsmål):
 - `showMovie(movie)` = skabelon for ét kort
 - `showMovies()` = loop over alle film
 
-> Når du kan forklare flowet med dine egne ord, går du videre til 8.2.
+> Når du kan forklare flowet med dine egne ord, er du klar til at ændre data og skabelon i 8.2.
 
 ### 8.2: Trin 2 - Én skabelon, mange data
 
-**Formål:** Test din forklaring fra 8.1 i praksis.
+**Formål:** Test i praksis at én ændring i data og én ændring i skabelonen kan påvirke alle cards.
+
+Nu bruger du den forståelse fra 8.1 til at udvide kortene med en ny property.
 
 1. Tilføj `genre` til alle film i `movies`-arrayet.
 2. Brug mindst 3 forskellige genrer i alt.
@@ -1202,16 +1224,22 @@ Eksempel på data med genre:
 > - Skulle du ændre HTML-skabelonen ét sted eller mange steder?
 > - Kom genre automatisk frem på alle film-kort?
 
-**Opsamling (tænk tilbage):**
+**Opsamling før næste trin:**
+
+Tænk kort over hvad du lige gjorde:
 
 - Hvis du havde hardcoded alle film-kort direkte i HTML, hvor mange steder skulle du så ændre koden for at tilføje genre?
 - Hvad ville være den største risiko: tidsforbrug eller at overse et kort?
 - Forestil dig at kunden vil bytte rækkefølgen på kortet, så fx `rating` vises før `titel` og `år`.
 - Hvor mange steder skulle du ændre rækkefølgen i hardcoded HTML vs. i en JavaScript-template?
 
+> Når du kan se forskellen på hardcoded HTML og skabelon + data, går du videre til 8.3.
+
 ### 8.3: Trin 3 - Gør flowet genbrugeligt med funktioner
 
-**Formål:** Udvid løsningen uden at røre HTML manuelt.
+**Formål:** Gør løsningen mere fleksibel, så du kan opdatere listen uden at røre HTML manuelt.
+
+Nu udvider du strukturen, så du kan tilføje en ny film med én funktion og derefter vise hele listen igen.
 
 1. Lav en ny funktion i din `app.js`:
 
@@ -1236,7 +1264,9 @@ addMovie({
 
 3. Bekræft at filmen vises korrekt uden at du skriver et nyt kort i HTML.
 
-**Afsluttende refleksion (kobling 8.1 -> 8.2 -> 8.3):**
+**Afsluttende refleksion:**
+
+Se tilbage på hele flowet fra 8.1 til 8.3:
 
 - Hvad ændrede du i data?
 - Hvad ændrede du i skabelonen?
@@ -1245,11 +1275,11 @@ addMovie({
 
 ---
 
-## Opgave 9 (BONUS): Introduktion til Fetch
+## Opgave 9: Ekstraopgave - Introduktion til Fetch
 
 **Kun hvis du er færdig med alt ovenstående!**
 
-I Opgave 9 skal du **ikke skrive alt om**. Du skal kun lave disse ændringer i din nuværende løsning:
+Opgave 9 er en ekstraopgave. Du skal **ikke skrive alt om**. Du skal kun lave disse ændringer i din nuværende løsning:
 
 ### 9.1: Erstat hardcoded `movies` med en tom liste
 

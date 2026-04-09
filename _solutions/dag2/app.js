@@ -12,7 +12,7 @@ const movies = [
   {
     title: "The Matrix",
     year: 1999,
-    rating: 8.7,
+    rating: 7.7,
     image:
       "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
   },
@@ -33,7 +33,7 @@ const movies = [
   {
     title: "Forrest Gump",
     year: 1994,
-    rating: 8.8,
+    rating: 6.8,
     image:
       "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
   },
