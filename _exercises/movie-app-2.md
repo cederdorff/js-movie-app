@@ -1082,7 +1082,7 @@ function showMovie(movie) {
 
 ---
 
-## Opgave 7: Ekstraopgaver (byg videre på Opgave 6)
+## Opgave 7: Ekstraopgaver
 
 Brug disse opgaver i rækkefølge. De går fra layout-forståelse til layout-robusthed.
 
