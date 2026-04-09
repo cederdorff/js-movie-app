@@ -103,7 +103,9 @@ Ved at starte med hardcoded data kan I fokusere på at forstå arrays, loops og 
 
 - Funktioner til at strukturere kode: `showMovies()` og `showMovie(movie)` (Opgave 5)
 - Udfordringer: billeder, flere film, rating-highlight (Opgave 6)
-- **Bonus introduktion:** forhåndsblik på fetch, ikke et krav i dag (BONUS)
+- Layout-lab: grid-container vs. grid-item, gap og breakpoints (Opgave 7)
+- Fra Data til UI: genre, `addMovie()`, refleksion over én skabelon/mange data (Opgave 8)
+- **Ekstraopgave:** forhåndsblik på fetch, ikke et krav i dag (Opgave 9)
 - Hjemmearbejde: Færdiggør arrays af objekter
 
 </details>
