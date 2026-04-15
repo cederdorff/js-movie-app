@@ -18,6 +18,14 @@ I denne ekstraopgave skal du gøre **præcis det samme flow** som i Movie App-op
 
 Lav opgaven på en ny branch, så du kan eksperimentere uden at påvirke din main.
 
+**Vigtigt først:** Commit og push dine nuværende ændringer, før du laver en ny branch.
+
+I GitHub Desktop:
+
+1. Skriv en commit-besked, fx `DAG 2 færdig før ekstraopgave`
+2. Klik **Commit to main**
+3. Klik **Push origin**
+
 Forslag til branch-navn:
 
 - `dag2-ekstra-personliste`
@@ -113,16 +121,71 @@ const persons = [
 I din `index.html` skal du have en sektion til person-cards:
 
 ```html
-<section id="person-list" class="movie-grid" aria-label="Personliste">
+<section id="person-list" class="person-grid" aria-label="Personliste">
   <!-- Personer vises her med JavaScript -->
 </section>
 ```
 
-Du må gerne genbruge din eksisterende `movie-grid` styling til denne opgave.
+---
+
+## Opgave 2: Opdater CSS så det matcher person-cards
+
+I denne ekstraopgave skal du **erstatte** movie-card CSS'en med person-card CSS.
+
+Det vil sige: brug `person-grid`, `person-card`, `person-image` og `person-info` i stedet for `movie-grid`, `movie-card`, `movie-image` og `movie-info`.
+
+Tilføj/erstat disse klasser i din `app.css`:
+
+```css
+.person-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+@media (min-width: 600px) {
+  .person-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .person-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.person-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.person-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.person-info {
+  padding: 1rem;
+}
+
+.person-info h3 {
+  color: #ffd700;
+  margin-bottom: 0.4rem;
+}
+```
+
+Tip: Den hurtigste vej er at copy/paste din movie-card CSS og omdøbe klasserne til person-klasser.
 
 ---
 
-## Opgave 2: Vis alle personer med loop
+## Opgave 3: Vis alle personer med loop
 
 1. Find containeren:
 
@@ -138,7 +201,7 @@ const personList = document.querySelector("#person-list");
 
 ---
 
-## Opgave 3: Lav `showPerson(person)`
+## Opgave 4: Lav `showPerson(person)`
 
 Byg HTML med en template literal og indsæt den i DOM'en.
 
@@ -149,6 +212,8 @@ Cardet skal mindst indeholde:
 - titel (`person.title`)
 - mail (`person.mail`)
 
+Brug klasser som matcher din CSS, fx `person-card`, `person-image` og `person-info`.
+
 Hint:
 
 ```javascript
@@ -157,7 +222,7 @@ personList.insertAdjacentHTML("beforeend", html);
 
 ---
 
-## Opgave 4: Gør mail klikbar
+## Opgave 5: Gør mail klikbar
 
 Lav mailen som et link:
 
@@ -169,7 +234,7 @@ Brug personens mail i både `href` og tekst.
 
 ---
 
-## Opgave 5: Refleksion
+## Opgave 6: Refleksion
 
 Skriv kort i kommentarer i din `app.js`:
 
@@ -183,7 +248,7 @@ Skriv kort i kommentarer i din `app.js`:
 
 - Sortér personerne alfabetisk efter navn før de vises
 - Tilføj badge til "Head of Department"
-- Gør cards pænere med en ny CSS-klasse til personer
+- Tilføj hover-effekt på `.person-card`
 
 ---
 
@@ -191,9 +256,9 @@ Skriv kort i kommentarer i din `app.js`:
 
 ```javascript
 const html = `
-  <article class="movie-card">
-    <img class="movie-image" src="${person.image}" alt="${person.name}">
-    <div class="movie-info">
+  <article class="person-card">
+    <img class="person-image" src="${person.image}" alt="${person.name}">
+    <div class="person-info">
       <h3>${person.name}</h3>
       <p>${person.title}</p>
       <p><a href="mailto:${person.mail}">${person.mail}</a></p>
