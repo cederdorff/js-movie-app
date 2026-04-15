@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RACE 2 - Arrays, Loops & Objects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css"
+    />
+    <style>
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6 {
+        text-transform: none;
+      }
+      .reveal pre {
+        width: 100%;
+        font-size: 0.55em;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .reveal code {
+        padding: 2px 6px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+      }
+      .reveal ul li,
+      .reveal ol li {
+        margin: 12px 0;
+      }
+      .race-accent {
+        color: #42affa;
+      }
+      .slide-number {
+        display: none;
+      }
+      .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      .callout {
+        background: rgba(66, 175, 250, 0.1);
+        border: 1px solid rgba(66, 175, 250, 0.25);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: left;
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      .soft-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: left;
+      }
+      .soft-box p:last-child,
+      .callout p:last-child {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1><span class="race-accent">RACE</span> 2</h1>
+          <h3>Arrays, Loops & Objects</h3>
+          <p style="margin-top: 80px; font-size: 0.8em; color: #888">15-04-2026</p>
+        </section>
+
+        <section>
+          <h2>Dagens dagsorden</h2>
+          <ol style="font-size: 1.1em; line-height: 1.8">
+            <li>Fra klik-tæller til film-liste</li>
+            <li>Arrays og <code>for...of</code> loops</li>
+            <li>Objects og dot notation</li>
+            <li>Template literals til HTML</li>
+            <li>Funktioner og struktur i koden</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Dagens mål</h2>
+          <ul style="font-size: 1em; line-height: 1.7">
+            <li>Gem flere film i et array i stedet for én variabel ad gangen</li>
+            <li>Loop gennem data og vise film på siden</li>
+            <li>Forstå objekter som data med labels</li>
+            <li>Bygge HTML med template literals</li>
+            <li>Dele koden op i funktioner som <code>showMovies()</code> og <code>showMovie()</code></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hvorfor skifter vi spor i dag?</h2>
+          <div class="two-col" style="margin-top: 28px">
+            <div class="soft-box">
+              <h3 style="margin-top: 0">DAG 1</h3>
+              <p>Klik-tæller med variabler, DOM og events.</p>
+              <p>God til at forstå én interaktion ad gangen.</p>
+            </div>
+            <div class="soft-box">
+              <h3 style="margin-top: 0">DAG 2</h3>
+              <p>Nu skal vi vise mange film på én gang.</p>
+              <p>Det kræver datastrukturer, loops og genbrugelig HTML.</p>
+            </div>
+          </div>
+          <p style="margin-top: 28px; font-size: 0.9em; color: #c6d7e4">
+            Vi går fra én knap til en rigtig lille app med mange data.
+          </p>
+        </section>
+
+        <section>
+          <h2>Bro-øvelse: Hardcoded HTML først</h2>
+          <div class="callout" style="margin-top: 26px; font-size: 0.95em">
+            <p><strong>Start med 2-3 film-kort direkte i HTML.</strong></p>
+            <p>Så mærker I problemet, før JavaScript løser det.</p>
+          </div>
+          <pre style="margin-top: 28px"><code class="language-html">&lt;section id="movie-list" class="movie-grid" aria-label="Filmliste"&gt;
+  &lt;article class="movie-card"&gt;
+    &lt;h3&gt;Inception&lt;/h3&gt;
+    &lt;p&gt;År: 2010&lt;/p&gt;
+  &lt;/article&gt;
+  &lt;article class="movie-card"&gt;
+    &lt;h3&gt;The Matrix&lt;/h3&gt;
+    &lt;p&gt;År: 1999&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Hvorfor er hardcoded cards tungt?</h2>
+          <ul style="font-size: 1em; line-height: 1.8">
+            <li>Du kopierer den samme struktur igen og igen</li>
+            <li>Små ændringer skal laves mange steder</li>
+            <li>20 film betyder meget håndarbejde</li>
+            <li>Computeren burde gøre det gentagne arbejde for os</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hvad er et array?</h2>
+          <p style="font-size: 1em; margin-bottom: 30px">Et array er en liste af værdier samlet i én variabel.</p>
+          <div class="compare-grid">
+            <div>
+              <p style="font-size: 0.9em"><strong>Mange variabler</strong></p>
+              <pre><code class="language-javascript">const movie1 = "Inception";
+const movie2 = "The Matrix";
+const movie3 = "Interstellar";</code></pre>
+            </div>
+            <div>
+              <p style="font-size: 0.9em"><strong>Én liste</strong></p>
+              <pre><code class="language-javascript">const movies = [
+  "Inception",
+  "The Matrix",
+  "Interstellar"
+];</code></pre>
+            </div>
+          </div>
+          <ul style="font-size: 0.95em; margin-top: 24px">
+            <li>Første element ligger på plads <code>0</code></li>
+            <li>Arrays er gode når vi har mange ting af samme type</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Loop med <code>for...of</code></h2>
+          <pre><code class="language-javascript">const movies = ["Inception", "The Matrix", "Dune"];
+
+for (const movie of movies) {
+  console.log(movie);
+}</code></pre>
+          <div class="callout" style="margin-top: 24px; font-size: 0.9em">
+            <p><strong>Pointen:</strong> Den samme kode kører én gang for hver film i arrayet.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Fra data til DOM</h2>
+          <pre><code class="language-javascript">const movieList = document.querySelector("#movie-list");
+
+for (const movie of movies) {
+  movieList.innerHTML += `&lt;article&gt;${movie}&lt;/article&gt;`;
+}</code></pre>
+          <p style="margin-top: 24px; font-size: 0.9em; color: #c6d7e4">
+            Først viser vi bare titler. Senere gør vi strukturen mere avanceret.
+          </p>
+        </section>
+
+        <section>
+          <h2>Hvad er et objekt?</h2>
+          <p style="font-size: 1em; margin-bottom: 24px">Et objekt samler relaterede data med navngivne properties.</p>
+          <pre><code class="language-javascript">const movie = {
+  title: "Inception",
+  year: 2010,
+  rating: 8.8
+};</code></pre>
+          <div class="two-col" style="margin-top: 24px">
+            <div class="soft-box">
+              <p><strong>Key:</strong> <code>title</code></p>
+              <p><strong>Value:</strong> <code>"Inception"</code></p>
+            </div>
+            <div class="soft-box">
+              <p><strong>Access:</strong> <code>movie.title</code></p>
+              <p><strong>Access:</strong> <code>movie.year</code></p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Arrays af objects</h2>
+          <pre><code class="language-javascript">const movies = [
+  {
+    title: "Inception",
+    year: 2010,
+    rating: 8.8
+  },
+  {
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7
+  }
+];</code></pre>
+          <p style="margin-top: 24px; font-size: 0.9em; color: #c6d7e4">
+            Nu har hver film flere oplysninger, men vi kan stadig loope gennem listen.
+          </p>
+        </section>
+
+        <section>
+          <h2>Loop gennem objects</h2>
+          <pre><code class="language-javascript">for (const movie of movies) {
+  console.log(movie.title);
+  console.log(movie.year);
+  console.log(movie.rating);
+}</code></pre>
+          <ul style="font-size: 0.95em; margin-top: 24px">
+            <li><code>movie</code> er ét objekt ad gangen</li>
+            <li>Dot notation bruges til at hente properties ud</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hvad er en template literal?</h2>
+          <div class="callout" style="margin-top: 26px; font-size: 0.95em">
+            <p><strong>En template literal er en string skrevet med backticks:</strong> <code>` `</code></p>
+            <p>Med <code>${}</code> kan du indsætte variabler direkte i teksten.</p>
+          </div>
+          <pre style="margin-top: 28px"><code class="language-javascript">const title = "Inception";
+const year = 2010;
+
+const text = `${title} kom ud i ${year}`;</code></pre>
+        </section>
+
+        <section>
+          <h2>Template literal vs. string concatenation</h2>
+          <div class="compare-grid" style="margin-top: 30px">
+            <div>
+              <p style="font-size: 0.9em"><strong>Concatenation</strong></p>
+              <pre><code class="language-javascript">const movieText =
+  title + " (" + year + ")";</code></pre>
+            </div>
+            <div>
+              <p style="font-size: 0.9em"><strong>Template literal</strong></p>
+              <pre><code class="language-javascript">const movieText = `${title} (${year})`;</code></pre>
+            </div>
+          </div>
+          <ul style="font-size: 0.95em; margin-top: 24px">
+            <li>Mere læsbart</li>
+            <li>Mindre rod med <code>+</code></li>
+            <li>Perfekt til HTML-skabeloner</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Byg movie cards med HTML-skabelon</h2>
+          <pre><code class="language-javascript">const html = `
+  &lt;article class="movie-card"&gt;
+    &lt;h3&gt;${movie.title}&lt;/h3&gt;
+    &lt;p&gt;År: ${movie.year}&lt;/p&gt;
+    &lt;p&gt;Rating: ${movie.rating}&lt;/p&gt;
+  &lt;/article&gt;
+`;</code></pre>
+          <div class="callout" style="margin-top: 24px; font-size: 0.9em">
+            <p><strong>Pointen:</strong> Én HTML-struktur kan genbruges til alle film.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Indsæt HTML i DOM'en</h2>
+          <pre><code class="language-javascript">movieList.insertAdjacentHTML("beforeend", html);</code></pre>
+          <div class="two-col" style="margin-top: 24px">
+            <div class="soft-box">
+              <p><strong><code>beforeend</code></strong></p>
+              <p>Tilføjer HTML sidst inde i elementet.</p>
+            </div>
+            <div class="soft-box">
+              <p><strong>God vane</strong></p>
+              <p>Gem HTML i en variabel først. Indsæt bagefter.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Funktioner giver struktur</h2>
+          <pre><code class="language-javascript">showMovies();
+
+function showMovies() {
+  movieList.innerHTML = "";
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}</code></pre>
+          <p style="margin-top: 24px; font-size: 0.9em; color: #c6d7e4">
+            En funktion samler én tydelig opgave ét sted.
+          </p>
+        </section>
+
+        <section>
+          <h2>Én film ad gangen</h2>
+          <pre><code class="language-javascript">function showMovie(movie) {
+  const html = `
+    &lt;article class="movie-card"&gt;
+      &lt;h3&gt;${movie.title}&lt;/h3&gt;
+      &lt;p&gt;År: ${movie.year}&lt;/p&gt;
+      &lt;p&gt;Rating: ${movie.rating}&lt;/p&gt;
+    &lt;/article&gt;
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Ekstra: simpelt highlight med betingelse</h2>
+          <pre><code class="language-javascript">const highlightClass = movie.rating > 8.5
+  ? "movie-card--highlight"
+  : "";</code></pre>
+          <p style="margin-top: 24px; font-size: 0.92em">
+            Vi bruger data til også at styre udseende. Høj rating kan give særlig styling.
+          </p>
+        </section>
+
+        <section>
+          <h2>Hovedpointer i dag</h2>
+          <div class="callout" style="margin-top: 34px; font-size: 1em; line-height: 1.8">
+            <p>Arrays gemmer lister af data.</p>
+            <p><code>for...of</code> lader os køre den samme kode for hvert element.</p>
+            <p>Objects samler data med labels som <code>title</code> og <code>year</code>.</p>
+            <p>Template literals gør HTML-generering meget lettere.</p>
+            <p>Funktioner giver kode med bedre struktur.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Næste gang</h2>
+          <ul style="font-size: 1.05em; line-height: 1.8">
+            <li>Vi henter data med <code>fetch()</code></li>
+            <li>Vi bygger videre med filtrering</li>
+            <li>Samme tankegang: data ind, UI ud</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        width: "90%",
+        height: "100%",
+        margin: 0.1,
+        navigationMode: "default",
+      });
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

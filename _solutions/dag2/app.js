@@ -7,7 +7,7 @@ const movies = [
     title: "Inception",
     year: 2010,
     rating: 8.8,
-    image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
+    image: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
   },
   {
     title: "The Matrix",
