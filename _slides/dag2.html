@@ -127,7 +127,9 @@
             <p><strong>Start med 2-3 film-kort direkte i HTML.</strong></p>
             <p>Så mærker I problemet, før JavaScript løser det.</p>
           </div>
-          <pre style="margin-top: 28px"><code class="language-html">&lt;section id="movie-list" class="movie-grid" aria-label="Filmliste"&gt;
+          <pre
+            style="margin-top: 28px"
+          ><code class="language-html">&lt;section id="movie-list" class="movie-grid" aria-label="Filmliste"&gt;
   &lt;article class="movie-card"&gt;
     &lt;h3&gt;Inception&lt;/h3&gt;
     &lt;p&gt;År: 2010&lt;/p&gt;
@@ -301,7 +303,9 @@ const text = `${title} kom ud i ${year}`;</code></pre>
           <pre><code class="language-javascript">movieList.insertAdjacentHTML("beforeend", html);</code></pre>
           <div class="two-col" style="margin-top: 24px">
             <div class="soft-box">
-              <p><strong><code>beforeend</code></strong></p>
+              <p>
+                <strong><code>beforeend</code></strong>
+              </p>
               <p>Tilføjer HTML sidst inde i elementet.</p>
             </div>
             <div class="soft-box">
