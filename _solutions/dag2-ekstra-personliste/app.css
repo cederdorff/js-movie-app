@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+@media (min-width: 600px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1400px) {
+  .movie-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.movie-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s;
+  overflow: hidden;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.movie-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-info h3 {
+  color: #ffd700;
+  margin-bottom: 0.4rem;
+  font-size: 1.15rem;
+}
+
+.person-title {
+  font-weight: 600;
+  opacity: 0.95;
+  margin-bottom: 0.5rem;
+}
+
+.person-mail a {
+  color: #ffffff;
+  text-underline-offset: 2px;
+}
+
+.person-mail a:hover {
+  color: #ffd700;
+}
+
+.person-badge {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffe68a;
+  border: 1px solid rgba(255, 215, 0, 0.55);
+}
