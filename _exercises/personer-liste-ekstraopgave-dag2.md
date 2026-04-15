@@ -255,7 +255,7 @@ Skriv kort i kommentarer i din `app.js`:
 ## Bonus: Eksempel på card-template uden færdig løsning
 
 ```javascript
-const html = `
+const html = /*html*/ `
   <article class="person-card">
     <img class="person-image" src="${person.image}" alt="${person.name}">
     <div class="person-info">
@@ -266,3 +266,33 @@ const html = `
   </article>
 `;
 ```
+
+---
+
+## Afslutning: Commit, push og branch-skift
+
+Når du er færdig med ekstraopgaven, skal du gemme dit arbejde på branchen:
+
+I GitHub Desktop:
+
+1. Skriv en commit-besked, fx `DAG 2 ekstraopgave med persons`
+2. Klik **Commit to dag2-ekstra-personliste**
+3. Klik **Push origin**
+
+### Sådan skifter du mellem `main` og `dag2-ekstra-personliste`
+
+1. Klik på branch-dropdown i GitHub Desktop
+2. Vælg den branch du vil arbejde på:
+
+- `main` = dit normale hovedspor
+- `dag2-ekstra-personliste` = ekstraopgaven
+
+3. Vent til GitHub Desktop har skiftet branch, før du redigerer filer
+
+### God vane når du skifter branch
+
+1. Commit ændringer først, hvis der er noget under **Changes**
+2. Push, så ændringer også ligger på GitHub
+3. Skift branch bagefter
+
+På den måde kan du trygt gå frem og tilbage uden at miste arbejde.
