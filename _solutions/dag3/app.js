@@ -3,29 +3,26 @@
 // DAG 3 - Fetch & Genre-filter eksempel
 // Formål: Hent data og filtrer på én valgt genre
 
-console.log("Movie App starter...");
-
-const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const movieCount = document.querySelector("#movie-count");
 
-start();
+fetchMovies();
 
-async function start() {
-  console.log("Henter film data...");
-
+async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
-
-  console.log("Hentet", allMovies.length, "film!");
 
   populateGenreSelect();
   showMovies(allMovies);
 
-  document.querySelector("#genre-select").addEventListener("change", applyGenreFilter);
+  genreSelect.addEventListener("change", applyGenreFilter);
 }
 
 function populateGenreSelect() {
-  const genreSelect = document.querySelector("#genre-select");
   const genres = new Set();
 
   for (const movie of allMovies) {
@@ -34,14 +31,16 @@ function populateGenreSelect() {
     }
   }
 
-  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
-  for (const genre of sortedGenres) {
-    genreSelect.insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
   }
 }
 
 function applyGenreFilter() {
-  const selectedGenre = document.querySelector("#genre-select").value;
+  const selectedGenre = genreSelect.value;
 
   if (selectedGenre === "all") {
     showMovies(allMovies);
@@ -56,28 +55,15 @@ function applyGenreFilter() {
 }
 
 function showMovies(movies) {
-  console.log("Viser", movies.length, "film...");
-
-  const movieList = document.querySelector("#movie-list");
   movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
 
-  // Hvis ingen film
-  if (movies.length === 0) {
-    movieList.innerHTML = '<p style="text-align: center; color: white;">Ingen film matchede filteret.</p>';
-    document.querySelector("#movie-count").textContent = "Viser 0 film";
-    return;
-  }
-
-  const counter = document.querySelector("#movie-count");
-  counter.textContent = `Viser ${movies.length} film`;
-
-  // Loop gennem film
   for (const movie of movies) {
-    showMovie(movie, movieList);
+    showMovie(movie);
   }
 }
 
-function showMovie(movie, movieList) {
+function showMovie(movie) {
   const html = /* html */ `
     <article class="movie-card">
       <img class="movie-image" src="${movie.image}" alt="${movie.title}">
@@ -92,5 +78,3 @@ function showMovie(movie, movieList) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
-
-console.log("Script klar!");

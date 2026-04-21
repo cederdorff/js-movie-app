@@ -789,14 +789,12 @@ Opdatér `index.html` - tilføj dette EFTER header:
   <select id="genre-select">
     <option value="all">Alle genrer</option>
   </select>
-  <p id="movie-count"></p>
 </section>
 ```
 
-Det giver os to nye elementer i HTML:
+Det giver os et nyt element i HTML:
 
 1. en dropdown med id `genre-select`
-2. et felt til antal film med id `movie-count`
 
 ### 3.2: Gør klar i JavaScript
 
@@ -1013,6 +1011,9 @@ Det vigtigste her er:
 
 Når du har bygget det trin for trin, kan du sammenligne med denne samlede version:
 
+<details>
+<summary><strong>Vis samlet løsning for 3.2.6</strong></summary>
+
 ```javascript
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
@@ -1065,14 +1066,16 @@ function applyGenreFilter() {
 }
 ```
 
-**Test det!**
+</details>
+
+**Test det:**
 
 1. Siden loader → vis alle film
 2. Tjek at dropdownen automatisk er fyldt med genrer
 3. Vælg fx Action i dropdown → vis kun Action film
 4. Vælg Alle genrer → vis alle igen
 
-### 3.2.7: Ekstra trin - sortér genrer alfabetisk
+### 3.2.7: Sortér genrer alfabetisk
 
 Hvis du vil gøre dropdownen lidt pænere, kan du sortere genrerne alfabetisk.
 
