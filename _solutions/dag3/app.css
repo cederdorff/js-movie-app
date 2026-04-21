@@ -1,3 +1,9 @@
+.genre-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+}
 * {
   margin: 0;
   padding: 0;
@@ -46,13 +52,33 @@ header h1 {
   font-weight: 600;
 }
 
+/* Flex container for genre controls */
+.genre-flex {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.genre-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
 #genre-select {
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid white;
   border-radius: 12px;
   padding: 0.75rem 0.9rem;
   font-size: 1rem;
+  line-height: 1.5;
   transition: all 0.3s;
+  margin-right: 1.2rem;
+  min-width: 260px;
+  max-width: 340px;
 }
 
 #genre-select:focus {
@@ -60,9 +86,10 @@ header h1 {
 }
 
 #movie-count {
-  margin: 0;
   font-size: 1.1rem;
   font-weight: bold;
+  white-space: nowrap;
+  color: #fff;
 }
 
 main {

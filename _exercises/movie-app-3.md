@@ -1121,9 +1121,8 @@ Det nye her er:
 
 ---
 
-## Udfordringer
 
-### Udfordring 1: Tilføj søgning i title
+## Opgave 4: Tilføj søgning i title
 
 Tilføj et input-felt og filtrér på title samtidig med genre:
 
@@ -1143,7 +1142,7 @@ function applyFilters() {
 }
 ```
 
-### Udfordring 2: Vis hvor mange film
+## Opgave 5: Vis hvor mange film
 
 Tilføj en counter der viser antal film:
 
@@ -1171,7 +1170,7 @@ function showMovies(movies) {
 }
 ```
 
-### Udfordring 3: Gør dropdown dynamisk med antal
+## Opgave 6: Gør dropdown dynamisk med antal
 
 Vis antal film pr. genre i dropdown-teksten:
 
