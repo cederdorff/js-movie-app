@@ -69,6 +69,13 @@ I GitHub Desktop:
 
 ## Opgave 0: Recap Fra DAG 2 (Funktioner Først)
 
+---
+
+> **Checkpoint:**
+> Kan du se de hardcodede film fra dag 2 i din browser? Hvis ja, er du klar til næste trin!
+
+---
+
 ### 0.1: Åbn dit projekt fra sidst
 
 Åbn din `movie-app` fra DAG 2.
@@ -497,6 +504,13 @@ async function fetchMovies() {
 
 Du genbruger altså dine eksisterende `showMovies(...)` og `showMovie(...)` funktioner fra før.
 
+---
+
+> **Checkpoint:**
+> Loader din app nu rigtige film fra nettet? (Tjek billeder og titler i browseren)
+
+---
+
 ### 1.2.6: Samlet version
 
 Når du har bygget det trin for trin, kan du bruge den samlede version her som støtte, hvis du har brug for det.
@@ -592,6 +606,13 @@ Tænk på det sådan her:
 3. Bagefter bruger vi præcis den idé til at vise fx kun `Action`, `Drama` eller `Sci-Fi`
 
 Så Opgave 2 er med vilje en lille mellemstation: først forstå filter-logikken, derefter bruge den til genre-filtrering i Opgave 3.
+
+---
+
+> **Checkpoint:**
+> Kan du i konsollen se et array med kun de film, der matcher dit filter? Hvis ja, er du klar til næste trin!
+
+---
 
 ### 2.1: Forstå filter
 
@@ -1007,6 +1028,13 @@ Det vigtigste her er:
 3. ellers filtrér `allMovies`
 4. vis det filtrerede resultat
 
+---
+
+> **Checkpoint:**
+> Opdateres listen korrekt, når du vælger genre i dropdownen? Hvis ja, er dit genre-filter klar!
+
+---
+
 ### 3.2.6: Samlet JavaScript-løsning
 
 Når du har bygget det trin for trin, kan du sammenligne med denne samlede version:
@@ -1192,6 +1220,13 @@ function showMovies(movies) {
   movieCount.textContent = `Viser ${movies.length} film`;
 }
 ```
+
+---
+
+> **Checkpoint:**
+> Viser tælleren altid det rigtige antal film – både når alle film vises, og når du har valgt en genre?
+
+---
 
 **Test:**
 Når du vælger en genre, skal tælleren automatisk opdatere og vise hvor mange film der matcher dit valg.

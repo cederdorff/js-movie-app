@@ -50,7 +50,7 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 <summary><strong>1. Recap</strong></summary>
 
 - Hvem fik arrays af objekter til at virke? Vis og fortæl (2-3 frivillige)
-- Quiz: Arrays, objects, loops, template literals
+- Arrays, objects, loops, template literals
 - Dagens mål: funktioner + rigtig data fra fetch + ét simpelt genre-filter (Opgave 0)
 
 </details>
@@ -101,7 +101,7 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 </details>
 
 <details>
-<summary><strong>6. Afrunding og forhåndsblik</strong></summary>
+<summary><strong>6. Afrunding og næste gang</strong></summary>
 
 - Recap: fetch, async/await, filter, includes
 - Hjemmearbejde: Ryd op i kode
