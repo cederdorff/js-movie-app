@@ -6,6 +6,7 @@ Formålet med denne lektion er at introducere jer til at hente rigtig data fra p
 
 **Mål:**
 
+- Repetere funktioner (`showMovies()`, `showMovie(movie)`, parametre og return)
 - Forstå og anvende `fetch()` til at hente data fra en URL
 - Arbejde med `async`/`await` pattern
 - Konvertere JSON til JavaScript objekter
@@ -46,16 +47,29 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 ## Agenda
 
 <details>
-<summary><strong>1. Recap og opsamling</strong></summary>
+<summary><strong>1. Recap</strong></summary>
 
 - Hvem fik arrays af objekter til at virke? Vis og fortæl (2-3 frivillige)
 - Quiz: Arrays, objects, loops, template literals
-- Dagens mål: Rigtig data fra fetch + ét simpelt genre-filter (Opgave 0)
+- Dagens mål: funktioner + rigtig data fra fetch + ét simpelt genre-filter (Opgave 0)
 
 </details>
 
 <details>
-<summary><strong>2. Fetch og JSON</strong></summary>
+<summary><strong>2. Funktioner</strong></summary>
+
+- Kort funktion-recap: hvorfor vi deler kode op i funktioner
+- Gennemgå `showMovies()` og `showMovie(movie)` fra DAG 2
+- Mini-øvelse: lav `formatMovieTitle(title, year)` der returnerer en samlet tekst
+- Hvordan bruger vi funktioner sammen med fetch-flowet?
+- Ansvarsdeling i funktioner: `fetchMovies()`, `showMovies()`, `showMovie(movie)`
+- Hvornår kalder vi hvilke funktioner?
+- Praktisk overgang: behold funktionsstrukturen mens data-kilden skiftes
+
+</details>
+
+<details>
+<summary><strong>3. Fetch og JSON</strong></summary>
 
 - Hvad er fetch? Henter data fra internettet
 - Hvad er JSON? Dataformat der ligner JavaScript
@@ -66,7 +80,7 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 </details>
 
 <details>
-<summary><strong>3. Array.filter() og .includes()</strong></summary>
+<summary><strong>4. Array.filter() og .includes()</strong></summary>
 
 - Hvad er `.filter()`? Udvælg specifikke elementer
 - Filterfunktionen returnerer `true` (behold) eller `false` (drop)
@@ -77,7 +91,7 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 </details>
 
 <details>
-<summary><strong>4. Genre-filter med dropdown</strong></summary>
+<summary><strong>5. Genre-filter med dropdown</strong></summary>
 
 - Planlæg: HTML dropdown, JavaScript logik
 - Trin-for-trin: `populateGenreSelect()`, `applyGenreFilter()`, `showMovies(filteredMovies)` (Opgave 3)
@@ -87,7 +101,7 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 </details>
 
 <details>
-<summary><strong>5. Afrunding og forhåndsblik</strong></summary>
+<summary><strong>6. Afrunding og forhåndsblik</strong></summary>
 
 - Recap: fetch, async/await, filter, includes
 - Hjemmearbejde: Ryd op i kode
