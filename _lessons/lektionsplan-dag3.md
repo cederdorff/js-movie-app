@@ -49,9 +49,10 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 <details>
 <summary><strong>1. Recap</strong></summary>
 
+- Hvad skal vi i dag? Vis løsning
+- Dagens mål: funktioner + rigtig data fra fetch + ét simpelt genre-filter (Opgave 0)
 - Hvem fik arrays af objekter til at virke? Vis og fortæl (2-3 frivillige)
 - Arrays, objects, loops, template literals
-- Dagens mål: funktioner + rigtig data fra fetch + ét simpelt genre-filter (Opgave 0)
 
 </details>
 
@@ -62,7 +63,7 @@ Ved at fokusere på ét filter ad gangen lærer I konceptet ordentligt uden at b
 - Gennemgå `showMovies()` og `showMovie(movie)` fra DAG 2
 - Mini-øvelse: lav `formatMovieTitle(title, year)` der returnerer en samlet tekst
 - Hvordan bruger vi funktioner sammen med fetch-flowet?
-- Ansvarsdeling i funktioner: `fetchMovies()`, `showMovies()`, `showMovie(movie)`
+- Ansvarsdeling i funktioner: `fetchMovies()`, `showMovies(allMovies)`, `showMovie(movie)`
 - Hvornår kalder vi hvilke funktioner?
 - Praktisk overgang: behold funktionsstrukturen mens data-kilden skiftes
 
