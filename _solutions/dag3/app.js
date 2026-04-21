@@ -31,7 +31,9 @@ function populateGenreSelect() {
     }
   }
 
-  for (const genre of genres) {
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
