@@ -1121,7 +1121,6 @@ Det nye her er:
 
 ---
 
-
 ## Opgave 4: Tilføj søgning i title
 
 Tilføj et input-felt og filtrér på title samtidig med genre:
