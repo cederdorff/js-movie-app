@@ -1121,74 +1121,133 @@ Det nye her er:
 
 ---
 
-## Opgave 4: Tilføj søgning i title
+## Opgave 4: Vis hvor mange film
 
-Tilføj et input-felt og filtrér på title samtidig med genre:
+**Formål:**
+Gør det tydeligt for brugeren hvor mange film der vises lige nu – både når alle film vises, og når der er filtreret på genre.
 
-```javascript
-function applyFilters() {
-  let selectedGenre = document.querySelector("#genre-select").value;
-  let searchTerm = document.querySelector("#search-input").value.toLowerCase();
+**Sådan gør du:**
 
-  let filteredMovies = allMovies.filter(function (movie) {
-    let matchesGenre =
-      selectedGenre === "all" || movie.genre.includes(selectedGenre);
-    let matchesTitle = movie.title.toLowerCase().includes(searchTerm);
-    return matchesGenre && matchesTitle;
-  });
+1. Tilføj et element til HTML’en, hvor antallet kan vises (se eksempel).
+2. Giv det en klasse og et id, så det er let at style og finde i JavaScript.
+3. Tilføj CSS for at sikre, at tælleren står flot på linje med genre-dropdown og label.
+4. Find elementet i JavaScript med `const movieCount = ...` (placeret sammen med de andre DOM-variabler i toppen).
+5. Opdater tælleren i din `showMovies()`-funktion, så den altid viser det aktuelle antal film.
 
-  showMovies(filteredMovies);
-}
-```
-
-## Opgave 5: Vis hvor mange film
-
-Tilføj en counter der viser antal film:
-
-**HTML:**
+**HTML-eksempel:**
 
 ```html
 <section class="controls">
-  <label for="genre-select">Genre</label>
-  <select id="genre-select">
-    <option value="all">Alle genrer</option>
-  </select>
-  <p id="movie-count" style="color: white; margin: 0;"></p>
+  <div class="genre-row">
+    <label for="genre-select">Genre</label>
+    <select id="genre-select">
+      <option value="all">Alle genrer</option>
+    </select>
+    <span id="movie-count" class="movie-count"></span>
+  </div>
 </section>
 ```
 
-**JavaScript - i `showMovies()` funktionen:**
+**CSS-eksempel (tilføj i din app.css):**
+
+```css
+.genre-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+}
+
+#genre-select {
+  min-width: 260px;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  border: 2px solid white;
+  font-size: 1rem;
+}
+
+.movie-count {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  white-space: nowrap;
+}
+```
+
+**JavaScript-eksempel:**
+
+Øverst i din fil (sammen med de andre DOM-variabler):
+
+```javascript
+const movieCount = document.querySelector("#movie-count");
+```
+
+I din `showMovies()` funktion:
 
 ```javascript
 function showMovies(movies) {
-  // ... existing code ...
+  // ... eksisterende kode til at vise film ...
 
-  // Opdater counter
-  let counter = document.querySelector("#movie-count");
-  counter.textContent = `Viser ${movies.length} film`;
+  // Opdater counter – denne linje sørger for at tælleren altid viser det rigtige antal
+  movieCount.textContent = `Viser ${movies.length} film`;
 }
 ```
 
-## Opgave 6: Gør dropdown dynamisk med antal
+**Test:**
+Når du vælger en genre, skal tælleren automatisk opdatere og vise hvor mange film der matcher dit valg.
 
-Vis antal film pr. genre i dropdown-teksten:
+## Ekstraopgave: Vis antal film i hver genre i dropdown
+
+_Denne opgave er ekstra og kan springes over, hvis du vil fokusere på hovedfunktionaliteten først._
+
+**Hvad går opgaven ud på?**
+Du skal gøre genre-dropdownen endnu smartere, så der står hvor mange film der er i hver genre – fx “Action (5)”. Så kan brugeren hurtigt se fordelingen og vælge genre ud fra antal.
+
+**Sådan gør du – trin for trin:**
+
+1. Find funktionen `populateGenreSelect()` i din JavaScript-fil. Det er her dropdownen fyldes med genrer.
+2. Før du opretter `<option>`-elementerne, skal du tælle hvor mange film der er i hver genre. Det gør du ved at gennemløbe alle film og bruge et objekt (fx `counts`) til at holde styr på antallet.
+3. Når du opretter `<option>`-elementerne, skal du skrive både genre-navn og antal, fx “Action (5)”.
+4. Husk at rydde dropdownen først, så der ikke kommer dubletter, hvis funktionen kaldes flere gange.
+
+**Eksempel på hele funktionen:**
 
 ```javascript
-let counts = {};
-for (let movie of allMovies) {
-  for (let genre of movie.genre) {
-    counts[genre] = (counts[genre] || 0) + 1;
+function populateGenreSelect() {
+  // Ryd dropdownen først (behold evt. "Alle genrer")
+  genreSelect.innerHTML = '<option value="all">Alle genrer</option>';
+
+  // Saml alle genrer og tæl hvor mange film der er i hver
+  const genres = new Set();
+  let counts = {};
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+      counts[genre] = (counts[genre] || 0) + 1;
+    }
+  }
+
+  // Sortér genrer alfabetisk
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  // Opret <option> for hver genre med antal
+  for (const genre of sortedGenres) {
+    const label = `${genre} (${counts[genre]})`;
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${label}</option>`,
+    );
   }
 }
-
-for (let genre of sortedGenres) {
-  let label = `${genre} (${counts[genre]})`;
-  genreSelect.insertAdjacentHTML(
-    "beforeend",
-    `<option value="${genre}">${label}</option>`,
-  );
-}
 ```
+
+**Når det virker, skal du kunne:**
+
+- Åbne dropdownen og se hvor mange film der er i hver genre – fx “Drama (7)”
+- Få et hurtigt overblik over fordelingen og lettere vælge genre
+
+**Bonus:**
+Hvis du vil, kan du også vise antal film ud for “Alle genrer” (fx “Alle genrer (17)”) – det kræver bare at du ændrer label-teksten i første option.
 
 ---
 
@@ -1201,21 +1260,6 @@ for (let genre of sortedGenres) {
  **.includes()** - check om noget findes i array  
  **Event listeners** - reagere på ændringer i input/select  
  **Global variables** - data tilgængelig overalt
-
----
-
-## Forberedelse til næste gang
-
-Til næste gang skal vi tilføje:
-
-- Søgefelt (find film ved titel)
-- Sortering (titel, år og rating)
-- Dialog (vis detaljer når man klikker)
-- Deploy til GitHub Pages (gør din app offentlig!)
-
-Hold det simpelt! Vi bygger videre på det du har nu.
-
-Vi ses!
 
 ---
 
