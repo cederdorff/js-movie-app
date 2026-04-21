@@ -355,7 +355,37 @@ I stedet for at få hele løsningen på én gang, bygger du nu fetch-flowet trin
 
 ### 1.2.1: Opret URL, variabler og første funktionskald
 
-Start med at opdatere toppen af din fil til dette:
+Start med at opdatere toppen af din fil.
+
+**Det skal du gøre:**
+
+1. Behold `"use strict";`
+2. Behold din `showMovies(...)` og `showMovie(...)` længere nede i filen
+3. Slet hele den gamle hardcoded `const movies = [...]` liste
+4. Opret i stedet `let allMovies = []`
+5. Sørg for at `const movieList = document.querySelector("#movie-list")` kun står én gang
+6. Tilføj `MOVIES_URL`
+7. Tilføj kaldet `fetchMovies();`
+
+**Hvorfor bruger vi `let allMovies = []`?**
+
+Fordi variablen skal skifte værdi senere.
+
+I starten er `allMovies` en tom liste:
+
+```javascript
+let allMovies = [];
+```
+
+Efter `fetch()` får den en ny værdi med rigtige film:
+
+```javascript
+allMovies = await response.json();
+```
+
+Hvis vi brugte `const`, måtte vi ikke tildele en ny værdi bagefter.
+
+Toppen af filen skal nu se sådan ud:
 
 ```javascript
 "use strict";
@@ -369,6 +399,8 @@ const movieList = document.querySelector("#movie-list");
 
 fetchMovies();
 ```
+
+Hvis du kører koden allerede her, er det helt normalt at den endnu ikke virker færdigt - vi har kaldt `fetchMovies()`, men har ikke lavet funktionen endnu. Det gør vi i næste trin.
 
 **Hvorfor?**
 
@@ -403,6 +435,20 @@ async function fetchMovies() {
 
 Nu henter du data og gemmer det i `allMovies`.
 
+**Hvad sker der helt præcist her?**
+
+1. `fetch(MOVIES_URL)` sender en forespørgsel til URL'en
+2. Svaret gemmes i variablen `response`
+3. `response.json()` oversætter JSON-svaret til JavaScript-data
+4. Den færdige liste gemmes i `allMovies`
+
+Der er altså to ventetrin:
+
+- først venter du på selve svaret fra serveren
+- derefter venter du på at JSON bliver lavet om til JavaScript
+
+Det er derfor vi bruger `await` to gange.
+
 ### 1.2.4: Tjek at data faktisk er kommet ind
 
 Tilføj et par logs i funktionen:
@@ -416,14 +462,23 @@ async function fetchMovies() {
 
   console.log("Hentet", allMovies.length, "film!");
   console.log("Første film:", allMovies[0]);
+  console.log("Alle film:", allMovies);
 }
 ```
 
-Hvis du ser antal film og første film i konsollen, virker fetch-delen.
+Hvis du ser antal film, første film og hele arrayet i konsollen, virker fetch-delen.
 
 ### 1.2.5: Vis filmene med dine eksisterende funktioner
 
-Tilføj nu sidste linje i funktionen og sørg for at resten af filen ser sådan ud:
+Nu skal du bare koble de hentede data sammen med de funktioner du allerede har.
+
+Tilføj denne linje nederst i `fetchMovies()`:
+
+```javascript
+showMovies(allMovies);
+```
+
+Så funktionen ser sådan ud:
 
 ```javascript
 async function fetchMovies() {
@@ -434,44 +489,23 @@ async function fetchMovies() {
 
   console.log("Hentet", allMovies.length, "film!");
   console.log("Første film:", allMovies[0]);
+  console.log("Alle film:", allMovies);
 
   showMovies(allMovies);
 }
-
-function showMovies(movies) {
-  console.log("Viser", movies.length, "film...");
-
-  movieList.innerHTML = "";
-
-  for (const movie of movies) {
-    showMovie(movie);
-  }
-}
-
-function showMovie(movie) {
-  const html = /* html */ `
-    <article class="movie-card">
-      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
-      <div class="movie-info">
-        <h3>${movie.title}</h3>
-        <p>År: ${movie.year}</p>
-        <p>Rating: ${movie.rating}</p>
-      </div>
-    </article>
-  `;
-
-  movieList.insertAdjacentHTML("beforeend", html);
-}
 ```
+
+Du genbruger altså dine eksisterende `showMovies(...)` og `showMovie(...)` funktioner fra før.
 
 ### 1.2.6: Samlet version
 
-Når du har bygget det trin for trin, kan din samlede kode se sådan ud:
+Når du har bygget det trin for trin, kan du bruge den samlede version her som støtte, hvis du har brug for det.
+
+<details>
+<summary><strong>Vis samlet løsning for 1.2</strong></summary>
 
 ```javascript
 "use strict";
-
-console.log("Movie App starter...");
 
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
@@ -481,20 +515,13 @@ const movieList = document.querySelector("#movie-list");
 fetchMovies();
 
 async function fetchMovies() {
-  console.log("Henter film data...");
-
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
-
-  console.log("Hentet", allMovies.length, "film!");
-  console.log("Første film:", allMovies[0]);
 
   showMovies(allMovies);
 }
 
 function showMovies(movies) {
-  console.log("Viser", movies.length, "film...");
-
   movieList.innerHTML = "";
 
   for (const movie of movies) {
@@ -517,6 +544,8 @@ function showMovie(movie) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 ```
+
+</details>
 
 > **Progressions-tjek:**
 >
@@ -548,9 +577,21 @@ async function fetchMovies() {
 
 ---
 
-## Opgave 2: Hvad Er Array.filter()
+## Opgave 2: Forberedelse Til Genre-filtrering
 
-**Formål:** Lær at udvælge specifikke elementer fra et array.
+**Formål:** Lær `Array.filter()`, så du er klar til at filtrere film på genre.
+
+Nu har du hentet alle filmene med `fetch()`. Næste skridt er, at brugeren selv skal kunne vælge en genre og kun se de film der passer.
+
+Før vi bygger selve genre-filteret, træner vi først den vigtigste teknik bagved: `Array.filter()`.
+
+Tænk på det sådan her:
+
+1. Du har allerede **alle film** i `allMovies`
+2. Nu skal du lære at lave en **ny liste med nogle af filmene**
+3. Bagefter bruger vi præcis den idé til at vise fx kun `Action`, `Drama` eller `Sci-Fi`
+
+Så Opgave 2 er med vilje en lille mellemstation: først forstå filter-logikken, derefter bruge den til genre-filtrering i Opgave 3.
 
 ### 2.1: Forstå filter
 
@@ -569,6 +610,18 @@ const bigNumbers = numbers.filter(function (number) {
 console.log(bigNumbers); // [6, 7, 8, 9, 10]
 ```
 
+**Test det selv i `app.js`:**
+
+Prøv at indsætte eksemplet helt nederst i din `app.js` fil midlertidigt. Fjern det igen, når du har testet og forstået.
+
+Genindlæs siden i browseren og tjek derefter konsollen.
+
+Du skulle gerne se:
+
+```javascript
+[6, 7, 8, 9, 10];
+```
+
 **Hvad sker der?**
 
 - Filter går gennem hvert tal
@@ -577,6 +630,14 @@ console.log(bigNumbers); // [6, 7, 8, 9, 10]
 - Hvis `false` → drop det
 
 ### 2.2: Filter med film
+
+Nu flytter vi filter-tanken over på dine filmdata.
+
+Målet er stadig det samme: behold nogle elementer, og fjern resten.
+
+Forskellen er bare, at vi nu filtrerer filmobjekter i stedet for tal.
+
+Koden herunder er først bare et eksempel, så du kan se hvordan filter-logikken ser ud med film:
 
 ```javascript
 // Behold kun film fra 2010 eller senere
@@ -587,7 +648,7 @@ const newMovies = allMovies.filter(function (movie) {
 console.log("Nye film:", newMovies);
 ```
 
-**Test det i din Console:**
+**Test det i `fetchMovies()` og tjek svaret i konsollen:**
 
 Tilføj dette EFTER du har hentet data:
 
@@ -610,11 +671,113 @@ async function fetchMovies() {
 }
 ```
 
+Genindlæs siden og åbn konsollen.
+
+Du skal nu kontrollere, at du kan se:
+
+1. hvor mange film der er i `allMovies`
+2. hvor mange film der er fra 2010 eller senere
+3. et array med de film der matcher filteret
+
+Det er den samme mekanik vi om lidt bruger til genre:
+
+- i eksemplet ovenfor spørger vi: `er movie.year >= 2010?`
+- i næste opgave spørger vi i stedet: `indeholder movie.genre den valgte genre?`
+
+### 2.3: Træn genre-filter uden dropdown først
+
+Før du bygger den rigtige løsning, tager vi en ekstra træningsrunde.
+
+Her vælger brugeren ikke genre endnu. I stedet vælger **du selv** en genre direkte i koden, så du kan øve filter-logikken helt isoleret.
+
+Det gør Opgave 3 lettere, fordi du først træner selve tankegangen:
+
+1. vælg en genre
+2. filtrér filmene
+3. tjek resultatet i konsollen
+
+Prøv dette inde i `fetchMovies()` efter du har hentet data:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  const selectedGenre = "Action";
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    return movie.genre.includes(selectedGenre);
+  });
+
+  console.log("Valgt genre:", selectedGenre);
+  console.log("Film i genren:", filteredMovies.length);
+  console.log(filteredMovies);
+
+  showMovies(allMovies);
+}
+```
+
+Genindlæs siden og tjek svaret i konsollen.
+
+Du skal nu kontrollere, at du kan se:
+
+1. hvilken genre du filtrerer på
+2. hvor mange film der matcher den genre
+3. arrayet med de film der passer til genren
+
+Prøv derefter at skifte `"Action"` til fx `"Drama"`, `"Sci-Fi"` eller `"Adventure"` og se hvordan resultatet ændrer sig.
+
+Nu har du faktisk allerede lavet selve filter-logikken til genre.
+
+I Opgave 3 er forskellen bare, at genren ikke længere er hardcoded i JavaScript. Den kommer i stedet fra brugerens valg i dropdownen.
+
+### 2.4: Ryd op før du går videre til Opgave 3
+
+Ja, før du starter på den rigtige løsning, skal du lige nulstille din kode igen.
+
+Ellers risikerer du at have midlertidig testkode liggende, som gør Opgave 3 mere forvirrende.
+
+**Fjern derfor dette fra `fetchMovies()`:**
+
+1. midlertidige `console.log(...)` tests fra 2.2 og 2.3
+2. `const newMovies = ...` fra årstals-filteret
+3. `const selectedGenre = "Action"` fra den hardcoded genre-test
+4. `const filteredMovies = ...` fra træningsrunden i 2.3
+
+Når du er færdig med at rydde op, skal `fetchMovies()` igen være helt enkel og se sådan ud:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  showMovies(allMovies);
+}
+```
+
+Det er din rene baseline før Opgave 3.
+
+Så starter du med en frisk version, hvor du kun bygger de nye genre-filter trin ovenpå.
+
 ---
 
 ## Opgave 3: Lav Dit Første Genre-filter
 
 **Formål:** Filtrer film på valgt genre med en dropdown.
+
+Nu bruger du `filter()` til noget der ligner en rigtig app.
+
+Brugeren vælger en genre i en dropdown, og din kode skal derefter:
+
+1. læse den valgte genre
+2. filtrere `allMovies`
+3. vise den nye filtrerede liste med `showMovies(...)`
+
+Det er altså ikke en helt ny tankegang i Opgave 3. Det er bare Opgave 2 anvendt på et mere realistisk problem.
+
+I 2.3 valgte du selv genren direkte i JavaScript.
+
+Nu flytter vi det valg over til brugerfladen, så brugeren selv kan vælge genre i en dropdown.
 
 ### 3.1: Tilføj Genre-felt I HTML
 
@@ -630,13 +793,232 @@ Opdatér `index.html` - tilføj dette EFTER header:
 </section>
 ```
 
-### 3.2: Opdatér JavaScript
+Det giver os to nye elementer i HTML:
+
+1. en dropdown med id `genre-select`
+2. et felt til antal film med id `movie-count`
+
+### 3.2: Gør klar i JavaScript
+
+Før vi bygger hele løsningen, tager vi det i små trin.
+
+Målet er:
+
+1. at finde dropdownen i JavaScript
+2. at fylde den med genrer fra dataen
+3. at reagere når brugeren vælger en genre
+4. at filtrere filmene og vise resultatet
+
+### 3.2.1: Gem dropdownen i en variabel
+
+Tilføj denne linje sammen med dine andre DOM-variabler i toppen af filen:
+
+```javascript
+const genreSelect = document.querySelector("#genre-select");
+```
+
+Toppen af filen skal nu ligne dette:
+
+```javascript
+"use strict";
+
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+let allMovies = [];
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+
+fetchMovies();
+```
+
+### 3.2.2: Fyld dropdownen med genrer
+
+Nu laver du funktionen `populateGenreSelect()`.
+
+Det er helt ok, hvis du ikke forstår hver eneste linje i den her funktion første gang du ser den.
+
+Det vigtigste er, at du forstår idéen:
+
+1. vi går gennem alle film
+2. vi samler deres genrer
+3. vi undgår dubletter
+4. vi viser genrerne i dropdownen
+
+Den skal:
+
+1. gennemgå alle film
+2. samle alle genrer
+3. undgå dubletter
+4. indsætte genrerne som `<option>` i dropdownen
+
+Vi holder den bevidst så enkel som muligt her.
+
+Tilføj denne funktion under `fetchMovies()`:
+
+```javascript
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+```
+
+**Kort forklaring:**
+
+- `new Set()` er en samling der automatisk undgår dubletter
+- hver gang vi finder en genre, lægger vi den i `genres`
+- bagefter laver vi en `<option>` i dropdownen for hver genre
+
+Du behøver ikke kunne genfortælle hele funktionen perfekt endnu. Det vigtigste er at se mønsteret: læs data -> saml værdier -> vis dem i HTML.
+
+### 3.2.3: Kald `populateGenreSelect()` når filmene er hentet
+
+Når `allMovies` er fyldt med data, skal dropdownen også fyldes.
+
+Opdatér `fetchMovies()` til dette:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  showMovies(allMovies);
+}
+```
+
+Test det nu.
+
+Genindlæs siden og tjek dropdownen i browseren.
+
+Du skulle gerne se, at den nu automatisk bliver fyldt med genrer fra dataen.
+
+### 3.2.4: Reagér når brugeren vælger en genre
+
+Nu skal din kode lytte efter ændringer i dropdownen.
+
+Tilføj denne linje nederst i `fetchMovies()`:
+
+```javascript
+genreSelect.addEventListener("change", applyGenreFilter);
+```
+
+Så `fetchMovies()` nu ser sådan ud:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  showMovies(allMovies);
+
+  genreSelect.addEventListener("change", applyGenreFilter);
+}
+```
+
+**Vigtigt:**
+
+`applyGenreFilter` er ikke lavet endnu på dette trin.
+
+Det betyder, at hvis du allerede nu prøver at ændre genre i dropdownen, vil koden fejle. Det er helt forventet.
+
+Fejlen forsvinder i næste trin, hvor du opretter selve `applyGenreFilter()`.
+
+### 3.2.5: Lav selve filter-funktionen
+
+Nu kommer selve logikken, som matcher det du allerede trænede i 2.3.
+
+Vi bygger den i små trin.
+
+#### 3.2.5.1: Start med en tom funktion
+
+Tilføj først rammen:
+
+```javascript
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
+}
+```
+
+Tilføj en midlertidig testlinje, så du kan se at funktionen bliver kaldt:
+
+```javascript
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
+
+  console.log("Valgt genre:", selectedGenre);
+}
+```
+
+Test ved at ændre genre i dropdownen og tjek konsollen.
+
+#### 3.2.5.2: Håndtér "Alle genrer"
+
+Når brugeren vælger `all`, skal alle film vises igen:
+
+```javascript
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
+
+  if (selectedGenre === "all") {
+    showMovies(allMovies);
+    return;
+  }
+}
+```
+
+#### 3.2.5.3: Filtrér resten
+
+Nu tilføjer du den sidste del, som filtrerer på den valgte genre:
+
+```javascript
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
+
+  if (selectedGenre === "all") {
+    showMovies(allMovies);
+    return;
+  }
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    return movie.genre.includes(selectedGenre);
+  });
+
+  showMovies(filteredMovies);
+}
+```
+
+Når alt virker, kan du fjerne den midlertidige `console.log(...)` testlinje.
+
+Det vigtigste her er:
+
+1. læs den valgte genre fra dropdownen
+2. hvis værdien er `"all"`, så vis alle film
+3. ellers filtrér `allMovies`
+4. vis det filtrerede resultat
+
+### 3.2.6: Samlet JavaScript-løsning
+
+Når du har bygget det trin for trin, kan du sammenligne med denne samlede version:
 
 ```javascript
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
 const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
 
 fetchMovies();
 
@@ -647,13 +1029,10 @@ async function fetchMovies() {
   populateGenreSelect();
   showMovies(allMovies);
 
-  document
-    .querySelector("#genre-select")
-    .addEventListener("change", applyGenreFilter);
+  genreSelect.addEventListener("change", applyGenreFilter);
 }
 
 function populateGenreSelect() {
-  const genreSelect = document.querySelector("#genre-select");
   const genres = new Set();
 
   for (const movie of allMovies) {
@@ -662,8 +1041,7 @@ function populateGenreSelect() {
     }
   }
 
-  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
-  for (const genre of sortedGenres) {
+  for (const genre of genres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
@@ -672,7 +1050,7 @@ function populateGenreSelect() {
 }
 
 function applyGenreFilter() {
-  const selectedGenre = document.querySelector("#genre-select").value;
+  const selectedGenre = genreSelect.value;
 
   if (selectedGenre === "all") {
     showMovies(allMovies);
@@ -690,8 +1068,47 @@ function applyGenreFilter() {
 **Test det!**
 
 1. Siden loader → vis alle film
-2. Vælg fx Action i dropdown → vis kun Action film
-3. Vælg Alle genrer → vis alle igen
+2. Tjek at dropdownen automatisk er fyldt med genrer
+3. Vælg fx Action i dropdown → vis kun Action film
+4. Vælg Alle genrer → vis alle igen
+
+### 3.2.7: Ekstra trin - sortér genrer alfabetisk
+
+Hvis du vil gøre dropdownen lidt pænere, kan du sortere genrerne alfabetisk.
+
+Det er en god forbedring, men det er ikke nødvendigt for at forstå genre-filteret.
+
+Derfor ligger det som et ekstra trin og ikke som en del af grundløsningen.
+
+Du kan ændre denne del:
+
+```javascript
+for (const genre of genres) {
+  genreSelect.insertAdjacentHTML(
+    "beforeend",
+    `<option value="${genre}">${genre}</option>`,
+  );
+}
+```
+
+til dette:
+
+```javascript
+const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+for (const genre of sortedGenres) {
+  genreSelect.insertAdjacentHTML(
+    "beforeend",
+    `<option value="${genre}">${genre}</option>`,
+  );
+}
+```
+
+Det nye her er:
+
+1. `[...]` laver dit `Set` om til et array
+2. `sort()` sorterer genrerne alfabetisk
+3. bagefter looper du over den sorterede liste i stedet for den usorterede
 
 ### 3.3: Tjekliste
 
