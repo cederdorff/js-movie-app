@@ -196,6 +196,7 @@ Du går fra et simpelt genre-filter til en app der kan:
 **Opgaver:**
 
 - [Movie App - DAG 4](../_exercises/movie-app-4.md)
+- [Games App - Kom godt i gang](../_exercises/games-app-guide.md)
 - [Deploy dit website til GitHub Pages](https://www.notion.so/Deploy-dit-website-til-GitHub-Pages-2cba6f1413dc474883b58fdd4eba57bb?pvs=21)
 
 **Movie App løsning:**
