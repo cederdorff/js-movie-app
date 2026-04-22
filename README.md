@@ -1,211 +1,166 @@
 # JavaScript Movie App
 
-Et 4-dages JavaScript-kursus for begyndere - bygget til multimediedesignstuderende.
+Et 4-dages JavaScript-forløb for begyndere, bygget til multimediedesignstuderende.
 
-## Kursusstruktur
+## Overblik
 
-### DAG 1: Klik-tæller og grundprincipper
+Forløbet bygger en lille movie app i fire trin:
 
-**Formål:** Lær de helt grundlæggende ting uden arrays eller objekter
+- DAG 1: grundlæggende DOM og events
+- DAG 2: arrays, objekter og rendering
+- DAG 3: `fetch()`, JSON og genre-filter
+- DAG 4: søgning, sortering, dialog og GitHub Pages
 
-- Variabler med const-first tilgang (brug let kun ved reassignment)
-- querySelector til at finde elementer
-- addEventListener til at reagere på klik
-- Byg en simpel klik-tæller
+Materialet består af:
 
-**Eksempel:** Se `_solutions/dag1/app.js`
-
----
-
-### DAG 2: Arrays, Loops & Objekter
-
-**Formål:** Introducer datastrukturer med forhåndsdefineret data
-
-- Arrays med strenge
-- for...of loops
-- Introduktion til objekter
-- Array af objekter (forhåndsdefineret filmdata)
-- Template literals til HTML-generering
-- **Bonus:** Introduktion til fetch (valgfri)
-
-**Eksempel:** Se `_solutions/dag2/app.js`
-
----
-
-### DAG 3: Fetch, JSON & Simpelt Filter
-
-**Formål:** Hent rigtig data og tilføj ÉT filter
-
-- fetch() fra ekstern URL
-- async/await mønster
-- JSON konvertering
-- Array.filter() grundlæggende
-- .includes() til at checke arrays
-- ÉN genre-filter-knap (ikke kombineret)
-
-**Eksempel:** Se `_solutions/dag3/app.js`
-
----
-
-### DAG 4: Søgning, Genre, Sortering & Udgivelse
-
-**Formål:** Komplet app med fetch, titel-søgning, genre-filter, sortering og dialog
-
-- Søgefelt med input-event
-- Simpel genre-filtrering
-- Kombineret søgning + genre
-- Simpel sortering (titel, år, rating)
-- Dialog med film-detaljer
-- Udgivelse med GitHub Pages
-
-**Eksempel:** Se `_solutions/dag4/app.js`
-
----
-
-## Simplificeringer fra originalen
-
-**Hvad er blevet enklere:**
-
-- Ingen kombinerede filtre (kun én ad gangen)
-- Ingen range-filtre (år/rating-sliders)
-- Sortering er med som simpel basisfunktion i DAG 4
-- Ingen favorit-funktion
-- Ingen avanceret dialog-navigation
-
-**Hvorfor simplificeret?**
-
-- Fokus på grundprincipper først
-- Ét koncept ad gangen
-- Mindre frustrerende for begyndere
-- Mere tid til at øve grundprincipper
-
----
+- ovelser i `_exercises/`
+- loesninger i `_solutions/`
+- lektionsplaner i `_lessons/`
+- slides i `_slides/`
 
 ## Projektstruktur
 
-```
+```text
 js-movie-app/
-├── index.html              # Root-demo (slutapp)
-├── app.js                  # Fetch + titel-søgning + genre-filter + simpel sortering
-├── app.css                 # Root-styling til slutapp
+├── index.html
+├── app.js
+├── app.css
+├── img/
+│   └── favicon.png
 ├── _exercises/
 │   ├── movie-app-1.md
 │   ├── movie-app-2.md
 │   ├── movie-app-3.md
 │   ├── movie-app-4.md
-│   └── examples/
-│       ├── dag1/app.js     # DAG 1 eksempel
-│       ├── dag1/index.html
-│       ├── dag1/style.css
-│       ├── dag2/app.js     # DAG 2 eksempel
-│       ├── dag2/index.html
-│       ├── dag2/style.css
-│       ├── dag3/app.js     # DAG 3 eksempel
-│       ├── dag3/index.html
-│       ├── dag3/style.css
-│       ├── dag4/app.js     # DAG 4 eksempel (komplet app!)
-│       ├── dag4/index.html
-│       └── dag4/style.css
+│   ├── personer-liste-ekstraopgave-dag2.md
+│   ├── games-app-guide.md
+│   └── emneoversigt.md
+├── _solutions/
+│   ├── dag1/
+│   ├── dag2/
+│   ├── dag2-ekstra-personliste/
+│   ├── dag3/
+│   └── dag4/
+├── _lessons/
+│   ├── lektionsplan-dag1.md
+│   ├── lektionsplan-dag2.md
+│   ├── lektionsplan-dag3.md
+│   └── lektionsplan-dag4.md
+└── _slides/
+    ├── dag1.html
+    └── dag2.html
 ```
 
----
+## Dage
+
+### DAG 1
+
+Fokus:
+
+- `querySelector`
+- `addEventListener`
+- variabler og simple funktioner
+- helt enkel DOM-opdatering
+
+Se:
+
+- `_exercises/movie-app-1.md`
+- `_solutions/dag1/`
+
+### DAG 2
+
+Fokus:
+
+- arrays og objekter
+- `for...of`
+- template literals
+- rendering af en liste med hardcoded data
+
+Se:
+
+- `_exercises/movie-app-2.md`
+- `_solutions/dag2/`
+
+Ekstra:
+
+- `_exercises/personer-liste-ekstraopgave-dag2.md`
+- `_solutions/dag2-ekstra-personliste/`
+
+### DAG 3
+
+Fokus:
+
+- `fetch()`
+- `async/await`
+- JSON-data
+- `populateGenreSelect()`
+- `applyGenreFilter()`
+- movie count og et simpelt genre-filter
+
+Se:
+
+- `_exercises/movie-app-3.md`
+- `_solutions/dag3/`
+
+### DAG 4
+
+Fokus:
+
+- fælles baseline fra DAG 3
+- `DOMContentLoaded` og `initApp()`
+- søgning på titel
+- sortering
+- `applyFilters()`
+- tom-tilstand
+- dialog med filmdetaljer
+- GitHub Pages
+
+Se:
+
+- `_exercises/movie-app-4.md`
+- `_solutions/dag4/`
+
+## Root-filer
+
+Filerne i roden er den aktuelle samlede app:
+
+- [index.html](/Users/race/Developer/js-movie-app/index.html)
+- [app.js](/Users/race/Developer/js-movie-app/app.js)
+- [app.css](/Users/race/Developer/js-movie-app/app.css)
+
+Den matcher i praksis DAG 4-niveau:
+
+- `initApp()` på `DOMContentLoaded`
+- søgning, genre og sortering
+- movie count
+- tom-besked
+- dialog med detaljer
 
 ## Kom i gang
 
-### For Studerende:
+Projektet er ren HTML, CSS og JavaScript. Der er ingen `package.json`.
 
-**DAG 1:**
+Kør lokalt med fx:
 
-```bash
-# Start med tom mappe
-mkdir movie-app
-cd movie-app
-# Følg instruktioner i movie-app-1.md
-```
+1. Live Server i VS Code
+2. en simpel statisk server
 
-**DAG 2-4:**
+Appen henter data fra:
 
-```bash
-# Fortsæt fra hvor du slap
-# Se eksempler i _solutions/
-```
+`https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json`
 
-### Kør projektet lokalt:
+## For undervisere
 
-Projektet er ren HTML/CSS/JS (ingen `package.json`):
+Anbefalet arbejdsgang:
 
-1. Åbn `index.html` med Live Server i VS Code
-2. Eller servér mappen med en simpel statisk server
-3. Appen henter film fra ekstern URL: https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json
-
-`npm run dev` virker ikke i denne repo, da der ikke er npm scripts.
-
-### For Undervisere:
-
-**Klon repo:**
-
-```bash
-git clone https://github.com/cederdorff/js-movie-app.git
-cd js-movie-app
-```
-
-**Åbn eksempler:**
-
-```bash
-# Åbn _solutions/ mappen
-# Hver dag har sine egne filer (dag-mapper med app.js, index.html og style.css.)
-```
-
----
+1. Brug øvelsesfilerne i `_exercises/` som elevspor
+2. Brug mapperne i `_solutions/` som reference efter hver dag
+3. Brug `_lessons/` til planlægning
+4. Brug `_slides/` som supplement
 
 ## Undervisningstips
 
-1. **Vis console.log meget!** Gør det synligt hvad der sker
-2. **Start fra ingenting** - lad dem skrive hver linje
-3. **Test efter hver ændring** - hvis noget virker, byg videre
-4. **Brug debugging-sektioner** - i hver opgavefil
-5. **Hold det simpelt** - modstå fristelsen til at tilføje mere
-
----
-
-## App-funktioner efter dag
-
-| Funktion  | DAG 1-2                      | DAG 3-4                          |
-| --------- | ---------------------------- | -------------------------------- |
-| **DAG 1** | Klik-tæller                  | Grundprincipper                  |
-| **DAG 2** | Arrays & loops               | Liste med forhåndsdefineret data |
-| **DAG 3** | Fetch & genre-filter         | ÉN filter-knap                   |
-| **DAG 4** | Søgning + sortering + dialog | Komplet app                      |
-| **Fokus** | Grundlæggende JavaScript     | API + DOM-manipulation           |
-
----
-
-## Live-demo
-
-Udgiv til GitHub Pages for at vise resultatet:
-
-**URL-format:** `https://[username].github.io/js-movie-app/`
-
-Se DAG 4-guiden for udgivelsesinstruktioner.
-
----
-
-## Bidrag
-
-Forslag til forbedringer? Åbn en issue eller en pull request.
-
----
-
-## Licens
-
-MIT-licens - brug frit til undervisning
-
----
-
-## Udviklet til
-
-**Multimediedesign studerende på EASJ**  
-4-dages JavaScript introduktion  
-Fokus: Grundprincipper først, kompleksitet senere
-
-**Feedback?** Skriv til race@eaaa.dk
+- Hold fast i progressionen: ét lag ad gangen
+- Test i browseren efter hver ændring
+- Brug `console.log()` aktivt i de tidlige dage
+- Lad studerende sammenligne med `_solutions/` efter de selv har prøvet
