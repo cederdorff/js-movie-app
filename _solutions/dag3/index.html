@@ -12,17 +12,20 @@
       <p class="subtitle">DAG 3: Fetch & Filter</p>
     </header>
 
-    <section class="controls">
-      <div class="genre-row">
-        <label for="genre-select"><b>Genre</b></label>
-        <select id="genre-select">
-          <option value="all">Alle genrer</option>
-        </select>
-        <span id="movie-count"></span>
-      </div>
-    </section>
-
     <main>
+      <section class="controls">
+        <div class="control-group">
+          <label for="genre-select">Genre</label>
+          <select id="genre-select">
+            <option value="all">Alle genrer</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="status-bar">
+        <p id="movie-count">Viser 0 ud af 0 film</p>
+      </section>
+
       <section id="movie-list" class="movie-grid" aria-label="Filmliste">
         <!-- Film vises her -->
       </section>

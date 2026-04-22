@@ -1165,33 +1165,59 @@ Gør det tydeligt for brugeren hvor mange film der vises lige nu – både når 
 **HTML-eksempel:**
 
 ```html
-<section class="controls">
-  <div class="genre-row">
-    <label for="genre-select">Genre</label>
-    <select id="genre-select">
-      <option value="all">Alle genrer</option>
-    </select>
-    <span id="movie-count" class="movie-count"></span>
-  </div>
-</section>
+<main>
+  <section class="controls">
+    <div class="control-group">
+      <label for="genre-select">Genre</label>
+      <select id="genre-select">
+        <option value="all">Alle genrer</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="status-bar">
+    <p id="movie-count" class="movie-count">Viser 0 ud af 0 film</p>
+  </section>
+
+  <section id="movie-list" class="movie-grid" aria-label="Filmliste"></section>
+</main>
 ```
+
+Vi bruger med vilje samme `controls` og `control-group` struktur som i DAG 4.
+Så skal du ikke lære et nyt markup-mønster igen dagen efter.
 
 **CSS-eksempel (tilføj i din app.css):**
 
 ```css
-.genre-row {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.controls {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px);
   justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.control-group label {
+  font-weight: 600;
 }
 
 #genre-select {
-  min-width: 260px;
+  width: 100%;
+  min-width: 0;
   padding: 0.75rem 0.9rem;
   border-radius: 12px;
   border: 2px solid white;
   font-size: 1rem;
+}
+
+.status-bar {
+  margin-bottom: 0.5rem;
 }
 
 .movie-count {
@@ -1201,6 +1227,14 @@ Gør det tydeligt for brugeren hvor mange film der vises lige nu – både når 
   white-space: nowrap;
 }
 ```
+
+Hvis du allerede har en `.controls` block fra tidligere, så ret i den eksisterende i stedet for at lave endnu en et andet sted i filen.
+
+Det vigtige er:
+
+- dropdownen ligger i `.controls`
+- feltet ligger i `.control-group`
+- tælleren ligger for sig selv i en lille `status-bar` under controls
 
 **JavaScript-eksempel:**
 
@@ -1219,6 +1253,7 @@ function showMovies(movies) {
   // Opdater counter – denne linje sørger for at tælleren altid viser det rigtige antal
   movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 }
+```
 ```
 
 ---
