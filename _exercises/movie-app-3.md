@@ -802,20 +802,53 @@ Nu flytter vi det valg over til brugerfladen, så brugeren selv kan vælge genre
 
 ### 3.1: Tilføj Genre-felt I HTML
 
-Opdatér `index.html` - tilføj dette EFTER header:
+Opdatér `index.html`.
+
+I dag bruger vi en lidt mere færdig shell, så layoutet allerede minder om det, du bygger videre på i DAG 4.
+
+Det betyder:
+
+- headeren må gerne hedde `Movie Database`
+- controls ligger inde i `main`
+- film-antallet ligger i en lille status-linje under controls
+
+Du kan fx lade toppen af din HTML se sådan ud:
 
 ```html
-<section class="controls">
-  <label for="genre-select">Genre</label>
-  <select id="genre-select">
-    <option value="all">Alle genrer</option>
-  </select>
-</section>
+<body>
+  <header>
+    <h1>Movie Database</h1>
+    <p class="subtitle">DAG 3: Fetch & genre-filter</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="control-group">
+        <label for="genre-select">Genre</label>
+        <select id="genre-select">
+          <option value="all">Alle genrer</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="status-bar">
+      <p id="movie-count">Viser 0 ud af 0 film</p>
+    </section>
+
+    <section id="movie-list" class="movie-grid" aria-label="Filmliste">
+      <!-- Film vises her -->
+    </section>
+  </main>
+</body>
 ```
 
-Det giver os et nyt element i HTML:
+Det giver os disse vigtige elementer i HTML:
 
 1. en dropdown med id `genre-select`
+2. et count-element med id `movie-count`
+3. en filmliste med id `movie-list`
+
+Vi bruger med vilje samme shell-idé som i DAG 4, så overgangen bliver rolig både visuelt og strukturelt.
 
 ### 3.2: Gør klar i JavaScript
 
@@ -1189,7 +1222,42 @@ Så skal du ikke lære et nyt markup-mønster igen dagen efter.
 **CSS-eksempel (tilføj i din app.css):**
 
 ```css
+:root {
+  --bg-dark: #0c111a;
+  --text-light: #e8f0f7;
+  --text-muted: #a8b8cc;
+  --card-bg: #3f464e;
+  --accent: #69c8f0;
+}
+
+body {
+  background: linear-gradient(180deg, #0c111a 0%, #1a1f2e 100%);
+  color: var(--text-light);
+}
+
+header {
+  background: linear-gradient(90deg, rgba(26, 70, 85, 0.6), rgba(31, 79, 96, 0.6));
+  border-bottom: 1px solid rgba(105, 200, 240, 0.15);
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.subtitle {
+  margin-top: 0.4rem;
+  color: var(--text-muted);
+}
+
+main {
+  width: min(1200px, 94vw);
+  margin: 0 auto;
+  padding: 1.5rem 0 3rem;
+}
+
 .controls {
+  background: rgba(14, 20, 30, 0.6);
+  border: 1px solid rgba(105, 200, 240, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
   display: grid;
   grid-template-columns: minmax(240px, 320px);
   justify-content: center;
@@ -1205,36 +1273,40 @@ Så skal du ikke lære et nyt markup-mønster igen dagen efter.
 
 .control-group label {
   font-weight: 600;
+  color: var(--text-muted);
 }
 
 #genre-select {
   width: 100%;
   min-width: 0;
-  padding: 0.75rem 0.9rem;
-  border-radius: 12px;
-  border: 2px solid white;
-  font-size: 1rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(105, 200, 240, 0.2);
+  background: rgba(23, 29, 39, 0.8);
+  color: var(--text-light);
+  font-size: 0.95rem;
 }
 
 .status-bar {
-  margin-bottom: 0.5rem;
+  margin: 0.8rem 0;
 }
 
 .movie-count {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 ```
 
-Hvis du allerede har en `.controls` block fra tidligere, så ret i den eksisterende i stedet for at lave endnu en et andet sted i filen.
+Hvis du allerede har styles fra tidligere, så ret i de eksisterende blocks i stedet for at lave helt nye dubletter længere nede i filen.
 
 Det vigtige er:
 
 - dropdownen ligger i `.controls`
 - feltet ligger i `.control-group`
 - tælleren ligger for sig selv i en lille `status-bar` under controls
+- shellen føles som en tidlig version af den app du bygger videre på i DAG 4
 
 **JavaScript-eksempel:**
 
@@ -1253,7 +1325,6 @@ function showMovies(movies) {
   // Opdater counter – denne linje sørger for at tælleren altid viser det rigtige antal
   movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 }
-```
 ```
 
 ---
