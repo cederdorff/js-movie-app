@@ -1217,7 +1217,7 @@ function showMovies(movies) {
   // ... eksisterende kode til at vise film ...
 
   // Opdater counter – denne linje sørger for at tælleren altid viser det rigtige antal
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 }
 ```
 

@@ -81,7 +81,8 @@ Det betyder:
 - du beholder gerne `populateGenreSelect()`
 - du beholder gerne `showMovies(movies)`
 - du beholder gerne `showMovie(movie)`
-- du bygger oven på `applyGenreFilter()` i stedet for at starte forfra
+- du beholder gerne `movie-image` som billedklasse fra DAG 3
+- du bygger oven på `applyGenreFilter()` og ender med `applyFilters()`
 
 ---
 
@@ -375,6 +376,8 @@ async function fetchMovies() {
 
   populateGenreSelect();
   applyFilters();
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
 }
 ```
 
@@ -446,7 +449,7 @@ function applyFilters() {
 
 function showMovies(movies) {
   movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   for (const movie of movies) {
     showMovie(movie);
@@ -468,9 +471,6 @@ function showMovie(movie) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
-
-genreSelect.addEventListener("change", applyFilters);
-searchInput.addEventListener("input", applyFilters);
 ```
 
 </details>
@@ -592,25 +592,14 @@ I denne opgave skal du kun fokusere på én ny ting:
 Du skal **ikke** tænke på dialog eller filmdetaljer endnu.
 Det kommer først senere.
 
-Nu ændrer vi `applyFilters()` til `applyFiltersAndSort()`.
+Vi beholder navnet `applyFilters()`.
 
-Det nye navn gør det tydeligere hvad funktionen faktisk gør.
+Det gør progressionen mere rolig, fordi funktionen stadig har samme ansvar som før:
+den læser brugerens valg og viser de rigtige film. Nu udvider vi den bare med sortering.
 
 Find din nuværende funktion fra Opgave 1.
 
-Omdøb funktionen fra:
-
-```javascript
-function applyFilters() {
-```
-
-til:
-
-```javascript
-function applyFiltersAndSort() {
-```
-
-Du skal altså ændre selve funktionsnavnet der, hvor funktionen bliver defineret.
+Du skal altså ikke omdøbe funktionen her.
 
 Du skal ikke oprette en ekstra funktion længere nede i filen.
 Du skal videreudbygge den funktion, du allerede lavede i Opgave 1.
@@ -630,7 +619,7 @@ const searchValue = searchInput.value.trim().toLowerCase();
 Toppen af funktionen skal nu ligne dette:
 
 ```javascript
-function applyFiltersAndSort() {
+function applyFilters() {
   const selectedGenre = genreSelect.value;
   const searchValue = searchInput.value.trim().toLowerCase();
   const sortOption = sortSelect.value;
@@ -666,7 +655,7 @@ Det betyder helt konkret:
 Hele funktionen skal nu ligne dette:
 
 ```javascript
-function applyFiltersAndSort() {
+function applyFilters() {
   const selectedGenre = genreSelect.value;
   const searchValue = searchInput.value.trim().toLowerCase();
   const sortOption = sortSelect.value;
@@ -704,9 +693,9 @@ Bliv stadig i `app.js`.
 Alle tre inputfelter skal nu pege på samme funktion:
 
 ```javascript
-genreSelect.addEventListener("change", applyFiltersAndSort);
-searchInput.addEventListener("input", applyFiltersAndSort);
-sortSelect.addEventListener("change", applyFiltersAndSort);
+genreSelect.addEventListener("change", applyFilters);
+searchInput.addEventListener("input", applyFilters);
+sortSelect.addEventListener("change", applyFilters);
 ```
 
 Find derfor dine to eksisterende linjer fra Opgave 1:
@@ -732,7 +721,7 @@ populateGenreSelect();
 applyFilters();
 ```
 
-Nu skal den i stedet kalde den nye funktion.
+Nu skal den stadig kalde den samme funktion.
 
 Find linjen med:
 
@@ -743,7 +732,7 @@ applyFilters();
 og erstat den med:
 
 ```javascript
-applyFiltersAndSort();
+applyFilters();
 ```
 
 Hvis du også udfylder genre-dropdownen i samme funktion, skal den typisk ende sådan her:
@@ -754,7 +743,10 @@ async function fetchMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  applyFiltersAndSort();
+  applyFilters();
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
 }
 ```
 
@@ -816,7 +808,7 @@ async function fetchMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  applyFiltersAndSort();
+  applyFilters();
 }
 
 function populateGenreSelect() {
@@ -838,7 +830,7 @@ function populateGenreSelect() {
   }
 }
 
-function applyFiltersAndSort() {
+function applyFilters() {
   const selectedGenre = genreSelect.value;
   const searchValue = searchInput.value.trim().toLowerCase();
   const sortOption = sortSelect.value;
@@ -870,7 +862,7 @@ function applyFiltersAndSort() {
 
 function showMovies(movies) {
   movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   for (const movie of movies) {
     showMovie(movie);
@@ -892,10 +884,6 @@ function showMovie(movie) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
-
-genreSelect.addEventListener("change", applyFiltersAndSort);
-searchInput.addEventListener("input", applyFiltersAndSort);
-sortSelect.addEventListener("change", applyFiltersAndSort);
 ```
 
 </details>
@@ -912,7 +900,7 @@ Strukturen fra DAG 3 bevarer vi stadig:
 
 - `fetchMovies()` henter data
 - `populateGenreSelect()` udfylder dropdownen
-- `applyFiltersAndSort()` vælger hvilke film der skal vises
+- `applyFilters()` vælger hvilke film der skal vises
 - `showMovies(movies)` renderer listen
 - `showMovie(movie)` renderer ét kort
 
@@ -926,7 +914,7 @@ Hvis du ikke allerede har den, så tilføj en lille status-linje mellem controls
 
 ```html
 <section class="status-bar">
-  <p id="movie-count">Viser 0 film</p>
+  <p id="movie-count">Viser 0 ud af 0 film</p>
 </section>
 ```
 
@@ -938,7 +926,7 @@ Med andre ord:
 - indsæt den før `<section id="movie-list" ...>`
 
 > **Checkpoint:**
-> Kan du nu se teksten `Viser 0 film` på siden?
+> Kan du nu se teksten `Viser 0 ud af 0 film` på siden?
 
 ### 3.1.1: Tilføj styling til movie count
 
@@ -1011,7 +999,7 @@ function showMovies(movies) {
 }
 ```
 
-Det er en fin forbedring, fordi brugeren nu kan se hvor meget søgning og filtrering har indsnævret listen.
+Det er en fin forbedring, fordi brugeren nu både kan se hvor mange film der vises lige nu, og hvor mange der findes i alt.
 
 ### 3.3: Håndtér tomt resultat
 
@@ -1077,7 +1065,7 @@ Erstat template-delen med en version i denne stil:
 function showMovie(movie) {
   const html = /* html */ `
     <article class="movie-card" tabindex="0">
-      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <img src="${movie.image}" alt="${movie.title}" class="movie-image" />
       <div class="movie-info">
         <div class="title-row">
           <h2>${movie.title}</h2>
@@ -1119,7 +1107,7 @@ Nu har du introduceret nye klassenavne i `showMovie(movie)`.
 
 Det betyder, at du også skal style de nye elementer:
 
-- `.movie-poster`
+- `.movie-image`
 - `.title-row`
 - `.year-badge`
 - `.movie-rating`
@@ -1152,7 +1140,8 @@ Du kan fx starte med styles i denne retning:
 }
 ```
 
-Hvis du også har skiftet fra `.movie-image` til `.movie-poster`, så husk at opdatere billed-stylingen til det nye klassenavn.
+Behold gerne `movie-image` som klassenavn hele vejen fra DAG 3 til DAG 4.
+Så undgår du at ændre både HTML, JavaScript og CSS på samme tid uden at det er nødvendigt.
 
 Hvis du bliver i tvivl, kan du bruge denne fil som reference:
 
@@ -1201,7 +1190,10 @@ async function fetchMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  applyFiltersAndSort();
+  applyFilters();
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
 }
 
 function populateGenreSelect() {
@@ -1223,7 +1215,7 @@ function populateGenreSelect() {
   }
 }
 
-function applyFiltersAndSort() {
+function applyFilters() {
   const selectedGenre = genreSelect.value;
   const searchValue = searchInput.value.trim().toLowerCase();
   const sortOption = sortSelect.value;
@@ -1271,7 +1263,7 @@ function showMovies(movies) {
 function showMovie(movie) {
   const html = /* html */ `
     <article class="movie-card" tabindex="0">
-      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <img src="${movie.image}" alt="${movie.title}" class="movie-image" />
       <div class="movie-info">
         <div class="title-row">
           <h2>${movie.title}</h2>
@@ -1286,10 +1278,6 @@ function showMovie(movie) {
 
   movieList.insertAdjacentHTML("beforeend", html);
 }
-
-genreSelect.addEventListener("change", applyFiltersAndSort);
-searchInput.addEventListener("input", applyFiltersAndSort);
-sortSelect.addEventListener("change", applyFiltersAndSort);
 ```
 
 </details>
@@ -1399,7 +1387,7 @@ function showMovieDialog(movie) {
   const dialogContent = document.querySelector("#dialog-content");
 
   dialogContent.innerHTML = /* html */ `
-    <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
+    <img src="${movie.image}" alt="${movie.title}" class="movie-image">
     <div class="dialog-details">
       <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
       <p class="movie-genre">${movie.genre.join(", ")}</p>
@@ -1439,7 +1427,7 @@ Den kan fra Opgave 3 ligne noget i denne retning:
 function showMovie(movie) {
   const html = /* html */ `
     <article class="movie-card" tabindex="0">
-      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <img src="${movie.image}" alt="${movie.title}" class="movie-image" />
       <div class="movie-info">
         <div class="title-row">
           <h2>${movie.title}</h2>
@@ -1481,7 +1469,7 @@ Hele funktionen ender så sådan her:
 function showMovie(movie) {
   const html = /* html */ `
     <article class="movie-card" tabindex="0">
-      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <img src="${movie.image}" alt="${movie.title}" class="movie-image" />
       <div class="movie-info">
         <div class="title-row">
           <h2>${movie.title}</h2>
@@ -1610,7 +1598,10 @@ async function fetchMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  applyFiltersAndSort();
+  applyFilters();
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
 }
 
 function populateGenreSelect() {
@@ -1632,7 +1623,7 @@ function populateGenreSelect() {
   }
 }
 
-function applyFiltersAndSort() {
+function applyFilters() {
   const selectedGenre = genreSelect.value;
   const searchValue = searchInput.value.trim().toLowerCase();
   const sortOption = sortSelect.value;
@@ -1680,7 +1671,7 @@ function showMovies(movies) {
 function showMovie(movie) {
   const html = /* html */ `
     <article class="movie-card" tabindex="0">
-      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <img src="${movie.image}" alt="${movie.title}" class="movie-image" />
       <div class="movie-info">
         <div class="title-row">
           <h2>${movie.title}</h2>
@@ -1712,7 +1703,7 @@ function showMovieDialog(movie) {
   const dialogContent = document.querySelector("#dialog-content");
 
   dialogContent.innerHTML = /* html */ `
-    <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
+    <img src="${movie.image}" alt="${movie.title}" class="movie-image">
     <div class="dialog-details">
       <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
       <p class="movie-genre">${movie.genre.join(", ")}</p>
@@ -1725,10 +1716,6 @@ function showMovieDialog(movie) {
 
   dialog.showModal();
 }
-
-genreSelect.addEventListener("change", applyFiltersAndSort);
-searchInput.addEventListener("input", applyFiltersAndSort);
-sortSelect.addEventListener("change", applyFiltersAndSort);
 ```
 
 </details>
@@ -1841,14 +1828,14 @@ async function fetchMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  applyFiltersAndSort();
+  applyFilters();
 }
 ```
 
 Resten af filen vil så bestå af:
 
 - `populateGenreSelect()`
-- `applyFiltersAndSort()`
+- `applyFilters()`
 - `showMovies(movies)`
 - `showMovie(movie)`
 - `showMovieDialog(movie)`

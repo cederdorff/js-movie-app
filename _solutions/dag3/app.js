@@ -58,7 +58,7 @@ function applyGenreFilter() {
 
 function showMovies(movies) {
   movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} film`;
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
 
   for (const movie of movies) {
     showMovie(movie);
