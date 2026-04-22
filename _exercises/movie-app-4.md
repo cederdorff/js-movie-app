@@ -2,67 +2,195 @@
 
 ## Formål
 
-I dag bygger du videre på din løsning fra DAG 3.
-
-Du har allerede:
-
-- `fetch()` der henter filmdata
-- `showMovies(movies)` der viser en liste
-- `showMovie(movie)` der viser ét filmkort
-- genre-filter med dropdown
-
-I DAG 4 tilføjer vi fire nye lag:
+I dag bygger du videre på DAG 3 og tilføjer:
 
 - **Tekstsøgning** på filmtitel
 - **Sortering** af film
 - **Dialog** med flere detaljer om en film
 - **GitHub Pages** så appen kan deles online
 
-Vi holder samme progression som i de andre øvelser:
-
-1. Start fra noget der allerede virker
-2. Tilføj én ny ting ad gangen
-3. Test undervejs
-4. Byg videre i små trin
+Vi bygger stadig videre i små trin oven på noget, der allerede virker.
 
 ---
 
 ## Før Du Starter DAG 4
 
-Du skal starte fra din fungerende løsning fra DAG 3.
+Du skal starte fra en fungerende DAG 3-løsning med:
 
-På dette tidspunkt bør du have:
-
-- en `index.html` med en sektion til controls og en sektion til filmlisten
-- en genre-dropdown med id `genre-select`
-- et element til filmlisten med id `movie-list`
-- JavaScript der henter filmdata med `fetch()`
-- en variabel som gemmer alle film, fx `allMovies`
-- en funktion som viser en liste af film, fx `showMovies(movies)`
-- en funktion som viser ét filmkort, fx `showMovie(movie)`
-- en funktion som udfylder genre-dropdownen med genrer fra dataen
-- et genre-filter der opdaterer listen når brugeren vælger en genre
+- `genre-select`
+- `movie-list`
+- `movie-count`
+- `fetchMovies()`
+- `showMovies(movies)`
+- `showMovie(movie)`
+- et genre-filter der virker
 
 > **Checkpoint:**
 > Kan du i browseren vælge en genre og se listen opdatere?
 > Hvis ikke, så gå tilbage til [DAG 3](./movie-app-3.md) først.
 
+### Fælles Udgangspunkt: Nulstil Til Samme HTML Og JavaScript
+
+For at sikre samme startpunkt for alle, må du meget gerne starte DAG 4 fra denne fælles baseline.
+
+Det er stadig funktionelt en DAG 3-løsning, men vi introducerer allerede her `initApp()`, så resten af DAG 4 bygger videre på samme struktur som løsningen.
+
+Kort fortalt:
+
+- `DOMContentLoaded` betyder: vent med at starte JavaScript, til HTML'en er loaded
+- `initApp()` er appens opstarts-funktion
+- her samler vi den kode, der skal køres, når siden er klar, fx event listeners og første datahentning
+
+Det gør koden mere overskuelig, især nu hvor appen får flere features.
+
+#### `index.html`
+
+Brug gerne denne version som udgangspunkt:
+
+```html
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie App</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Movie Database</h1>
+      <p class="subtitle">DAG 3: Fetch & genre-filter</p>
+    </header>
+
+    <main>
+      <section class="controls">
+        <div class="control-group">
+          <label for="genre-select">Genre</label>
+          <select id="genre-select">
+            <option value="all">Alle genrer</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="status-bar">
+        <p id="movie-count">Viser 0 ud af 0 film</p>
+      </section>
+
+      <section id="movie-list" class="movie-grid" aria-label="Filmliste">
+        <!-- Film vises her -->
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+#### `app.js`
+
+Brug gerne denne version som udgangspunkt:
+
+```javascript
+"use strict";
+
+document.addEventListener("DOMContentLoaded", initApp);
+
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+let allMovies = [];
+
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const movieCount = document.querySelector("#movie-count");
+
+function initApp() {
+  genreSelect.addEventListener("change", applyGenreFilter);
+  fetchMovies();
+}
+
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  showMovies(allMovies);
+}
+
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
+
+  if (selectedGenre === "all") {
+    showMovies(allMovies);
+    return;
+  }
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    return movie.genre.includes(selectedGenre);
+  });
+
+  showMovies(filteredMovies);
+}
+
+function showMovies(movies) {
+  movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+Når du har copy/pastet de to filer og det virker i browseren, starter vi DAG 4 fra præcis samme sted.
+
 ---
 
 ## Opgave 0: Forstå Springet Fra DAG 3 Til DAG 4
 
-I DAG 3 havde du ét filter: genre.
-
-I DAG 4 skal appen kunne:
+I DAG 3 havde du ét filter. I DAG 4 skal appen kunne:
 
 1. læse flere inputs fra brugeren
 2. kombinere flere filtre samtidigt
 3. sortere resultatet
 4. vise flere detaljer når man klikker på en film
 
-Det betyder, at vi ikke længere kun har en funktion som filtrerer på genre.
-
-I stedet laver vi én samlet funktion, der:
+Det betyder, at vi ikke længere kun har en funktion som filtrerer på genre. I stedet laver vi én samlet funktion, der:
 
 1. læser søgefeltet
 2. læser genre-dropdownen
@@ -71,11 +199,7 @@ I stedet laver vi én samlet funktion, der:
 5. sorterer dem
 6. viser resultatet
 
-Det er den vigtigste arkitekturændring i dag.
-
-Vi prøver samtidig at holde fast i så meget af strukturen fra DAG 3 som muligt.
-
-Det betyder:
+Det vigtigste i dag er stadig at holde fast i så meget af DAG 3-strukturen som muligt:
 
 - du beholder gerne `fetchMovies()`
 - du beholder gerne `populateGenreSelect()`
@@ -316,7 +440,7 @@ Bliv stadig i `app.js`.
 
 Nu skal både genre-dropdown og søgefelt trigge den samme filterfunktion.
 
-Find stedet hvor du sætter din event listener på genre-dropdownen.
+Hvis du bruger en `initApp()` funktion, er det et rigtig fint sted at samle dine event listeners.
 
 I DAG 3 ligger den typisk nederst i `fetchMovies()`:
 
@@ -324,22 +448,26 @@ I DAG 3 ligger den typisk nederst i `fetchMovies()`:
 genreSelect.addEventListener("change", applyGenreFilter);
 ```
 
+I DAG 4 kan du i stedet samle det i `initApp()`.
+
 Hvis du tidligere havde:
 
 ```javascript
 genreSelect.addEventListener("change", applyGenreFilter);
 ```
 
-så skal du ændre den eksisterende linje og tilføje en ny linje under den:
+så kan din `initApp()` nu fx se sådan ud:
 
 ```javascript
-genreSelect.addEventListener("change", applyFilters);
-searchInput.addEventListener("input", applyFilters);
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+
+  fetchMovies();
+}
 ```
 
 `input` er smart til søgning, fordi listen opdateres mens brugeren skriver.
-
-Sæt den nye `searchInput.addEventListener(...)` linje lige under genre-listeneren.
 
 ### 1.6: Sørg for at appen bruger filterfunktionen efter fetch
 
@@ -367,17 +495,24 @@ applyFilters();
 
 Det er altså inde i `fetchMovies()` at du retter det sidste kald, så visningen efter datahentning går gennem din nye filterfunktion.
 
-Hvis du også udfylder genre-dropdownen i samme funktion, skal den typisk ende sådan her:
+Hvis du også bruger `initApp()`, kan toppen af filen typisk ende sådan her:
 
 ```javascript
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+
+  fetchMovies();
+}
+
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
   populateGenreSelect();
   applyFilters();
-  genreSelect.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
 }
 ```
 
@@ -403,7 +538,14 @@ const genreSelect = document.querySelector("#genre-select");
 const movieCount = document.querySelector("#movie-count");
 const searchInput = document.querySelector("#search-input");
 
-fetchMovies();
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+
+  fetchMovies();
+}
 
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
@@ -693,12 +835,16 @@ Bliv stadig i `app.js`.
 Alle tre inputfelter skal nu pege på samme funktion:
 
 ```javascript
-genreSelect.addEventListener("change", applyFilters);
-searchInput.addEventListener("input", applyFilters);
-sortSelect.addEventListener("change", applyFilters);
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
+
+  fetchMovies();
+}
 ```
 
-Find derfor dine to eksisterende linjer fra Opgave 1:
+Find derfor dine to eksisterende linjer fra Opgave 1 i `initApp()`:
 
 ```javascript
 genreSelect.addEventListener("change", applyFilters);
@@ -708,13 +854,13 @@ searchInput.addEventListener("input", applyFilters);
 Erstat dem med de tre linjer ovenfor.
 
 De skal stå samme sted som før.
-Du skal altså udskifte de gamle listeners, ikke tilføje de nye et helt andet sted i filen.
+Du skal altså udskifte de gamle listeners i `initApp()`, ikke tilføje de nye et helt andet sted i filen.
 
 ### 2.6: Sørg for at `fetchMovies()` bruger den nye funktion
 
 Find nu din `fetchMovies()` funktion i `app.js`.
 
-I Opgave 1 endte den sandsynligvis med:
+I Opgave 1 endte den sandsynligvis med noget i denne retning:
 
 ```javascript
 populateGenreSelect();
@@ -723,30 +869,30 @@ applyFilters();
 
 Nu skal den stadig kalde den samme funktion.
 
-Find linjen med:
+Det vigtige her er derfor ikke at omdøbe noget, men bare at sikre at:
+
+- `fetchMovies()` stadig slutter med `applyFilters();`
+- dine event listeners bliver sat i `initApp()`
+
+Hvis du bruger `initApp()`, vil toppen af filen typisk ende sådan her:
 
 ```javascript
-applyFilters();
-```
+document.addEventListener("DOMContentLoaded", initApp);
 
-og erstat den med:
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
 
-```javascript
-applyFilters();
-```
+  fetchMovies();
+}
 
-Hvis du også udfylder genre-dropdownen i samme funktion, skal den typisk ende sådan her:
-
-```javascript
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
   populateGenreSelect();
   applyFilters();
-  genreSelect.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
-  sortSelect.addEventListener("change", applyFilters);
 }
 ```
 
@@ -801,7 +947,15 @@ const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
 
-fetchMovies();
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
+
+  fetchMovies();
+}
 
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
@@ -1183,7 +1337,15 @@ const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
 
-fetchMovies();
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
+
+  fetchMovies();
+}
 
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
@@ -1191,9 +1353,6 @@ async function fetchMovies() {
 
   populateGenreSelect();
   applyFilters();
-  genreSelect.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
-  sortSelect.addEventListener("change", applyFilters);
 }
 
 function populateGenreSelect() {
@@ -1591,7 +1750,15 @@ const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
 
-fetchMovies();
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
+
+  fetchMovies();
+}
 
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
@@ -1599,9 +1766,6 @@ async function fetchMovies() {
 
   populateGenreSelect();
   applyFilters();
-  genreSelect.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
-  sortSelect.addEventListener("change", applyFilters);
 }
 
 function populateGenreSelect() {
@@ -1821,7 +1985,15 @@ const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
 
-fetchMovies();
+document.addEventListener("DOMContentLoaded", initApp);
+
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
+
+  fetchMovies();
+}
 
 async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
@@ -1834,6 +2006,7 @@ async function fetchMovies() {
 
 Resten af filen vil så bestå af:
 
+- `initApp()`
 - `populateGenreSelect()`
 - `applyFilters()`
 - `showMovies(movies)`
