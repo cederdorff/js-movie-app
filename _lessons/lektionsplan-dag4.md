@@ -1,111 +1,189 @@
-# RACE 4 - Søgning, Dialog, Sortering & Udgivelse
+# RACE 4 - Søgning, Sortering, Dialog & Udgivelse
 
 ## Formål
 
-Formålet med denne lektion er at færdiggøre din Movie App med titel-søgning, genre-filter, detaljedialog og udgivelse, så du kan dele den med venner og familie. Samtidig er formålet, at du nu har en god base og baggrund for at kunne lave dit spilcafe-projekt.
+Formålet med denne lektion er at bygge videre på Movie App'en fra DAG 3 og gøre den mere færdig og brugbar.
+
+Du går fra et simpelt genre-filter til en app der kan:
+
+- søge på titel
+- kombinere søgning og genre-filter
+- sortere filmene
+- vise flere detaljer i en dialog
+- udgives på GitHub Pages
 
 **Mål:**
 
-- Implementere søgefunktion med input-event
+- Udvide koden fra DAG 3 i stedet for at starte forfra
+- Implementere søgefunktion med `input`-event
 - Kombinere titel-søgning og genre-filter
-- Oprette og style HTML `<dialog>` element
-- Bruge `showModal()` og `close()` API
-- Håndtere klik-events på dynamisk genereret indhold
-- Tilføje simpel sortering (titel, år, rating)
-- Udgive din app på GitHub Pages
+- Udvide filterlogikken til også at håndtere sortering
+- Opdatere `showMovies(movies)` med movie count og tom-tilstand
+- Udvide `showMovie(movie)` så cards er klar til interaktion
+- Oprette og bruge HTML `<dialog>` element
+- Bruge `showModal()` til at vise filmdetaljer
+- Håndtere klik-events på dynamisk genererede movie cards
+- Udgive appen på GitHub Pages
 
 **Progression i forløbet:**
 
-- **DAG 1:** Movie App setup + Klik-tæller (variabler, events)
-- **DAG 2:** Arrays, loops, hardcoded movie data
-- **DAG 3:** Fetch + simpel genre-filter
-- **DAG 4:** Titel-søgning + dialog + sortering + deployment ← DU ER HER
+- **DAG 1:** Movie App setup + Klik-tæller
+- **DAG 2:** Arrays, loops og hardcoded movie data
+- **DAG 3:** Fetch + simpelt genre-filter
+- **DAG 4:** Søgning + sortering + dialog + deployment ← DU ER HER
 
 ## Forberedelse
 
 - [Færdiggør øvelsen fra DAG 3](../_exercises/movie-app-3.md)
+- Sørg for at du har en fungerende løsning med:
+  - `fetchMovies()`
+  - `populateGenreSelect()`
+  - `showMovies(movies)`
+  - `showMovie(movie)`
+  - `applyGenreFilter()`
 
-- **Læs:**
-  - [Dialog element på MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) (skim hvordan det virker)
-  - [GitHub Pages dokumentation](https://docs.github.com/en/pages/getting-started-with-github-pages) (kort overblik)
+**Læs:**
+
+- [Dialog element på MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) for kort overblik
+- [GitHub Pages dokumentation](https://docs.github.com/en/pages/getting-started-with-github-pages) for kort overblik
 
 ## Agenda
 
 <details>
-<summary><strong>1. Recap og overblik over sidste dag</strong></summary>
+<summary><strong>1. Recap Fra DAG 3 Og Dagens Spring</strong></summary>
 
-- Hvem har fungerende fetch og filter?
-- Vis og fortæl: Vis dine genre-filtre
-- Quiz: fetch, filter, includes
-- Dagens mål: Søgning + dialog + live på internettet!
-- Motivation: "I dag bliver din app færdig og offentlig!"
-
-</details>
-
-<details>
-<summary><strong>2. Søgefunktion + kombinerede filtre</strong></summary>
-
-- Hvorfor søgning? Brugere ved ofte hvad de leder efter
-- Genre-filter fra DAG 3 videreføres
-- Input-event trigger når der skrives
-- `.toLowerCase()` og `.includes()` for søgning uden forskel på store/små bogstaver
-- Kod trin-for-trin: HTML søgefelt og kontroller
-- Saml logikken i `applyFiltersAndSort()`
-- Lad `showMovies()` styre listevisning og tom-tilstand
-- Praktisk øvelse: Implementer og test søgning
-- Håndter "Ingen resultater"
+- Tjek at du har fungerende fetch og genre-filter
+- Se på din egen kode: hvordan ser `fetchMovies()` og `applyGenreFilter()` ud?
+- Gentag den kendte struktur fra DAG 3:
+  - `fetchMovies()`
+  - `populateGenreSelect()`
+  - `showMovies(movies)`
+  - `showMovie(movie)`
+- Forstå dagens vigtigste arkitekturændring:
+  - vi går fra ét filter til flere inputs
+  - vi samler logikken gradvist
+- Dagens mål:
+  - først søgning
+  - så sortering
+  - så visning og dialog
+  - til sidst GitHub Pages
 
 </details>
 
 <details>
-<summary><strong>3. Dialog-implementering</strong></summary>
+<summary><strong>2. Søgefunktion Oven På Genre-filter</strong></summary>
 
-- Hvad er en dialog? Et pop op-vindue over siden
-- HTML `<dialog>` element vs `alert()`
-- API-metoder: `showModal()` og `close()`
-- Praktisk øvelse del 1: HTML struktur og CSS styling
-- Praktisk øvelse del 2: JavaScript klik-events med `showMovie(movie)` og `showMovieDialog(movie)`
-- Ensret rating-visning i cards og dialog (`movie-rating`)
-- Luk dialog med indbygget Luk-knap (`form method="dialog"`) og ESC
-
-</details>
-
-<details>
-<summary><strong>4. Sortering og finpudsning</strong></summary>
-
-- Tilføj sortering i dropdown (titel, år, rating)
-- Hold flowet enkelt: `applyFiltersAndSort()` → `showMovies()` → `showMovie()` → `showMovieDialog()`
-- Kodekvalitetstjek: Fjern unødvendige `console.log()`
-- Tilføj indlæsnings-tilstand mens data hentes
-- Bløde animationer og overgange
-- Sidste CSS-finpudsning
-
-</details>
-
-<details>
-<summary><strong>5. Udgivelse på GitHub Pages</strong></summary>
-
-- Hvad er GitHub Pages? Gratis hosting
-- URL-format: `https://[username].github.io/movie-app/`
-- Trin-for-trin udgivelse:
-- Commit alle ændringer
-- Push til GitHub
-- Aktivér GitHub Pages i indstillinger
-- Vent og test
-- Fejlfinding hvis nødvendigt
-- Udgiv din app, så den er online
+- Hvorfor søgning?
+  - Brugere ved ofte hvad de leder efter
+- Hold fast i DAG 3-strukturen
+  - byg videre på `applyGenreFilter()`
+  - lad resten af appen være så uændret som muligt
+- Gennemgå:
+  - HTML søgefelt i `controls`
+  - `input`-event
+  - `.trim()`
+  - `.toLowerCase()`
+  - `.includes()`
+- Praktisk kodning:
+  - tilføj søgefelt
+  - find `searchInput` i JavaScript
+  - udvid filterfunktionen til også at håndtere søgning
+  - brug filterfunktionen efter `fetchMovies()`
+- Test undervejs:
+  - virker genre stadig?
+  - virker søgning?
+  - virker de sammen?
 
 </details>
 
 <details>
-<summary><strong>6. Fejring og afrunding</strong></summary>
+<summary><strong>3. Sortering Oven På Filtrering</strong></summary>
 
-- Del og fejr: Del dine links
-- Vis og fortæl: Vis din live app, hvis du har lyst
-- Opsamling på forløbet: Hvad har vi lært i 4 dage?
-- Feedback-runde
-- Næste skridt og ressourcer
-- Tillykke - du er nu web developer!
+- Byg videre på den funktion du lige har lavet
+- Omdøb gradvist fra `applyFilters()` til `applyFiltersAndSort()`
+- Tilføj sorterings-dropdown i HTML
+- Læs `sortSelect.value` i JavaScript
+- Sortér efter:
+  - titel
+  - år
+  - rating
+- Forstå rækkefølgen i flowet:
+  - læs inputs
+  - filtrér
+  - sortér
+  - vis resultat
+- Test undervejs:
+  - virker søgning stadig?
+  - virker genre stadig?
+  - virker sortering?
+  - virker alle tre ting sammen?
+
+</details>
+
+<details>
+<summary><strong>4. Visning, Movie Count Og Tom Tilstand</strong></summary>
+
+- Før dialogen giver du listen et lille kvalitetsløft
+- Tilføj `movie-count` i HTML
+- Udvid `showMovies(movies)` så den:
+  - rydder listen
+  - viser antal film
+  - håndterer tomt resultat
+- Forstå kort hvorfor `showMovies(movies)` stadig er central:
+  - samme funktion viser både hele listen og filtrerede lister
+- Udvid `showMovie(movie)` med:
+  - lidt mere struktur
+  - bedre card-indhold
+  - klasser som forbereder dialogen
+- Justér CSS løbende:
+  - controls
+  - status-bar
+  - `.empty`
+  - card-styling
+
+</details>
+
+<details>
+<summary><strong>5. Dialog Med Filmdetaljer</strong></summary>
+
+- Hvad er en dialog?
+  - et lag oven på siden med ekstra information
+- Introducér HTML `<dialog>`
+- Brug browserens indbyggede løsning i stedet for at bygge modal helt fra bunden
+- Praktisk kodning:
+  - tilføj dialog i HTML
+  - style den grundlæggende i CSS
+  - lav `showMovieDialog(movie)`
+  - kobl klik på movie cards til dialogen
+- Forstå hvorfor klik-eventen først sættes efter kortet er indsat i DOM'en
+- Tilføj evt. ekstra tastaturvenlighed med Enter
+- Test:
+  - klik åbner dialog
+  - indhold matcher den valgte film
+  - dialogen kan lukkes igen
+
+</details>
+
+<details>
+<summary><strong>6. Udgivelse På GitHub Pages</strong></summary>
+
+- Hvad er GitHub Pages?
+  - gratis hosting af statiske websites
+- Formålet:
+  - få appen online
+  - kunne dele resultatet med andre
+- Gennemgå trin for trin:
+  - commit ændringer
+  - push til GitHub
+  - aktivér Pages i repository settings
+  - vent på deploy
+  - test siden live
+- Gør det konkret:
+  - URL-format: `https://brugernavn.github.io/repository-navn/`
+- Kort fejlfinding:
+  - er der pushed?
+  - er `main` og root valgt?
+  - er der givet lidt tid til deploy?
 
 </details>
 

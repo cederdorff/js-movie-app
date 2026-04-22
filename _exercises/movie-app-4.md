@@ -73,6 +73,16 @@ I stedet laver vi én samlet funktion, der:
 
 Det er den vigtigste arkitekturændring i dag.
 
+Vi prøver samtidig at holde fast i så meget af strukturen fra DAG 3 som muligt.
+
+Det betyder:
+
+- du beholder gerne `fetchMovies()`
+- du beholder gerne `populateGenreSelect()`
+- du beholder gerne `showMovies(movies)`
+- du beholder gerne `showMovie(movie)`
+- du bygger oven på `applyGenreFilter()` i stedet for at starte forfra
+
 ---
 
 ## Opgave 1: Tilføj Søgning
@@ -80,6 +90,17 @@ Det er den vigtigste arkitekturændring i dag.
 **Formål:** Brugeren skal kunne søge på titel.
 
 Vi starter med søgning, fordi det er den naturlige udvidelse af dit eksisterende genre-filter.
+
+I Opgave 1 holder vi os så tæt som muligt til strukturen fra DAG 3.
+
+Det betyder, at du som udgangspunkt beholder:
+
+- `fetchMovies()`
+- `populateGenreSelect()`
+- `showMovies(movies)`
+- `showMovie(movie)`
+
+Den største ændring i denne opgave er derfor kun, at `applyGenreFilter()` bliver udvidet til også at håndtere søgning.
 
 ### 1.1: Tilføj søgefelt til HTML
 
@@ -91,6 +112,8 @@ Det er i den sektion, du skal lave den første ændring.
 Find den `<section class="controls">` hvor din genre-dropdown ligger.
 
 Udvid den, så du også får et søgefelt.
+
+Det nemmeste er at indsætte søgefeltets `<div class="control-group">` lige før den eksisterende genre-dropdown.
 
 Brug denne struktur:
 
@@ -155,6 +178,8 @@ Tilføj eller opdatér styles i retning af dette:
 Du behøver ikke ramme præcis de samme værdier.
 Det vigtigste er bare, at søgefelt og genre-dropdown står pænt og er nemme at bruge.
 
+Hvis du allerede har en `.controls`-block fra DAG 3, så ret i den eksisterende block i stedet for at oprette en ny et andet sted i filen.
+
 ### 1.2: Find søgefeltet i JavaScript
 
 Åbn nu `app.js`.
@@ -171,6 +196,12 @@ Tilføj nu også en reference til søgefeltet lige sammen med dem:
 
 ```javascript
 const searchInput = document.querySelector("#search-input");
+```
+
+Sæt den lige under:
+
+```javascript
+const genreSelect = document.querySelector("#genre-select");
 ```
 
 ### 1.3: Saml filtreringen i én funktion
@@ -215,6 +246,9 @@ function applyFilters() {
 ```
 
 Du skal altså ændre selve funktionsnavnet der, hvor funktionen bliver defineret.
+
+Du skal ikke lave en ny funktion et andet sted i filen.
+Du skal ændre den eksisterende `applyGenreFilter()` funktion dér hvor den allerede står.
 
 Start med kun at ændre toppen af funktionen, så den læser begge inputfelter.
 
@@ -283,6 +317,12 @@ Nu skal både genre-dropdown og søgefelt trigge den samme filterfunktion.
 
 Find stedet hvor du sætter din event listener på genre-dropdownen.
 
+I DAG 3 ligger den typisk nederst i `fetchMovies()`:
+
+```javascript
+genreSelect.addEventListener("change", applyGenreFilter);
+```
+
 Hvis du tidligere havde:
 
 ```javascript
@@ -297,6 +337,8 @@ searchInput.addEventListener("input", applyFilters);
 ```
 
 `input` er smart til søgning, fordi listen opdateres mens brugeren skriver.
+
+Sæt den nye `searchInput.addEventListener(...)` linje lige under genre-listeneren.
 
 ### 1.6: Sørg for at appen bruger filterfunktionen efter fetch
 
@@ -321,6 +363,8 @@ og erstatte den med:
 ```javascript
 applyFilters();
 ```
+
+Det er altså inde i `fetchMovies()` at du retter det sidste kald, så visningen efter datahentning går gennem din nye filterfunktion.
 
 Hvis du også udfylder genre-dropdownen i samme funktion, skal den typisk ende sådan her:
 
@@ -353,6 +397,7 @@ let allMovies = [];
 
 const movieList = document.querySelector("#movie-list");
 const genreSelect = document.querySelector("#genre-select");
+const movieCount = document.querySelector("#movie-count");
 const searchInput = document.querySelector("#search-input");
 
 fetchMovies();
@@ -374,7 +419,9 @@ function populateGenreSelect() {
     }
   }
 
-  for (const genre of genres) {
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
@@ -399,6 +446,7 @@ function applyFilters() {
 
 function showMovies(movies) {
   movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
 
   for (const movie of movies) {
     showMovie(movie);
@@ -434,6 +482,8 @@ searchInput.addEventListener("input", applyFilters);
 **Formål:** Brugeren skal kunne ændre rækkefølgen på filmene.
 
 Nu hvor filtreringen virker, kan vi lægge sortering ovenpå.
+
+Også her bygger vi videre på koden fra før i stedet for at lave en ny struktur.
 
 ### 2.1: Tilføj sortering til HTML
 
@@ -503,6 +553,9 @@ Hvis du vil gøre layoutet mere robust på små skærme, kan du også tilføje:
 }
 ```
 
+Hvis du allerede har en `.controls`-style, så opdatér den eksisterende style.
+Hvis du ikke har en `@media`-block endnu, kan du lægge den nederst i `app.css`.
+
 ### 2.2: Find sorterings-dropdownen i JavaScript
 
 Åbn `app.js`.
@@ -513,6 +566,12 @@ Tilføj nu også en reference til sorterings-dropdownen:
 
 ```javascript
 const sortSelect = document.querySelector("#sort-select");
+```
+
+Sæt den lige under:
+
+```javascript
+const searchInput = document.querySelector("#search-input");
 ```
 
 ### 2.3: Udvid filterfunktionen til også at sortere
@@ -553,10 +612,19 @@ function applyFiltersAndSort() {
 
 Du skal altså ændre selve funktionsnavnet der, hvor funktionen bliver defineret.
 
+Du skal ikke oprette en ekstra funktion længere nede i filen.
+Du skal videreudbygge den funktion, du allerede lavede i Opgave 1.
+
 Tilføj derefter en ny linje i toppen af funktionen, så den også læser den valgte sortering:
 
 ```javascript
 const sortOption = sortSelect.value;
+```
+
+Sæt den lige under:
+
+```javascript
+const searchValue = searchInput.value.trim().toLowerCase();
 ```
 
 Toppen af funktionen skal nu ligne dette:
@@ -588,6 +656,12 @@ let filteredMovies = allMovies.filter(...)
 Vi bruger `let`, fordi vi bagefter vil ændre rækkefølgen på listen.
 
 Tilføj derefter sorteringslogikken mellem filteret og `showMovies(filteredMovies);`.
+
+Det betyder helt konkret:
+
+1. behold din eksisterende `filter(...)`
+2. indsæt `if/else if` sorteringsblokken lige efter filteret
+3. lad `showMovies(filteredMovies);` blive stående nederst i funktionen
 
 Hele funktionen skal nu ligne dette:
 
@@ -643,6 +717,9 @@ searchInput.addEventListener("input", applyFilters);
 ```
 
 Erstat dem med de tre linjer ovenfor.
+
+De skal stå samme sted som før.
+Du skal altså udskifte de gamle listeners, ikke tilføje de nye et helt andet sted i filen.
 
 ### 2.6: Sørg for at `fetchMovies()` bruger den nye funktion
 
@@ -730,6 +807,7 @@ const movieList = document.querySelector("#movie-list");
 const genreSelect = document.querySelector("#genre-select");
 const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
+const movieCount = document.querySelector("#movie-count");
 
 fetchMovies();
 
@@ -750,7 +828,9 @@ function populateGenreSelect() {
     }
   }
 
-  for (const genre of genres) {
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
@@ -790,6 +870,7 @@ function applyFiltersAndSort() {
 
 function showMovies(movies) {
   movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
 
   for (const movie of movies) {
     showMovie(movie);
@@ -827,6 +908,14 @@ sortSelect.addEventListener("change", applyFiltersAndSort);
 
 Når vi tilføjer flere controls og flere data på kortene, giver det mening at stramme UI'et lidt op.
 
+Strukturen fra DAG 3 bevarer vi stadig:
+
+- `fetchMovies()` henter data
+- `populateGenreSelect()` udfylder dropdownen
+- `applyFiltersAndSort()` vælger hvilke film der skal vises
+- `showMovies(movies)` renderer listen
+- `showMovie(movie)` renderer ét kort
+
 ### 3.1: Tilføj movie count
 
 Åbn `index.html`.
@@ -842,6 +931,11 @@ Hvis du ikke allerede har den, så tilføj en lille status-linje mellem controls
 ```
 
 Den kan placeres lige under dine controls og lige over filmlisten.
+
+Med andre ord:
+
+- indsæt den efter `</section>` for controls
+- indsæt den før `<section id="movie-list" ...>`
 
 > **Checkpoint:**
 > Kan du nu se teksten `Viser 0 film` på siden?
@@ -863,6 +957,8 @@ Tilføj en lille style til status-linjen og movie count, så den visuelt hænger
 }
 ```
 
+Læg dem gerne i nærheden af dine andre layout- og status-styles, eller nederst i filen hvis det er lettere at finde igen.
+
 ### 3.2: Opdatér `showMovies(movies)`
 
 Åbn `app.js`.
@@ -881,6 +977,12 @@ Find området i toppen af filen, hvor du allerede har dine DOM-referencer, fx:
 - `sortSelect`
 
 Læg `movieCount` ind sammen med dem.
+
+Sæt den fx lige under:
+
+```javascript
+const sortSelect = document.querySelector("#sort-select");
+```
 
 Find derefter din `showMovies(movies)` funktion.
 
@@ -926,6 +1028,8 @@ if (movies.length === 0) {
   return;
 }
 ```
+
+Det betyder, at `if (movies.length === 0) { ... }` skal stå før dit `for...of` loop.
 
 Når du har tilføjet den besked i JavaScript, så gå også til `app.css` og giv den lidt styling:
 
@@ -989,6 +1093,19 @@ function showMovie(movie) {
   movieList.insertAdjacentHTML("beforeend", html);
 }
 ```
+
+Du skal stadig beholde:
+
+```javascript
+movieList.insertAdjacentHTML("beforeend", html);
+```
+
+Den skal fortsat stå nederst i `showMovie(movie)`.
+
+Det vil sige:
+
+- ret HTML-template-strengen i toppen af funktionen
+- behold selve `insertAdjacentHTML(...)` linjen nederst
 
 **Hvorfor `tabindex="0"`?**
 
@@ -1096,7 +1213,9 @@ function populateGenreSelect() {
     }
   }
 
-  for (const genre of genres) {
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
@@ -1185,6 +1304,12 @@ Nu gør vi appen mere interaktiv.
 
 I stedet for at vise al information direkte på kortet, kan vi vise ekstra detaljer i en dialog.
 
+Vi holder stadig fast i den kendte struktur:
+
+- `showMovies(movies)` viser listen
+- `showMovie(movie)` viser ét kort
+- den nye funktion `showMovieDialog(movie)` viser detaljerne for det kort man klikker på
+
 ### 4.1: Tilføj dialog til HTML
 
 Åbn `index.html`.
@@ -1208,6 +1333,9 @@ Tilføj denne kode nederst i `body`, lige over `<script src="app.js"></script>`:
 </dialog>
 ```
 
+Du skal altså ikke sætte dialogen inde i `main`.
+Den skal stå som et selvstændigt element nederst i `body`.
+
 Her er idéen:
 
 - `<dialog>` er selve pop-up'en
@@ -1226,6 +1354,8 @@ Tilføj i første omgang styles til:
 - `#movie-dialog::backdrop`
 - `#dialog-content`
 - `#close-dialog`
+
+Læg dem gerne i bunden af `app.css`, så de er nemme at finde igen.
 
 Et eksempel kunne være:
 
@@ -1252,6 +1382,8 @@ dialog#movie-dialog::backdrop {
   right: 0.8rem;
 }
 ```
+
+Hvis du allerede har styling til knapper eller modal-lignende elementer, så lad dialog-styles stå samlet ét sted, så de ikke bliver spredt rundt i filen.
 
 ### 4.2: Lav funktionen `showMovieDialog(movie)`
 
@@ -1281,6 +1413,9 @@ function showMovieDialog(movie) {
   dialog.showModal();
 }
 ```
+
+Sæt den som en selvstændig funktion lige under `showMovie(movie)`.
+Du skal ikke placere den inde i en anden funktion.
 
 **Hvad sker der her?**
 
@@ -1338,6 +1473,8 @@ newCard.addEventListener("click", function () {
 });
 ```
 
+De nye linjer skal altså stå nederst i `showMovie(movie)`, efter kortet er blevet indsat i DOM'en.
+
 Hele funktionen ender så sådan her:
 
 ```javascript
@@ -1390,6 +1527,14 @@ newCard.addEventListener("keydown", function (event) {
 });
 ```
 
+Den skal stå direkte under:
+
+```javascript
+newCard.addEventListener("click", function () {
+  showMovieDialog(movie);
+});
+```
+
 ### 4.4.1: Udvid dialog-CSS med indholdsstyling
 
 Åbn `app.css`.
@@ -1419,6 +1564,8 @@ Et eksempel kunne være:
 Du kan stadig bruge denne fil som reference:
 
 - [_solutions/dag4/app.css](../_solutions/dag4/app.css)
+
+Læg også disse styles i bunden af `app.css`, lige under den grundlæggende dialog-CSS fra 4.1.1, så dialog-stylingen står samlet.
 
 Her er browserens built-in dialog faktisk ret smart, så du slipper for at bygge en modal helt fra bunden med `position: fixed` og ekstra overlay-logik.
 
@@ -1475,7 +1622,9 @@ function populateGenreSelect() {
     }
   }
 
-  for (const genre of genres) {
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
@@ -1675,28 +1824,19 @@ Når du er færdig, vil din kode typisk have denne struktur:
 ```javascript
 "use strict";
 
-document.addEventListener("DOMContentLoaded", initApp);
-
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 
 let allMovies = [];
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#search-input");
+const sortSelect = document.querySelector("#sort-select");
+const movieCount = document.querySelector("#movie-count");
 
-function initApp() {
-  document
-    .querySelector("#search-input")
-    .addEventListener("input", applyFiltersAndSort);
-  document
-    .querySelector("#genre-select")
-    .addEventListener("change", applyFiltersAndSort);
-  document
-    .querySelector("#sort-select")
-    .addEventListener("change", applyFiltersAndSort);
+fetchMovies();
 
-  getMovies();
-}
-
-async function getMovies() {
+async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
