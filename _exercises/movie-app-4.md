@@ -529,16 +529,16 @@ Den viser en mulig løsning på søgning oven på din DAG 3-kode:
 ```javascript
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
 
 const movieList = document.querySelector("#movie-list");
 const genreSelect = document.querySelector("#genre-select");
-const movieCount = document.querySelector("#movie-count");
 const searchInput = document.querySelector("#search-input");
-
-document.addEventListener("DOMContentLoaded", initApp);
+const movieCount = document.querySelector("#movie-count");
 
 function initApp() {
   genreSelect.addEventListener("change", applyFilters);
@@ -937,6 +937,8 @@ Den viser en mulig løsning på sortering oven på Opgave 1:
 ```javascript
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
@@ -946,8 +948,6 @@ const genreSelect = document.querySelector("#genre-select");
 const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
-
-document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   genreSelect.addEventListener("change", applyFilters);
@@ -1327,6 +1327,8 @@ Den viser en mulig løsning på Opgave 3 oven på Opgave 2:
 ```javascript
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
@@ -1336,8 +1338,6 @@ const genreSelect = document.querySelector("#genre-select");
 const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
-
-document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   genreSelect.addEventListener("change", applyFilters);
@@ -1740,6 +1740,8 @@ Den viser en mulig løsning på Opgave 4 oven på Opgave 3:
 ```javascript
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
@@ -1749,8 +1751,6 @@ const genreSelect = document.querySelector("#genre-select");
 const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
-
-document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   genreSelect.addEventListener("change", applyFilters);
@@ -1975,6 +1975,8 @@ Når du er færdig, vil din kode typisk have denne struktur:
 ```javascript
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 
@@ -1984,8 +1986,6 @@ const genreSelect = document.querySelector("#genre-select");
 const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
-
-document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
   genreSelect.addEventListener("change", applyFilters);
