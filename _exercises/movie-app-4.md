@@ -1,48 +1,108 @@
-# DAG 4 - Søgning, Genre, Sortering, Detaljer & Udgivelse
+# DAG 4 - Søgning, Sortering, Dialog & GitHub Pages
 
 ## Formål
 
-På den sidste dag tilføjer vi:
+I dag bygger du videre på din løsning fra DAG 3.
 
-- **Søgefelt** (find film ved titel)
-- **Sortering** (titel, år og rating)
-- **Dialog/detaljer** (vis mere info når man klikker)
-- **GitHub Pages** (gør din app offentlig)
+Du har allerede:
 
-**Hold det enkelt!** Basis funktionalitet der virker.
+- `fetch()` der henter filmdata
+- `showMovies(movies)` der viser en liste
+- `showMovie(movie)` der viser ét filmkort
+- genre-filter med dropdown
+
+I DAG 4 tilføjer vi fire nye lag:
+
+- **Tekstsøgning** på filmtitel
+- **Sortering** af film
+- **Dialog** med flere detaljer om en film
+- **GitHub Pages** så appen kan deles online
+
+Vi holder samme progression som i de andre øvelser:
+
+1. Start fra noget der allerede virker
+2. Tilføj én ny ting ad gangen
+3. Test undervejs
+4. Byg videre i små trin
 
 ---
 
-## Opgave 0: Start Hvor Vi Slap
+## Før Du Starter DAG 4
 
-Din `app.js` fra DAG 3 skulle have:
+Du skal starte fra din fungerende løsning fra DAG 3.
 
-- `fetch()` der henter data
-- `showMovies()` der viser film
-- Genre-filter (dropdown)
+På dette tidspunkt bør du have:
 
-**Hvis ikke - kopier fra DAG 3 først!**
+- en `index.html` med en sektion til controls og en sektion til filmlisten
+- en genre-dropdown med id `genre-select`
+- et element til filmlisten med id `movie-list`
+- JavaScript der henter filmdata med `fetch()`
+- en variabel som gemmer alle film, fx `allMovies`
+- en funktion som viser en liste af film, fx `showMovies(movies)`
+- en funktion som viser ét filmkort, fx `showMovie(movie)`
+- en funktion som udfylder genre-dropdownen med genrer fra dataen
+- et genre-filter der opdaterer listen når brugeren vælger en genre
+
+> **Checkpoint:**
+> Kan du i browseren vælge en genre og se listen opdatere?
+> Hvis ikke, så gå tilbage til [DAG 3](./movie-app-3.md) først.
 
 ---
 
-## Opgave 1: Tilføj Søgning, Genre & Sortering
+## Opgave 0: Forstå Springet Fra DAG 3 Til DAG 4
 
-**Formål:** Lad brugeren søge på titel, filtrere på genre og sortere resultater.
+I DAG 3 havde du ét filter: genre.
 
-### 1.1: Tilføj HTML
+I DAG 4 skal appen kunne:
 
-Opdatér `index.html` - tilføj søgefeltet:
+1. læse flere inputs fra brugeren
+2. kombinere flere filtre samtidigt
+3. sortere resultatet
+4. vise flere detaljer når man klikker på en film
+
+Det betyder, at vi ikke længere kun har en funktion som filtrerer på genre.
+
+I stedet laver vi én samlet funktion, der:
+
+1. læser søgefeltet
+2. læser genre-dropdownen
+3. læser sortering
+4. filtrerer filmene
+5. sorterer dem
+6. viser resultatet
+
+Det er den vigtigste arkitekturændring i dag.
+
+---
+
+## Opgave 1: Tilføj Søgning
+
+**Formål:** Brugeren skal kunne søge på titel.
+
+Vi starter med søgning, fordi det er den naturlige udvidelse af dit eksisterende genre-filter.
+
+### 1.1: Tilføj søgefelt til HTML
+
+Åbn `index.html`.
+
+Fra DAG 3 har du allerede en sektion med controls og genre-dropdown.
+Det er i den sektion, du skal lave den første ændring.
+
+Find den `<section class="controls">` hvor din genre-dropdown ligger.
+
+Udvid den, så du også får et søgefelt.
+
+Brug denne struktur:
 
 ```html
-<header>
-  <h1>Movie Database</h1>
-  <p class="subtitle">Søgning, genre og sortering</p>
-</header>
-
 <section class="controls">
-  <div class="control-group grow">
+  <div class="control-group">
     <label for="search-input">Søg på titel</label>
-    <input type="text" id="search-input" placeholder="Fx matrix, dune eller dark" />
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Fx matrix, dune eller dark"
+    />
   </div>
 
   <div class="control-group">
@@ -51,194 +111,294 @@ Opdatér `index.html` - tilføj søgefeltet:
       <option value="all">Alle genrer</option>
     </select>
   </div>
-
-  <div class="control-group">
-    <label for="sort-select">Sortering</label>
-    <select id="sort-select">
-      <option value="none">Ingen sortering</option>
-      <option value="title">Titel (A-Å)</option>
-      <option value="year">Årstal (nyeste først)</option>
-      <option value="rating">Rating (højeste først)</option>
-    </select>
-  </div>
 </section>
-
-<section class="status-bar">
-  <p id="movie-count">Viser 0 film</p>
-</section>
-
-<main>
-  <section id="movie-list" class="movie-grid">
-    <p class="loading">Loader film...</p>
-  </section>
-</main>
 ```
 
-### 1.2: Tilføj CSS
+Hvis din HTML fra DAG 3 ser lidt anderledes ud, er det helt ok.
+Det vigtige er bare, at du nu har:
 
-Tilføj i `app.css`:
+- et input med id `search-input`
+- din eksisterende dropdown med id `genre-select`
+
+> **Checkpoint:**
+> Kan du se søgefeltet i browseren?
+
+### 1.1.1: Giv søgefeltet plads i CSS
+
+Åbn `app.css`.
+
+Fra DAG 3 har du sandsynligvis allerede styling til din `controls`-sektion.
+
+Nu hvor sektionen skal rumme både søgning og genre, skal den kunne håndtere flere felter pænt.
+
+Tilføj eller opdatér styles i retning af dette:
 
 ```css
-.movie-card {
-  background: linear-gradient(180deg, #434b54 0%, #3f464e 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  transition:
-    transform 200ms ease,
-    box-shadow 200ms ease,
-    border-color 200ms ease;
-}
-
-.movie-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-  border-color: #69c8f0;
-}
-
-.title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.year-badge {
-  border-radius: 999px;
-  background: rgba(105, 200, 240, 0.24);
-  color: #92dafd;
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 0.38rem 0.45rem;
-}
-
-.movie-rating {
-  margin-top: 0.52rem;
-  color: #ffcf4d;
-  font-weight: 700;
-}
-
-#movie-dialog {
-  width: min(92vw, 920px);
-  background: #454b53;
-}
-
-#dialog-content {
+.controls {
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) 2fr;
-  gap: 2rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
 }
 
-.dialog-description {
-  padding: 1rem;
-  border-left: 4px solid #69c8f0;
-  font-style: italic;
-  background: rgba(105, 200, 240, 0.08);
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.control-group input,
+.control-group select {
+  width: 100%;
 }
 ```
 
-### 1.3: Tilføj JavaScript
+Du behøver ikke ramme præcis de samme værdier.
+Det vigtigste er bare, at søgefelt og genre-dropdown står pænt og er nemme at bruge.
 
-**Opdatér `app.js` - tilføj søge-logik:**
+### 1.2: Find søgefeltet i JavaScript
+
+Åbn nu `app.js`.
+
+I DAG 3 havde du en reference til genre-dropdownen:
 
 ```javascript
-const MOVIES_URL = "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+const genreSelect = document.querySelector("#genre-select");
+```
 
-document.addEventListener("DOMContentLoaded", initApp);
+Find området i toppen af filen, hvor du allerede har dine andre DOM-variabler.
 
-function initApp() {
-  document.querySelector("#search-input").addEventListener("input", applyFiltersAndSort);
-  document.querySelector("#genre-select").addEventListener("change", applyFiltersAndSort);
-  document.querySelector("#sort-select").addEventListener("change", applyFiltersAndSort);
+Tilføj nu også en reference til søgefeltet lige sammen med dem:
 
-  getMovies();
-}
+```javascript
+const searchInput = document.querySelector("#search-input");
+```
 
-async function getMovies() {
-  const response = await fetch(MOVIES_URL);
-  allMovies = await response.json();
+### 1.3: Saml filtreringen i én funktion
 
-  populateGenreSelect();
-  applyFiltersAndSort();
-}
+Bliv i `app.js`.
 
-function applyFiltersAndSort() {
-  const searchTerm = document.querySelector("#search-input").value.trim().toLowerCase();
-  const selectedGenre = document.querySelector("#genre-select").value;
-  const sortOption = document.querySelector("#sort-select").value;
+I DAG 3 havde du typisk en funktion som lignede:
 
-  let filteredMovies = allMovies.filter(function (movie) {
-    const matchesTitle = movie.title.toLowerCase().includes(searchTerm);
-    const matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
-    return matchesTitle && matchesGenre;
+```javascript
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    return selectedGenre === "all" || movie.genre.includes(selectedGenre);
   });
-
-  if (sortOption === "title") {
-    filteredMovies.sort((movieA, movieB) => movieA.title.localeCompare(movieB.title));
-  } else if (sortOption === "year") {
-    filteredMovies.sort((movieA, movieB) => movieB.year - movieA.year);
-  } else if (sortOption === "rating") {
-    filteredMovies.sort((movieA, movieB) => movieB.rating - movieA.rating);
-  }
 
   showMovies(filteredMovies);
 }
 ```
 
-**Test det!**
+Nu skal vi udvide idéen.
 
-- Skriv "matrix" → se Matrix film
-- Skriv "dark" → se Dark Knight film
-- Slet tekst → se alle film igen
+I denne del af opgaven skal du kun fokusere på én ting:
 
-### 1.4: Forstå Filter-logikken
+- få søgning til at virke sammen med dit eksisterende genre-filter
+
+Du skal **ikke** tænke på sortering endnu.
+Det kommer først i Opgave 2.
+
+Find din nuværende genre-filter-funktion.
+
+Omdøb funktionen fra:
 
 ```javascript
-const searchTerm = searchInput.value.toLowerCase();
+function applyGenreFilter() {
 ```
 
-- `searchInput.value` = hvad brugeren skrev
-- `.toLowerCase()` = gør til små bogstaver ("Matrix" → "matrix")
+til:
 
 ```javascript
-const filteredMovies = allMovies.filter(function (movie) {
-  const title = movie.title.toLowerCase();
-  return title.includes(searchTerm);
-});
+function applyFilters() {
 ```
 
-- Gør film-titlen til små bogstaver
-- Check om titlen indeholder søgeteksten
-- `"The Matrix".toLowerCase().includes("matrix")` → `true`
+Du skal altså ændre selve funktionsnavnet der, hvor funktionen bliver defineret.
 
-**Vigtigt:**
+Start med kun at ændre toppen af funktionen, så den læser begge inputfelter.
 
-- `"input"` event = trigger hver gang der skrives
-- `.toLowerCase()` gør søgningen case-insensitive
-- Tom streng `""` → vis alle film igen
-
----
-
-## Opgave 2: Klik På Film -> Vis Detaljer
-
-**Formål:** Når man klikker en film → vis mere info i en dialog.
-
-### 2.1: Cardvisning der matcher løsningen
-
-Opdatér `showMovies()`:
+Din funktion skal nu starte sådan her:
 
 ```javascript
-function showMovies(movies) {
-  const movieList = document.querySelector("#movie-list");
-  const movieCount = document.querySelector("#movie-count");
+function applyFilters() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  // eksisterende genre-filter-kode
+}
+```
 
-  movieList.innerHTML = "";
-  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
+### 1.4: Filtrér både på genre og titel
 
-  if (movies.length === 0) {
-    movieList.innerHTML = '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
-    return;
+Bliv i den samme funktion i `app.js`.
+
+Find linjen hvor du i DAG 3 lavede:
+
+```javascript
+const filteredMovies = allMovies.filter(...)
+```
+
+Erstat filter-logikken med denne version, så der både filtreres på genre og søgning:
+
+```javascript
+function applyFilters() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  showMovies(filteredMovies);
+}
+```
+
+**Hvad sker der her?**
+
+- `matchesGenre` checker om filmen passer til genren
+- `matchesSearch` checker om titlen indeholder søgeteksten
+- vi beholder kun filmen hvis **begge** er `true`
+
+Det er første gang i forløbet, at du kombinerer flere betingelser i samme filter.
+
+Stop gerne op her og test, før du går videre.
+
+Målet lige nu er kun dette:
+
+- genre-filter virker stadig
+- søgning virker også
+- de to ting virker sammen
+
+Sortering venter vi med til næste opgave.
+
+### 1.5: Opdatér event listeners
+
+Bliv stadig i `app.js`.
+
+Nu skal både genre-dropdown og søgefelt trigge den samme filterfunktion.
+
+Find stedet hvor du sætter din event listener på genre-dropdownen.
+
+Hvis du tidligere havde:
+
+```javascript
+genreSelect.addEventListener("change", applyGenreFilter);
+```
+
+så skal du ændre den eksisterende linje og tilføje en ny linje under den:
+
+```javascript
+genreSelect.addEventListener("change", applyFilters);
+searchInput.addEventListener("input", applyFilters);
+```
+
+`input` er smart til søgning, fordi listen opdateres mens brugeren skriver.
+
+### 1.6: Sørg for at appen bruger filterfunktionen efter fetch
+
+Find nu din `fetchMovies()` funktion i `app.js`.
+
+I DAG 3 viste du sandsynligvis alle film direkte efter fetch:
+
+```javascript
+showMovies(allMovies);
+```
+
+I DAG 4 vil vi hellere lade den samlede filterfunktion styre visningen.
+
+Det betyder, at du skal finde linjen med:
+
+```javascript
+showMovies(allMovies);
+```
+
+og erstatte den med:
+
+```javascript
+applyFilters();
+```
+
+Hvis du også udfylder genre-dropdownen i samme funktion, skal den typisk ende sådan her:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  applyFilters();
+}
+```
+
+> **Checkpoint:**
+> Kan du nu både vælge genre og søge på titel samtidig?
+
+<details>
+<summary><strong>Vis samlet løsning efter Opgave 1</strong></summary>
+
+Hvis du er kørt fast, kan du sammenligne med denne version.
+
+Den viser en mulig løsning på søgning oven på din DAG 3-kode:
+
+```javascript
+"use strict";
+
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+let allMovies = [];
+
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#search-input");
+
+fetchMovies();
+
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  applyFilters();
+}
+
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
   }
+
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+
+function applyFilters() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  showMovies(filteredMovies);
+}
+
+function showMovies(movies) {
+  movieList.innerHTML = "";
 
   for (const movie of movies) {
     showMovie(movie);
@@ -246,9 +406,572 @@ function showMovies(movies) {
 }
 
 function showMovie(movie) {
-  const movieList = document.querySelector("#movie-list");
+  const html = /* html */ `
+    <article class="movie-card">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
+      </div>
+    </article>
+  `;
 
-  const movieCard = `
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+
+genreSelect.addEventListener("change", applyFilters);
+searchInput.addEventListener("input", applyFilters);
+```
+
+</details>
+
+---
+
+## Opgave 2: Tilføj Sortering
+
+**Formål:** Brugeren skal kunne ændre rækkefølgen på filmene.
+
+Nu hvor filtreringen virker, kan vi lægge sortering ovenpå.
+
+### 2.1: Tilføj sortering til HTML
+
+Åbn `index.html`.
+
+Find den samme `<section class="controls">` som du lige har arbejdet i i Opgave 1.
+
+Du har allerede:
+
+- et søgefelt
+- en genre-dropdown
+
+Nu skal du tilføje en tredje control i den samme sektion: en dropdown til sortering.
+
+Tilføj denne kode som endnu et `<div class="control-group">` inde i `controls`-sektionen:
+
+```html
+<div class="control-group">
+  <label for="sort-select">Sortering</label>
+  <select id="sort-select">
+    <option value="none">Ingen sortering</option>
+    <option value="title">Titel (A-Å)</option>
+    <option value="year">Årstal (nyeste først)</option>
+    <option value="rating">Rating (højeste først)</option>
+  </select>
+</div>
+```
+
+Du bør nu have tre controls:
+
+- søgning
+- genre
+- sortering
+
+> **Checkpoint:**
+> Kan du se sorterings-dropdownen i browseren?
+
+### 2.1.1: Justér CSS så der er plads til tre controls
+
+Åbn `app.css`.
+
+Nu har du tre felter i din `controls`-sektion:
+
+- søgning
+- genre
+- sortering
+
+Hvis layoutet ser klemt ud, så opdatér din `.controls`-style, så den passer bedre til tre kolonner.
+
+Et eksempel kunne være:
+
+```css
+.controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.8rem;
+}
+```
+
+Hvis du vil gøre layoutet mere robust på små skærme, kan du også tilføje:
+
+```css
+@media (max-width: 900px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+### 2.2: Find sorterings-dropdownen i JavaScript
+
+Åbn `app.js`.
+
+Find området i toppen af filen, hvor du allerede har dine DOM-referencer, fx `movieList`, `genreSelect` og `searchInput`.
+
+Tilføj nu også en reference til sorterings-dropdownen:
+
+```javascript
+const sortSelect = document.querySelector("#sort-select");
+```
+
+### 2.3: Udvid filterfunktionen til også at sortere
+
+Bliv i `app.js`.
+
+I Opgave 1 lavede du en funktion, der kun havde ét fokus:
+
+- filtrere på genre
+- filtrere på søgning
+
+Nu bygger vi videre på den samme funktion.
+
+I denne opgave skal du kun fokusere på én ny ting:
+
+- få sortering til at virke oven på de filtre du allerede har
+
+Du skal **ikke** tænke på dialog eller filmdetaljer endnu.
+Det kommer først senere.
+
+Nu ændrer vi `applyFilters()` til `applyFiltersAndSort()`.
+
+Det nye navn gør det tydeligere hvad funktionen faktisk gør.
+
+Find din nuværende funktion fra Opgave 1.
+
+Omdøb funktionen fra:
+
+```javascript
+function applyFilters() {
+```
+
+til:
+
+```javascript
+function applyFiltersAndSort() {
+```
+
+Du skal altså ændre selve funktionsnavnet der, hvor funktionen bliver defineret.
+
+Tilføj derefter en ny linje i toppen af funktionen, så den også læser den valgte sortering:
+
+```javascript
+const sortOption = sortSelect.value;
+```
+
+Toppen af funktionen skal nu ligne dette:
+
+```javascript
+function applyFiltersAndSort() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const sortOption = sortSelect.value;
+}
+```
+
+### 2.4: Tilføj sorteringslogik i den samme funktion
+
+Bliv i den samme funktion i `app.js`.
+
+Find den del af funktionen hvor du allerede laver:
+
+```javascript
+const filteredMovies = allMovies.filter(...)
+```
+
+Ret den først til:
+
+```javascript
+let filteredMovies = allMovies.filter(...)
+```
+
+Vi bruger `let`, fordi vi bagefter vil ændre rækkefølgen på listen.
+
+Tilføj derefter sorteringslogikken mellem filteret og `showMovies(filteredMovies);`.
+
+Hele funktionen skal nu ligne dette:
+
+```javascript
+function applyFiltersAndSort() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const sortOption = sortSelect.value;
+
+  let filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  if (sortOption === "title") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieA.title.localeCompare(movieB.title);
+    });
+  } else if (sortOption === "year") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.year - movieA.year;
+    });
+  } else if (sortOption === "rating") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.rating - movieA.rating;
+    });
+  }
+
+  showMovies(filteredMovies);
+}
+```
+
+### 2.5: Opdatér event listeners igen
+
+Bliv stadig i `app.js`.
+
+Alle tre inputfelter skal nu pege på samme funktion:
+
+```javascript
+genreSelect.addEventListener("change", applyFiltersAndSort);
+searchInput.addEventListener("input", applyFiltersAndSort);
+sortSelect.addEventListener("change", applyFiltersAndSort);
+```
+
+Find derfor dine to eksisterende linjer fra Opgave 1:
+
+```javascript
+genreSelect.addEventListener("change", applyFilters);
+searchInput.addEventListener("input", applyFilters);
+```
+
+Erstat dem med de tre linjer ovenfor.
+
+### 2.6: Sørg for at `fetchMovies()` bruger den nye funktion
+
+Find nu din `fetchMovies()` funktion i `app.js`.
+
+I Opgave 1 endte den sandsynligvis med:
+
+```javascript
+populateGenreSelect();
+applyFilters();
+```
+
+Nu skal den i stedet kalde den nye funktion.
+
+Find linjen med:
+
+```javascript
+applyFilters();
+```
+
+og erstat den med:
+
+```javascript
+applyFiltersAndSort();
+```
+
+Hvis du også udfylder genre-dropdownen i samme funktion, skal den typisk ende sådan her:
+
+```javascript
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  applyFiltersAndSort();
+}
+```
+
+### 2.7: Hvorfor bruger vi `let filteredMovies`?
+
+I filterdelen laver vi først listen:
+
+```javascript
+let filteredMovies = allMovies.filter(...);
+```
+
+Vi bruger `let`, fordi vi bagefter vil ændre rækkefølgen med `.sort()`.
+
+Det er stadig den samme liste vi arbejder med, men den bliver ændret undervejs.
+
+Stop gerne op og test her, før du går videre.
+
+Målet lige nu er kun dette:
+
+- søgning virker stadig
+- genre-filter virker stadig
+- sortering virker også
+- alle tre ting virker sammen
+
+Dialog og filmdetaljer venter vi med til næste store del.
+
+> **Checkpoint:**
+> Kan du nu:
+>
+> - søge på titel
+> - vælge genre
+> - sortere listen
+> - kombinere alle tre ting samtidig?
+
+<details>
+<summary><strong>Vis samlet løsning efter Opgave 2</strong></summary>
+
+Hvis du er kørt fast, kan du sammenligne med denne version.
+
+Den viser en mulig løsning på sortering oven på Opgave 1:
+
+```javascript
+"use strict";
+
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+let allMovies = [];
+
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#search-input");
+const sortSelect = document.querySelector("#sort-select");
+
+fetchMovies();
+
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  applyFiltersAndSort();
+}
+
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+
+function applyFiltersAndSort() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const sortOption = sortSelect.value;
+
+  let filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  if (sortOption === "title") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieA.title.localeCompare(movieB.title);
+    });
+  } else if (sortOption === "year") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.year - movieA.year;
+    });
+  } else if (sortOption === "rating") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.rating - movieA.rating;
+    });
+  }
+
+  showMovies(filteredMovies);
+}
+
+function showMovies(movies) {
+  movieList.innerHTML = "";
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+
+genreSelect.addEventListener("change", applyFiltersAndSort);
+searchInput.addEventListener("input", applyFiltersAndSort);
+sortSelect.addEventListener("change", applyFiltersAndSort);
+```
+
+</details>
+
+---
+
+## Opgave 3: Gør Visningen Mere Professionel
+
+**Formål:** Opdatér HTML/CSS og movie count så appen passer til de nye features.
+
+Når vi tilføjer flere controls og flere data på kortene, giver det mening at stramme UI'et lidt op.
+
+### 3.1: Tilføj movie count
+
+Åbn `index.html`.
+
+Find området lige under din `<section class="controls">`.
+
+Hvis du ikke allerede har den, så tilføj en lille status-linje mellem controls og filmlisten:
+
+```html
+<section class="status-bar">
+  <p id="movie-count">Viser 0 film</p>
+</section>
+```
+
+Den kan placeres lige under dine controls og lige over filmlisten.
+
+> **Checkpoint:**
+> Kan du nu se teksten `Viser 0 film` på siden?
+
+### 3.1.1: Tilføj styling til movie count
+
+Åbn `app.css`.
+
+Tilføj en lille style til status-linjen og movie count, så den visuelt hænger sammen med resten af appen:
+
+```css
+.status-bar {
+  margin: 0.8rem 0;
+}
+
+#movie-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+```
+
+### 3.2: Opdatér `showMovies(movies)`
+
+Åbn `app.js`.
+
+Sørg først for at du har en DOM-reference til movie count, fx:
+
+```javascript
+const movieCount = document.querySelector("#movie-count");
+```
+
+Find området i toppen af filen, hvor du allerede har dine DOM-referencer, fx:
+
+- `movieList`
+- `genreSelect`
+- `searchInput`
+- `sortSelect`
+
+Læg `movieCount` ind sammen med dem.
+
+Find derefter din `showMovies(movies)` funktion.
+
+I Opgave 2 har den sandsynligvis set nogenlunde sådan her ud:
+
+```javascript
+function showMovies(movies) {
+  movieList.innerHTML = "";
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+```
+
+Udvid den, så den både rydder listen og viser antal film:
+
+```javascript
+function showMovies(movies) {
+  movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+```
+
+Det er en fin forbedring, fordi brugeren nu kan se hvor meget søgning og filtrering har indsnævret listen.
+
+### 3.3: Håndtér tomt resultat
+
+Bliv i den samme `showMovies(movies)` funktion i `app.js`.
+
+Hvis ingen film matcher, bliver appen mere brugervenlig hvis du viser en besked i stedet for bare en tom liste.
+
+Tilføj dette i `showMovies(movies)` lige efter at du har sat `innerHTML = ""` og movie count:
+
+```javascript
+if (movies.length === 0) {
+  movieList.innerHTML =
+    '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
+  return;
+}
+```
+
+Når du har tilføjet den besked i JavaScript, så gå også til `app.css` og giv den lidt styling:
+
+```css
+.empty {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+}
+```
+
+### 3.4: Udvid `showMovie(movie)`
+
+Bliv i `app.js`.
+
+I DAG 3 viste du måske kun titel, år, rating og genre.
+
+I DAG 4 vil vi gerne have kortene klar til klik og detaljer.
+
+Find din nuværende `showMovie(movie)` funktion.
+
+Den kan fra Opgave 2 ligne noget i denne retning:
+
+```javascript
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+Erstat template-delen med en version i denne stil:
+
+```javascript
+function showMovie(movie) {
+  const html = /* html */ `
     <article class="movie-card" tabindex="0">
       <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
       <div class="movie-info">
@@ -263,76 +986,287 @@ function showMovie(movie) {
     </article>
   `;
 
-  movieList.insertAdjacentHTML("beforeend", movieCard);
-
-  const newCard = movieList.lastElementChild;
-  newCard.addEventListener("click", function () {
-    showMovieDialog(movie);
-  });
+  movieList.insertAdjacentHTML("beforeend", html);
 }
 ```
 
-**Test det!** Du skal nu have cards med badge, genre, rating og instruktør-linje.
+**Hvorfor `tabindex="0"`?**
 
-### 2.2: Bedre løsning med HTML dialog
+Det gør kortet fokusérbart, så det også kan nås med tastatur.
 
-**Mere professionelt - brug en dialog:**
+### 3.4.1: Tilføj styling til de nye movie cards
 
-#### Trin 1: Tilføj dialog i HTML
+Åbn `app.css`.
 
-Tilføj EFTER `<main>`:
+Nu har du introduceret nye klassenavne i `showMovie(movie)`.
+
+Det betyder, at du også skal style de nye elementer:
+
+- `.movie-poster`
+- `.title-row`
+- `.year-badge`
+- `.movie-rating`
+- `.director-line`
+
+Du kan fx starte med styles i denne retning:
+
+```css
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.year-badge {
+  border-radius: 999px;
+  padding: 0.35rem 0.45rem;
+  font-size: 0.7rem;
+}
+
+.movie-rating {
+  margin-top: 0.45rem;
+  font-weight: 700;
+}
+
+.director-line {
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}
+```
+
+Hvis du også har skiftet fra `.movie-image` til `.movie-poster`, så husk at opdatere billed-stylingen til det nye klassenavn.
+
+Hvis du bliver i tvivl, kan du bruge denne fil som reference:
+
+- [_solutions/dag4/app.css](../_solutions/dag4/app.css)
+
+Stop gerne op og test her, før du går videre.
+
+Målet lige nu er kun dette:
+
+- søgning virker stadig
+- genre-filter virker stadig
+- sortering virker stadig
+- movie count opdateres
+- du får en tom-besked hvis intet matcher
+- kortene viser lidt mere information
+
+Dialogen kommer først i Opgave 4.
+
+> **Checkpoint:**
+> Virker søgning, genre, sortering og movie count stadig efter dine UI-ændringer?
+
+<details>
+<summary><strong>Vis samlet løsning efter Opgave 3</strong></summary>
+
+Hvis du er kørt fast, kan du sammenligne med denne version.
+
+Den viser en mulig løsning på Opgave 3 oven på Opgave 2:
+
+```javascript
+"use strict";
+
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+let allMovies = [];
+
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#search-input");
+const sortSelect = document.querySelector("#sort-select");
+const movieCount = document.querySelector("#movie-count");
+
+fetchMovies();
+
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  applyFiltersAndSort();
+}
+
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+
+function applyFiltersAndSort() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const sortOption = sortSelect.value;
+
+  let filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  if (sortOption === "title") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieA.title.localeCompare(movieB.title);
+    });
+  } else if (sortOption === "year") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.year - movieA.year;
+    });
+  } else if (sortOption === "rating") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.rating - movieA.rating;
+    });
+  }
+
+  showMovies(filteredMovies);
+}
+
+function showMovies(movies) {
+  movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
+
+  if (movies.length === 0) {
+    movieList.innerHTML =
+      '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
+    return;
+  }
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card" tabindex="0">
+      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <div class="movie-info">
+        <div class="title-row">
+          <h2>${movie.title}</h2>
+          <span class="year-badge">(${movie.year})</span>
+        </div>
+        <p class="genre">${movie.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p class="director-line"><strong>Instruktør:</strong> ${movie.director}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+
+genreSelect.addEventListener("change", applyFiltersAndSort);
+searchInput.addEventListener("input", applyFiltersAndSort);
+sortSelect.addEventListener("change", applyFiltersAndSort);
+```
+
+</details>
+
+---
+
+## Opgave 4: Klik På En Film Og Vis Detaljer I En Dialog
+
+**Formål:** Når brugeren klikker på et filmkort, skal der vises flere detaljer.
+
+Nu gør vi appen mere interaktiv.
+
+I stedet for at vise al information direkte på kortet, kan vi vise ekstra detaljer i en dialog.
+
+### 4.1: Tilføj dialog til HTML
+
+Åbn `index.html`.
+
+Find den nederste del af `body`, lige over:
 
 ```html
-</main>
+<script src="app.js"></script>
+```
 
-<!-- Dialog -->
+Tilføj denne kode nederst i `body`, lige over `<script src="app.js"></script>`:
+
+```html
 <dialog id="movie-dialog">
   <form method="dialog">
     <button id="close-dialog" aria-label="Luk">✕</button>
     <div id="dialog-content">
-      <!-- Detaljer vises her -->
+      <!-- Filmdetaljer indsættes her via JavaScript -->
     </div>
   </form>
 </dialog>
 ```
 
-#### Trin 2: Tilføj CSS
+Her er idéen:
+
+- `<dialog>` er selve pop-up'en
+- `#dialog-content` er området vi fylder med JavaScript
+- knappen lukker dialogen
+
+### 4.1.1: Tilføj grundlæggende dialog-CSS
+
+Åbn `app.css`.
+
+Når du har tilføjet dialogen i HTML, giver det mening at style selve boksen med det samme.
+
+Tilføj i første omgang styles til:
+
+- `#movie-dialog`
+- `#movie-dialog::backdrop`
+- `#dialog-content`
+- `#close-dialog`
+
+Et eksempel kunne være:
 
 ```css
-#movie-dialog {
-  border-radius: 16px;
-  width: min(92vw, 920px);
-  background: #454b53;
+dialog#movie-dialog {
+  width: min(94vw, 900px);
+  padding: 0;
+  border-radius: 14px;
+}
+
+dialog#movie-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 #dialog-content {
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) 2fr;
-  gap: 2rem;
-}
-
-.dialog-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.dialog-description {
+  gap: 1rem;
   padding: 1rem;
-  border-left: 4px solid #69c8f0;
-  font-style: italic;
-  background: rgba(105, 200, 240, 0.08);
+}
+
+#close-dialog {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
 }
 ```
 
-#### Trin 3: Opdatér JavaScript
+### 4.2: Lav funktionen `showMovieDialog(movie)`
+
+Åbn `app.js`.
+
+Find et sted under dine andre funktioner, fx under `showMovie(movie)`.
+
+Tilføj denne nye funktion:
 
 ```javascript
 function showMovieDialog(movie) {
   const dialog = document.querySelector("#movie-dialog");
   const dialogContent = document.querySelector("#dialog-content");
 
-  dialogContent.innerHTML = `
+  dialogContent.innerHTML = /* html */ `
     <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
     <div class="dialog-details">
       <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
@@ -348,263 +1282,502 @@ function showMovieDialog(movie) {
 }
 ```
 
-**Test det!**
+**Hvad sker der her?**
 
-- Klik en film → se flot dialog
-- Klik "Luk" eller tryk ESC -> luk dialog
-- Prøv forskellige film
+1. vi finder dialogen i HTML
+2. vi indsætter indhold baseret på den valgte film
+3. vi åbner dialogen med `showModal()`
 
----
+### 4.3: Kobl klik på movie cards til dialogen
 
-## Opgave 3: Deploy Til GitHub Pages
+Bliv i `app.js`.
 
-**Formål:** Gør din app tilgængelig på internettet.
+Nu skal `showMovie(movie)` ikke kun vise et kort.
 
-### 3.1: Forbered dit projekt
+Kortet skal også reagere på klik.
 
-**Tjek at alt virker:**
+Find din nuværende `showMovie(movie)` funktion.
 
-1. Søgning fungerer
-2. Genre-filter fungerer
-3. Sortering fungerer
-4. Dialog åbner og lukker
-5. Ingen fejl i konsollen
-
-### 3.2: Push til GitHub
-
-**Trin 1: Stage alle filer**
-
-```bash
-git add .
-```
-
-**Trin 2: Commit**
-
-```bash
-git commit -m "Færdig movie app med søgning og dialog"
-```
-
-**Trin 3: Push**
-
-```bash
-git push origin main
-```
-
-### 3.3: Aktivér GitHub Pages
-
-1. Gå til dit repo på GitHub.com
-2. Klik **Settings** (øverst)
-3. Scroll til **Pages** (venstre menu)
-4. Under **Source**:
-
-- Vælg branch: `main`
-- Vælg folder: `/ (root)`
-
-5. Klik **Save**
-
-**Vent 1-2 minutter** → Din side er live.
-
-URL: `https://[dit-brugernavn].github.io/[repo-navn]/`
-
-### 3.4: Test dit live-site
-
-Åbn URL'en i en ny fane og test:
-
-- Loader film?
-- Søgning virker?
-- Genre-filter virker?
-- Sortering virker?
-- Dialog åbner?
-
-**Hvis noget ikke virker:**
-
-- Tjek konsollen for fejl (Windows/PC: F12 eller Ctrl+Shift+I, Mac: Cmd+Option+I)
-- Tjek at alle filer er pushet
-- Prøv hård genindlæsning (Windows/PC: Ctrl+Shift+R, Mac: Cmd+Shift+R)
-
----
-
-## Udfordringer
-
-### Udfordring 1: Søg også i genre
-
-Lad søgningen også finde film baseret på genre:
+Den kan fra Opgave 3 ligne noget i denne retning:
 
 ```javascript
-function applyFiltersAndSort() {
-  let searchTerm = document.querySelector("#search-input").value.toLowerCase();
-  let selectedGenre = document.querySelector("#genre-select").value;
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card" tabindex="0">
+      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <div class="movie-info">
+        <div class="title-row">
+          <h2>${movie.title}</h2>
+          <span class="year-badge">(${movie.year})</span>
+        </div>
+        <p class="genre">${movie.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p class="director-line"><strong>Instruktør:</strong> ${movie.director}</p>
+      </div>
+    </article>
+  `;
 
-  let filteredMovies = allMovies.filter(function (movie) {
-    let title = movie.title.toLowerCase();
-    let genres = movie.genre.join(" ").toLowerCase();
-    let matchesSearch = title.includes(searchTerm) || genres.includes(searchTerm);
-    let matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
-    return matchesSearch && matchesGenre;
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+```
+
+Du skal ikke lave hele funktionen om.
+
+Du skal kun tilføje klik-logikken lige efter denne linje:
+
+```javascript
+movieList.insertAdjacentHTML("beforeend", html);
+```
+
+Tilføj:
+
+```javascript
+const newCard = movieList.lastElementChild;
+newCard.addEventListener("click", function () {
+  showMovieDialog(movie);
+});
+```
+
+Hele funktionen ender så sådan her:
+
+```javascript
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card" tabindex="0">
+      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <div class="movie-info">
+        <div class="title-row">
+          <h2>${movie.title}</h2>
+          <span class="year-badge">(${movie.year})</span>
+        </div>
+        <p class="genre">${movie.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p class="director-line"><strong>Instruktør:</strong> ${movie.director}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+
+  const newCard = movieList.lastElementChild;
+  newCard.addEventListener("click", function () {
+    showMovieDialog(movie);
   });
-
-  showMovies(filteredMovies);
 }
 ```
 
-### Udfordring 2: Udvid sorteringen
+Det smarte her er:
 
-Sortering er allerede en del af basisløsningen. Som ekstra træning kan du tilføje:
+- du renderer kortet først
+- derefter finder du det sidst indsatte kort
+- så kobler du et klik til den rigtige film
 
-- stigende/faldende retning
-- sekundær sortering (fx titel ved samme rating)
+### 4.4: Ekstra tastaturvenlighed
 
-Grundlogikken i `applyFiltersAndSort()` er:
+Bliv i den samme `showMovie(movie)` funktion.
 
-```javascript
-if (sortOption === "title") {
-  filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
-} else if (sortOption === "year") {
-  filteredMovies.sort((a, b) => b.year - a.year);
-} else if (sortOption === "rating") {
-  filteredMovies.sort((a, b) => b.rating - a.rating);
-}
-```
+Hvis du vil gøre løsningen bedre, kan du også åbne dialogen med Enter.
 
-### Udfordring 3: Luk dialog med klik på backdrop (valgfri)
+Det er ikke et krav for at komme i mål, men det er en god øvelse.
+
+Tilføj i så fald også denne event listener lige under klik-listeneren:
 
 ```javascript
-document.querySelector("#movie-dialog").addEventListener("click", function (event) {
-  if (event.target.id === "movie-dialog") {
-    this.close();
+newCard.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    showMovieDialog(movie);
   }
 });
 ```
 
-### Udfordring 4: Tilføj indlæsnings-tilstand
+### 4.4.1: Udvid dialog-CSS med indholdsstyling
 
-Vis "Loading..." mens data hentes:
+Åbn `app.css`.
+
+Nu hvor dialogen også får rigtigt indhold fra JavaScript, kan du udvide stylingen med:
+
+- `.dialog-details`
+- `.movie-year`
+- `.movie-genre`
+- `.movie-description`
+
+Et eksempel kunne være:
+
+```css
+.dialog-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.movie-description {
+  padding: 0.9rem;
+  border-left: 4px solid #69c8f0;
+}
+```
+
+Du kan stadig bruge denne fil som reference:
+
+- [_solutions/dag4/app.css](../_solutions/dag4/app.css)
+
+Her er browserens built-in dialog faktisk ret smart, så du slipper for at bygge en modal helt fra bunden med `position: fixed` og ekstra overlay-logik.
+
+Stop gerne op og test her, før du går videre.
+
+Målet lige nu er kun dette:
+
+- filmkort kan stadig vises
+- klik på et kort åbner dialogen
+- dialogen viser de rigtige detaljer
+- dialogen kan lukkes igen
+
+GitHub Pages kommer først i næste opgave.
+
+> **Checkpoint:**
+> Kan du klikke på et filmkort og få vist flere detaljer i en dialog?
+
+<details>
+<summary><strong>Vis samlet løsning efter Opgave 4</strong></summary>
+
+Hvis du er kørt fast, kan du sammenligne med denne version.
+
+Den viser en mulig løsning på Opgave 4 oven på Opgave 3:
 
 ```javascript
-async function start() {
-  // Vis loading
-  let movieList = document.querySelector("#movie-list");
-  movieList.innerHTML = '<p style="text-align: center; color: #aaa;">Loading movies...</p>';
+"use strict";
 
-  let response = await fetch("...");
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+let allMovies = [];
+
+const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#search-input");
+const sortSelect = document.querySelector("#sort-select");
+const movieCount = document.querySelector("#movie-count");
+
+fetchMovies();
+
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
-  // Skjul loading - vis film
-  setupFilters();
+  populateGenreSelect();
+  applyFiltersAndSort();
+}
+
+function populateGenreSelect() {
+  const genres = new Set();
+
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
+  }
+}
+
+function applyFiltersAndSort() {
+  const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const sortOption = sortSelect.value;
+
+  let filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
+
+    return matchesGenre && matchesSearch;
+  });
+
+  if (sortOption === "title") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieA.title.localeCompare(movieB.title);
+    });
+  } else if (sortOption === "year") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.year - movieA.year;
+    });
+  } else if (sortOption === "rating") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.rating - movieA.rating;
+    });
+  }
+
+  showMovies(filteredMovies);
+}
+
+function showMovies(movies) {
+  movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} ud af ${allMovies.length} film`;
+
+  if (movies.length === 0) {
+    movieList.innerHTML =
+      '<p class="empty">Ingen film matcher din søgning eller genre.</p>';
+    return;
+  }
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card" tabindex="0">
+      <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster" />
+      <div class="movie-info">
+        <div class="title-row">
+          <h2>${movie.title}</h2>
+          <span class="year-badge">(${movie.year})</span>
+        </div>
+        <p class="genre">${movie.genre.join(", ")}</p>
+        <p class="movie-rating">⭐ ${movie.rating}</p>
+        <p class="director-line"><strong>Instruktør:</strong> ${movie.director}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+
+  const newCard = movieList.lastElementChild;
+  newCard.addEventListener("click", function () {
+    showMovieDialog(movie);
+  });
+
+  newCard.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      showMovieDialog(movie);
+    }
+  });
+}
+
+function showMovieDialog(movie) {
+  const dialog = document.querySelector("#movie-dialog");
+  const dialogContent = document.querySelector("#dialog-content");
+
+  dialogContent.innerHTML = /* html */ `
+    <img src="${movie.image}" alt="Poster af ${movie.title}" class="movie-poster">
+    <div class="dialog-details">
+      <h2>${movie.title} <span class="movie-year">(${movie.year})</span></h2>
+      <p class="movie-genre">${movie.genre.join(", ")}</p>
+      <p class="movie-rating">⭐ ${movie.rating}</p>
+      <p><strong>Instruktør:</strong> ${movie.director}</p>
+      <p><strong>Skuespillere:</strong> ${movie.actors.join(", ")}</p>
+      <p class="movie-description">${movie.description}</p>
+    </div>
+  `;
+
+  dialog.showModal();
+}
+
+genreSelect.addEventListener("change", applyFiltersAndSort);
+searchInput.addEventListener("input", applyFiltersAndSort);
+sortSelect.addEventListener("change", applyFiltersAndSort);
+```
+
+</details>
+
+---
+
+## Opgave 5: Publicér Til GitHub Pages
+
+**Formål:** Gør appen offentlig, så den kan deles.
+
+Nu har du en rigtig lille webapp, og sidste trin er at få den online.
+
+### 5.1: Commit dine ændringer
+
+I GitHub Desktop:
+
+1. Gå til fanen **Changes**
+2. Gennemgå dine filer
+3. Skriv en commit-besked, fx `DAG 4 færdig - søgning, sortering og dialog`
+4. Klik **Commit to main**
+
+### 5.2: Push til GitHub
+
+Klik **Push origin** i GitHub Desktop.
+
+Det sender din seneste version op på GitHub.
+
+### 5.3: Aktivér GitHub Pages
+
+På GitHub:
+
+1. Åbn dit repository i browseren
+2. Klik på **Settings**
+3. Klik på **Pages** i menuen til venstre
+4. Under **Build and deployment** vælger du:
+   - **Source:** `Deploy from a branch`
+   - **Branch:** `main`
+   - **Folder:** `/ (root)`
+5. Klik **Save**
+
+### 5.4: Vent på deploy
+
+GitHub Pages bruger ofte lige et øjeblik på at bygge siden.
+
+Efter kort tid får du en URL der typisk ligner:
+
+```text
+https://dit-brugernavn.github.io/repository-navn/
+```
+
+Åbn linket og test:
+
+- loader appen?
+- virker fetch stadig?
+- virker søgning?
+- virker sortering?
+- virker dialogen?
+
+### 5.5: Vigtigt når du senere ændrer noget
+
+Når GitHub Pages først er sat op, er workflowet simpelt:
+
+1. Lav ændringer lokalt
+2. Commit i GitHub Desktop
+3. Push til GitHub
+4. Vent lidt
+5. Genindlæs din GitHub Pages-side
+
+Så bliver siden automatisk opdateret.
+
+---
+
+## Samlet Checkliste
+
+Når du er færdig med DAG 4, skal din app kunne:
+
+- hente filmdata med `fetch()`
+- vise film i et grid
+- filtrere på genre
+- søge på titel
+- sortere på titel, år eller rating
+- vise movie count
+- vise en tom-besked hvis intet matcher
+- åbne en dialog med flere detaljer
+- være publiceret på GitHub Pages
+
+---
+
+## Samlet JavaScript-Struktur
+
+Når du er færdig, vil din kode typisk have denne struktur:
+
+```javascript
+"use strict";
+
+document.addEventListener("DOMContentLoaded", initApp);
+
+const MOVIES_URL =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
+
+let allMovies = [];
+
+function initApp() {
+  document
+    .querySelector("#search-input")
+    .addEventListener("input", applyFiltersAndSort);
+  document
+    .querySelector("#genre-select")
+    .addEventListener("change", applyFiltersAndSort);
+  document
+    .querySelector("#sort-select")
+    .addEventListener("change", applyFiltersAndSort);
+
+  getMovies();
+}
+
+async function getMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
   populateGenreSelect();
   applyFiltersAndSort();
 }
 ```
 
----
+Resten af filen vil så bestå af:
 
-## Hvad har du lært i dag?
+- `populateGenreSelect()`
+- `applyFiltersAndSort()`
+- `showMovies(movies)`
+- `showMovie(movie)`
+- `showMovieDialog(movie)`
 
-- **Søgefunktion** med `.filter()` og `.includes()`
-- **Sortering** med `.sort()`
-- **Dialog** med `<dialog>` element
-- **showModal() / close()** API
-- **Event listeners** på dynamisk oprettede elementer
-- **GitHub Pages** deployment
-- **Kombination af funktioner** (søg + filter)
+Du behøver ikke have præcis samme struktur eller funktionsnavne.
 
----
+Det vigtige er at logikken er den samme.
 
-## Du har nu en komplet Movie App!
+Sammenlign eventuelt med:
 
-**Din app kan:**
-
-- Hente data fra et API
-- Vise film med billeder
-- Filtrere på genre
-- Søge efter titel
-- Vise detaljer i dialog
-- Sortere film efter titel, år og rating
-- Køre live på internettet!
-
-**Hvad kunne du tilføje senere?**
-
-- Favorit-funktion (localStorage)
-- Flere filtre (år-range, rating-range)
-- Pagination (vis 20 ad gangen)
-- Dark mode toggle
-
-Men det er for avanceret lige nu. **Hold det simpelt!**
+- [_solutions/dag4/app.js](../_solutions/dag4/app.js)
+- [_solutions/dag4/index.html](../_solutions/dag4/index.html)
+- [_solutions/dag4/app.css](../_solutions/dag4/app.css)
 
 ---
 
-## Fejlfindingstips
+## Fejlfinding
 
 ### Søgning virker ikke?
 
-```javascript
-// Test i konsollen:
-let searchTerm = "matrix";
-console.log("Søger:", searchTerm);
+Tjek:
 
-allMovies.forEach((movie) => {
-  let title = movie.title.toLowerCase();
-  console.log(title, "matches?", title.includes(searchTerm));
-});
-```
+- findes `#search-input` i HTML?
+- bruger du `input` event?
+- kalder du `.toLowerCase()` på både titel og søgetekst?
 
-### Dialog åbner ikke?
+### Sortering virker ikke?
 
-```javascript
-// Tjek om dialog findes
-let dialog = document.querySelector("#movie-dialog");
-console.log("Dialog element:", dialog);
+Tjek:
 
-// Tjek om showModal() er en funktion
-console.log("showModal() findes?", typeof dialog.showModal);
+- findes `#sort-select` i HTML?
+- læser du `sortSelect.value`?
+- bliver `.sort()` kørt efter filtreringen?
 
-// Prøv at åbne den manuelt
-dialog.showModal();
-```
+### Genre-dropdown er tom?
 
-### Klik-event virker ikke?
+Tjek:
 
-```javascript
-function showMovies(movies) {
-  const movieList = document.querySelector("#movie-list");
+- bliver `populateGenreSelect()` kaldt efter fetch?
+- indeholder `allMovies` data?
+- bruger du `movie.genre` korrekt?
 
-  for (const movie of movies) {
-    // ... HTML creation ...
+### Dialogen åbner ikke?
 
-    const card = movieList.lastElementChild;
-    console.log("Tilføjer click til:", card);
+Tjek:
 
-    card.addEventListener("click", function () {
-      console.log("Clicked!", movie.title);
-      showMovieDialog(movie);
-    });
-  }
-}
-```
+- findes `<dialog id="movie-dialog">` i HTML?
+- bliver `showMovieDialog(movie)` kaldt ved klik?
+- bruger du `dialog.showModal()`?
 
 ### GitHub Pages viser ikke siden?
 
-1. **Tjek branch**: Er "main" valgt?
-2. **Tjek URL**: Korrekt `username.github.io/repo-name`?
-3. **Vent**: Tag en kop kaffe - det kan tage 5 min første gang
-4. **Tjek konsollen**: Fejl? CORS-problemer? (normalt ikke med GitHub Pages)
-5. **Hård genindlæsning**: Windows/PC: Ctrl+Shift+R, Mac: Cmd+Shift+R
+Tjek:
+
+- har du pushed til GitHub?
+- er Pages sat til `main` og root?
+- giver du GitHub 1-2 minutter til at bygge siden?
 
 ---
 
-## Tillykke!
+## Når Du Er Færdig
 
-Du har gennemført en 4-dages JavaScript kursus!
+Så har du bygget en lille app med et ret realistisk frontend-flow:
 
-Du kan nu:
+1. hent data
+2. læs brugerinput
+3. filtrér og sortér data
+4. render resultatet
+5. vis detaljer i UI
+6. deploy til web
 
-- Manipulere DOM
-- Arbejde med arrays og objects
-- Hente data fra API'er
-- Filtrere og søge i data
-- Bygge interaktive web apps
-- Udgive på internettet
-
-**Del din app!** Send linket til venner og familie
-
-Vi ses!
+Det er en rigtig fin afslutning på Movie App-forløbet.
