@@ -1,5 +1,7 @@
 "use strict";
 
+document.addEventListener("DOMContentLoaded", initApp);
+
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
@@ -9,7 +11,21 @@ const searchInput = document.querySelector("#search-input");
 const sortSelect = document.querySelector("#sort-select");
 const movieCount = document.querySelector("#movie-count");
 
-fetchMovies();
+function initApp() {
+  genreSelect.addEventListener("change", applyFilters);
+  searchInput.addEventListener("input", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
+
+  fetchMovies();
+}
+
+async function fetchMovies() {
+  const response = await fetch(MOVIES_URL);
+  allMovies = await response.json();
+
+  populateGenreSelect();
+  applyFilters();
+}
 
 function populateGenreSelect() {
   const genres = new Set();
@@ -112,16 +128,4 @@ function showMovieDialog(movie) {
   `;
 
   dialog.showModal();
-}
-
-async function fetchMovies() {
-  const response = await fetch(MOVIES_URL);
-  allMovies = await response.json();
-
-  populateGenreSelect();
-  applyFilters();
-
-  genreSelect.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
-  sortSelect.addEventListener("change", applyFilters);
 }
